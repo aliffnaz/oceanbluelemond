@@ -1,0 +1,389 @@
+@import 'variables';
+@import 'mixin';
+/* ------ jQuery FlexSlider v2.7.0 ----------- */
+/* Resets */
+.flex-container a:hover,
+.flex-slider a:hover {
+  outline: none;
+}
+.slides,
+.slides > li,
+.flex-control-nav,
+.flex-direction-nav {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.flex-pauseplay span {
+  text-transform: capitalize;
+}
+/* Base style */
+.flexslider {
+  margin: 0;
+  padding: 0;
+}
+.flexslider .slides > li {
+  display: none;
+  -webkit-backface-visibility: hidden;
+}
+.flexslider .slides img {
+  width: 100%;
+  display: block;
+
+}
+.flexslider .slides:after {
+  content: "\0020";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0;
+}
+html[xmlns] .flexslider .slides {
+  display: block;
+}
+* html .flexslider .slides {
+  height: 1%;
+}
+.no-js .flexslider .slides > li:first-child {
+  display: block;
+}
+/* Default theme */
+.flexslider {
+  margin: 0;
+  background: #111;
+  position: relative;
+  zoom: 1;
+}
+.flexslider .slides {
+  zoom: 1;
+}
+.flexslider .slides img {
+  height: auto;
+  -moz-user-select: none;
+}
+.flex-viewport {
+  max-height: 2000px;
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -ms-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  transition: all 1s ease;
+}
+.loading .flex-viewport {
+  max-height: 300px;
+}
+.carousel li {
+  margin-right: 5px;
+}
+.flex-direction-nav {
+  position: absolute;
+  bottom: 50px;
+  height: 30px;
+  line-height: 1;
+    right: 0;
+    bottom: 0;
+  width: 100%;
+  z-index: 9999;
+}
+.flex-direction-nav a {
+  text-decoration: none;
+  display: block!important;
+  width: 45px;
+  height: 52px;
+  position: absolute;
+  top: -65px;
+  z-index: 10;
+  overflow: hidden;
+  opacity: 0;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.8);
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.flex-direction-nav a:before {
+  font-family: "bootstrap-icons";
+  font-size: 46px;
+  display: inline-block;
+  content: '\F284';
+  color: rgba(255, 255, 255, 1);
+}
+.flex-direction-nav a.flex-next:before {
+  content: '\F285';
+}
+.flex-direction-nav .flex-next {
+  text-align: right;
+}
+#carousel_slider .flex-direction-nav .flex-prev {
+  opacity: 0.8;
+  left: 15px;
+}
+#carousel_slider .flex-direction-nav .flex-prev:hover {
+  opacity: 1;
+}
+#carousel_slider .flex-direction-nav .flex-next {
+  opacity: 0.8;
+  right: 15px;
+}
+#carousel_slider .flex-direction-nav .flex-next:hover {
+  opacity: 1;
+}
+#carousel_slider .flex-direction-nav .flex-disabled {
+  opacity: 0!important;
+  filter: alpha(opacity=0);
+  cursor: default;
+  z-index: -1;
+}
+
+.flex-control-nav {
+  width: 100%;
+  position: absolute;
+  bottom: -40px;
+  text-align: center;
+}
+.flex-control-nav li {
+  margin: 0 6px;
+  display: inline-block;
+  zoom: 1;
+  *display: inline;
+}
+
+
+/* Custom theme */
+#slider.flexslider li {
+    position: relative;
+}
+
+#slider.flexslider li .meta {
+  position: absolute;
+  bottom: 35%;
+  left: 60px;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  font-weight: 400;
+  z-index: 99;
+  @include mobile {
+    left: 15px;
+    bottom: auto;
+    top: 50%;
+    bottom: auto;
+  }
+  padding-right: 45px;
+}
+
+#slider.flexslider li h3 {
+  @include fontSize(46px);
+  margin-bottom: 0;
+  color: #fff;
+  @include mobile {@include fontSize(32px);}
+}
+
+#slider.flexslider li .info {
+    display: flex;
+    flex-direction: row;
+}
+
+#slider.flexslider li .info p {
+    margin-bottom: 25px;
+    @include fontSize(21px);
+    @include mobile {@include fontSize(18px);}
+}
+
+#slider.flexslider li h3,
+#slider.flexslider li .info p {
+    -webkit-animation-duration: .6s;
+    animation-duration: .6s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-name: fadeOut;
+    animation-name: fadeOut;
+}
+
+#slider.flexslider li .meta a {
+    -webkit-animation-duration: .3s;
+    animation-duration: .3s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-name: zoomOut;
+    animation-name: zoomOut;
+    padding: 12px 20px;
+}
+
+#slider.flexslider li.flex-active-slide .meta h3,
+#slider.flexslider li.flex-active-slide .meta .info p{
+    -webkit-animation-delay: .4s;
+    animation-delay: .4s;
+    -webkit-animation-duration: .6s;
+    animation-duration: .6s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-name: slideInUp;
+    animation-name: slideInUp;
+}
+
+#slider.flexslider li.flex-active-slide .meta a{
+    -webkit-animation-delay: 1s;
+    animation-delay: 1s;
+    -webkit-animation-duration: .3s;
+    animation-duration: .3s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-name: zoomIn;
+    animation-name: zoomIn;
+  
+}
+
+#slider.flexslider li.flex-active-slide .meta .info p {
+    -webkit-animation-delay: .6s;
+    animation-delay: .6s;
+}
+
+.slider {
+  position: relative;
+}
+
+#slider.flexslider {
+  overflow: hidden;
+  .flex-direction-nav {
+    opacity: 0;
+    display: none;
+  }
+  ul.slides {
+    li {
+      height: 80vh;
+      background-color: #000;
+      @include desktop {
+        height: 650px!important;
+      }
+      @include mobile {
+        height: 500px!important;
+      }
+      img {
+        opacity: 0.5;
+        width: 100%;
+        height: auto;
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          @include transform (translate(-50%, -50%));
+        @include desktop {
+          height: 650px!important;
+          width: auto;
+        }
+        @include mobile {
+          height: 500px!important;
+          width: auto;
+        }
+      }
+    }
+  }
+}
+#icon_drag_mobile{
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  background: url(../img/drag_icon.svg) 0 0 no-repeat;
+  width: 50px;
+  height: 30px;
+  opacity: 0.6;
+  z-index: 99;
+  display: none;
+  @include mobile {display: block;}
+}
+
+#carousel_slider_wp{
+  @include background-gradient(transparent, #000, 'vertical');
+  position: absolute;
+  bottom: 0;
+  z-index: 9;
+  width: 100%;
+  padding: 0 60px 45px 60px;
+  @include mobile {display: none;}
+}
+
+#carousel_slider {
+    
+  &.flexslider {
+    overflow: hidden;
+    background-color: transparent;
+        ul.slides {
+        padding-top: 20px;
+      }
+    ul.slides li {
+      position: relative;
+      @include border-radius(10px);
+      background-color: #000;
+      @include box-shadow (0px 0px 10px 0px rgba(0, 0, 0, 0.3));
+      overflow: hidden;
+      cursor: pointer;
+      &:hover img{
+          @include transform (scale(1.1));
+        }
+      img {
+        @include transform (scale(1));
+        opacity: 0.8;
+        @include transition-default (all, 0.3s, ease-in-out);
+      }
+      .caption {
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 9;
+        width: 100%;
+        height: 100%;
+        padding: 20px;
+        color: #fff;
+        @include background-gradient(rgba(0, 0, 0, 0.7), transparent, 'vertical');
+        h3 {
+          @include fontSize(18px);
+          color: #fff;
+          font-weight: 600;
+          span {
+            margin: 3px 0 0 0;
+            display: block;
+            text-transform: uppercase;
+            @include fontSize(13px);
+            letter-spacing: 1px;
+            font-weight: 600;
+          }
+        }
+        small {
+          opacity: 0;
+          @include transition-default-cubic-bezier;
+          position: absolute;
+          bottom: 10px;
+          left: 20px;
+          display: block;
+          width: 100%;
+          font-weight: 500;
+          @include fontSize(14px);
+          @include transform (translate(0, 10px));
+          strong {
+            float: right;
+            display: inline-block;
+            text-align: right;
+            margin:0 40px 0 0;
+            padding: 3px 0 0 0;
+            h6 {
+              color: #fff;
+              margin: 0;
+              font-weight: 500;
+              @include fontSize(14px);
+            }
+          }
+        }
+      }
+      &:hover .caption small{
+        opacity: 1;
+        @include transform (translate(0, 0));
+      }
+    }
+  }
+}
