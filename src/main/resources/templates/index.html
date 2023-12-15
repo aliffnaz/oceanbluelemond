@@ -25,15 +25,15 @@
         rel="stylesheet">
 
     <!-- BASE CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/vendors.min.css" rel="stylesheet">
+    <link th:href="@{css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{css/style.css}" rel="stylesheet">
+    <link th:href="@{css/vendors.min.css}" rel="stylesheet">
 
     <!-- SEPCIFIC CSS -->
-    <link href="css/flex_slider.css" rel="stylesheet">
+    <link th:href="@{css/flex_slider.css}" rel="stylesheet">
 
     <!-- YOUR CUSTOM CSS -->
-    <link href="css/custom.css" rel="stylesheet">
+    <link th:href="@{css/custom.css}" rel="stylesheet">
 </head>
 
 <body class="datepicker_mobile_full">
@@ -77,16 +77,16 @@
             <nav>
 
                 <ul class="level-1">
-                    <li><a href="index.html"><i class="bi bi-house" style="font-size: 25px;"></i> &nbsp;Home</a></li>
-                    <li><a href="guestProfile.html"><i class="bi bi-person-square" style="font-size: 25px;"></i>
+                    <li><a th:href="@{index.html}"><i class="bi bi-house" style="font-size: 25px;"></i> &nbsp;Home</a></li>
+                    <li><a th:href="@{guestProfile.html}"><i class="bi bi-person-square" style="font-size: 25px;"></i>
                             &nbsp;Profile</a></li>
-                    <li><a href="guestViewRoom.html"><i class="bi bi-door-open" style="font-size: 25px;"></i> &nbsp;Our
+                    <li><a th:href="@{guestViewRoom.html}"><i class="bi bi-door-open" style="font-size: 25px;"></i> &nbsp;Our
                             Rooms</a></li>
-                    <li><a href="guestMakeRoomReservation.html"><i class="bi bi-plus" style="font-size: 25px;"></i>
+                    <li><a th:href="@{guestMakeRoomReservation.html}"><i class="bi bi-plus" style="font-size: 25px;"></i>
                             &nbsp;Make Reservation</a></li>
-                    <li><a href="guestRoomReservation.html"><i class="bi bi-receipt-cutoff"
+                    <li><a th:href="@{guestRoomReservation.html}"><i class="bi bi-receipt-cutoff"
                                 style="font-size: 25px;"></i> &nbsp;Records</a></li>
-                    <li class="mt-5"><a href="guestLogin.html" class="btn btn-danger pt-3"
+                    <li class="mt-5"><a th:href="@{guestLogin.html}" class="btn btn-danger pt-3"
                             style="color: white; border-radius: 10px 10px 10px 10px; height: 50px;">Logout</a></li>
                 </ul>
                 <div class="panel_footer">
