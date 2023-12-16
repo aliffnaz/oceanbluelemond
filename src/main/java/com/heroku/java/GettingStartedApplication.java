@@ -26,7 +26,7 @@ public class GettingStartedApplication {
         return "index";
     }
 
-    @GetMapping("/guestLogin")
+    @GetMapping("/guestLogin.html")
     public String guestLogin() {
         return "user/guestLogin";
     }
