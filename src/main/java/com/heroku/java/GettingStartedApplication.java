@@ -31,9 +31,20 @@ public class GettingStartedApplication {
         return "user/guestLogin";
     }
 
+        @GetMapping("/index")
+    public String index1() {
+        return "index";
+    }
+
+        @GetMapping("/guestViewRoom")
+    public String guestLogin() {
+        return "user/guestViewRoom";
+    }
+
+
      @GetMapping("/guestMakeRoomReservation")
     public String guestMakeRoomReservation() {
-        return "/guestMakeRoomReservation";
+        return "user/guestMakeRoomReservation";
     }
 
         @GetMapping("/guestProfile")
