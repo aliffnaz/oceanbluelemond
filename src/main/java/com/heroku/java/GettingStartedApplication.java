@@ -30,7 +30,16 @@ public class GettingStartedApplication {
     public String guestLogin() {
         return "user/guestLogin";
     }
-    
+
+     @GetMapping("/guestMakeRoomReservation")
+    public String guestMakeRoomReservation() {
+        return "/guestMakeRoomReservation";
+    }
+
+        @GetMapping("/guestProfile")
+    public String guestProfile() {
+        return "user/guestProfile";
+    }
   
 
     @GetMapping("/database")
