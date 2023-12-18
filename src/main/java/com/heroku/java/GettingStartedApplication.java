@@ -42,7 +42,7 @@ public class GettingStartedApplication {
     }
 
         @GetMapping("/guestViewRoom")
-    public String guestLogin() {
+    public String guestViewRoom() {
         return "user/guestViewRoom";
     }
 
