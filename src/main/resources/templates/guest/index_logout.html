@@ -34,19 +34,21 @@
 
 <body class="datepicker_mobile_full">
 
+    <div class="layer"></div>
 
-    <header class="reveal_header">
+
+    <header class="reveal_header" style="background-color:#24262d;">
         <div class="container-fluid">
             <div class="row align-items-center">
                 <div class="col-6">
-                    <a th:href="@{index.html}" class="logo_normal"><img th:src="@{stylesheets/img/logo.png}" width="135" height="45" alt=""></a>
-                    <a th:href="@{index.html}" class="logo_sticky"><img th:src="@{stylesheets/img/logo_sticky.png}" width="135" height="45"
+                    <a th:href="@{/#}" class="logo"><img th:src="@{stylesheets/img/logo.png}" width="135" height="45" alt=""></a>
+                    <a th:href="@{/#}" class="logo_sticky"><img th:src="@{stylesheets/img/logo_sticky.png}" width="135" height="45"
                             alt=""></a>
                 </div>
                 <div class="col-6">
                     <nav>
                         <ul>
-                            <li><a th:href="@{guestMakeRoomReservation.html}" class="btn_1 btn_scrollto">Book Now</a></li>
+                            <li><a th:href="@{/guestLogin}" class="btn_1 btn_scrollto">Book Now</a></li>
                             <li>
                                 <div class="hamburger_2 open_close_nav_panel">
                                     <div class="hamburger__box">
@@ -61,24 +63,18 @@
         </div><!-- /container -->
     </header><!-- /Header -->
 
-    <div class="nav_panel">
-        <a th:href="@{#}" class="closebt open_close_nav_panel"><i class="bi bi-x"></i></a>
+
+
+     <div class="nav_panel">
+        <a th:href="@{/#}" class="closebt open_close_nav_panel"><i class="bi bi-x"></i></a>
         <div class="logo_panel"><img th:src="@{stylesheets/img/logo_sticky.png}" width="135" height="45" alt=""></div>
         <div class="sidebar-navigation">
             <nav>
 
                 <ul class="level-1">
-                    <li><a th:href="@{index.html}"><i class="bi bi-house" style="font-size: 25px;"></i> &nbsp;Home</a></li>
-                    <li><a th:href="@{guestProfile.html}"><i class="bi bi-person-square" style="font-size: 25px;"></i>
-                            &nbsp;Profile</a></li>
-                    <li><a th:href="@{guestViewRoom.html}"><i class="bi bi-door-open" style="font-size: 25px;"></i> &nbsp;Our
-                            Rooms</a></li>
-                    <li><a th:href="@{guestMakeRoomReservation.html}"><i class="bi bi-plus" style="font-size: 25px;"></i>
-                            &nbsp;Make Reservation</a></li>
-                    <li><a th:href="@{guestRoomReservation.html}"><i class="bi bi-receipt-cutoff"
-                                style="font-size: 25px;"></i> &nbsp;Records</a></li>
-                    <li class="mt-5"><a th:href="@{guestLogin.html}" class="btn btn-danger pt-3"
-                            style="color: white; border-radius: 10px 10px 10px 10px; height: 50px;">Logout</a></li>
+                    <li><a th:href="@{/index_logout}"><i class="bi bi-house" style="font-size: 25px;"></i> &nbsp;Home</a></li>
+                    <li><a th:href="@{/guestViewRoom}"><i class="bi bi-door-open" style="font-size: 25px;"></i> &nbsp;Our Rooms</a></li>
+                    <li class="mt-5"><a href="@{/guestLogin}" class="btn btn-dark pt-3" style="color: white; border-radius: 10px 10px 10px 10px; height: 50px;">Login</a></li>
                 </ul>
                 <div class="panel_footer">
                     <div class="copy">
@@ -105,7 +101,7 @@
                             <div class="info">
                                 <p>Exquisite furnishings for a cosy ambience</p>
                             </div>
-                            <a th:href="@{guestViewRoom.html}" class="btn_1 outline white">Read more</a>
+                            <a th:href="@{/guestViewRoom}" class="btn_1 outline white">Read more</a>
                         </div>
                     </li>
                     <li>
@@ -115,7 +111,7 @@
                             <div class="info">
                                 <p>The simple yet comfortable atmosphere</p>
                             </div>
-                            <a th:href="@{guestViewRoom.html}" class="btn_1 outline white">Read more</a>
+                            <a th:href="@{/guestViewRoom}" class="btn_1 outline white">Read more</a>
                         </div>
                     </li>
 
@@ -283,7 +279,7 @@
                             </div>
                         </div>
                         <!-- / row -->
-                        <p class="text-end mt-4"><a th:href="@{guestViewRoom.html}" class="btn_1 outline">Book
+                        <p class="text-end mt-4"><a th:href="@{guestViewRoom}" class="btn_1 outline">Book
                                 Now</a></p>
                     </div>
                 </div>
@@ -346,5 +342,5 @@
 <script th:src="@{stylesheets/js/jquery.flexslider.min.js}"></script>
 <script th:src="@{stylesheets/js/slider_func.js}"></script>
 </body>
-
+    
 </html>
