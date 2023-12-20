@@ -33,7 +33,7 @@ public class GettingStartedApplication {
 
     @GetMapping("/guestLogin")
     public String guestLogin() {
-        return "user/guestLogin";
+        return "guest/guestLogin";
     }
 
         @GetMapping("/index")
@@ -48,18 +48,18 @@ public class GettingStartedApplication {
 
         @GetMapping("/guestViewRoom")
     public String guestViewRoom() {
-        return "user/guestViewRoom";
+        return "guest/guestViewRoom";
     }
 
 
      @GetMapping("/guestMakeRoomReservation")
     public String guestMakeRoomReservation() {
-        return "user/guestMakeRoomReservation";
+        return "guest/guestMakeRoomReservation";
     }
 
         @GetMapping("/guestProfile")
     public String guestProfile() {
-        return "user/guestProfile";
+        return "guest/guestProfile";
     }
   
 
