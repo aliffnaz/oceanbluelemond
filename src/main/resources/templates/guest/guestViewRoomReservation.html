@@ -9,31 +9,26 @@
     <title>Ombak Biru Chalet</title>
 
     <!-- Favicons-->
-    <link rel="shortcut icon" th:href="@{stylesheets/img/favicon.png}" type="image/x-icon">
-    <link rel="apple-touch-icon" type="image/x-icon"
-        th:href="@{stylesheets/img/apple-touch-icon-57x57-precomposed.png}">
-    <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72"
-        th:href="@{stylesheets/img/apple-touch-icon-72x72-precomposed.png}">
-    <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114"
-        th:href="@{stylesheets/img/apple-touch-icon-114x114-precomposed.png}">
-    <link th:rel="apple-touch-icon" type="image/x-icon" sizes="144x144"
-        th:href="@{stylesheets/img/apple-touch-icon-144x144-precomposed.png}">
+    <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
+    <link rel="apple-touch-icon" type="image/x-icon" href="img/logo_dchalet.png">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72" href="img/logo_dchalet.png">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114" href="img/logo_dchalet.png">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="144x144" href="img/logo_dchalet.png">
 
     <!-- GOOGLE WEB FONT-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500&family=Montserrat:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
 
     <!-- BASE CSS -->
-    <link th:href="@{stylesheets/css/bootstrap.min.css}" rel="stylesheet">
-    <link th:href="@{stylesheets/css/style.css}" rel="stylesheet">
-    <link th:href="@{stylesheets/css/vendors.min.css}" rel="stylesheet">
-
-    <!-- SEPCIFIC CSS -->
-    <link th:href="@{stylesheets/css/flex_slider.css}" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/vendors.min.css" rel="stylesheet">
 
     <!-- YOUR CUSTOM CSS -->
-    <link th:href="@{stylesheets/css/custom.css}" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
 </head>
 
 <body class="datepicker_mobile_full">
@@ -44,19 +39,18 @@
     <div class="layer"></div>
 
 
-    <header class="reveal_header">
-        <div class="container-fluid">
+    <header class="reveal_header" style="background-color: #24262d;">
+        <div class="container">
             <div class="row align-items-center">
                 <div class="col-6">
-                    <a th:href="@{/index}" class="logo_normal"><img th:src="@{stylesheets/img/logo.png}" width="135"
-                            height="45" alt=""></a>
-                    <a th:href="@{/index}" class="logo_sticky"><img th:src="@{stylesheets/img/logo_sticky.png}"
-                            width="135" height="45" alt=""></a>
+                    <a href="index.html" class="logo_normal"><img src="img/logo.png" width="135" height="45" alt=""></a>
+                    <a href="index.html" class="logo_sticky"><img src="img/logo_sticky.png" width="135" height="45"
+                            alt=""></a>
                 </div>
                 <div class="col-6">
                     <nav>
                         <ul>
-                            <li><a th:href="@{/guestMakeRoomReservation}" class="btn_1 btn_scrollto">Book Now</a></li>
+                            <li><a href="guestMakeRoomReservation.html" class="btn_1 btn_scrollto">Book Now</a></li>
                             <li>
                                 <div class="hamburger_2 open_close_nav_panel">
                                     <div class="hamburger__box">
@@ -72,24 +66,25 @@
     </header><!-- /Header -->
 
 
+
+    <!-- -------------------- sidebar panel ------------------------- -->
     <div class="nav_panel">
-        <a th:href="@{#}" class="closebt open_close_nav_panel"><i class="bi bi-x"></i></a>
-        <div class="logo_panel"><img th:src="@{stylesheets/img/logo_sticky.png}" width="135" height="45" alt=""></div>
+        <a href="#" class="closebt open_close_nav_panel"><i class="bi bi-x"></i></a>
+        <div class="logo_panel"><img src="img/logo_sticky.png" width="135" height="45" alt=""></div>
         <div class="sidebar-navigation">
             <nav>
 
                 <ul class="level-1">
-                    <li><a th:href="@{/index}"><i class="bi bi-house" style="font-size: 25px;"></i> &nbsp;Home</a></li>
-                    <li><a th:href="@{/guestProfile}"><i class="bi bi-person-square" style="font-size: 25px;"></i>
+                    <li><a href="index.html"><i class="bi bi-house" style="font-size: 25px;"></i> &nbsp;Home</a></li>
+                    <li><a href="guestProfile.html"><i class="bi bi-person-square" style="font-size: 25px;"></i>
                             &nbsp;Profile</a></li>
-                    <li><a th:href="@{/guestViewRoom}"><i class="bi bi-door-open" style="font-size: 25px;"></i>
-                            &nbsp;Our
+                    <li><a href="guestViewRoom.html"><i class="bi bi-door-open" style="font-size: 25px;"></i> &nbsp;Our
                             Rooms</a></li>
-                    <li><a th:href="@{/guestMakeRoomReservation}"><i class="bi bi-plus" style="font-size: 25px;"></i>
+                    <li><a href="guestMakeRoomReservation.html"><i class="bi bi-plus" style="font-size: 25px;"></i>
                             &nbsp;Make Reservation</a></li>
-                    <li><a th:href="@{/guestRoomReservation}"><i class="bi bi-receipt-cutoff"
+                    <li><a href="guestRoomReservation.html"><i class="bi bi-receipt-cutoff"
                                 style="font-size: 25px;"></i> &nbsp;Records</a></li>
-                    <li class="mt-5"><a th:href="@{/guestLogin}" class="btn btn-danger pt-3" type="button"
+                    <li class="mt-5"><a href="guestLogin.html" class="btn btn-danger pt-3"
                             style="color: white; border-radius: 10px 10px 10px 10px; height: 50px;">Logout</a></li>
                 </ul>
                 <div class="panel_footer">
@@ -107,35 +102,46 @@
     <!-- /nav_panel -->
 
     <main>
-
         <div class="container mt-5">
             &nbsp;
         </div>
-    
+
         <div class="container mt-5 mb-5 align-items-center">
             <div class="row">
                 <div class="col">
-    
+
                 </div>
-    
+
                 <div class="col-md card card-body py-5">
                     <div class="row m-5">
                         <div class="col-2 text-center">
-                            <a th:href="@{/guestRoomReservation.html}">
+                            <a href="guestRoomReservation.html">
                                 <div class="bi bi-arrow-left-circle" style="font-size: 50px;"></div>
                             </a>
                         </div>
                         <div class="col-md-9 text-center pt-3">
                             <div class="">
-    
+
                                 <h1>Your Reservation</h1>
                             </div>
                         </div>
                         <div class="col-2">
-    
+
                         </div>
                     </div>
-    
+
+                    <div class="row m-3">
+                        <div class="col-1"></div>
+                        <div class="col pt-3">
+                            <span>
+                                <h6>Guest IC Number</h6>
+                            </span>
+                        </div>
+                        <div class="col-8">
+                            <input type="text" value="770901012341" name="" id="" class="form-control" disabled>
+                        </div>
+                    </div>
+
                     <div class="row m-3">
                         <div class="col-1"></div>
                         <div class="col pt-3">
@@ -147,7 +153,7 @@
                             <input type="text" value="Haiqal Izzee" name="" id="" class="form-control" disabled>
                         </div>
                     </div>
-    
+
                     <div class="row m-3">
                         <div class="col-1"></div>
                         <div class="col pt-3">
@@ -162,7 +168,7 @@
                             </div>
                         </div>
                     </div>
-    
+
                     <div class="row m-3">
                         <div class="col-1"></div>
                         <div class="col pt-3">
@@ -177,7 +183,7 @@
                             </div>
                         </div>
                     </div>
-    
+
                     <div class="row m-3">
                         <div class="col-1"></div>
                         <div class="col pt-3">
@@ -192,139 +198,134 @@
                                 <div id="daterangepicker-embedded-container"
                                     class="embedded-daterangepicker clearfix mb-4"></div>
                                 <div class="row">
-    
+
                                 </div>
                             </div>
                         </div>
-                    </div>
-    
-                    <div class="row m-3">
-                        <div class="col-1"></div>
-                        <div class="col pt-3">
-                            <span>
-                                <h6>Room Type</h6>
-                            </span>
-                        </div>
-                        <div class="col-8">
-                            <div class="custom_select">
-                                <select class="wide" name="rooms_booking" id="rooms_booking" disabled>
-                                    <option value="">Select Room</option>
-                                    <option value="Deluxe Room" selected>Deluxe Room</option>
-                                    <option value="Superior Room">Standard Room</option>
-                                </select>
+
+                        <div class="row m-3">
+                            <div class="col-1"></div>
+                            <div class="col pt-3">
+                                <span>
+                                    <h6>Room Type</h6>
+                                </span>
+                            </div>
+                            <div class="col-8">
+                                <div class="custom_select">
+                                    <select class="wide" name="rooms_booking" id="rooms_booking" disabled>
+                                        <option value="">Select Room</option>
+                                        <option value="Deluxe Room" selected>Deluxe Room</option>
+                                        <option value="Superior Room">Standard Room</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                    </div>
-    
-                    <div class="row m-3">
-                        <div class="col-1"></div>
-                        <div class="col pt-3">
-                            <span>
-                                <h6>Total Adults</h6>
-                            </span>
-                        </div>
-                        <div class="col-8">
-                            <div class="qty-buttons mb-3 version_2">
-                                <input type="text" name="totalAdult" id="totalAdult" value="2"
-                                    class="qty form-control" placeholder="Adults" disabled>
+
+                        <div class="row m-3">
+                            <div class="col-1"></div>
+                            <div class="col pt-3">
+                                <span>
+                                    <h6>Total Adults</h6>
+                                </span>
+                            </div>
+                            <div class="col-8">
+                                <div class="qty-buttons mb-3 version_2">
+                                    <input type="text" name="totalAdult" id="totalAdult" value="2"
+                                        class="qty form-control" placeholder="Adults" disabled>
+                                </div>
                             </div>
                         </div>
-                    </div>
-    
-                    <div class="row m-3">
-                        <div class="col-1"></div>
-                        <div class="col pt-3">
-                            <span>
-                                <h6>Total Kids</h6>
-                            </span>
-                        </div>
-                        <div class="col-8">
-                            <div class="mb-3 qty-buttons mb-3 version_2">
-                                <input type="text" name="totalKids" id="totalKids" value="1"
-                                    class="qty form-control" placeholder="Childs" disabled>
+
+                        <div class="row m-3">
+                            <div class="col-1"></div>
+                            <div class="col pt-3">
+                                <span>
+                                    <h6>Total Kids</h6>
+                                </span>
+                            </div>
+                            <div class="col-8">
+                                <div class="mb-3 qty-buttons mb-3 version_2">
+                                    <input type="text" name="totalKids" id="totalKids" value="1"
+                                        class="qty form-control" placeholder="Childs" disabled>
+                                </div>
                             </div>
                         </div>
-                    </div>
-    
-                    <div class="row m-3">
-                        <div class="col-1"></div>
-                        <div class="col pt-3">
-                            <span>
-                                <h6>Add-on Room Service</h6>
-                                <div class="col-9"><a class="" th:href="@{/guestViewRoomService}" target="blank">View
-                                        Catalogue</a></div>
-                            </span>
-                        </div>
-                        <div class="col-8">
-                            <div class="custom_select">
-                                <select name="" id="" class="wide" disabled>
-                                    <option value="">Select</option>
-                                    <option value="">RS01</option>
-                                    <option value="">RS02</option>
-                                    <option value="">RS03</option>
-                                    <option value="">RS04</option>
-                                    <option value="">RS05</option>
-                                    <option value="" selected>None</option>
-                                </select>
+
+                        <div class="row m-3">
+                            <div class="col-1"></div>
+                            <div class="col pt-3">
+                                <span>
+                                    <h6>Add-on Room Service</h6>
+                                    <div class="col-9"><a class="" href="guestViewRoomService.html" target="blank">View
+                                            Catalogue</a></div>
+                                </span>
+                            </div>
+                            <div class="col-8">
+                                <div class="custom_select">
+                                    <select name="" id="" class="wide" disabled>
+                                        <option value="">Select</option>
+                                        <option value="S01- Barbecue Set" selected>S01- Barbecue Set</option>
+                                        <option value="Dapur & Gas (Set A)">S02 - Dapur & Gas (Set A) </option>
+                                        <option value="S03 - Dapur & Gas (Set B) " selected>S03 - Dapur & Gas (Set B) </option>
+                                        <option value="S04- Toto (Set A)">S04- Toto (Set A)</option>
+                                        <option value="S05 - Toto (Set B)">S05 - Toto (Set B)</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        <div class="row m-3">
+                            <div class="col-1"></div>
+                            <div class="col pt-3">
+                                <span>
+                                    <h6>Total Room</h6>
+                                </span>
+                            </div>
+                            <div class="col-8">
+                                <div class="qty-buttons mb-3 version_2">
+                                    <input type="text" name="totalRoom" id="totalRoom" value="1"
+                                        class="qty form-control" placeholder="Total Room" disabled>
+                                </div>
                             </div>
                         </div>
-                    </div>
-    
-                    <div class="row m-3">
-                        <div class="col-1"></div>
-                        <div class="col pt-3">
-                            <span>
-                                <h6>Total Room</h6>
-                            </span>
-                        </div>
-                        <div class="col-8">
-                            <div class="qty-buttons mb-3 version_2">
-                                <input type="text" name="totalRoom" id="totalRoom" value="1"
-                                    class="qty form-control" placeholder="Total Room" disabled>
+
+                        <div class="row m-3">
+                            <div class="col-1"></div>
+                            <div class="col pt-3">
+                                <span>
+                                    <h6>Total Payment</h6>
+                                </span>
+                            </div>
+                            <div class="col-8">
+                                <div class="qty-buttons mb-3 version_2">
+                                    <input type="text" name="" id="" value="150.00" class="form-control" disabled>
+                                </div>
                             </div>
                         </div>
-                    </div>
-    
-                    <div class="row m-3">
-                        <div class="col-1"></div>
-                        <div class="col pt-3">
-                            <span>
-                                <h6>Total Payment</h6>
-                            </span>
-                        </div>
-                        <div class="col-8">
-                            <div class="qty-buttons mb-3 version_2">
-                                <input type="text" name="" id="" value="150.00" class="form-control" disabled>
-                            </div>
+                        <div class="row">
+                            <div class="col"></div>
+                            <div class="col text-center">Generate your receipt <a href="guestGenerateReceipt.html">here</a></div>
+                            <div class="col"></div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col"></div>
-                        <div class="col text-center">Generate your receipt <a
-                                th:href="@{/guestGenerateReceipt.html}">here</a></div>
-                        <div class="col"></div>
+
+                    <div class="row m-5">
+                        <div class="col text-center">
+                            <a href="guestRoomReservation.html" class="btn btn-dark btn-lg"
+                                style="border-radius: 3px 3px 3px 3px; height: auto; width:150px">Back</a>
+                        </div>
                     </div>
-                </div>
-    
-                <div class="row m-5">
-                    <div class="col text-center">
-                        <a th:href="@{/guestRoomReservation.html}" class="btn btn-dark btn-lg"
-                            style="border-radius: 3px 3px 3px 3px; height: auto; width:150px">Back</a>
-                    </div>
-                </div>
-    
-    
+
+
                 </div>
                 <div class="col">
-    
+
                 </div>
             </div>
-    
+
             <div class="container mt-5">
                 &nbsp;
             </div>
         </div>
-    
     </main>
 
     <footer class="revealed">
@@ -339,15 +340,15 @@
                     <ul>
                         <li>Jalan Telok Gong / Pengkalan Balak, Kampung Sungai Tuang<br>78300 Masjid Tanah,
                             Melaka<br><br></li>
-                        <li><strong><a th:href="@{#0}">dchaletombakbiru@gmail.com</a></strong></li>
-                        <li><strong><a th:href="@{#0}">016-2115359/012-2431337</a></strong></li>
+                        <li><strong><a href="#0">dchaletombakbiru@gmail.com</a></strong></li>
+                        <li><strong><a href="#0">016-2115359/012-2431337</a></strong></li>
                     </ul>
                     <div class="social">
                         <ul>
-                            <li><a th:href="@{#0}"><i class="bi bi-instagram"></i></a></li>
-                            <li><a th:href="@{#0}"><i class="bi bi-whatsapp"></i></a></li>
-                            <li><a th:href="@{#0}"><i class="bi bi-facebook"></i></a></li>
-                            <li><a th:href="@{#0}"><i class="bi bi-twitter"></i></a></li>
+                            <li><a href="#0"><i class="bi bi-instagram"></i></a></li>
+                            <li><a href="#0"><i class="bi bi-whatsapp"></i></a></li>
+                            <li><a href="#0"><i class="bi bi-facebook"></i></a></li>
+                            <li><a href="#0"><i class="bi bi-twitter"></i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -368,15 +369,13 @@
         </svg>
     </div>
     <!-- /back to top -->
-    <!-- COMMON SCRIPTS -->
-    <script th:src="@{stylesheets/js/common_scripts.js}"></script>
-    <script th:src="@{stylesheets/js/common_functions.js}"></script>
-    <script th:src="@{stylesheets/js/datepicker_inline.js}"></script>
-    <script th:src="@{stylesheets/phpmailer/validate.js}"></script>
 
-    <!-- SPECIFIC SCRIPTS -->
-    <script th:src="@{stylesheets/js/jquery.flexslider.min.js}"></script>
-    <script th:src="@{stylesheets/js/slider_func.js}"></script>
+    <!-- COMMON SCRIPTS -->
+    <script src="js/common_scripts.js"></script>
+    <script src="js/common_functions.js"></script>
+    <script src="js/datepicker_inline.js"></script>
+    <script src="phpmailer/validate.js"></script>
+
 </body>
 
 </html>
