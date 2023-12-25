@@ -78,6 +78,52 @@ public class GettingStartedApplication {
         return "guest/guestUpdate";
     }
 
+        @GetMapping("/staffHome")
+    public String staffHome() {
+        return "staff/staffHome";
+    }
+
+    @GetMapping("/staffLogin")
+    public String staffLogin() {
+        return "staff/staffLogin";
+    }
+
+    @GetMapping("/staffProfile")
+    public String staffProfile() {
+        return "staff/staffProfile";
+    }
+
+    @GetMapping("/staffRoomList")
+    public String staffRoomList() {
+        return "staff/staffRoomList";
+    }
+
+    @GetMapping("/staffUpdate")
+    public String staffUpdate() {
+        return "staff/staffUpdate";
+    }
+
+    @GetMapping("/staffUpdateRoom")
+    public String staffUpdateRoom() {
+        return "staff/staffUpdateRoom";
+    }
+
+    @GetMapping("/staffViewGuest")
+    public String staffViewGuest() {
+        return "staff/staffViewGuest";
+    }
+
+    @GetMapping("/staffViewRoom")
+    public String staffViewRoom() {
+        return "staff/staffViewRoom";
+    }
+
+    @GetMapping("/staffReservationList")
+    public String staffReservationList() {
+        return "staff/staffReservationList";
+    }
+
+
   
 
     @GetMapping("/database")
