@@ -31,6 +31,11 @@ public class GettingStartedApplication {
         return "index";
     }
 
+    @GetMapping("/index")
+    public String index1() {
+        return "index";
+    }
+
     @GetMapping("/guestLogin")
     public String guestLogin() {
         return "guest/guestLogin";
@@ -57,12 +62,33 @@ public class GettingStartedApplication {
         return "guest/guestMakeRoomReservation";
     }
 
-        @GetMapping("/guestProfile")
-    public String guestProfile() {
-        return "guest/guestProfile";
-    }
-  
+   
 
+
+
+
+@GetMapping("/guestProfile")
+public String guestProfile() {
+    return "guest/guestProfile";
+}
+
+@GetMapping("/guestRoomReservation")
+public String guestRoomReservation() {
+    return "guest/guestRoomReservation";
+}
+
+@GetMapping("/guestRegister")
+public String guestRegister() {
+    return "guest/guestRegister";
+}
+
+@GetMapping("/guestUpdate")
+public String guestUpdate() {
+    return "guest/guestUpdate";
+}
+
+  
+}
     @GetMapping("/database")
     String database(Map<String, Object> model) {
         try (Connection connection = dataSource.getConnection()) {
