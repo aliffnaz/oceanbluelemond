@@ -41,10 +41,6 @@ public class GettingStartedApplication {
         return "guest/guestLogin";
     }
 
-        @GetMapping("/index")
-    public String index1() {
-        return "index";
-    }
 
     @GetMapping("/index_logout")
     public String index_logout() {
