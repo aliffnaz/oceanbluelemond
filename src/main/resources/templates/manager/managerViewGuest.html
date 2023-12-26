@@ -6,31 +6,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="Ansonika">
-    <title>Ombak Biru Chalet</title>
-
+    <title>D Chalet Ombak Biru</title>
     <!-- Favicons-->
-    <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon"> 
-    <link rel="apple-touch-icon" type="image/x-icon" href="img/apple-touch-icon-57x57-precomposed.png">
-    <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72" href="img/apple-touch-icon-72x72-precomposed.png">
+    <link rel="shortcut icon" th:href="@{stylesheets/img/favicon.png}" type="image/x-icon">
+    <link rel="apple-touch-icon" type="image/x-icon"
+        th:href="@{stylesheets/img/apple-touch-icon-57x57-precomposed.png}">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72"
+        th:href="@{stylesheets/img/apple-touch-icon-72x72-precomposed.png}">
     <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114"
-        href="img/apple-touch-icon-114x114-precomposed.png">
-    <link rel="apple-touch-icon" type="image/x-icon" sizes="144x144"
-        href="img/apple-touch-icon-144x144-precomposed.png">
+        th:href="@{stylesheets/img/apple-touch-icon-114x114-precomposed.png}">
+    <link th:rel="apple-touch-icon" type="image/x-icon" sizes="144x144"
+        th:href="@{stylesheets/img/apple-touch-icon-144x144-precomposed.png}">
 
     <!-- GOOGLE WEB FONT-->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500&family=Montserrat:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
 
     <!-- BASE CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/vendors.min.css" rel="stylesheet">
+    <link th:href="@{stylesheets/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{stylesheets/css/style.css}" rel="stylesheet">
+    <link th:href="@{stylesheets/css/vendors.min.css}" rel="stylesheet">
+
+    <!-- SEPCIFIC CSS -->
+    <link th:href="@{stylesheets/css/flex_slider.css}" rel="stylesheet">
 
     <!-- YOUR CUSTOM CSS -->
-    <link href="css/custom.css" rel="stylesheet">
+    <link th:href="@{stylesheets/css/custom.css}" rel="stylesheet">
 </head>
 
 <body class="datepicker_mobile_full">
@@ -42,7 +44,7 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-6">
-                    <a href="index-6.html" class="logo"><img src="img/logo_sticky.png" width="135" height="45" alt=""></a>
+                    <a th:href="@{/managerHome}" class="logo"><img th:src="@{img/logo_sticky.png}" width="135" height="45" alt=""></a>
                 </div>
                 <div class="col-6">
                     <nav>
@@ -66,26 +68,26 @@
 
     <!-- -------------------- sidebar panel ------------------------- -->
     <div class="nav_panel">
-        <a href="#" class="closebt open_close_nav_panel"><i class="bi bi-x"></i></a>
-        <div class="logo_panel"><img src="img/logo_sticky.png" width="135" height="45" alt=""></div>
+        <a th:href="@{#}" class="closebt open_close_nav_panel"><i class="bi bi-x"></i></a>
+        <div class="logo_panel"><img th:src="@{img/logo_sticky.png}" width="135" height="45" alt=""></div>
         <div class="sidebar-navigation">
             <nav>
                 <ul class="level-1">
-                    <li class=""><a href="managerHome.html"><i class="bi bi-house" style="font-size: 25px;"></i>
+                    <li class=""><a th:href="@{/managerHome}"><i class="bi bi-house" style="font-size: 25px;"></i>
                             &nbsp;Home</a></li>
-                    <li class=""><a href="managerUpdateStatus.html"><i class="bi bi-clipboard-check"
+                    <li class=""><a th:href="@{/managerUpdateStatus}"><i class="bi bi-clipboard-check"
                                 style="font-size: 25px;"></i>&nbsp; Room Reservation</a></li>
-                    <li><a href="managerStaffList.html"><i class="bi bi-person-badge"
+                    <li><a th:href="@{/managerStaffList}"><i class="bi bi-person-badge"
                                 style="font-size: 25px;"></i>&nbsp; Manage Staff</a></li>
-                    <li><a href="managerRoomList.html"><i class="bi bi-pencil-square"
+                    <li><a th:href="@{/managerRoomList}"><i class="bi bi-pencil-square"
                                 style="font-size: 25px;"></i>&nbsp; Manage Room</a></li>
-                    <li><a href="managerRoomServiceList.html"><i class="bi bi-nut" style="font-size: 25px;"></i>&nbsp;
+                    <li><a th:href="@{/managerRoomServiceList}"><i class="bi bi-nut" style="font-size: 25px;"></i>&nbsp;
                             Manage Room Service</a></li>
-                    <li><a href="managerGuestList.html"><i class="bi bi-people"
+                    <li><a th:href="@{/managerGuestList}"><i class="bi bi-people"
                             style="font-size: 25px;"></i>&nbsp; Manage Guest</a></li>
-                    <li><a href="managerGenerateReport.html"><i class="bi bi-file-earmark-bar-graph"
+                    <li><a th:href="@{/managerGenerateReport}"><i class="bi bi-file-earmark-bar-graph"
                                 style="font-size: 25px;"></i>&nbsp; Generate Report</a></li>
-                    <li class="mt-5"><a href="guestLogin.html" class="btn btn-danger pt-3"
+                    <li class="mt-5"><a th:href="@{/guestLogin}" class="btn btn-danger pt-3"
                             style="color: white; border-radius: 10px 10px 10px 10px; height: 50px;">Logout</a></li>
                 </ul>
                 <div class="panel_footer">
@@ -118,7 +120,7 @@
                 <div class="col-md card card-body py-5">
                     <div class="row m-5">
                         <div class="col-2 text-center">
-                            <a href="managerGuestList.html">
+                            <a th:href="@{/managerGuestList}">
                                 <div class="bi bi-arrow-left-circle" style="font-size: 50px;"></div>
                             </a>
                         </div>
@@ -254,7 +256,7 @@
                     <div class="row m-5">
                         <div class="col-1"></div>
                         <div class="col">
-                            <a href="managerGuestList.html" class="btn btn-dark btn-lg"
+                            <a th:href="@{/managerGuestList}" class="btn btn-dark btn-lg"
                                 style="border-radius: 3px 3px 3px 3px; height: auto; width:150px">Back</a>
                         </div>
                     </div>
@@ -294,15 +296,15 @@
                     <ul>
                         <li>Jalan Telok Gong / Pengkalan Balak, Kampung Sungai Tuang<br>78300 Masjid Tanah,
                             Melaka<br><br></li>
-                        <li><strong><a href="#0">dchaletombakbiru@gmail.com</a></strong></li>
-                        <li><strong><a href="#0">016-2115359/012-2431337</a></strong></li>
+                            <li><strong><a th:href="@{#0}">dchaletombakbiru@gmail.com</a></strong></li>
+                            <li><strong><a th:href="@{#0}">016-2115359/012-2431337</a></strong></li>
                     </ul>
                     <div class="social">
                         <ul>
-                            <li><a href="#0"><i class="bi bi-instagram"></i></a></li>
-                            <li><a href="#0"><i class="bi bi-whatsapp"></i></a></li>
-                            <li><a href="#0"><i class="bi bi-facebook"></i></a></li>
-                            <li><a href="#0"><i class="bi bi-twitter"></i></a></li>
+                            <li><a th:href="@{#0}"><i class="bi bi-instagram"></i></a></li>
+                            <li><a th:href="@{#0}"><i class="bi bi-whatsapp"></i></a></li>
+                            <li><a th:href="@{#0}"><i class="bi bi-facebook"></i></a></li>
+                            <li><a th:href="@{#0}"><i class="bi bi-twitter"></i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -325,10 +327,10 @@
     <!-- /back to top -->
 
     <!-- COMMON SCRIPTS -->
-    <script src="js/common_scripts.js"></script>
-    <script src="js/common_functions.js"></script>
-    <script src="js/datepicker_inline.js"></script>
-    <script src="phpmailer/validate.js"></script>
+    <script th:src="@{js/common_scripts.js}"></script>
+    <script th:src="@{js/common_functions.js}"></script>
+    <script th:src="@{js/datepicker_inline.js}"></script>
+    <script th:src="@{phpmailer/validate.js}"></script>
 
 </body>
 
