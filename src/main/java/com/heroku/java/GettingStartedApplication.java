@@ -129,17 +129,17 @@ public class GettingStartedApplication {
 
     @GetMapping("/staffAddRoom")
 public String staffAddRoom() {
-    return "manager/staffAddRoom";
+    return "staff/staffAddRoom";
 }
 
 @GetMapping("/staffGenerateReport")
 public String staffGenerateReport() {
-    return "manager/staffGenerateReport";
+    return "staff/staffGenerateReport";
 }
 
 @GetMapping("/staffGuestList")
 public String staffGuestList() {
-    return "manager/staffGuestList";
+    return "staff/staffGuestList";
 }
 
 // for manager
