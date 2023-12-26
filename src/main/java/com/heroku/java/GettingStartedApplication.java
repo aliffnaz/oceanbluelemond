@@ -26,6 +26,8 @@ public class GettingStartedApplication {
         this.dataSource = dataSource;
     }
 
+// for guest
+
     @GetMapping("/")
     public String index() {
         return "index";
@@ -78,6 +80,8 @@ public class GettingStartedApplication {
         return "guest/guestUpdate";
     }
 
+    // for staff
+
         @GetMapping("/staffHome")
     public String staffHome() {
         return "staff/staffHome";
@@ -122,6 +126,49 @@ public class GettingStartedApplication {
     public String staffReservationList() {
         return "staff/staffReservationList";
     }
+
+    @GetMapping("/staffAddRoom")
+public String staffAddRoom() {
+    return "manager/staffAddRoom";
+}
+
+@GetMapping("/staffGenerateReport")
+public String staffGenerateReport() {
+    return "manager/staffGenerateReport";
+}
+
+@GetMapping("/staffGuestList")
+public String staffGuestList() {
+    return "manager/staffGuestList";
+}
+
+// for manager
+
+@GetMapping("/managerViewGuest")
+public String managerViewGuest() {
+    return "manager/managerViewGuest";
+}
+
+@GetMapping("/managerViewRoom")
+public String managerViewRoom() {
+    return "manager/managerViewRoom";
+}
+
+@GetMapping("/managerViewStaff")
+public String managerViewStaff() {
+    return "manager/managerViewStaff";
+}
+
+@GetMapping("/reservationReport")
+public String reservationReport() {
+    return "manager/reservationReport";
+}
+
+@GetMapping("/salesReport")
+public String salesReport() {
+    return "manager/salesReport";
+}
+
 
 
   
