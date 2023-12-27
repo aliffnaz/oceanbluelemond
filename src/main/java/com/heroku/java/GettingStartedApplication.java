@@ -144,6 +144,46 @@ public String staffGuestList() {
 
 // for manager
 
+@GetMapping("/managerHome")
+public String managerHome() {
+    return "manager/managerHome";
+}
+
+@GetMapping("/managerRoomList")
+public String managerRoomList() {
+    return "manager/managerRoomList";
+}
+
+@GetMapping("/managerRoomServiceList")
+public String managerRoomServiceList() {
+    return "manager/managerRoomServiceList";
+}
+
+@GetMapping("/managerStaffList")
+public String managerStaffList() {
+    return "manager/managerStaffList";
+}
+
+@GetMapping("/managerStaffUpdate")
+public String managerStaffUpdate() {
+    return "manager/managerStaffUpdate";
+}
+
+@GetMapping("/managerUpdateRoom")
+public String managerUpdateRoom() {
+    return "manager/managerUpdateRoom";
+}
+
+@GetMapping("/managerUpdateRoomService")
+public String managerUpdateRoomService() {
+    return "manager/managerUpdateRoomService";
+}
+
+@GetMapping("/managerUpdateStatus")
+public String managerUpdateStatus() {
+    return "manager/managerUpdateStatus";
+}
+    
 @GetMapping("/managerViewGuest")
 public String managerViewGuest() {
     return "manager/managerViewGuest";
