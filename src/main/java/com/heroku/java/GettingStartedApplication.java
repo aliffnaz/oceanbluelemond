@@ -26,8 +26,15 @@ public class GettingStartedApplication {
         this.dataSource = dataSource;
     }
 
+// for guest
+
     @GetMapping("/")
     public String index() {
+        return "index";
+    }
+
+    @GetMapping("/index")
+    public String index1() {
         return "index";
     }
 
@@ -36,10 +43,6 @@ public class GettingStartedApplication {
         return "guest/guestLogin";
     }
 
-        @GetMapping("/index")
-    public String index1() {
-        return "index";
-    }
 
     @GetMapping("/index_logout")
     public String index_logout() {
@@ -57,10 +60,157 @@ public class GettingStartedApplication {
         return "guest/guestMakeRoomReservation";
     }
 
-        @GetMapping("/guestProfile")
+    @GetMapping("/guestProfile")
     public String guestProfile() {
         return "guest/guestProfile";
     }
+
+    @GetMapping("/guestRoomReservation")
+    public String guestRoomReservation() {
+        return "guest/guestRoomReservation";
+    }
+
+    @GetMapping("/guestRegister")
+    public String guestRegister() {
+        return "guest/guestRegister";
+    }
+
+    @GetMapping("/guestUpdate")
+    public String guestUpdate() {
+        return "guest/guestUpdate";
+    }
+
+    // for staff
+
+        @GetMapping("/staffHome")
+    public String staffHome() {
+        return "staff/staffHome";
+    }
+
+    @GetMapping("/staffLogin")
+    public String staffLogin() {
+        return "staff/staffLogin";
+    }
+
+    @GetMapping("/staffProfile")
+    public String staffProfile() {
+        return "staff/staffProfile";
+    }
+
+    @GetMapping("/staffRoomList")
+    public String staffRoomList() {
+        return "staff/staffRoomList";
+    }
+
+    @GetMapping("/staffUpdate")
+    public String staffUpdate() {
+        return "staff/staffUpdate";
+    }
+
+    @GetMapping("/staffUpdateRoom")
+    public String staffUpdateRoom() {
+        return "staff/staffUpdateRoom";
+    }
+
+    @GetMapping("/staffViewGuest")
+    public String staffViewGuest() {
+        return "staff/staffViewGuest";
+    }
+
+    @GetMapping("/staffViewRoom")
+    public String staffViewRoom() {
+        return "staff/staffViewRoom";
+    }
+
+    @GetMapping("/staffReservationList")
+    public String staffReservationList() {
+        return "staff/staffReservationList";
+    }
+
+    @GetMapping("/staffAddRoom")
+public String staffAddRoom() {
+    return "staff/staffAddRoom";
+}
+
+@GetMapping("/staffGenerateReport")
+public String staffGenerateReport() {
+    return "staff/staffGenerateReport";
+}
+
+@GetMapping("/staffGuestList")
+public String staffGuestList() {
+    return "staff/staffGuestList";
+}
+
+// for manager
+
+@GetMapping("/managerHome")
+public String managerHome() {
+    return "manager/managerHome";
+}
+
+@GetMapping("/managerRoomList")
+public String managerRoomList() {
+    return "manager/managerRoomList";
+}
+
+@GetMapping("/managerRoomServiceList")
+public String managerRoomServiceList() {
+    return "manager/managerRoomServiceList";
+}
+
+@GetMapping("/managerStaffList")
+public String managerStaffList() {
+    return "manager/managerStaffList";
+}
+
+@GetMapping("/managerStaffUpdate")
+public String managerStaffUpdate() {
+    return "manager/managerStaffUpdate";
+}
+
+@GetMapping("/managerUpdateRoom")
+public String managerUpdateRoom() {
+    return "manager/managerUpdateRoom";
+}
+
+@GetMapping("/managerUpdateRoomService")
+public String managerUpdateRoomService() {
+    return "manager/managerUpdateRoomService";
+}
+
+@GetMapping("/managerUpdateStatus")
+public String managerUpdateStatus() {
+    return "manager/managerUpdateStatus";
+}
+    
+@GetMapping("/managerViewGuest")
+public String managerViewGuest() {
+    return "manager/managerViewGuest";
+}
+
+@GetMapping("/managerViewRoom")
+public String managerViewRoom() {
+    return "manager/managerViewRoom";
+}
+
+@GetMapping("/managerViewStaff")
+public String managerViewStaff() {
+    return "manager/managerViewStaff";
+}
+
+@GetMapping("/reservationReport")
+public String reservationReport() {
+    return "manager/reservationReport";
+}
+
+@GetMapping("/salesReport")
+public String salesReport() {
+    return "manager/salesReport";
+}
+
+
+
   
 
     @GetMapping("/database")
