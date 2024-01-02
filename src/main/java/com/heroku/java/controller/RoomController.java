@@ -47,7 +47,7 @@ public class RoomController {
         //String staffsrole = (String) session.getAttribute("staffsrole");
         //System.out.println("staffrole managerRoomList : " + staffsrole);
         try (Connection connection = dataSource.getConnection()) {
-            String sql = "SELECT roomNum, roomType, maxGuest, roomRate, roomSize, roomStatus FROM room WHERE roomNum=?"; //ni originally WHERE staffsrole=?
+            String sql = "SELECT roomNum, roomType, maxGuest, roomRate, roomSize, roomStatus FROM room order by roomNum"; //ni originally WHERE staffsrole=?
             final var statement = connection.prepareStatement(sql);
             //statement.setString(1, "baker"); (syahir punya nih)
             final var resultSet = statement.executeQuery();
@@ -60,10 +60,10 @@ public class RoomController {
                 String roomRate = resultSet.getString("roomRate");
                 String roomSize = resultSet.getString("roomSize");
                 String roomStatus = resultSet.getString("roomStatus");
-                //System.out.println("role while" + email);
-                //System.out.println("role while" + fullname);
+                System.out.println("room number" + roomNum);
+                
 
-                rooms.add(new room(roomNum, roomType, maxGuest, roomRate, roomSize, roomStatus));
+                //rooms.add(new room(roomNum, roomType, maxGuest, roomRate, roomSize, roomStatus));
                 model.addAttribute("rooms", rooms);
                 //model.addAttribute("isAdmin", staffsrole != null && staffsrole.equals("admin")); // Add isAdmin flag to the modelF (syahir punya gak)
 
@@ -71,7 +71,7 @@ public class RoomController {
 
             connection.close();
 
-         return "admin/managerRoomList";
+         return "manager/managerRoomList";
         } catch (SQLException e) {
             e.printStackTrace();
             // Handle the exception as desired (e.g., show an error message)
@@ -116,6 +116,7 @@ public class RoomController {
         return "redirect:/managerRoomList";
     }*/  
 
+    /*
     @PostMapping("/staffregister")
     public String addAccountStaff(HttpSession session, @ModelAttribute("staffregister") staff staff) {
         String fullname = (String) session.getAttribute("roomType");
