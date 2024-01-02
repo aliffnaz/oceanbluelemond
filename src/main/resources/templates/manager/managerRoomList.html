@@ -109,22 +109,22 @@
                     <div class="row mx-2">
                         <table class="table table-hover table-bordered">
                             <thead>
-                                <th class="text-center">Room ID</th>
                                 <th class="text-center">Room Number</th>
                                 <th class="text-center">Max Guest</th>
                                 <th class="text-center">Room Rate</th>
                                 <th class="text-center">Room Type</th>
                                 <th class="text-center">Room Size</th>
+                                <th class="text-center">Room Status</th>
                                 <th class="text-center" colspan="2">Action</th>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="text-center">R1</td>
-                                    <td class="text-center">A01</td>
-                                    <td class="text-center">4</td>
-                                    <td class="text-center">RM80.00</td>
-                                    <td class="text-center">Standard</td>
-                                    <td class="text-center">22 x 28 ft</td>
+                                <tr th:each="room : ${rooms}">
+                                    <td class="text-center" th:text="room.roomNum"></td>
+                                    <td class="text-center" th:text="room.maxGuest"></td>
+                                    <td class="text-center" th:text="room.roomRate"></td>
+                                    <td class="text-center" th:text="room.roomType"></td>
+                                    <td class="text-center" th:text="room.roomSize"></td>
+                                    <td class="text-center" th:text="room.roomStatus"></td>
                                     <td class="text-center">
                                         <a th:href="@{/managerViewRoom}"><i class="bi bi-eye-fill"
                                                 style="font-size: 20px;"></i></a>
@@ -132,71 +132,6 @@
                                     </td>
                                     <td class="text-center"><a href=" " onclick="success()"><i class="bi bi-trash3-fill"
                                                 style=" font-size: 20px;"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">R2</td>
-                                    <td class="text-center">A02</td>
-                                    <td class="text-center">4</td>
-                                    <td class="text-center">RM80.00</td>
-                                    <td class="text-center">Standard</td>
-                                    <td class="text-center">22 x 28 ft</td>
-                                    <td class="text-center">
-                                        <a th:href="@{/managerViewRoom}"><i class="bi bi-eye-fill"
-                                                style="font-size: 20px;"></i></a>
-
-                                    </td>
-                                    <td class="text-center"><a href=" " onclick="success()"><i class="bi bi-trash3-fill"
-                                                style="font-size: 20px;"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">R3</td>
-                                    <td class="text-center">A03</td>
-                                    <td class="text-center">4</td>
-                                    <td class="text-center">RM80.00</td>
-                                    <td class="text-center">Standard</td>
-                                    <td class="text-center">22 x 28 ft</td>
-                                    <td class="text-center">
-                                        <a th:href="@{/managerViewRoom}"><i class="bi bi-eye-fill"
-                                                style="font-size: 20px;"></i></a>
-
-                                    </td>
-                                    <td class="text-center"><a href=" " onclick="success()"><i class="bi bi-trash3-fill"
-                                                style="font-size: 20px;"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">R4</td>
-                                    <td class="text-center">B01</td>
-                                    <td class="text-center">8</td>
-                                    <td class="text-center">RM150.00</td>
-                                    <td class="text-center">Deluxe</td>
-                                    <td class="text-center">28 x 32 ft</td>
-                                    <td class="text-center">
-                                        <a th:href="@{/managerViewRoom}"><i class="bi bi-eye-fill"
-                                                style="font-size: 20px;"></i></a>
-
-                                    </td>
-                                    <td class="text-center"><a href=" " onclick="success()"><i class="bi bi-trash3-fill"
-                                                style="font-size: 20px;"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">R5</td>
-                                    <td class="text-center">B02</td>
-                                    <td class="text-center">8</td>
-                                    <td class="text-center">RM150.00</td>
-                                    <td class="text-center">Deluxe</td>
-                                    <td class="text-center">28 x 32 ft</td>
-                                    <td class="text-center">
-                                        <a th:href="@{/managerViewRoom}"><i class="bi bi-eye-fill"
-                                                style="font-size: 20px;"></i></a>
-
-                                    </td>
-                                    <td class="text-center"><a href="" onclick="success()"><i class="bi bi-trash3-fill"
-                                                style="font-size: 20px;"></i></a>
-
                                     </td>
                                 </tr>
                             </tbody>
