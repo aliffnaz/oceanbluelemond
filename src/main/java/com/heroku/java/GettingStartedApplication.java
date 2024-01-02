@@ -164,6 +164,11 @@ public String managerStaffList() {
     return "manager/managerStaffList";
 }
 
+@GetMapping("/managerGuestList")
+public String managerGuestList() {
+    return "manager/managerGuestList";
+}
+
 @GetMapping("/managerStaffUpdate")
 public String managerStaffUpdate() {
     return "manager/managerStaffUpdate";
