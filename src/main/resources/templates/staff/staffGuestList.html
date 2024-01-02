@@ -36,33 +36,43 @@
 </head>
 
 <body class="datepicker_mobile_full">
-    <div class="layer"></div>
-    <header class="reveal_header" style="background-color: #24262d;">
-        <div class="container-fluid">
-          <div class="row align-items-center">
-            <div class="col-6">
-              <a th:href="@{/index}" class="logo_normal"><img th:src="@{stylesheets/img/logo.png}" width="135" height="45" alt=""></a>
-              <a th:href="@{/index}" class="logo_sticky"><img th:src="@{stylesheets/img/logo_sticky.png}" width="135" height="45" alt=""></a>
-            </div>
-            <div class="col-6">
-              <nav>
-                <ul>
-                  <li><a class="btn_1 btn_scrollto">Staff</a></li>
-                  <li>
-                    <div class="hamburger_2 open_close_nav_panel">
-                      <div class="hamburger__box">
-                        <div class="hamburger__inner"></div>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-              </nav>
-            </div>
-          </div>
-        </div><!-- /container -->
-      </header><!-- /Header -->
+    <div id="preloader">
+        <div data-loader="circle-side"></div>
+    </div><!-- /Page Preload -->
 
-    <!-- -------------------- sidebar panel ------------------------- -->
+    <div class="layer"></div>
+
+
+    <header class="reveal_header" style="background-color: #24262d;">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-6">
+                    <a th:href="@{/index}" class="logo_normal"><img th:src="@{stylesheets/img/logo.png}" width="135"
+                        height="45" alt=""></a>
+                    <a th:href="@{/index}" class="logo_sticky"><img th:src="@{stylesheets/img/logo_sticky.png}"
+                        width="135" height="45" alt=""></a>
+                </div>
+                <div class="col-6">
+                    <nav>
+                        <ul>
+                            <li><a class="btn_1 btn_scrollto">Staff</a></li>
+                            <li>
+                                <div class="hamburger_2 open_close_nav_panel">
+                                    <div class="hamburger__box">
+                                        <div class="hamburger__inner"></div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div><!-- /container -->
+    </header><!-- /Header -->
+
+
+
+     <!-- -------------------- sidebar panel ------------------------- -->
      <div class="nav_panel">
         <a th:href="@{#}" class="closebt open_close_nav_panel"><i class="bi bi-x"></i></a>
         <div class="logo_panel"><img th:src="@{stylesheets/img/logo_sticky.png}" width="135" height="45" alt=""></div>
@@ -92,7 +102,7 @@
                     </div>
                 </div>
                 <!-- /panel_footer -->
-      </nav>
+            </nav>
         </div>
         <!-- /sidebar-navigation -->
     </div>
@@ -206,7 +216,7 @@
         </div>
     </footer>
     <!-- /footer -->
-    
+
     <div class="progress-wrap">
         <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
             <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
