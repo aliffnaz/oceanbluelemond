@@ -7,55 +7,48 @@
     <meta name="description" content="">
     <meta name="author" content="Ansonika">
     <title>D Chalet Ombak Biru</title>
-    <!-- Favicons-->
-    <link rel="shortcut icon" th:href="@{stylesheets/img/favicon.png}" type="image/x-icon">
-    <link rel="apple-touch-icon" type="image/x-icon"
-        th:href="@{stylesheets/img/apple-touch-icon-57x57-precomposed.png}">
-    <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72"
-        th:href="@{stylesheets/img/apple-touch-icon-72x72-precomposed.png}">
-    <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114"
-        th:href="@{stylesheets/img/apple-touch-icon-114x114-precomposed.png}">
-    <link th:rel="apple-touch-icon" type="image/x-icon" sizes="144x144"
-        th:href="@{stylesheets/img/apple-touch-icon-144x144-precomposed.png}">
+ <!-- Favicons-->
+ <link rel="shortcut icon" th:href="@{stylesheets/img/favicon.png}" type="image/x-icon">
+ <link rel="apple-touch-icon" type="image/x-icon" th:href="@{stylesheets/img/apple-touch-icon-57x57-precomposed.png}">
+ <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72" th:href="@{stylesheets/img/apple-touch-icon-72x72-precomposed.png}">
+ <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114"
+     th:href="@{stylesheets/img/apple-touch-icon-114x114-precomposed.png}">
+ <link th:rel="apple-touch-icon" type="image/x-icon" sizes="144x144"
+     th:href="@{stylesheets/img/apple-touch-icon-144x144-precomposed.png}">
 
-    <!-- GOOGLE WEB FONT-->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500&family=Montserrat:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
+ <!-- GOOGLE WEB FONT-->
+ <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500&family=Montserrat:wght@300;400;500;600;700&display=swap"
+     rel="stylesheet">
 
-    <!-- BASE CSS -->
-    <link th:href="@{stylesheets/css/bootstrap.min.css}" rel="stylesheet">
-    <link th:href="@{stylesheets/css/style.css}" rel="stylesheet">
-    <link th:href="@{stylesheets/css/vendors.min.css}" rel="stylesheet">
+ <!-- BASE CSS -->
+ <link th:href="@{stylesheets/css/bootstrap.min.css}" rel="stylesheet">
+ <link th:href="@{stylesheets/css/style.css}" rel="stylesheet">
+ <link th:href="@{stylesheets/css/vendors.min.css}" rel="stylesheet">
 
-    <!-- SEPCIFIC CSS -->
-    <link th:href="@{stylesheets/css/flex_slider.css}" rel="stylesheet">
+ <!-- SEPCIFIC CSS -->
+ <link th:href="@{stylesheets/css/flex_slider.css}" rel="stylesheet">
 
-    <!-- YOUR CUSTOM CSS -->
-    <link th:href="@{stylesheets/css/custom.css}" rel="stylesheet">
+ <!-- YOUR CUSTOM CSS -->
+ <link th:href="@{stylesheets/css/custom.css}" rel="stylesheet">
 </head>
 
 <body class="datepicker_mobile_full">
 
-    <div id="preloader">
-        <div data-loader="circle-side"></div>
-    </div><!-- /Page Preload -->
+    <div class="layer"></div>
 
-    <div class="layer"></div><!-- Opacity Mask -->
 
-    <header class="reveal_header">
+    <header class="reveal_header" style="background-color:#24262d;">
         <div class="container-fluid">
             <div class="row align-items-center">
                 <div class="col-6">
-                    <a th:href="@{/index}" class="logo_normal"><img th:src="@{stylesheets/img/logo.png}" width="135"
-                            height="45" alt=""></a>
-                    <a th:href="@{/index}" class="logo_sticky"><img th:src="@{stylesheets/img/logo_sticky.png}"
-                            width="135" height="45" alt=""></a>
+                    <a th:href="@{/index}" class="logo"><img th:src="@{stylesheets/img/logo.png}" width="135" height="45" alt=""></a>
+                    <a th:href="@{/index}" class="logo_sticky"><img th:src="@{stylesheets/img/logo_sticky.png}" width="135" height="45"
+                            alt=""></a>
                 </div>
                 <div class="col-6">
                     <nav>
                         <ul>
-                            <li><a th:href="@{/guestMakeRoomReservation}" class="btn_1 btn_scrollto">Book Now</a></li>
+                            <li><a th:href="@{/guestLogin}" class="btn_1 btn_scrollto">Book Now</a></li>
                             <li>
                                 <div class="hamburger_2 open_close_nav_panel">
                                     <div class="hamburger__box">
@@ -71,7 +64,7 @@
     </header><!-- /Header -->
 
     <div class="nav_panel">
-        <a th:href="@{#}" class="closebt open_close_nav_panel"><i class="bi bi-x"></i></a>
+        <a th:href="@{/#}" class="closebt open_close_nav_panel"><i class="bi bi-x"></i></a>
         <div class="logo_panel"><img th:src="@{stylesheets/img/logo_sticky.png}" width="135" height="45" alt=""></div>
         <div class="sidebar-navigation">
             <nav>
@@ -79,16 +72,46 @@
                 <ul class="level-1">
                     <li><a th:href="@{/index}"><i class="bi bi-house" style="font-size: 25px;"></i> &nbsp;Home</a></li>
                     <li><a th:href="@{/guestProfile}"><i class="bi bi-person-square" style="font-size: 25px;"></i>
-                            &nbsp;Profile</a></li>
-                    <li><a th:href="@{/guestViewRoom}"><i class="bi bi-door-open" style="font-size: 25px;"></i>
-                            &nbsp;Our
+                            <div class="sidebar-navigation">
+                                <nav>
+
+                                    <ul class="level-1">
+                                        <li><a th:href="@{/index}"><i class="bi bi-house" style="font-size: 25px;"></i>
+                                                &nbsp;Home</a></li>
+                                        <li><a th:href="@{/guestProfile}"><i class="bi bi-person-square"
+                                                    style="font-size: 25px;"></i>
+                                                &nbsp;Profile</a></li>
+                                        <li><a th:href="@{/guestViewRoom}"><i class="bi bi-door-open"
+                                                    style="font-size: 25px;"></i> &nbsp;Our
+                                                Rooms</a></li>
+                                        <li><a th:href="@{/guestMakeRoomReservation}"><i class="bi bi-plus"
+                                                    style="font-size: 25px;"></i>
+                                                &nbsp;Make Reservation</a></li>
+                                        <li><a th:href="@{/guestRoomReservation}"><i class="bi bi-receipt-cutoff"
+                                                    style="font-size: 25px;"></i> &nbsp;Records</a></li>
+                                        <li class="mt-5"><a th:href="@{/guestLogin}" class="btn btn-danger pt-3"
+                                                style="color: white; border-radius: 10px 10px 10px 10px; height: 50px;">Logout</a>
+                                        </li>
+                                    </ul>
+                                    <div class="panel_footer">
+                                        <div class="copy">
+                                            <div class="container py-3">
+                                                © Ombak Biru Chalet Malaysia
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /panel_footer -->
+                                </nav>
+                            </div> &nbsp;Profile
+                        </a></li>
+                    <li><a th:href="@{/guestViewRoom}"><i class="bi bi-door-open" style="font-size: 25px;"></i> &nbsp;Our
                             Rooms</a></li>
                     <li><a th:href="@{/guestMakeRoomReservation}"><i class="bi bi-plus" style="font-size: 25px;"></i>
                             &nbsp;Make Reservation</a></li>
                     <li><a th:href="@{/guestRoomReservation}"><i class="bi bi-receipt-cutoff"
                                 style="font-size: 25px;"></i> &nbsp;Records</a></li>
-                    <li class="mt-5"><a th:href="@{/guestLogin}" class="btn btn-danger pt-3" type="button"
-                            style="color: white; border-radius: 10px 10px 10px 10px; height: 50px;">Logout</a></li>
+                    <li class="mt-5"><a th:href="@{/guestLogin}" class="btn btn-dark pt-3"
+                            style="color: white; border-radius: 10px 10px 10px 10px; height: 50px;">Log in</a></li>
                 </ul>
                 <div class="panel_footer">
                     <div class="copy">
@@ -102,12 +125,14 @@
         </div>
         <!-- /sidebar-navigation -->
     </div>
+    <!-- /nav_panel -->
+
     <main>
         <div class="slider">
             <div id="slider" class="flexslider">
                 <ul class="slides">
                     <li>
-                        <img th:src="@{stylesheets/img/rooms/standard-1.jpg}" alt="">
+                        <img th:src="@{img/rooms/standard-1.jpg}" alt="">
                         <div class="meta">
                             <h3>Standard Room</h3>
                             <div class="info">
@@ -117,7 +142,7 @@
                         </div>
                     </li>
                     <li>
-                        <img th:src="@{stylesheets/rooms/deluxe-1.jpg}" alt="">
+                        <img th:src="@{img/rooms/deluxe-1.jpg}" alt="">
                         <div class="meta">
                             <h3>Deluxe Room</h3>
                             <div class="info">
@@ -134,14 +159,14 @@
                 <div id="carousel_slider" class="flexslider">
                     <ul class="slides">
                         <li>
-                            <img th:src="@{stylesheets/rooms/standard-2.jpg}" alt="">
+                            <img th:src="@{img/rooms/standard-2.jpg}" alt="">
                             <div class="caption">
                                 <h3>Standard Room<span>RM150 / Night</span></h3>
                                 <small>4 Guests - 1 Bed</small>
                             </div>
                         </li>
                         <li>
-                            <img th:src="@{stylesheets/rooms/deluxe-2.jpg}" alt="">
+                            <img th:src="@{img/rooms/deluxe-2.jpg}" alt="">
                             <div class="caption">
                                 <h3>Deluxe Room <span>RM200 / Night</span></h3>
                                 <small>8 Guests - 2 Bed</small>
@@ -159,7 +184,7 @@
                 <div class="row justify-content-between flex-lg-row-reverse align-items-center">
                     <div class="col-lg-5">
                         <div class="parallax_wrapper">
-                            <img th:src="@{stylesheets/img/owner.jpg}" alt="" class="img-fluid rounded-img">
+                            <img th:src="@{img/owner.jpg}" alt="" class="img-fluid rounded-img">
 
                         </div>
                     </div>
@@ -192,7 +217,7 @@
                     <div class="col-lg-6">
                         <div class="pinned-image rounded_container pinned-image--small mb-4">
                             <div class="pinned-image__container">
-                                <img th:src="@{stylesheets/img/local_amenities_1.jpg}" alt="">
+                                <img th:src="@{img/local_amenities_1.jpg}" alt="">
                             </div>
                         </div>
                     </div>
@@ -213,7 +238,7 @@
                     <div class="col-lg-6 order-lg-2">
                         <div class="pinned-image rounded_container pinned-image--small mb-4">
                             <div class="pinned-image__container">
-                                <img th:src="@{stylesheets/img/local_amenities_3.jpg}" alt="">
+                                <img th:src="@{img/local_amenities_3.jpg}" alt="">
                             </div>
                         </div>
                     </div>
@@ -244,12 +269,11 @@
                             <small>D Chalet Ombak Biru</small>
                             <h2>Check Availability</h2>
                         </div>
-                        <p>Make your reservation now! Choose your start booking date and end of your stay date.</p>
-                        <p>Check-in Time : 2.00pm</p>
-                        <p>Check-out Time : 12.00pm</p>
-                        <div class="phone_element no_borders"><a th:href="@{tel://+6012 3456789}"><i
-                                    class="bi bi-telephone"></i>
-                                <span><em>Info and bookings</em>016-2115359/012-2431337</span></a></div>
+                        <p>Mea nibh meis philosophia eu. Duis legimus efficiantur ea sea. Id placerat tacimates
+                            definitionem sea, prima quidam vim no. Duo nobis persecuti cu. </p>
+                        <p class="phone_element no_borders"><a href="tel://423424234"><i
+                                    class="bi bi-telephone"></i><span><em>Info and bookings</em>+41 934 121
+                                    1334</span></a></p>
                     </div>
                 </div>
                 <div class="col-xl-7">
@@ -292,8 +316,7 @@
                             </div>
                         </div>
                         <!-- / row -->
-                        <p class="text-end mt-4"><a th:href="@{/guestViewRoom}" class="btn_1 outline">Book
-                                Now</a></p>
+                        <p class="text-end mt-4"><a th:href="@{/guestLogin}" class="btn_1 outline">Book Now</a></p>
                     </div>
                 </div>
                 <!-- /col -->
@@ -345,15 +368,17 @@
         </svg>
     </div>
     <!-- /back to top -->
+
     <!-- COMMON SCRIPTS -->
     <script th:src="@{stylesheets/js/common_scripts.js}"></script>
     <script th:src="@{stylesheets/js/common_functions.js}"></script>
     <script th:src="@{stylesheets/js/datepicker_inline.js}"></script>
     <script th:src="@{stylesheets/phpmailer/validate.js}"></script>
-
+    
     <!-- SPECIFIC SCRIPTS -->
     <script th:src="@{stylesheets/js/jquery.flexslider.min.js}"></script>
     <script th:src="@{stylesheets/js/slider_func.js}"></script>
+
 </body>
 
 </html>
