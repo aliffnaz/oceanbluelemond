@@ -80,11 +80,6 @@ public class GettingStartedApplication {
         return "guest/guestUpdate";
     }
 
-    @GetMapping("/guestViewRoom")
-    public String guestViewRoom() {
-        return "guest/guestViewRoom";
-    }
-
     @GetMapping("/guestViewRoomReservation")
     public String guestViewRoomReservation() {
         return "guest/guestViewRoomReservation";
@@ -93,6 +88,11 @@ public class GettingStartedApplication {
     @GetMapping("/guestViewService")
     public String guestViewService() {
         return "guest/guestViewService";
+    }
+
+    @GetMapping("/guestGenerateReceipt")
+    public String guestGenerateReceipt() {
+        return "guest/guestGenerateReceipt";
     }
 
     // for staff
