@@ -80,6 +80,21 @@ public class GettingStartedApplication {
         return "guest/guestUpdate";
     }
 
+    @GetMapping("/guestViewRoom")
+    public String guestViewRoom() {
+        return "guest/guestViewRoom";
+    }
+
+    @GetMapping("/guestViewRoomReservation")
+    public String guestViewRoomReservation() {
+        return "guest/guestViewRoomReservation";
+    }
+
+    @GetMapping("/guestViewService")
+    public String guestViewService() {
+        return "guest/guestViewService";
+    }
+
     // for staff
 
         @GetMapping("/staffHome")
@@ -149,6 +164,21 @@ public String managerHome() {
     return "manager/managerHome";
 }
 
+@GetMapping("/managerAddRoom")
+public String managerAddRoom() {
+    return "manager/managerAddRoom";
+}
+
+@GetMapping("/managerAddStaff")
+public String managerAddStaff() {
+    return "manager/managerAddStaff";
+}
+
+@GetMapping("/managerAddRoomService")
+public String managerAddRoomService() {
+    return "manager/managerAddRoomService";
+}
+
 @GetMapping("/managerRoomList")
 public String managerRoomList() {
     return "manager/managerRoomList";
@@ -202,6 +232,11 @@ public String managerViewRoom() {
 @GetMapping("/managerViewStaff")
 public String managerViewStaff() {
     return "manager/managerViewStaff";
+}
+
+@GetMapping("/managerGenerateReport")
+public String managerGenerateReport() {
+    return "manager/managerGenerateReport";
 }
 
 @GetMapping("/reservationReport")
