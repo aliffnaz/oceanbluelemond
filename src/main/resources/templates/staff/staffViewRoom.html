@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="Ansonika">
-    <title>D Chalet Ombak Biru</title>
+    <title>Ombak Biru Chalet</title>
+
     <!-- Favicons-->
     <link rel="shortcut icon" th:href="@{stylesheets/img/favicon.png}" type="image/x-icon">
     <link rel="apple-touch-icon" type="image/x-icon"
@@ -19,8 +20,9 @@
         th:href="@{stylesheets/img/apple-touch-icon-144x144-precomposed.png}">
 
     <!-- GOOGLE WEB FONT-->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500&family=Montserrat:wght@300;400;500;600;700&display=swap"
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500&family=Montserrat:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
 
     <!-- BASE CSS -->
@@ -36,17 +38,13 @@
 </head>
 
 <body class="datepicker_mobile_full">
-    <div id="preloader">
-        <div data-loader="circle-side"></div>
-    </div><!-- /Page Preload -->
     <div class="layer"></div>
     <header class="reveal_header" style="background-color: #24262d;">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-6">
-                    <a th:href="@{/staffHome}" class="logo_normal"><img th:src="@{stylesheets/img/logo.png"} width="135" height="45" alt=""></a>
-                    <a th:href="@{/staffHome}" class="logo_sticky"><img th:src="@{stylesheets/img/logo_sticky.png}" width="135" height="45"
-                            alt=""></a>
+                    <a th:href="@{/index}" class="logo_normal"><img th:src="@{stylesheets/img/logo.png}" width="135" height="45" alt=""></a>
+                    <a th:href="@{/index}" class="logo_sticky"><img th:src="@{stylesheets/img/logo_sticky.png}" width="135" height="45" alt=""></a>
                 </div>
                 <div class="col-6">
                     <nav>
@@ -69,40 +67,40 @@
 
 
     <!-- -------------------- sidebar panel ------------------------- -->
-    <div class="nav_panel">
-        <a th:href="@{#}" class="closebt open_close_nav_panel"><i class="bi bi-x"></i></a>
+  <div class="nav_panel">
+    <a th:href="@{#}" class="closebt open_close_nav_panel"><i class="bi bi-x"></i></a>
         <div class="logo_panel"><img th:src="@{stylesheets/img/logo_sticky.png}" width="135" height="45" alt=""></div>
-        <div class="sidebar-navigation">
-            <nav>
-                <ul class="level-1">
-                <li class=""><a th:href="@{/staffHome}"><i class="bi bi-house" style="font-size: 25px;"></i> &nbsp;
-                        Home</a></li>
-                <li><a th:href="@{/staffProfile}"><i class="bi bi-person-check" style="font-size: 25px;"></i>
-                        &nbsp; View Profile</a></li>
-                <li><a th:href="@{/staffRoomList}"><i class="bi bi-clipboard-check" style="font-size: 25px;"></i>
-                        &nbsp; Manage Room</a></li>
-                <li><a th:href="@{/staffReservationList}"><i class="bi bi-view-list" style="font-size: 25px;"></i>
-                        &nbsp; Reservation List</a></li>
-                <li><a th:href="@{/staffGuestList}"><i class="bi bi-people" style="font-size: 25px;" ></i> 
-                        &nbsp; Manage Guest</a></li>
-                <li><a th:href="@{/staffGenerateReport}"><i class="bi bi-file-earmark-bar-graph"
-                            style="font-size: 25px;"></i> &nbsp; Generate Report</a></li>
-                <li class="mt-5"><a th:href="@{/index_logout}" class="btn btn-danger pt-3"
-                        style="color: white; border-radius: 10px 10px 10px 10px; height: 50px;">Logout</a></li>
-                </ul>
-                <div class="panel_footer">
-                    <div class="copy">
-                        <div class="container py-3">
-                            © Ombak Biru Chalet Malaysia
-                        </div>
-                    </div>
-                </div>
-                <!-- /panel_footer -->
-            </nav>
+    <div class="sidebar-navigation">
+      <nav>
+        <ul class="level-1">
+          <li class=""><a th:href="@{/staffHome}"><i class="bi bi-house" style="font-size: 25px;"></i> &nbsp;
+              Home</a></li>
+          <li><a th:href="@{/staffProfile}"><i class="bi bi-person-check" style="font-size: 25px;"></i>
+              &nbsp; View Profile</a></li>
+          <li><a th:href="@{/staffRoomList}"><i class="bi bi-clipboard-check" style="font-size: 25px;"></i>
+              &nbsp; Manage Room</a></li>
+          <li><a th:href="@{/staffReservationList}"><i class="bi bi-view-list" style="font-size: 25px;"></i>
+              &nbsp; Reservation List</a></li>
+          <li><a th:href="@{/staffGuestList}"><i class="bi bi-people" style="font-size: 25px;"></i>
+              &nbsp; Manage Guest</a></li>
+          <li><a th:href="@{/staffGenerateReport}"><i class="bi bi-file-earmark-bar-graph" style="font-size: 25px;"></i>
+              &nbsp; Generate Report</a></li>
+          <li class="mt-5"><a th:href="@{/index_logout}" class="btn btn-danger pt-3"
+              style="color: white; border-radius: 10px 10px 10px 10px; height: 50px;">Logout</a></li>
+        </ul>
+        <div class="panel_footer">
+          <div class="copy">
+            <div class="container py-3">
+              © Ombak Biru Chalet Malaysia
+            </div>
+          </div>
         </div>
-        <!-- /sidebar-navigation -->
+        <!-- /panel_footer -->
+      </nav>
     </div>
-    <!-- /nav_panel -->
+    <!-- /sidebar-navigation -->
+  </div>
+  <!-- /nav_panel -->
 
 
     <main>
@@ -114,7 +112,7 @@
 
                     <div class="row m-5">
                         <div class="col-2 text-center">
-                            <a rh:href="@{/staffRoomList}">
+                            <a th:href="@{/staffRoomList}">
                                 <div class="bi bi-arrow-left-circle" style="font-size: 50px;"></div>
                             </a>
                         </div>
@@ -201,7 +199,7 @@
                             <a th:href="@{/staffUpdateRoom}" class="btn btn-dark btn-lg"
                                 style="border-radius: 3px 3px 3px 3px; height: auto; width:150px">Edit</a>
                             &nbsp;
-                            <a th:href="@{/staffRoomList}" class="btn btn-danger btn-lg"
+                            <a th:href="@{/staffRoomList}"" class="btn btn-danger btn-lg"
                                 style="border-radius: 3px 3px 3px 3px; height: auto; width:150px" onclick="success()">Delete</a>
 
                             <script>
@@ -225,7 +223,6 @@
     <footer class="revealed">
         <div class="footer_bg">
             <div class="gradient_over"></div>
-      
         </div>
         <div class="container">
             <div class="row move_content">
@@ -240,9 +237,9 @@
                     <div class="social">
                         <ul>
                             <li><a th:href="@{#0}"><i class="bi bi-instagram"></i></a></li>
-                            <li><a th:href="@{#0}"><i class="bi bi-whatsapp"></i></a></li>
                             <li><a th:href="@{#0}"><i class="bi bi-facebook"></i></a></li>
                             <li><a th:href="@{#0}"><i class="bi bi-twitter"></i></a></li>
+                            <li><a th:href="@{#0}"><i class="bi bi-whatsapp"></i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -251,10 +248,10 @@
         <!--/container-->
         <div class="copy">
             <div class="container">
-                © Ombak Biru Chalet - by <a th:href="@{#}">Ocean Blue Lemond</a>
+                © Ombak Biru Chalet - by <a href="#">Ocean Blue Lemond</a>
             </div>
         </div>
-      </footer>
+    </footer>
     <!-- /footer -->
 
     <div class="progress-wrap">
@@ -265,10 +262,11 @@
     <!-- /back to top -->
 
     <!-- COMMON SCRIPTS -->
-    <script th:src="@{stylesheets/js/common_scripts.js}"></script>
-    <script th:src="@{stylesheets/js/common_functions.js}"></script>
-    <script th:src="@{stylesheets/js/datepicker_inline.js}"></script>
-    <script th:src="@{stylesheets/phpmailer/validate.js}"></script>
+    <script src="js/common_scripts.js"></script>
+    <script src="js/common_functions.js"></script>
+    <script src="js/datepicker_inline.js"></script>
+    <script src="phpmailer/validate.js"></script>
+
 </body>
 
 </html>
