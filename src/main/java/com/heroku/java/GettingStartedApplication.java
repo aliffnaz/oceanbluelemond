@@ -46,7 +46,7 @@ public class GettingStartedApplication {
 
     @GetMapping("/index_logout")
     public String index_logout() {
-        return "guest/index_logout";
+        return "index_logout";
     }
 
         @GetMapping("/guestViewRoom")
