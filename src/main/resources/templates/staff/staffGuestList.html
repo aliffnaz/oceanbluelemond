@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="Ansonika">
-    <title>D Chalet Ombak Biru</title>
+    <title>Ombak Biru Chalet</title>
+
     <!-- Favicons-->
     <link rel="shortcut icon" th:href="@{stylesheets/img/favicon.png}" type="image/x-icon">
     <link rel="apple-touch-icon" type="image/x-icon"
@@ -19,8 +20,9 @@
         th:href="@{stylesheets/img/apple-touch-icon-144x144-precomposed.png}">
 
     <!-- GOOGLE WEB FONT-->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500&family=Montserrat:wght@300;400;500;600;700&display=swap"
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500&family=Montserrat:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
 
     <!-- BASE CSS -->
@@ -36,67 +38,71 @@
 </head>
 
 <body class="datepicker_mobile_full">
+    <div id="preloader">
+        <div data-loader="circle-side"></div>
+    </div><!-- /Page Preload -->
+
     <div class="layer"></div>
     <header class="reveal_header" style="background-color: #24262d;">
-        <div class="container-fluid">
-          <div class="row align-items-center">
-            <div class="col-6">
-              <a th:href="@{/index}" class="logo_normal"><img th:src="@{stylesheets/img/logo.png}" width="135" height="45" alt=""></a>
-              <a th:href="@{/index}" class="logo_sticky"><img th:src="@{stylesheets/img/logo_sticky.png}" width="135" height="45" alt=""></a>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-6">
+                    <a th:href="@{/index}" class="logo_normal"><img th:src="@{stylesheets/img/logo.png}" width="135" height="45" alt=""></a>
+                    <a th:href="@{/index}" class="logo_sticky"><img th:src="@{stylesheets/img/logo_sticky.png}" width="135" height="45" alt=""></a>
+                </div>
+                <div class="col-6">
+                    <nav>
+                        <ul>
+                            <li><a class="btn_1 btn_scrollto">Staff</a></li>
+                            <li>
+                                <div class="hamburger_2 open_close_nav_panel">
+                                    <div class="hamburger__box">
+                                        <div class="hamburger__inner"></div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
             </div>
-            <div class="col-6">
-              <nav>
-                <ul>
-                  <li><a class="btn_1 btn_scrollto">Staff</a></li>
-                  <li>
-                    <div class="hamburger_2 open_close_nav_panel">
-                      <div class="hamburger__box">
-                        <div class="hamburger__inner"></div>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-              </nav>
+        </div><!-- /container -->
+    </header><!-- /Header -->
+
+     <!-- -------------------- sidebar panel ------------------------- -->
+    <div class="nav_panel">
+    <a th:href="@{#}" class="closebt open_close_nav_panel"><i class="bi bi-x"></i></a>
+        <div class="logo_panel"><img th:src="@{stylesheets/img/logo_sticky.png}" width="135" height="45" alt=""></div>
+    <div class="sidebar-navigation">
+      <nav>
+        <ul class="level-1">
+          <li class=""><a th:href="@{/staffHome}"><i class="bi bi-house" style="font-size: 25px;"></i> &nbsp;
+              Home</a></li>
+          <li><a th:href="@{/staffProfile}"><i class="bi bi-person-check" style="font-size: 25px;"></i>
+              &nbsp; View Profile</a></li>
+          <li><a th:href="@{/staffRoomList}"><i class="bi bi-clipboard-check" style="font-size: 25px;"></i>
+              &nbsp; Manage Room</a></li>
+          <li><a th:href="@{/staffReservationList}"><i class="bi bi-view-list" style="font-size: 25px;"></i>
+              &nbsp; Reservation List</a></li>
+          <li><a th:href="@{/staffGuestList}"><i class="bi bi-people" style="font-size: 25px;"></i>
+              &nbsp; Manage Guest</a></li>
+          <li><a th:href="@{/staffGenerateReport}"><i class="bi bi-file-earmark-bar-graph" style="font-size: 25px;"></i>
+              &nbsp; Generate Report</a></li>
+          <li class="mt-5"><a th:href="@{/index_logout}" class="btn btn-danger pt-3"
+              style="color: white; border-radius: 10px 10px 10px 10px; height: 50px;">Logout</a></li>
+        </ul>
+        <div class="panel_footer">
+          <div class="copy">
+            <div class="container py-3">
+              © Ombak Biru Chalet Malaysia
             </div>
           </div>
-        </div><!-- /container -->
-      </header><!-- /Header -->
-
-    <!-- -------------------- sidebar panel ------------------------- -->
-     <div class="nav_panel">
-        <a th:href="@{#}" class="closebt open_close_nav_panel"><i class="bi bi-x"></i></a>
-        <div class="logo_panel"><img th:src="@{stylesheets/img/logo_sticky.png}" width="135" height="45" alt=""></div>
-        <div class="sidebar-navigation">
-            <nav>
-                <ul class="level-1">
-                    <li class=""><a th:href="@{/staffHome}"><i class="bi bi-house" style="font-size: 25px;"></i> &nbsp;
-                            Home</a></li>
-                    <li><a th:href="@{/staffProfile}"><i class="bi bi-person-check" style="font-size: 25px;"></i>
-                            &nbsp; View Profile</a></li>
-                    <li><a th:href="@{/staffRoomList}"><i class="bi bi-clipboard-check" style="font-size: 25px;"></i>
-                            &nbsp; Manage Room</a></li>
-                    <li><a th:href="@{/staffReservationList}"><i class="bi bi-view-list" style="font-size: 25px;"></i>
-                            &nbsp; Reservation List</a></li>
-                    <li><a th:href="@{/staffGuestList}"><i class="bi bi-people" style="font-size: 25px;" ></i> 
-                            &nbsp; Manage Guest</a></li>
-                    <li><a th:href="@{/staffGenerateReport}"><i class="bi bi-file-earmark-bar-graph"
-                                style="font-size: 25px;"></i> &nbsp; Generate Report</a></li>
-                    <li class="mt-5"><a th:href="@{/guestLogin}" class="btn btn-danger p-3"
-                            style="color: white; border-radius: 10px 10px 10px 10px; height: 50px;">Logout</a></li>
-                </ul>
-                <div class="panel_footer">
-                    <div class="copy">
-                        <div class="container m-3">
-                            © Ombak Biru Chalet Malaysia
-                        </div>
-                    </div>
-                </div>
-                <!-- /panel_footer -->
-      </nav>
         </div>
-        <!-- /sidebar-navigation -->
+        <!-- /panel_footer -->
+      </nav>
     </div>
-    <!-- /nav_panel -->
+    <!-- /sidebar-navigation -->
+  </div>
+  <!-- /nav_panel -->
 
 
     <main>
@@ -115,54 +121,77 @@
                     <div class="row mx-2">
                         <table class="table table-hover table-bordered">
                             <thead style="vertical-align: middle;">
-                                <th class="text-center">Guest IC Number</th>
+                                <th class="text-center">Guest ID</th>
                                 <th class="text-center">Guest Name</th>
                                 <th class="text-center" width="130">Guest Phone Number</th>
+                                <th class="text-center" width="150">Guest IC Number</th>
                                 <th class="text-center">Guest Gender</th>
                                 <th class="text-center">Guest Race</th>
                                 <th class="text-center">Guest Religion</th>
-                                <th class="text-center">Guest Email</th>
                                 <th class="text-center">Guest Address</th>
                                 <th class="text-center" colspan="2">Action</th>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td class="text-center">010205012313</td>
+                                    <td class="text-center">G01</td>
                                     <td class="text-center">Haiqal</td>
                                     <td class="text-center">011-17246568</td>
+                                    <td class="text-center">020907-14-1111</td>
                                     <td class="text-center">Male</td>
                                     <td class="text-center">Malay</td>
                                     <td class="text-center">Muslim</td>
-                                    <td class="text-center">haiqalizze02@gmail.com</td>
                                     <td class="text-center">275 Jln 4 Off Jln Chan Sow Lin, 55200 Wilayah Persekutuan Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur</td>
                                     <td class="text-center"><a th:href="@{/staffViewGuest}"><i class="bi bi-eye-fill" style="font-size: 20px;"></i></a></td>
-                                    <td class="text-center"><a th:href=" "><i class="bi bi-trash3-fill" style="font-size: 20px;"></i></a></td>
+                                    <td class="text-center"><a href=" "><i class="bi bi-trash3-fill" style="font-size: 20px;"></i></a></td>
                                 </tr>
                                 <tr>
-                                    <td class="text-center">890524054568</td>
+                                    <td class="text-center">G02</td>
                                     <td class="text-center">Azalea</td>
                                     <td class="text-center">014-7138969</td>
+                                    <td class="text-center">020707-04-2222</td>
                                     <td class="text-center">Female</td>
                                     <td class="text-center">Malay</td>
                                     <td class="text-center">Muslim</td>
-                                    <td class="text-center">azaleaAzizi@gmail.com</td>
                                     <td class="text-center">No 42, Jalan PRI 22, Taman Paya Rumput Indah, 76450 Paya Rumput, Melaka</td>
                                     <td class="text-center"><a th:href="@{/staffViewGuest}"><i class="bi bi-eye-fill" style="font-size: 20px;"></i></a></td>
-                                    <td class="text-center"><a th:href=" "><i class="bi bi-trash3-fill" style="font-size: 20px;"></i></a></td>
+                                    <td class="text-center"><a href=" "><i class="bi bi-trash3-fill" style="font-size: 20px;"></i></a></td>
                                 </tr>
                                 <tr>
-                                    <td class="text-center">990625040044</td>
+                                    <td class="text-center">G03</td>
                                     <td class="text-center">Balqis</td>
                                     <td class="text-center">014-6070102</td>
+                                    <td class="text-center">020625-04-4444</td>
                                     <td class="text-center">Female</td>
                                     <td class="text-center">Malay</td>
                                     <td class="text-center">Muslim</td>
-                                    <td class="text-center">pnurdania53@gmail.com</td>
                                     <td class="text-center">No 12 Jln Angkasa Nuri 47, Taman Angkasa Nuri, 76100 Durian Tunggal, Melaka</td>
                                     <td class="text-center"><a th:href="@{/staffViewGuest}"><i class="bi bi-eye-fill" style="font-size: 20px;"></i></a></td>
-                                    <td class="text-center"><a th:href=" "><i class="bi bi-trash3-fill" style="font-size: 20px;"></i></a></td>
+                                    <td class="text-center"><a href=" "><i class="bi bi-trash3-fill" style="font-size: 20px;"></i></a></td>
                                 </tr>
-                              
+                                <tr>
+                                    <td class="text-center">G04</td>
+                                    <td class="text-center">Aliff</td>
+                                    <td class="text-center">018-9839423</td>
+                                    <td class="text-center">021230-04-3333</td>
+                                    <td class="text-center">Male</td>
+                                    <td class="text-center">Malay</td>
+                                    <td class="text-center">Muslim</td>
+                                    <td class="text-center">No 24, Jalan Sri Raya 5, Taman Muzafar Syah, 75450 Ayer Keroh, Melaka</td>
+                                    <td class="text-center"><a th:href="@{/staffViewGuest}"><i class="bi bi-eye-fill" style="font-size: 20px;"></i></a></td>
+                                    <td class="text-center"><a href=" "><i class="bi bi-trash3-fill" style="font-size: 20px;"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">G05</td>
+                                    <td class="text-center">Aminudin</td>
+                                    <td class="text-center">019-2141021</td>
+                                    <td class="text-center">021207-05-7777</td>
+                                    <td class="text-center">Non-Binary</td>
+                                    <td class="text-center">Portuguese</td>
+                                    <td class="text-center">Muslim</td>
+                                    <td class="text-center">1130 Jalan Sentosa 3, Taman Sentosa, 73400 Gemas, Negeri Sembilan</td>
+                                    <td class="text-center"><a th:href="@{/staffViewGuest}"><i class="bi bi-eye-fill" style="font-size: 20px;"></i></a></td>
+                                    <td class="text-center"><a href=" "><i class="bi bi-trash3-fill" style="font-size: 20px;"></i></a></td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -201,12 +230,12 @@
         <!--/container-->
         <div class="copy">
             <div class="container">
-              © Ombak Biru Chalet - by <a th:href="@{#}">Ocean Blue Lemond</a>
+                © Ombak Biru Chalet - by <a href="#">Ocean Blue Lemond</a>
             </div>
         </div>
     </footer>
     <!-- /footer -->
-    
+
     <div class="progress-wrap">
         <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
             <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
@@ -219,6 +248,10 @@
     <script th:src="@{stylesheets/js/common_functions.js}"></script>
     <script th:src="@{stylesheets/js/datepicker_inline.js}"></script>
     <script th:src="@{stylesheets/phpmailer/validate.js}"></script>
+    
+    <!-- SPECIFIC SCRIPTS -->
+    <script th:src="@{stylesheets/js/jquery.flexslider.min.js}"></script>
+    <script th:src="@{stylesheets/js/slider_func.js}"></script>
 
 </body>
 
