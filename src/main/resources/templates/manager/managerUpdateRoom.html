@@ -195,15 +195,16 @@
                     </div>
                     <div class="row m-5">
                         <div class="col text-center">
-                            <a th:href="@{/managerUpdateRoom?roomNum=}+${room.roomNum}" th:value="${room.roomNum}" class="btn btn-dark btn-lg"
-                                style="border-radius: 3px 3px 3px 3px; height: auto; width:150px" onclick="success()">Update</a>
-                            <script>
+                            <button type="submit" class="btn btn-dark btn-lg">Add</button>
+                            <!-- <a th:href="@{/managerUpdateRoom?roomNum=}+${room.roomNum}" th:value="${room.roomNum}" class="btn btn-dark btn-lg"
+                                style="border-radius: 3px 3px 3px 3px; height: auto; width:150px" onclick="success()">Update</a> -->
+                            <!-- <script>
                                 function success() {
                                     alert("Successfully Update");
                                 }
-                            </script>
+                            </script> -->
                             &nbsp;
-                            <a th:href="@{/managerUpdateRoom?roomNum=}+${room.roomNum}" class="btn btn-danger btn-lg"
+                            <a th:href="@{/managerViewRoom?roomNum=}+${room.roomNum}" class="btn btn-danger btn-lg"
                                 style="border-radius: 3px 3px 3px 3px; height: auto; width:150px">Cancel</a>
                         </div>
                     </div>
