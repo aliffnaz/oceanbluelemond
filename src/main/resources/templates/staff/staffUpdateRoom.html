@@ -103,6 +103,12 @@
     <main>
         <div class="container mt-5">&nbsp;</div>
         <div class="container mt-5 mb-5 align-items-center">
+            <form
+            method="post"
+            th:action="@{/staffUpdateRoom}"
+            modelAttribute="staffUpdateRoom"
+            th:object="(${staffUpdateRoom})"
+            enctype="multipart/form-data">
             <div class="row">
                 <div class="col"></div>
                 <div class="col-md card card-body py-5">
@@ -132,18 +138,6 @@
                         </div>
                     </div>
 
-
-                    <div class="row m-3">
-                        <div class="col-1"></div>
-                        <div class="col pt-3">
-                            <span>
-                                <h6>Room ID</h6>
-                            </span>
-                        </div>
-                        <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" placeholder="R1" disabled>
-                        </div>
-                    </div>
                     <div class="row m-3">
                         <div class="col-1"></div>
                         <div class="col pt-3">
@@ -152,7 +146,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" placeholder="A01">
+                            <input type="text" name="roomNum" id="roomNum" class="form-control" th:value="${room.roomNum}" readonly>
                         </div>
                     </div>
                     <div class="row m-3">
@@ -163,7 +157,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="number" name="" id="" class="form-control" placeholder="4">
+                            <input type="text" name="maxGuest" id="maxGuest" class="form-control" th:value="${room.maxGuest}">
                         </div>
                     </div>
                     <div class="row m-3">
@@ -174,7 +168,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" placeholder="RM80.00">
+                            <input type="text" name="roomRate" id="roomRate" class="form-control" th:value="${room.roomRate}">
                         </div>
                     </div>
                     <div class="row m-3">
@@ -185,12 +179,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <div class="custom_select">
-                                <select name="roomType" id="" class="wide">
-                                    <option value="standard" style="font-size: 16px;">Standard</option>
-                                    <option value="deluxe" style="font-size: 16px;">Deluxe</option>
-                                </select>
-                            </div>
+                            <input type="text" name="roomType" id="roomType" class="form-control" th:value="${room.roomType}">
                         </div>
                     </div>
                     <div class="row m-3">
@@ -201,20 +190,32 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" placeholder="22 x 28 ft">
+                            <input type="text" name="roomSize" id="roomSize" class="form-control" th:value="${room.roomSize}">
+                        </div>
+                    </div>
+                    <div class="row m-3">
+                        <div class="col-1"></div>
+                        <div class="col pt-3">
+                            <span>
+                                <h6>Room Status</h6>
+                            </span>
+                        </div>
+                        <div class="col-8">
+                            <input type="text" name="roomStatus" id="roomStatus" class="form-control" th:value="${room.roomStatus}">
                         </div>
                     </div>
                     <div class="row m-5">
                         <div class="col text-center">
-                            <a th:href="@{/staffViewRoom}" class="btn btn-dark btn-lg"
-                                style="border-radius: 3px 3px 3px 3px; height: auto; width:150px" onclick="success()">Update</a>
+                            <button type="submit" class="btn btn-dark btn-lg">Update</button>
+                            <!-- <a th:href="@{/staffViewRoom}" class="btn btn-dark btn-lg"
+                                style="border-radius: 3px 3px 3px 3px; height: auto; width:150px" onclick="success()">Update</a> -->
 
-                            <script>
+                            <!-- <script>
                                 function success() {
                                     alert("Successfully Update");
                                 }
 
-                            </script>
+                            </script> -->
                             <a th:href="@{/staffViewRoom}" class="btn btn-danger btn-lg"
                                 style="border-radius: 3px 3px 3px 3px; height: auto; width:150px">Cancel</a>
                         </div>
@@ -226,6 +227,7 @@
                 &nbsp;
             </div>
             <!-- <div class="row card card-body align-items-center"> -->
+        </form>
         </div>
         <!-- </div> -->
     </main>
