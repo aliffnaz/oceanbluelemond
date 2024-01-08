@@ -96,7 +96,7 @@ public class RoomController {
         //String staffsrole = (String) session.getAttribute("staffsrole");
         //System.out.println("staffrole staffRoomList : " + staffsrole);
         try (Connection connection = dataSource.getConnection()) {
-            String sql = "SELECT roomNum, roomType, maxGuest, roomRate, roomSize, roomStatus FROM public.room order by roomNum"; //ni originally WHERE staffsrole=?
+            String sql = "SELECT roomNum, roomType, maxGuest, roomRate, roomSize, roomStatus FROM public.room order by roomNum desc"; //ni originally WHERE staffsrole=?
             final var statement = connection.prepareStatement(sql);
             //statement.setString(1, "baker"); (syahir punya nih)
             final var resultSet = statement.executeQuery();
@@ -135,42 +135,6 @@ public class RoomController {
         }
         
     }
-
-    /* syahir punya delete, kita tak buat kot
-    @GetMapping("/deletestaff/")
-    public String deleteStaff(@RequestParam("roomNum") int roomNum, HttpSession session) {
-        // Retrieve the logged-in staff's role from the session
-        String staffsrole = (String) session.getAttribute("staffsrole");
-        System.out.println("delete staff : " + staffsrole);
-        System.out.println(roomNum);
-        if (staffsrole != null && staffsrole.equals("admin")) {
-            try (Connection connection = dataSource.getConnection()) {
-                String sql = "DELETE FROM staffs WHERE roomNum = ?";
-                PreparedStatement statement = connection.prepareStatement(sql);
-                statement.setInt(1, roomNum);
-                int rowsAffected = statement.executeUpdate();
-
-                if (rowsAffected > 0) {
-                    // Deletion successful
-                    connection.close();
-                    return "redirect:/managerRoomList"; // Redirect back to the staff list
-                } else {
-                    // Deletion failed
-                    connection.close();
-                    return "redirect:/managerRoomList"; // Redirect to an error page or show an error message
-                }
-
-
-            } catch (SQLException e) {
-                e.printStackTrace();
-                // Handle the exception as desired (e.g., show an error message)
-                return "admin/managerRoomList"; // Redirect to an error page or show an error message
-            }
-        }
-
-        // Redirect to an error page or back to the staff list
-        return "redirect:/managerRoomList";
-    }*/  
 
     @PostMapping("/managerAddRoom")
     public String managerAddRoom(@ModelAttribute("managerAddRoom")room room){
@@ -232,11 +196,6 @@ public class RoomController {
             statement.setString(6, roomstatus);
             statement.executeUpdate();
             
-             System.out.println("room number : "+roomNum);
-            // System.out.println("type : "+protype);
-            // System.out.println("product price : RM"+proprice);
-            // System.out.println("proimg: "+proimgs.getBytes());
-            
             connection.close();
                 
                 } catch (Exception e) {
@@ -246,53 +205,37 @@ public class RoomController {
             return "redirect:/staffRoomList";
          }
 
-/* 
-    @GetMapping("/staffprofile")
-    public String viewprofilestaff(HttpSession session, Model model) {
-        String fullname = (String) session.getAttribute("roomType");
-        int userid = (int) session.getAttribute("roomNum");
-        String staffrole = (String) session.getAttribute("staffsrole");
-        System.out.println("staff fullname : " + fullname);
-        System.out.println("staff id : " + userid);
-        System.out.println("staff role : " + staffrole);
 
-        if (fullname != null) {
-            try {
-                Connection connection = dataSource.getConnection();
-                final var statement = connection.prepareStatement(
-                        "SELECT  roomType, maxGuest, roomRate,staffsrole FROM staffs WHERE roomNum = ?");
-                statement.setInt(1, userid);
-                final var resultSet = statement.executeQuery();
-
-                while (resultSet.next()) {
-                    String fname = resultSet.getString("roomType");
-                    String email = resultSet.getString("maxGuest");
-                    String password = resultSet.getString("roomRate");
-                    String staffsrole = resultSet.getString("staffsrole");
-                    // debug
-                    System.out.println("fullname from db = " + fname);
-
-                    staff staffprofile = new staff(userid, fname, email, password, staffsrole);
-
-                    model.addAttribute("staffprofile", staffprofile);
-                    System.out.println("fullname :" + staffprofile.getFullname());
-                    // Return the view name for displaying staff details --debug
-                    System.out.println("Session staffprofile : " + model.getAttribute("staffprofile"));
-
-                }
-                connection.close();
-                return "staffprofile";
-            } catch (SQLException e) {
-                e.printStackTrace();
-                return "login";
-            }
-        } else {
-            return "login";
-        }
-        
+         @GetMapping("/managerViewRoom")
+         public String managerViewRoom(@RequestParam("roomNum") String roomNum, Model model) {
+           System.out.println("Room Number : " + roomNum);
+           try {
+             Connection connection = dataSource.getConnection();
+             String sql = "SELECT roomnum, roomtype, maxguest, roomrate, roomsize, roomstatus, FROM public.room WHERE roomnum = ?";
+             final var statement = connection.prepareStatement(sql);
+             statement.setString(1, roomNum);
+             final var resultSet = statement.executeQuery();
+         
+             if (resultSet.next()) {
+                String roomType = resultSet.getString("roomType");
+                String maxGuest = resultSet.getString("maxGuest");
+                String roomRate = resultSet.getString("roomRate");
+                String roomSize = resultSet.getString("roomSize");
+                String roomStatus = resultSet.getString("roomStatus");
+         
+               model.addAttribute("room", room);  
+   
+               connection.close();
+             }
+           } catch (Exception e) {
+             e.printStackTrace();
+           }
+         
+           return "manager/managerViewRoom";
+         }
 
     }
-
+/* 
     // Update Profile staff
     @PostMapping("/staffupdate")
     public String updatestaff(HttpSession session, @ModelAttribute("staffprofile") staff staff, Model model) {
@@ -373,5 +316,3 @@ public class RoomController {
         // error page)
         return "staff/stafforder";
     }*/
-
-}
