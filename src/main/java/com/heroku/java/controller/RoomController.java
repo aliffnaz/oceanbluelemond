@@ -85,7 +85,8 @@ public class RoomController {
 
             connection.close();
 
-         return "manager/managerRoomList";
+        echo "Controller okay"; 
+        //return "manager/managerRoomList";
         } catch (SQLException e) {
             e.printStackTrace();
             // Handle the exception as desired (e.g., show an error message)
