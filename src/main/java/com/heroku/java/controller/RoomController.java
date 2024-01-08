@@ -280,7 +280,7 @@ public class RoomController {
         
          
          @PostMapping("/managerUpdateRoom")
-        public String managerUpdateRoom(@ModelAttribute("managerUpdateRoom") room room ){
+        public String managerUpdateRoom(@ModelAttribute("managerUpdateRoom") room room){
           System.out.println("pass here <<<<<<<");
           try{
             Connection connection = dataSource.getConnection();
@@ -311,7 +311,7 @@ public class RoomController {
           }catch(Exception e){
             e.printStackTrace();
           }
-            return "manager/managerViewRoom?roomNum=roomNum";
+            return "redirect:/managerRoomList";
         }
     
     }
