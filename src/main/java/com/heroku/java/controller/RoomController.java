@@ -211,7 +211,7 @@ public class RoomController {
            System.out.println("Room Number : " + roomNum);
            try {
              Connection connection = dataSource.getConnection();
-             String sql = "SELECT roomnum, roomtype, maxguest, roomrate, roomsize, roomstatus, FROM public.room WHERE roomnum = ?";
+             String sql = "SELECT roomnum, roomtype, maxguest, roomrate, roomsize, roomstatus FROM public.room WHERE roomnum = ?";
              final var statement = connection.prepareStatement(sql);
              statement.setString(1, roomNum);
              final var resultSet = statement.executeQuery();
