@@ -243,8 +243,8 @@ public class RoomController {
 
     
 
-    @GetMapping("/managerUpdateRoom")
-         public String managerUpdateRoom(@RequestParam("roomNum") String roomNum, Model model) {
+    @GetMapping("/managerViewRoomUpdate")
+         public String managerViewRoomUpdate(@RequestParam("roomNum") String roomNum, Model model) {
            System.out.println("Room Number : " + roomNum);
            try {
              Connection connection = dataSource.getConnection();
