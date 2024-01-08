@@ -77,7 +77,7 @@ public class RoomController {
                 room.setRoomSize(roomSize);
                 room.setRoomStatus(roomStatus);                
 
-                rooms.add(r);
+                rooms.add(room);
                 model.addAttribute("room", room);
                 //model.addAttribute("isAdmin", staffsrole != null && staffsrole.equals("admin")); // Add isAdmin flag to the modelF (syahir punya gak)
 
