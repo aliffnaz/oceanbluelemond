@@ -106,6 +106,12 @@
     <main>
         &nbsp;<br>&nbsp;<br>&nbsp;<br>
         <div class="container mt-5 mb-5 align-items-center">
+            <form 
+            method="post"
+            th:action="@{/staffAddRoom}"
+            modelAttribute="staffAddRoom"
+            th:object="(${staffAddRoom})"
+            enctype="multipart/form-data"></form>
             <div class="row">
                 <div class="col">
                 </div>
@@ -134,7 +140,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" placeholder="A01">
+                            <input type="text" name="roomNum" id="roomNum" class="form-control" placeholder="A01">
                         </div>
                     </div>
                     <div class="row m-3">
@@ -147,7 +153,7 @@
                         <div class="col-8">
                             <div class="qty-buttons mb-3 version_2">
                                 <input type="button" value="+" class="qtyplus" name="adult_staff_addroom">
-                                <input type="text" value="0" class="qty form-control" name="adult_staff_addroom">
+                                <input type="text" value="0" class="qty form-control" name="maxGuest" id="maxGuest">
                                 <input type="button" value="-" class="qtyminus" name="adult_staff_addroom">
                             </div>
                         </div>
@@ -160,7 +166,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" placeholder="80">
+                            <input type="text" name="roomRate" id="roomRate" class="form-control" placeholder="80">
                         </div>
                     </div>
                     <div class="row m-3">
@@ -172,9 +178,9 @@
                         </div>
                         <div class="col-8">
                             <div class="custom_select">
-                                <select name="roomType" id="" class="wide">
-                                    <option value="standard" style="font-size: 16px;">Standard</option>
-                                    <option value="deluxe" style="font-size: 16px;">Deluxe</option>
+                                <select name="roomType" id="roomType" class="wide">
+                                    <option value="Standard" style="font-size: 16px;">Standard</option>
+                                    <option value="Deluxe" style="font-size: 16px;">Deluxe</option>
                                 </select>
                             </div>
                         </div>
@@ -187,19 +193,31 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" placeholder="22 x 28 ft">
+                            <input type="text" name="roomSize" id="roomSize" class="form-control" placeholder="22 x 28 ft">
+                        </div>
+                    </div>
+                    <div class="row m-3">
+                        <div class="col-1"></div>
+                        <div class="col pt-3">
+                            <span>
+                                <h6>Room Status</h6>
+                            </span>
+                        </div>
+                        <div class="col-8">
+                            <input type="text" name="roomStatus" id="roomStatus" class="form-control" placeholder="22 x 28 ft">
                         </div>
                     </div>
                     <div class="row m-5">
                         <div class="col text-center">
-                            <a th:href="@{/staffRoomList}" class="btn btn-dark btn-lg"
+                            <button type="submit" class="btn btn-dark btn-lg">Add</button>
+                            <!-- <a th:href="@{/staffRoomList}" class="btn btn-dark btn-lg"
                                 style="border-radius: 3px 3px 3px 3px; height: auto; width:150px" onclick="success()">Add</a>
 
                             <script>
                                 function success() {
                                     alert("Successfully Added");
                                 }
-                            </script>
+                            </script> -->
 
                             <a th:href="@{/staffRoomList}" class="btn btn-danger btn-lg"
                                 style="border-radius: 3px 3px 3px 3px; height: auto; width:150px">Cancel</a>
