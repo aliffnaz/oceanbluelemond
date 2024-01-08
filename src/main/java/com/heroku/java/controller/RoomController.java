@@ -209,6 +209,43 @@ public class RoomController {
             return "redirect:/managerRoomList";
          }
 
+    @PostMapping("/staffAddRoom")
+    public String staffAddRoom(@ModelAttribute("staffAddRoom")room room){
+
+        try {
+            Connection connection = dataSource.getConnection();
+            String sql = "INSERT INTO public.room(roomnum,roomtype,maxguest,roomrate,roomsize,roomstatus) VALUES(?,?,?,?,?,?)";
+            final var statement = connection.prepareStatement(sql);
+
+            String roomNum = room.getRoomNum();
+            String roomType = room.getRoomType();
+            String maxGuest = room.getMaxGuest();
+            String roomRate = room.getRoomRate();
+            String roomSize = room.getRoomSize();
+            String roomstatus = room.getRoomStatus();
+            
+            statement.setString(1, roomNum);
+            statement.setString(2, roomType);
+            statement.setString(3, maxGuest );
+            statement.setString(4, roomRate);
+            statement.setString(5, roomSize);
+            statement.setString(6, roomstatus);
+            statement.executeUpdate();
+            
+             System.out.println("room number : "+roomNum);
+            // System.out.println("type : "+protype);
+            // System.out.println("product price : RM"+proprice);
+            // System.out.println("proimg: "+proimgs.getBytes());
+            
+            connection.close();
+                
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return "redirect:/index";
+                }
+            return "redirect:/staffRoomList";
+         }
+
 /* 
     @GetMapping("/staffprofile")
     public String viewprofilestaff(HttpSession session, Model model) {
