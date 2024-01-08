@@ -111,6 +111,13 @@
     <main>
         <div class="container mt-5">&nbsp;</div>
         <div class="container mt-5 mb-5 align-items-center">
+            <form 
+            th:action="@{/managerUpdateRoom}" 
+            method="post"
+            class="d-flex justify-content-center"
+            modelAttribute  ="room"
+            th:object="${room}"
+            >
             <div class="row">
                 <div class="col"></div>
                 <div class="col-md card card-body py-5">
@@ -135,22 +142,11 @@
                         <div class="col-1"></div>
                         <div class="col pt-3">
                             <span>
-                                <h6>Room ID</h6>
-                            </span>
-                        </div>
-                        <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" placeholder="R1" disabled>
-                        </div>
-                    </div>
-                    <div class="row m-3">
-                        <div class="col-1"></div>
-                        <div class="col pt-3">
-                            <span>
                                 <h6>Room Number</h6>
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" placeholder="A01" disabled>
+                            <input type="text" name="roomNum" id="roomNum" class="form-control" th:value="${room.roomNum}" readonly>
                         </div>
                     </div>
                     <div class="row m-3">
@@ -161,7 +157,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" placeholder="4" disabled>
+                            <input type="text" name="maxGuest" id="maxGuest" class="form-control" th:value="${room.maxGuest}" readonly>
                         </div>
                     </div>
                     <div class="row m-3">
@@ -172,7 +168,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" placeholder="RM80.00" disabled>
+                            <input type="text" name="roomRate" id="roomRate" class="form-control" th:value="${room.roomRate}" readonly>
                         </div>
                     </div>
                     <div class="row m-3">
@@ -183,7 +179,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" placeholder="Standard" disabled>
+                            <input type="text" name="roomType" id="roomType" class="form-control" th:value="${room.roomType}" readonly>
                         </div>
                     </div>
                     <div class="row m-3">
@@ -194,7 +190,18 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" placeholder="22 x 28 ft" disabled>
+                            <input type="text" name="roomSize" id="roomSize" class="form-control" th:value="${room.roomSize}" readonly>
+                        </div>
+                    </div>
+                    <div class="row m-3">
+                        <div class="col-1"></div>
+                        <div class="col pt-3">
+                            <span>
+                                <h6>Room Status</h6>
+                            </span>
+                        </div>
+                        <div class="col-8">
+                            <input type="text" name="roomStatus" id="roomStatus" class="form-control" th:value="${room.roomStatus}" readonly>
                         </div>
                     </div>
                     <div class="row m-5">
@@ -222,6 +229,7 @@
                 &nbsp;
             </div>
             <!-- <div class="row card card-body align-items-center"> -->
+        </form>
         </div>
         <!-- </div> -->
     </main>
