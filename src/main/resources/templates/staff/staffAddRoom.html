@@ -111,7 +111,7 @@
             th:action="@{/staffAddRoom}"
             modelAttribute="staffAddRoom"
             th:object="(${staffAddRoom})"
-            enctype="multipart/form-data"></form>
+            enctype="multipart/form-data">
             <div class="row">
                 <div class="col">
                 </div>
@@ -153,7 +153,7 @@
                         <div class="col-8">
                             <div class="qty-buttons mb-3 version_2">
                                 <input type="button" value="+" class="qtyplus" name="adult_staff_addroom">
-                                <input type="text" value="0" class="qty form-control" name="maxGuest" id="maxGuest">
+                                <input type="text" value="" class="qty form-control" name="maxGuest" id="maxGuest">
                                 <input type="button" value="-" class="qtyminus" name="adult_staff_addroom">
                             </div>
                         </div>
@@ -227,6 +227,7 @@
                 <div class="col"></div>
             </div>
             <!-- <div class="row card card-body align-items-center"> -->
+        </form>
         </div>
         <!-- </div> -->
         &nbsp;
