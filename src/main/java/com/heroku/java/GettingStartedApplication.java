@@ -117,19 +117,9 @@ public class GettingStartedApplication {
         return "staff/staffUpdate";
     }
 
-    @GetMapping("/staffUpdateRoom")
-    public String staffUpdateRoom() {
-        return "staff/staffUpdateRoom";
-    }
-
     @GetMapping("/staffViewGuest")
     public String staffViewGuest() {
         return "staff/staffViewGuest";
-    }
-
-    @GetMapping("/staffViewRoom")
-    public String staffViewRoom() {
-        return "staff/staffViewRoom";
     }
 
     @GetMapping("/staffReservationList")
