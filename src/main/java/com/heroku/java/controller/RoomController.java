@@ -47,7 +47,7 @@ public class RoomController {
     // }
 
     @GetMapping("/managerRoomList")
-    public String managerRoomList() {
+    public String managerRoomList(Model model) {
 
         List<room> rooms = new ArrayList<room>();
         // Retrieve the logged-in room's role from the session (syahir punya nih)
