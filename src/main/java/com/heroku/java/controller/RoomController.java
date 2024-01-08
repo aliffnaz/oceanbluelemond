@@ -54,14 +54,14 @@ public class RoomController {
         //String staffsrole = (String) session.getAttribute("staffsrole");
         //System.out.println("staffrole managerRoomList : " + staffsrole);
         try (Connection connection = dataSource.getConnection()) {
-            String sql = "SELECT roomNum, roomType, maxGuest, roomRate, roomSize, roomStatus FROM room order by roomNum"; //ni originally WHERE staffsrole=?
+            String sql = "SELECT roomType, maxGuest, roomRate, roomSize, roomStatus FROM room order by roomNum"; //ni originally WHERE staffsrole=?
             final var statement = connection.prepareStatement(sql);
             //statement.setString(1, "baker"); (syahir punya nih)
             final var resultSet = statement.executeQuery();
             System.out.println("pass try managerRoomList >>>>>");
 
             while (resultSet.next()) {
-                String roomNum = resultSet.getString("roomNum");
+                //String roomNum = resultSet.getString("roomNum");
                 String roomType = resultSet.getString("roomType");
                 String maxGuest = resultSet.getString("maxGuest");
                 String roomRate = resultSet.getString("roomRate");
@@ -70,7 +70,7 @@ public class RoomController {
                 //System.out.println("room number" + roomNum);
                 
                 room room = new room();
-                room.setRoomNum(roomNum);
+                //room.setRoomNum(roomNum);
                 room.setRoomType(roomType);
                 room.setMaxGuest(maxGuest);
                 room.setRoomRate(roomRate);
@@ -85,8 +85,7 @@ public class RoomController {
 
             connection.close();
 
-        System.out.println("controller okay"); 
-        //return "manager/managerRoomList";
+        return "manager/managerRoomList";
         } catch (SQLException e) {
             e.printStackTrace();
             // Handle the exception as desired (e.g., show an error message)
