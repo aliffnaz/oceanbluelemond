@@ -173,11 +173,11 @@ public class RoomController {
     }*/  
 
     @PostMapping("/managerAddRoom")
-    public String managerAddRoom(@ModelAttribute("room")room room){
+    public String managerAddRoom(@ModelAttribute("managerAddRoom")room room){
 
         try {
             Connection connection = dataSource.getConnection();
-            String sql = "INSERT INTO public.room(roomnum,roomtype,maxGuest,roomRate,roomSize,roomStatus) VALUES(?,?,?,?,?,?)";
+            String sql = "INSERT INTO public.room(roomnum,roomtype,maxguest,roomrate,roomsize,roomstatus) VALUES(?,?,?,?,?,?)";
             final var statement = connection.prepareStatement(sql);
 
             String roomNum = room.getRoomNum();
@@ -195,7 +195,7 @@ public class RoomController {
             statement.setString(6, roomstatus);
             statement.executeUpdate();
             
-            // System.out.println("product name : "+proname);
+             System.out.println("room number : "+roomNum);
             // System.out.println("type : "+protype);
             // System.out.println("product price : RM"+proprice);
             // System.out.println("proimg: "+proimgs.getBytes());
