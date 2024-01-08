@@ -110,8 +110,8 @@
             <form 
             method="post"
             th:action="@{/managerAddRoom}"
-            modelAttribute="room"
-            th:object="(${room})"
+            modelAttribute="managerAddRoom"
+            th:object="(${managerAddRoom})"
             enctype="multipart/form-data">
             <div class="row">
                 <div class="col">
@@ -141,7 +141,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="roomnum" id="roomnum" class="form-control" placeholder="A01">
+                            <input type="text" name="roomnum" id="roomnum" class="form-control" placeholder="01">
                         </div>
                     </div>
                     <div class="row m-3">
@@ -191,6 +191,17 @@
                         </div>
                         <div class="col-8">
                             <input type="text" name="roomsize" id="roomsize" class="form-control" placeholder="22 x 28 ft">
+                        </div>
+                    </div>
+                    <div class="row m-3">
+                        <div class="col-1"></div>
+                        <div class="col pt-3">
+                            <span>
+                                <h6>Room Status</h6>
+                            </span>
+                        </div>
+                        <div class="col-8">
+                            <input type="text" name="roomstatus" id="roomstatus" class="form-control" placeholder="Available">
                         </div>
                     </div>
                     <div class="row m-5">
