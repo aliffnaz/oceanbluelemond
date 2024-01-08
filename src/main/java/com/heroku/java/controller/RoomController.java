@@ -243,8 +243,8 @@ public class RoomController {
 
     
 
-    @GetMapping("/managerViewRoomUpdate")
-         public String managerViewRoomUpdate(@RequestParam("roomNum") String roomNum, Model model) {
+    @GetMapping("/managerUpdateRoom")
+         public String managerUpdateRoom(@RequestParam("roomNum") String roomNum, Model model) {
            System.out.println("Room Number : " + roomNum);
            try {
              Connection connection = dataSource.getConnection();
@@ -278,7 +278,41 @@ public class RoomController {
            return "manager/managerUpdateRoom";
          }
         
-    
+         
+         @PostMapping("/managerUpdateRoom")
+        public String managerUpdateRoom(@ModelAttribute("managerUpdateRoom") room room ){
+          System.out.println("pass here <<<<<<<");
+          try{
+            Connection connection = dataSource.getConnection();
+            String sql = "UPDATE room SET roomType=? ,maxGuest=?, roomRate=?, roomSize=?, roomStatus=? WHERE roomNum=?";
+            final var statement = connection.prepareStatement(sql);
+            String roomNum = room.getRoomNum();
+            String roomType = room.getRoomType();
+            String maxGuest = room.getMaxGuest();
+            String roomRate = room.getRoomRate();
+            String roomSize = room.getRoomSize();
+            String roomstatus = room.getRoomStatus();
+
+            //debug
+            // System.out.println("pro price update : "+proprice);
+            // System.out.println("pro id update : "+proid);
+
+            statement.setString(1, roomNum);
+            statement.setString(2, roomType);
+            statement.setString(3, maxGuest );
+            statement.setString(4, roomRate);
+            statement.setString(5, roomSize);
+            statement.setString(6, roomstatus);
+
+            statement.executeUpdate();
+            
+            connection.close();
+
+          }catch(Exception e){
+            e.printStackTrace();
+          }
+            return "manager/managerViewRoom?roomNum=roomNum";
+        }
     
     }
 
