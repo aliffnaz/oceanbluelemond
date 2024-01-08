@@ -61,12 +61,12 @@ public class RoomController {
             System.out.println("pass try managerRoomList >>>>>");
 
             while (resultSet.next()) {
-                String roomNum = resultSet.getString("room.roomNum");
-                String roomType = resultSet.getString("room.roomType");
-                String maxGuest = resultSet.getString("room.maxGuest");
-                String roomRate = resultSet.getString("room.roomRate");
-                String roomSize = resultSet.getString("room.roomSize");
-                String roomStatus = resultSet.getString("room.roomStatus");
+                String roomNum = resultSet.getString("roomNum");
+                String roomType = resultSet.getString("roomType");
+                String maxGuest = resultSet.getString("maxGuest");
+                String roomRate = resultSet.getString("roomRate");
+                String roomSize = resultSet.getString("roomSize");
+                String roomStatus = resultSet.getString("roomStatus");
                 //System.out.println("room number" + roomNum);
                 
                 room r = new room();
@@ -78,7 +78,7 @@ public class RoomController {
                 r.setRoomStatus(roomStatus);                
 
                 rooms.add(r);
-                model.addAttribute("rooms", rooms);
+                model.addAttribute("room", rooms);
                 //model.addAttribute("isAdmin", staffsrole != null && staffsrole.equals("admin")); // Add isAdmin flag to the modelF (syahir punya gak)
 
             }
