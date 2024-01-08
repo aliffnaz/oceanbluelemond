@@ -223,7 +223,14 @@ public class RoomController {
                 String roomSize = resultSet.getString("roomSize");
                 String roomStatus = resultSet.getString("roomStatus");
          
-               model.addAttribute("room", room);  
+                room room = new room();
+                room.setRoomNum(roomNum);
+                room.setRoomType(roomType);
+                room.setMaxGuest(maxGuest);
+                room.setRoomRate(roomRate);
+                room.setRoomSize(roomSize);
+                room.setRoomStatus(roomStatus);
+                model.addAttribute("room", room);  
    
                connection.close();
              }
