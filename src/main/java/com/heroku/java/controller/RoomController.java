@@ -49,7 +49,7 @@ public class RoomController {
     @GetMapping("/managerRoomList")
     public String managerRoomList() {
 
-        List<room> rooms = new ArrayList<>();
+        List<room> rooms = new ArrayList<room>();
         // Retrieve the logged-in room's role from the session (syahir punya nih)
         //String staffsrole = (String) session.getAttribute("staffsrole");
         //System.out.println("staffrole managerRoomList : " + staffsrole);
@@ -67,11 +67,11 @@ public class RoomController {
                 String roomRate = resultSet.getString("roomRate");
                 String roomSize = resultSet.getString("roomSize");
                 String roomStatus = resultSet.getString("roomStatus");
-                System.out.println("room number" + roomNum);
+                //System.out.println("room number" + roomNum);
                 
 
-                //rooms.add(new room(roomNum, roomType, maxGuest, roomRate, roomSize, roomStatus));
-                //model.addAttribute("rooms", rooms);
+                rooms.add(new room(roomNum, roomType, maxGuest, roomRate, roomSize, roomStatus));
+                model.addAttribute("rooms", rooms);
                 //model.addAttribute("isAdmin", staffsrole != null && staffsrole.equals("admin")); // Add isAdmin flag to the modelF (syahir punya gak)
 
             }
