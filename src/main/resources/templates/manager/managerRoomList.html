@@ -119,12 +119,12 @@
                             </thead>
                             <tbody>
                                 <tr th:each="room : ${rooms}">
-                                    <td class="text-center" th:text="room.roomNum"></td>
-                                    <td class="text-center" th:text="room.maxGuest"></td>
-                                    <td class="text-center" th:text="room.roomRate"></td>
-                                    <td class="text-center" th:text="room.roomType"></td>
-                                    <td class="text-center" th:text="room.roomSize"></td>
-                                    <td class="text-center" th:text="room.roomStatus"></td>
+                                    <td class="text-center" th:text="${room.roomNum}"></td>
+                                    <td class="text-center" th:text="${room.maxGuest}"></td>
+                                    <td class="text-center" th:text="${room.roomRate}"></td>
+                                    <td class="text-center" th:text="${room.roomType}"></td>
+                                    <td class="text-center" th:text="${room.roomSize}"></td>
+                                    <td class="text-center" th:text="${room.roomStatus}"></td>
                                     <td class="text-center">
                                         <a th:href="@{/managerViewRoom?roomNum=}+${room.roomNum}" th:value="${room.roomNum}">
                                         <i class="bi bi-eye-fill" style="font-size: 20px;"></i>
