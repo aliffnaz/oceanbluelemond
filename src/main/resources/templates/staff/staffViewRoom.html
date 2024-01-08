@@ -126,18 +126,6 @@
                         </div>
                     </div>
 
-
-                    <div class="row m-3">
-                        <div class="col-1"></div>
-                        <div class="col pt-3">
-                            <span>
-                                <h6>Room ID</h6>
-                            </span>
-                        </div>
-                        <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" placeholder="R1" disabled>
-                        </div>
-                    </div>
                     <div class="row m-3">
                         <div class="col-1"></div>
                         <div class="col pt-3">
@@ -146,7 +134,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" placeholder="A01" disabled>
+                            <input type="text" name="roomNum" id="roomNum" class="form-control" th:value="${room.roomNum}" readonly>
                         </div>
                     </div>
                     <div class="row m-3">
@@ -157,7 +145,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" placeholder="4" disabled>
+                            <input type="text" name="maxGuest" id="maxGuest" class="form-control" th:value="${room.maxGuest}" readonly>
                         </div>
                     </div>
                     <div class="row m-3">
@@ -168,7 +156,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" placeholder="RM80.00" disabled>
+                            <input type="text" name="roomRate" id="roomRate" class="form-control" th:value="${room.roomRate}" readonly>
                         </div>
                     </div>
                     <div class="row m-3">
@@ -179,7 +167,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" placeholder="Standard" disabled>
+                            <input type="text" name="roomType" id="roomType" class="form-control" th:value="${room.roomType}" readonly>
                         </div>
                     </div>
                     <div class="row m-3">
@@ -190,22 +178,33 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" placeholder="22 x 28 ft" disabled>
+                            <input type="text" name="roomSize" id="roomSize" class="form-control" th:value="${room.roomSize}" readonly>
+                        </div>
+                    </div>
+                    <div class="row m-3">
+                        <div class="col-1"></div>
+                        <div class="col pt-3">
+                            <span>
+                                <h6>Room Status</h6>
+                            </span>
+                        </div>
+                        <div class="col-8">
+                            <input type="text" name="roomStatus" id="roomStatus" class="form-control" th:value="${room.roomStatus}" readonly>
                         </div>
                     </div>
                     <div class="row m-5">
                         <div class="col text-center">
-                            <a th:href="@{/staffUpdateRoom}" class="btn btn-dark btn-lg"
+                            <a th:href="@{/staffUpdateRoom?roomNum=}+${room.roomNum}" th:value="${room.roomNum}" class="btn btn-dark btn-lg"
                                 style="border-radius: 3px 3px 3px 3px; height: auto; width:150px">Edit</a>
                             &nbsp;
                             <a th:href="@{/staffRoomList}" class="btn btn-danger btn-lg"
                                 style="border-radius: 3px 3px 3px 3px; height: auto; width:150px" onclick="success()">Delete</a>
 
-                            <script>
+                            <!-- <script>
                                 function success() {
                                     alert("Successfully Deleted");
                                 }
-                            </script>
+                            </script> -->
                         </div>
                     </div>
                 </div>
