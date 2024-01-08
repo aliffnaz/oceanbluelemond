@@ -136,7 +136,7 @@
                                     <td class="text-center" th:text="${room.roomSize}"></td>
                                     <td class="text-center" th:text="${room.roomStatus}"></td>
                                     <td class="text-center">
-                                        <a th:href="@{/staffViewRoom}"><i class="bi bi-eye-fill"
+                                        <a th:href="@{/staffViewRoom?roomNum=}+${room.roomNum}" th:value="${room.roomNum}"><i class="bi bi-eye-fill"
                                                 style="font-size: 20px;"></i></a>
 
                                     </td>
