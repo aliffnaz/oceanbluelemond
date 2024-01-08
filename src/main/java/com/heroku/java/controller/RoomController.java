@@ -27,8 +27,8 @@ public class RoomController {
     private final DataSource dataSource;
 
     @Autowired
-    public RoomController(DataSource dataSource) {
-        this.dataSource = dataSource;
+    public RoomController() {
+        
     }
 
     //original syahir punyer, guna session
@@ -47,7 +47,7 @@ public class RoomController {
     // }
 
     @GetMapping("/managerRoomList")
-    public String managerRoomList(Model model) {
+    public String managerRoomList() {
 
         List<room> rooms = new ArrayList<>();
         // Retrieve the logged-in room's role from the session (syahir punya nih)
@@ -71,7 +71,7 @@ public class RoomController {
                 
 
                 //rooms.add(new room(roomNum, roomType, maxGuest, roomRate, roomSize, roomStatus));
-                model.addAttribute("rooms", rooms);
+                //model.addAttribute("rooms", rooms);
                 //model.addAttribute("isAdmin", staffsrole != null && staffsrole.equals("admin")); // Add isAdmin flag to the modelF (syahir punya gak)
 
             }
