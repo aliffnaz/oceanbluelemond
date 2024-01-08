@@ -39,12 +39,6 @@ public class RoomController {
     //     return "manager/managerAddRoom";
     // }
 
-    // @GetMapping("/managerAddRoom")
-    // public String managerAddRoom() {
-    // // int roomNumber = (int) session.getAttribute("roomNumber");
-    // // System.out.println("roomNumber id :" + roomNumber);
-    // return "manager/managerAddRoom";
-    // }
 
     @GetMapping("/managerRoomList")
     public String managerRoomList(Model model) {
@@ -94,6 +88,54 @@ public class RoomController {
         
     }
 
+    @GetMapping("/staffRoomList")
+    public String staffRoomList(Model model) {
+
+        List<room> rooms = new ArrayList<room>();
+        // Retrieve the logged-in room's role from the session (syahir punya nih)
+        //String staffsrole = (String) session.getAttribute("staffsrole");
+        //System.out.println("staffrole staffRoomList : " + staffsrole);
+        try (Connection connection = dataSource.getConnection()) {
+            String sql = "SELECT roomNum, roomType, maxGuest, roomRate, roomSize, roomStatus FROM public.room order by roomNum"; //ni originally WHERE staffsrole=?
+            final var statement = connection.prepareStatement(sql);
+            //statement.setString(1, "baker"); (syahir punya nih)
+            final var resultSet = statement.executeQuery();
+            System.out.println("pass try staffRoomList >>>>>");
+
+            while (resultSet.next()) {
+                String roomNum = resultSet.getString("roomNum");
+                String roomType = resultSet.getString("roomType");
+                String maxGuest = resultSet.getString("maxGuest");
+                String roomRate = resultSet.getString("roomRate");
+                String roomSize = resultSet.getString("roomSize");
+                String roomStatus = resultSet.getString("roomStatus");
+                //System.out.println("room number" + roomNum);
+                
+                room room = new room();
+                room.setRoomNum(roomNum);
+                room.setRoomType(roomType);
+                room.setMaxGuest(maxGuest);
+                room.setRoomRate(roomRate);
+                room.setRoomSize(roomSize);
+                room.setRoomStatus(roomStatus);                
+
+                rooms.add(room);
+                model.addAttribute("rooms", rooms);
+                //model.addAttribute("isAdmin", staffsrole != null && staffsrole.equals("admin")); // Add isAdmin flag to the modelF (syahir punya gak)
+
+            }
+
+            connection.close();
+
+        return "staff/staffRoomList";
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle the exception as desired (e.g., show an error message)
+            return "error";
+        }
+        
+    }
+
     /* syahir punya delete, kita tak buat kot
     @GetMapping("/deletestaff/")
     public String deleteStaff(@RequestParam("roomNum") int roomNum, HttpSession session) {
@@ -130,52 +172,44 @@ public class RoomController {
         return "redirect:/managerRoomList";
     }*/  
 
-    /*
-    @PostMapping("/staffregister")
-    public String addAccountStaff(HttpSession session, @ModelAttribute("staffregister") staff staff) {
-        String fullname = (String) session.getAttribute("roomType");
-        int userid = (int) session.getAttribute("roomNum");
+    @PostMapping("/managerAddRoom")
+    public String managerAddRoom(@ModelAttribute("room")room room){
 
-        //debug
-        System.out.println("fullname : "+fullname);
-        System.out.println("userid : "+ userid);
         try {
             Connection connection = dataSource.getConnection();
-            String sql1 = "INSERT INTO staffs (roomType, maxGuest, roomRate, staffsrole,managersid) VALUES (?,?,?,?,?)";
-            final var statement1 = connection.prepareStatement(sql1);
+            String sql = "INSERT INTO public.room(roomnum,roomtype,maxGuest,roomRate,roomSize,roomStatus) VALUES(?,?,?,?,?,?)";
+            final var statement = connection.prepareStatement(sql);
 
-            String fname = staff.getFullname();
-            String email = staff.getEmail();
-            String password = staff.getPassword();
-            System.out.println("password : " + password);
-            System.out.println("fullname : " + fname);
-            System.out.println("email : " + email);
-
-            statement1.setString(1, fname);
-            statement1.setString(2, email);
-            statement1.setString(3, password);
-            statement1.setString(4, "baker");
-            statement1.setInt(5, (int) session.getAttribute("roomNum"));
-
-            statement1.executeUpdate();
-
+            String roomNum = room.getRoomNum();
+            String roomType = room.getRoomType();
+            String maxGuest = room.getMaxGuest();
+            String roomRate = room.getRoomRate();
+            String roomSize = room.getRoomSize();
+            String roomstatus = room.getRoomStatus();
+            
+            statement.setString(1, roomNum);
+            statement.setString(2, roomType);
+            statement.setString(3, maxGuest );
+            statement.setString(4, roomRate);
+            statement.setString(5, roomSize);
+            statement.setString(6, roomstatus);
+            statement.executeUpdate();
+            
+            // System.out.println("product name : "+proname);
+            // System.out.println("type : "+protype);
+            // System.out.println("product price : RM"+proprice);
+            // System.out.println("proimg: "+proimgs.getBytes());
+            
             connection.close();
-            return "redirect:/login";
+                
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return "redirect:/index";
+                }
+            return "redirect:/managerRoomList";
+         }
 
-        } catch (SQLException sqe) {
-            System.out.println("Error Code = " + sqe.getErrorCode());
-            System.out.println("SQL state = " + sqe.getSQLState());
-            System.out.println("Message = " + sqe.getMessage());
-            System.out.println("printTrace /n");
-            sqe.printStackTrace();
-
-            return "redirect:/staffregister";
-        } catch (Exception e) {
-            System.out.println("E message : " + e.getMessage());
-            return "redirect:/staffregister";
-        }
-    }
-
+/* 
     @GetMapping("/staffprofile")
     public String viewprofilestaff(HttpSession session, Model model) {
         String fullname = (String) session.getAttribute("roomType");
