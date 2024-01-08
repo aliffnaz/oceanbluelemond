@@ -69,8 +69,15 @@ public class RoomController {
                 String roomStatus = resultSet.getString("roomStatus");
                 //System.out.println("room number" + roomNum);
                 
+                room r = new room();
+                r.setRoomNum(roomNum);
+                r.setRoomType(roomType);
+                r.setMaxGuest(maxGuest);
+                r.setRoomRate(roomRate);
+                r.setRoomSize(roomSize);
+                r.setRoomStatus(roomStatus);                )
 
-                rooms.add(new room(roomNum, roomType, maxGuest, roomRate, roomSize, roomStatus));
+                rooms.add(room);
                 model.addAttribute("rooms", rooms);
                 //model.addAttribute("isAdmin", staffsrole != null && staffsrole.equals("admin")); // Add isAdmin flag to the modelF (syahir punya gak)
 
