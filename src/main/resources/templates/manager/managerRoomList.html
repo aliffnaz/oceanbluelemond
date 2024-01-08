@@ -119,29 +119,26 @@
                             </thead>
                             <tbody>
                                 <tr th:each="room : ${rooms}">
-                                    <td class="text-center" th:text="${room.roomNum}"></td>
-                                    <td class="text-center" th:text="${room.maxGuest}"></td>
-                                    <td class="text-center" th:text="${room.roomRate}"></td>
-                                    <td class="text-center" th:text="${room.roomType}"></td>
-                                    <td class="text-center" th:text="${room.roomSize}"></td>
-                                    <td class="text-center" th:text="${room.roomStatus}"></td>
+                                    <td class="text-center" th:text="room.roomNum"></td>
+                                    <td class="text-center" th:text="room.maxGuest"></td>
+                                    <td class="text-center" th:text="room.roomRate"></td>
+                                    <td class="text-center" th:text="room.roomType"></td>
+                                    <td class="text-center" th:text="room.roomSize"></td>
+                                    <td class="text-center" th:text="room.roomStatus"></td>
                                     <td class="text-center">
-                                        <a th:href="@{/managerViewRoom}"><i class="bi bi-eye-fill"
-                                                style="font-size: 20px;"></i></a>
-
-                                    </td>
-                                    <td class="text-center"><a href=" " onclick="success()"><i class="bi bi-trash3-fill"
-                                                style=" font-size: 20px;"></i></a>
+                                        <a th:href="@{/managerViewRoom?roomNum=}+${room.roomNum}" th:value="${room.roomNum}">
+                                        <i class="bi bi-eye-fill" style="font-size: 20px;"></i>
+                                        </a>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                         
-                        <script>
+                        <!-- <script>
                             function success() {
                                 alert("Successfully Deleted");
                             }
-                        </script>
+                        </script> -->
                     </div>
                     <div class="row">
                         <div class="col"></div>
