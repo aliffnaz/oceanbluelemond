@@ -107,6 +107,12 @@
     <main>
         &nbsp;<br>&nbsp;<br>&nbsp;<br>
         <div class="container mt-5 mb-5 align-items-center">
+            <form 
+            method="post"
+            th:action="@{/managerAddRoom}"
+            modelAttribute="room"
+            th:object="(${room})"
+            enctype="multipart/form-data">
             <div class="row">
                 <div class="col">
                 </div>
@@ -135,7 +141,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" placeholder="A01">
+                            <input type="text" name="roomnum" id="roomnum" class="form-control" placeholder="A01">
                         </div>
                     </div>
                     <div class="row m-3">
@@ -146,7 +152,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="number" name="" id="" class="form-control" placeholder="0">
+                            <input type="number" name="maxguest" id="maxguest" class="form-control" placeholder="0">
                         </div>
                     </div>
                     <div class="row m-3">
@@ -157,7 +163,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" placeholder="80">
+                            <input type="text" name="roomrate" id="roomrate" class="form-control" placeholder="80">
                         </div>
                     </div>
                     <div class="row m-3">
@@ -169,7 +175,7 @@
                         </div>
                         <div class="col-8">
                             <div class="custom_select">
-                                <select name="roomType" id="" class="wide">
+                                <select name="roomtype" id="roomtype" class="wide">
                                     <option value="standard" style="font-size: 16px;">Standard</option>
                                     <option value="deluxe" style="font-size: 16px;">Deluxe</option>
                                 </select>
@@ -184,19 +190,20 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" placeholder="22 x 28 ft">
+                            <input type="text" name="roomsize" id="roomsize" class="form-control" placeholder="22 x 28 ft">
                         </div>
                     </div>
                     <div class="row m-5">
                         <div class="col text-center">
-                            <a th:href="@{/managerRoomList}" class="btn btn-dark btn-lg"
-                                style="border-radius: 3px 3px 3px 3px; height: auto; width:150px" onclick="success()">Add</a>
+                            <button type="submit" class="btn btn-dark btn-lg">Add</button>
+                            <!-- <a th:href="@{/managerRoomList}" class="btn btn-dark btn-lg"
+                                style="border-radius: 3px 3px 3px 3px; height: auto; width:150px" onclick="success()">Add</a> -->
                                 
-                            <script>
+                            <!-- <script>
                                 function success() {
                                     alert("Successfully Added");
                                 }
-                            </script>
+                            </script> -->
                             &nbsp;
                             <a th:href="@{/managerRoomList}" class="btn btn-danger btn-lg"
                                 style="border-radius: 3px 3px 3px 3px; height: auto; width:150px">Cancel</a>
@@ -206,6 +213,7 @@
                 <div class="col"></div>
             </div>
             <!-- <div class="row card card-body align-items-center"> -->
+            </form>
         </div>
         <!-- </div> -->
         &nbsp;
