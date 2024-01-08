@@ -58,7 +58,7 @@ public class RoomController {
             final var statement = connection.prepareStatement(sql);
             //statement.setString(1, "baker"); (syahir punya nih)
             final var resultSet = statement.executeQuery();
-            System.out.printl("pass try managerRoomList >>>>>");
+            System.out.println("pass try managerRoomList >>>>>");
 
             while (resultSet.next()) {
                 String roomNum = resultSet.getString("room.roomNum");
