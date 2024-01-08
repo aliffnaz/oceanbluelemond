@@ -241,46 +241,49 @@ public class RoomController {
            return "manager/managerViewRoom";
          }
 
-    }
-/* 
-    // Update Profile staff
-    @PostMapping("/staffupdate")
-    public String updatestaff(HttpSession session, @ModelAttribute("staffprofile") staff staff, Model model) {
-        int roomNum = (int) session.getAttribute("roomNum");
-        String staffsrole = (String) session.getAttribute("staffsrole");
+    
 
-        String roomType = staff.getFullname();
-        String maxGuest = staff.getEmail();
-        String roomRate = staff.getPassword();
-
-        // debug
-        System.out.println("id update = " + roomNum);
-        System.out.println("role update = " + staffsrole);
+    @GetMapping("/managerUpdateRoom")
+         public String managerUpdateRoom(@RequestParam("roomNum") String roomNum, Model model) {
+           System.out.println("Room Number : " + roomNum);
+           try {
+             Connection connection = dataSource.getConnection();
+             String sql = "SELECT roomnum, roomtype, maxguest, roomrate, roomsize, roomstatus FROM public.room WHERE roomnum = ?";
+             final var statement = connection.prepareStatement(sql);
+             statement.setString(1, roomNum);
+             final var resultSet = statement.executeQuery();
+         
+             if (resultSet.next()) {
+                String roomType = resultSet.getString("roomType");
+                String maxGuest = resultSet.getString("maxGuest");
+                String roomRate = resultSet.getString("roomRate");
+                String roomSize = resultSet.getString("roomSize");
+                String roomStatus = resultSet.getString("roomStatus");
+         
+                room room = new room();
+                room.setRoomNum(roomNum);
+                room.setRoomType(roomType);
+                room.setMaxGuest(maxGuest);
+                room.setRoomRate(roomRate);
+                room.setRoomSize(roomSize);
+                room.setRoomStatus(roomStatus);
+                model.addAttribute("room", room);  
+   
+               connection.close();
+             }
+           } catch (Exception e) {
+             e.printStackTrace();
+           }
+         
+           return "manager/managerUpdateRoom";
+         }
         
-        try {
-            Connection connection = dataSource.getConnection();
-            String sql1 = "UPDATE staffs SET roomType=? ,maxGuest=?, staffsrole=?, roomRate=? WHERE roomNum=?";
-            final var statement = connection.prepareStatement(sql1);
-
-                statement.setString(1, roomType);
-                statement.setString(2, maxGuest);
-                statement.setString(3, staffsrole);
-                statement.setString(4, roomRate);
-                statement.setInt(5, roomNum);
-                statement.executeUpdate();
-            System.out.println("debug= " + roomNum + " " + roomType + " " + staffsrole + " " + maxGuest + " " + roomRate);
-
-            connection.close();
-
-            String returnPage = "staffprofile";
-            return returnPage;
-
-        } catch (Throwable t) {
-            System.out.println("message : " + t.getMessage());
-            System.out.println("error");
-            return "redirect:/staffprofile";
-        }
+    
+    
     }
+
+
+
 
     /* delete controller
     @GetMapping("/deletestaff")
