@@ -297,12 +297,12 @@ public class RoomController {
             // System.out.println("pro price update : "+proprice);
             // System.out.println("pro id update : "+proid);
 
-            statement.setString(1, roomNum);
-            statement.setString(2, roomType);
-            statement.setString(3, maxGuest );
-            statement.setString(4, roomRate);
-            statement.setString(5, roomSize);
-            statement.setString(6, roomstatus);
+            statement.setString(1, roomType);
+            statement.setString(2, maxGuest );
+            statement.setString(3, roomRate);
+            statement.setString(4, roomSize);
+            statement.setString(5, roomstatus);
+            statement.setString(6, roomNum);
 
             statement.executeUpdate();
             
