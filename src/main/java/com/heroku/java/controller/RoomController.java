@@ -58,15 +58,15 @@ public class RoomController {
             final var statement = connection.prepareStatement(sql);
             //statement.setString(1, "baker"); (syahir punya nih)
             final var resultSet = statement.executeQuery();
-            System.out.println("pass try managerRoomList >>>>>");
+            System.out.printl("pass try managerRoomList >>>>>");
 
             while (resultSet.next()) {
-                String roomNum = resultSet.getString("roomNum");
-                String roomType = resultSet.getString("roomType");
-                String maxGuest = resultSet.getString("maxGuest");
-                String roomRate = resultSet.getString("roomRate");
-                String roomSize = resultSet.getString("roomSize");
-                String roomStatus = resultSet.getString("roomStatus");
+                String roomNum = resultSet.getString("room.roomNum");
+                String roomType = resultSet.getString("room.roomType");
+                String maxGuest = resultSet.getString("room.maxGuest");
+                String roomRate = resultSet.getString("room.roomRate");
+                String roomSize = resultSet.getString("room.roomSize");
+                String roomStatus = resultSet.getString("room.roomStatus");
                 //System.out.println("room number" + roomNum);
                 
                 room r = new room();
