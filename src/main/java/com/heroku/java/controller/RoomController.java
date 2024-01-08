@@ -54,19 +54,19 @@ public class RoomController {
         //String staffsrole = (String) session.getAttribute("staffsrole");
         //System.out.println("staffrole managerRoomList : " + staffsrole);
         try (Connection connection = dataSource.getConnection()) {
-            String sql = "SELECT 'room.roomNum', 'room.roomType', 'room.maxGuest', 'room.roomRate', 'room.roomSize', 'room.roomStatus' FROM room order by roomNum"; //ni originally WHERE staffsrole=?
+            String sql = "SELECT roomNum, roomType, maxGuest, roomRate, roomSize, roomStatus FROM public.room order by roomNum"; //ni originally WHERE staffsrole=?
             final var statement = connection.prepareStatement(sql);
             //statement.setString(1, "baker"); (syahir punya nih)
             final var resultSet = statement.executeQuery();
             System.out.println("pass try managerRoomList >>>>>");
 
             while (resultSet.next()) {
-                String roomNum = resultSet.getString("room.roomNum");
-                String roomType = resultSet.getString("room.roomType");
-                String maxGuest = resultSet.getString("room.maxGuest");
-                String roomRate = resultSet.getString("room.roomRate");
-                String roomSize = resultSet.getString("room.roomSize");
-                String roomStatus = resultSet.getString("room.roomStatus");
+                String roomNum = resultSet.getString("roomNum");
+                String roomType = resultSet.getString("roomType");
+                String maxGuest = resultSet.getString("maxGuest");
+                String roomRate = resultSet.getString("roomRate");
+                String roomSize = resultSet.getString("roomSize");
+                String roomStatus = resultSet.getString("roomStatus");
                 //System.out.println("room number" + roomNum);
                 
                 room room = new room();
