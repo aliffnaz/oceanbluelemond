@@ -54,7 +54,7 @@ public class RoomController {
         //String staffsrole = (String) session.getAttribute("staffsrole");
         //System.out.println("staffrole managerRoomList : " + staffsrole);
         try (Connection connection = dataSource.getConnection()) {
-            String sql = "SELECT room.roomNum, room.roomType, room.maxGuest, room.roomRate, room.roomSize, room.roomStatus FROM room order by roomNum"; //ni originally WHERE staffsrole=?
+            String sql = "SELECT "room.roomNum", "room.roomType", "room.maxGuest", "room.roomRate", "room.roomSize", "room.roomStatus" FROM room order by roomNum"; //ni originally WHERE staffsrole=?
             final var statement = connection.prepareStatement(sql);
             //statement.setString(1, "baker"); (syahir punya nih)
             final var resultSet = statement.executeQuery();
