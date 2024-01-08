@@ -61,7 +61,7 @@ public class RoomController {
             System.out.println("pass try managerRoomList >>>>>");
 
             while (resultSet.next()) {
-                String roomNum = resultSet.getString("roomNum");
+                //String roomNum = resultSet.getString("roomNum");
                 String roomType = resultSet.getString("roomType");
                 String maxGuest = resultSet.getString("maxGuest");
                 String roomRate = resultSet.getString("roomRate");
@@ -70,7 +70,7 @@ public class RoomController {
                 //System.out.println("room number" + roomNum);
                 
                 room r = new room();
-                r.setRoomNum(roomNum);
+                //r.setRoomNum(roomNum);
                 r.setRoomType(roomType);
                 r.setMaxGuest(maxGuest);
                 r.setRoomRate(roomRate);
