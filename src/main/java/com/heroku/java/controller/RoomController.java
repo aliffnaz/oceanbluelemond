@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -62,7 +61,7 @@ public class RoomController {
             System.out.println("pass try managerRoomList >>>>>");
 
             while (resultSet.next()) {
-                String roomNum = resultSet.getInt("roomNum");
+                String roomNum = resultSet.getString("roomNum");
                 String roomType = resultSet.getString("roomType");
                 String maxGuest = resultSet.getString("maxGuest");
                 String roomRate = resultSet.getString("roomRate");
