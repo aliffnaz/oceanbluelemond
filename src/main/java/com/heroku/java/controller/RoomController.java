@@ -75,7 +75,7 @@ public class RoomController {
                 r.setMaxGuest(maxGuest);
                 r.setRoomRate(roomRate);
                 r.setRoomSize(roomSize);
-                r.setRoomStatus(roomStatus);                )
+                r.setRoomStatus(roomStatus);                
 
                 rooms.add(room);
                 model.addAttribute("rooms", rooms);
