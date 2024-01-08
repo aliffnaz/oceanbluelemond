@@ -85,7 +85,7 @@ public class RoomController {
 
             connection.close();
 
-        echo "Controller okay"; 
+        System.out.println("controller okay"); 
         //return "manager/managerRoomList";
         } catch (SQLException e) {
             e.printStackTrace();
