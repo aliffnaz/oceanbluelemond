@@ -69,13 +69,13 @@ public class RoomController {
                 String roomStatus = resultSet.getString("roomStatus");
                 //System.out.println("room number" + roomNum);
                 
-                room r = new room();
-                r.setRoomNum(roomNum);
-                r.setRoomType(roomType);
-                r.setMaxGuest(maxGuest);
-                r.setRoomRate(roomRate);
-                r.setRoomSize(roomSize);
-                r.setRoomStatus(roomStatus);                
+                room room = new room();
+                room.setRoomNum(roomNum);
+                room.setRoomType(roomType);
+                room.setMaxGuest(maxGuest);
+                room.setRoomRate(roomRate);
+                room.setRoomSize(roomSize);
+                room.setRoomStatus(roomStatus);                
 
                 rooms.add(r);
                 model.addAttribute("room", room);
