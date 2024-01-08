@@ -194,11 +194,6 @@ public String managerStaffUpdate() {
     return "manager/managerStaffUpdate";
 }
 
-@GetMapping("/managerUpdateRoom")
-public String managerUpdateRoom() {
-    return "manager/managerUpdateRoom";
-}
-
 @GetMapping("/managerUpdateRoomService")
 public String managerUpdateRoomService() {
     return "manager/managerUpdateRoomService";
