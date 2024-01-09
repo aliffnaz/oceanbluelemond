@@ -127,7 +127,7 @@
 
                         </div>
                     </div>
-
+<form th:action="@{/managerUpdateRoomService}" th:object="(${managerUpdateRoomService})">
                     <div class="row m-3">
                         <div class="col-1"></div>
                         <div class="col pt-3">
@@ -136,7 +136,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" value ="1235002">
+                            <input type="text" name="serviceID" id="" class="form-control" th:value ="${service.serviceID}">
                         </div>
                     </div>
 
@@ -148,7 +148,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" value ="Barbecue Set">
+                            <input type="text" name="serviceName" id="" class="form-control" th:value ="${service.serviceName}">
                         </div>
                     </div>
 
@@ -160,7 +160,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" value ="Kitchen">
+                            <input type="text" name="serviceType" id="" class="form-control" th:value ="${service.seviceType}">
                         </div>
                     </div>
 
@@ -172,19 +172,24 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" value ="15.00">
+                            <input type="text" name="servicePrice" id="" class="form-control" th:value ="${service.servicePrice}">
                         </div>
                     </div>
 
                     <div class="row m-5">
                         <div class="col text-center">
-                            <a th:href="@{/managerRoomServiceList}" class="btn btn-dark btn-lg"
-                                style="border-radius: 3px 3px 3px 3px; height: auto; width:150px">Update</a>
+                           
+                            <button type="submit" class="btn btn-dark btn-lg"
+                                style="border-radius: 3px 3px 3px 3px; height: auto; width:150px">
+                                Update
+                            </button>
                             &nbsp;
                             <a th:href="@{/managerRoomServiceList}" class="btn btn-danger btn-lg"
                                 style="border-radius: 3px 3px 3px 3px; height: auto; width:150px">Cancel</a>
                         </div>
                     </div>
+</form>
+                    
 
 
                 </div>
