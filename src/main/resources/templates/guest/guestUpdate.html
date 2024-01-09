@@ -141,7 +141,7 @@
                             </div>
                         </div>
                     </div>
-
+<form th:action="${guestUpdate}" modelAttribute="guestUpdate" th:object="(${guestUpdate})">
                     <div class="row m-3">
                         <div class="col-1"></div>
                         <div class="col pt-3">
@@ -296,7 +296,7 @@
 
                             <a th:href="@{/guestProfile}" class="btn btn-danger btn-md"
                                 style="border-radius: 3px 3px 3px 3px; height: auto; width:150px">Cancel</a>
-
+                        </form>
 
                         </div>
                         <div class="col"></div>
