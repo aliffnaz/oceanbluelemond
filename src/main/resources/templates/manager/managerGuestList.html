@@ -126,15 +126,16 @@
                                 <th class="text-center" colspan="2">Action</th>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="text-center">010205012313</td>
-                                    <td class="text-center">Haiqal</td>
-                                    <td class="text-center">011-17246568</td>
-                                    <td class="text-center">020907-14-1111</td>
-                                    <td class="text-center">Male</td>
-                                    <td class="text-center">Malay</td>
-                                    <td class="text-center">Muslim</td>
-                                    <td class="text-center">275 Jln 4 Off Jln Chan Sow Lin, 55200 Wilayah Persekutuan Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur</td>
+                                
+                                <tr th:each="guest : ${guests}">
+                                    <td class="text-center" th:text="${guest.guestICNumber}"></td>
+                                    <td class="text-center" th:text="${guest.guestName}"></td>
+                                    <td class="text-center" th:text="${guest.guestPhoneNumber}"></td>
+                                    <td class="text-center" th:text="${guest.guestICNumber}"></td>
+                                    <td class="text-center" th:text="${guest.guestGender}"></td>
+                                    <td class="text-center" th:text="${guest.guestRace}"></td>
+                                    <td class="text-center" th:text="${guest.guestReligion}"></td>
+                                    <td class="text-center" th:text="${guest.guestAddress}"></td>
                                     <td class="text-center"><a th:href="@{/managerViewGuest}"><i class="bi bi-eye-fill" style="font-size: 20px;"></i></a></td>
                                     <td class="text-center"><a href=" "><i class="bi bi-trash3-fill" style="font-size: 20px;"></i></a></td>
                                 </tr>
