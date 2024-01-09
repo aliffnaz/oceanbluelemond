@@ -145,7 +145,7 @@
                             </div>
                         </div>
                     </div>
-
+<form th:action="@{/managerAddStaff}" th:object="(${managerAddStaff})">
                     <div class="row m-3">
                         <div class="col-1"></div>
                         <div class="col pt-3">
@@ -154,7 +154,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" value="">
+                            <input type="text" name="staffName" id="" class="form-control" value="">
                         </div>
                     </div>
 
@@ -166,7 +166,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" value="">
+                            <input type="text" name="staffICNumber" id="" class="form-control" value="">
                         </div>
                     </div>
 
@@ -178,7 +178,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" value="">
+                            <input type="text" name="staffAddress" id="" class="form-control" value="">
                         </div>
                     </div>
 
@@ -191,7 +191,7 @@
                         </div>
                         <div class="col-8">
                             <div class="custom_select">
-                                <select name="" id="" class="wide">
+                                <select name="staffGender" id="" class="wide">
                                     <option value="">Select</option>
                                     <option value="">Male</option>
                                     <option value="">Female</option>
@@ -209,11 +209,11 @@
                         </div>
                         <div class="col-8">
                             <div class="custom_select">
-                                <select name="" id="" class="wide">
+                                <select name="staffRace" id="" class="wide">
                                     <option value="">Select</option>
-                                    <option value="">Melayu</option>
-                                    <option value="">Cina</option>
-                                    <option value="">India</option>
+                                    <option value="Melayu">Melayu</option>
+                                    <option value="Cina">Cina</option>
+                                    <option value="India">India</option>
                                 </select>
                             </div>
                         </div>
@@ -228,11 +228,11 @@
                         </div>
                         <div class="col-8">
                             <div class="custom_select">
-                                <select name="" id="" class="wide">
+                                <select name="staffReligion" id="" class="wide">
                                     <option value="">Select</option>
-                                    <option value="">Islam</option>
-                                    <option value="">Budha</option>
-                                    <option value="">Christian</option>
+                                    <option value="Islam">Islam</option>
+                                    <option value="Budha">Budha</option>
+                                    <option value="Christian">Christian</option>
                                 </select>
                             </div>
                         </div>
@@ -247,12 +247,12 @@
                         </div>
                         <div class="col-8">
                             <div class="custom_select">
-                                <select name="" id="" class="wide">
+                                <select name="staffMaritalStatus" id="" class="wide">
                                     <option value="">Select</option>
-                                    <option value="">Single</option>
-                                    <option value="">Married</option>
-                                    <option value="">Divorce</option>
-                                    <option value="">Widowed</option>
+                                    <option value="Single">Single</option>
+                                    <option value="Married">Married</option>
+                                    <option value="Divorce">Divorce</option>
+                                    <option value="Widowed">Widowed</option>
                                 </select>
                             </div>
 
@@ -268,11 +268,11 @@
                         </div>
                         <div class="col-8">
                             <div class="custom_select">
-                                <select name="" id="" class="wide">
+                                <select name="staffRole" id="" class="wide">
                                     <option value="">Select</option>
-                                    <option value="">Cleaner</option>
-                                    <option value="">Cashier</option>
-                                    <option value="">Laundrier</option>
+                                    <option value="Cleaner">Cleaner</option>
+                                    <option value="Cashier">Cashier</option>
+                                    <option value="Laundrier">Laundrier</option>
                                 </select>
                             </div>
 
@@ -287,7 +287,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" value="">
+                            <input type="text" name="staffPhoneNumber" id="" class="form-control" value="">
                         </div>
                     </div>
 
@@ -299,7 +299,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" value="">
+                            <input type="text" name="staffEmail" id="" class="form-control" value="">
                         </div>
                     </div>
 
@@ -307,8 +307,10 @@
                     <div class="row m-5">
                         <div class="col"></div>
                         <div class="col-6 text-center">
-                            <a th:href="@{/managerStaffList}" class="btn btn-dark btn-md"
-                                style="border-radius: 3px 3px 3px 3px; height: auto; width:150px" onclick="success()">Add</a>
+                          <!--  <a th:href="@{/managerStaffList}" >Add</a> -->
+
+                            <button type="submit" class="btn btn-dark btn-md"
+                                style="border-radius: 3px 3px 3px 3px; height: auto; width:150px" onclick="success()">Add</button>
 
                             <script>
                                 function success() {
@@ -323,7 +325,7 @@
                         </div>
                         <div class="col"></div>
                     </div>
-
+</form>
 
                 </div>
 
