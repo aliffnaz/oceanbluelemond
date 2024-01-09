@@ -194,11 +194,6 @@ public String managerViewGuest() {
     return "manager/managerViewGuest";
 }
 
-@GetMapping("/managerViewStaff")
-public String managerViewStaff() {
-    return "manager/managerViewStaff";
-}
-
 @GetMapping("/managerGenerateReport")
 public String managerGenerateReport() {
     return "manager/managerGenerateReport";
