@@ -131,19 +131,21 @@
                                 <th class="text-center col-2">Status</th>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="text-center">RS001</td>
-                                    <td class="text-center">770901012341</td>
-                                    <td class="text-center">3</td>
-                                    <td class="text-center">2</td>
-                                    <td class="text-center" width="100">22-12-2022</td>
-                                    <td class="text-center" width="100">24-12-2022</td>
-                                    <td class="text-center">2</td>
-                                    <td class="text-center">1</td>
-                                    <td class="text-center">1</td>
-                                    <td class="text-center">RM80.00</td>
-                                    <td class="text-center">
-                                        <form action="managerViewReservation.html">
+                                <tr th:each="reservation : ${reservations}">
+                                    <td class="text-center" th:value="${reservation.reservationId}"></td>
+                                    <td class="text-center" th:value="${reservation.guestICNumber}"></td>
+                                    <td class="text-center" th:value="${reservation.guestQuantity}"></td>
+                                    <td class="text-center" th:value="${reservation.DurationOfStay}"></td>
+                                    <td class="text-center" width="100" th:value="${reservation.DateStart}"></td>
+                                    <td class="text-center" width="100" th:value="${reservation.DateEnd}"></td>
+                                    <td class="text-center" th:value="${reservation.totalAdult}"></td>
+                                    <td class="text-center" th:value="${reservation.totalKids}"></td>
+                                    <td class="text-center" th:value="${reservation.totalRoom}"></td>
+                                    <td class="text-center" th:value="${reservation.totalPayment}"></td>
+                                     <td class="text-center" th:value="${reservation.totalPayment}"></td>
+                                     <td class="text-center" th:value="${reservation.reservationStatus}"></td>
+                               <!--     <td class="text-center">
+                                        <form method="post" th:action="@{/StaffReservation}" th:object="(${staffUpdateReservation})" encType="multipart/form-data">
                                             <div class="custom_select text-center">
                                                 <select name="Status" id="Status" class="wide" disabled>
                                                     <option value="Pending Payment">Pending Payment</option>
@@ -151,7 +153,7 @@
                                                 </select>
                                             </div>
                                         </form>
-                                    </td>
+                                    </td>-->
                                 </tr>
                                 <tr>
                                     <td class="text-center">RS002</td>
