@@ -130,21 +130,8 @@
                                     <td th:text="${staff.staffName}"></td>
                                     <td th:text="${staff.staffICNumber}"></td>
                                     <td th:text="${staff.staffRole}"></td>
-                                    <td class="text-center"><a th:href="@{/managerViewStaff?=}+${staff.staffICNumber}"><i class="bi bi-eye-fill"></i></a></td>
+                                    <td class="text-center"><a th:href="@{/managerViewStaff?staffICNumber=}+${staff.staffICNumber}"><i class="bi bi-eye-fill"></i></a></td>
                                 </tr>
-                                <tr>
-                                    <td>Anas Ali</td>
-                                    <td>990912035671</td>
-                                    <td>Front Office</td>
-                                    <td class="text-center"><a th:href="@{/managerViewStaff}"><i class="bi bi-eye-fill"></i></a></td>
-                                </tr>
-                                <tr>
-                                    <td>Tengku Sofiya</td>
-                                    <td>971203045644</td>
-                                    <td>Finance</td>
-                                    <td class="text-center"><a th:href="@{/managerViewStaff}"><i class="bi bi-eye-fill"></i></a></td>
-                                </tr>
-                           
                             </tbody>
                         </table>
                     </div>
