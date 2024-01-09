@@ -134,7 +134,7 @@
                                     <td class="text-center" th:text="${reservation.totalRoom}">1</td>
                                     <td class="text-center" th:text="${reservation.totalPayment}">RM80.00</td>
                                     <td class="text-center">
-                                        <form th:action="@{/managerUpdateStatus}">
+                                        <form th:action="@{/managerUpdateStatus?=}+${reservation.reservationID}" modelAttribute="managerUpdateStatus" th:object="(${managerUpdateStatus})">
                                             <div class="custom_select text-center">
                                                 <select name="reservationStatus" id="Status" class="wide">
                                                     <option value="Pending Payment">Pending Payment</option>
