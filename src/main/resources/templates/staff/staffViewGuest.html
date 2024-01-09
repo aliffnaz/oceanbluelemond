@@ -162,7 +162,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" placeholder="Haiqal" disabled>
+                            <input type="text" th:value="${guest.guestName}" name="" id="" class="form-control" placeholder="Haiqal" disabled>
                         </div>
                     </div>
 
@@ -174,7 +174,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" placeholder="011-17246568" disabled>
+                            <input type="text" th:value="${guest.guestPhoneNumber}" name="" id="" class="form-control" placeholder="011-17246568" disabled>
                         </div>
                     </div>
 
@@ -186,11 +186,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <select name="" id="" class="form-control form-select" disabled>
-                                <option value="">Select</option>
-                                <option value="" Selected>Male</option>
-                                <option value="">Female</option>
-                            </select>
+                            <input type="text" th:value="${guest.guestGender}" name="" id="" class="form-control" placeholder="011-17246568" disabled>
                         </div>
                     </div>
 
@@ -202,12 +198,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <select name="" id="" class="form-control form-select" disabled>
-                                <option value="">Select</option>
-                                <option value="" Selected>Melayu</option>
-                                <option value="">Cina</option>
-                                <option value="">India</option>
-                            </select>
+                            <input type="text" th:value="${guest.guestRace}" name="" id="" class="form-control" placeholder="011-17246568" disabled>
                         </div>
                     </div>
 
@@ -219,12 +210,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <select name="" id="" class="form-control form-select" disabled>
-                                <option value="">Select</option>
-                                <option value="" Selected>Islam</option>
-                                <option value="">Budha</option>
-                                <option value="">Christian</option>
-                            </select>
+                           <input type="text" th:value="${guest.guestReligion}" name="" id="" class="form-control" placeholder="011-17246568" disabled>
                         </div>
                     </div>
 
@@ -237,7 +223,7 @@
                         </div>
                         <div class="col-8">
                             <div class="col-8">
-                                <input type="text" name="" id="" class="form-control" placeholder="haiqalizze02@gmail.com" disabled>
+                                <input type="text" th:value="${guest.guestEmail}" name="" id="" class="form-control" placeholder="haiqalizze02@gmail.com" disabled>
                             </div>
                         </div>
                     </div>
@@ -250,7 +236,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <textarea name="" id="" class="form-control" placeholder="275 Jln 4 Off Jln Chan Sow Lin, 55200 Wilayah Persekutuan Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur" disabled></textarea>
+                            <textarea name="" id="" th:value="${guest.guestAddress}" class="form-control" placeholder="275 Jln 4 Off Jln Chan Sow Lin, 55200 Wilayah Persekutuan Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur" disabled></textarea>
                         </div>
                     </div>
 
