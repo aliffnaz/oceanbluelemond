@@ -122,7 +122,7 @@
                             </div>
                         </div>
                     </div>
-
+<form th:action="@{/GuestLogin}" modelAttribute="GuestLogin" th:object="@{$GuestLogin}" encType="multipart/form-data">
                     <div class="row m-3">
                         <div class="col-1"></div>
                         <div class="col pt-3">
@@ -158,10 +158,13 @@
                     <div class="row m-5">
 
                         <div class="col text-center">
-                            <a th:href="@{/index}" class="btn btn-dark btn-lg"
-                                style="border-radius: 3px 3px 3px 3px; height: auto; width:150px">Sign In</a>
+                            <!-- <a th:href="@{/index}" class="btn btn-dark btn-lg"
+                                style="border-radius: 3px 3px 3px 3px; height: auto; width:150px">Sign In</a> -->
+
+                            <button type="submit" class="btn btn-dark btn-lg"   style="border-radius: 3px 3px 3px 3px; height: auto; width:150px">Sign In</button>
                         </div>
                     </div>
+</form>
 
 
                 </div>
