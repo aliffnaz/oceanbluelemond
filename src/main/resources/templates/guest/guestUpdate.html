@@ -150,7 +150,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" value="Karim bin Ikram">
+                            <input type="text" name="guestName" id="" class="form-control" th:value="${guest.guestName}">
                         </div>
                     </div>
 
@@ -162,7 +162,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" value="770901012341">
+                            <input type="text" name="guestICNumber" id="" class="form-control" th:value="${guest.guestICNumber}>
                         </div>
                     </div>
 
@@ -174,7 +174,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" value="Silentmode, Bangi">
+                            <input type="text" name="gusetAddress" id="" class="form-control" th:value="${guest.guestAddress}>
                         </div>
                     </div>
 
@@ -186,7 +186,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <select name="" id="" class="form-control form-select">
+                            <select name="guestGender" id="" class="form-control form-select">
                                 <option value="">Select</option>
                                 <option value="" Selected>Male</option>
                                 <option value="">Female</option>
@@ -202,7 +202,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <select name="" id="" class="form-control form-select">
+                            <select name="guestRace" id="" class="form-control form-select">
                                 <option value="">Select</option>
                                 <option value="" Selected>Melayu</option>
                                 <option value="">Cina</option>
@@ -219,7 +219,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <select name="" id="" class="form-control form-select">
+                            <select name="guestReligion" id="" class="form-control form-select">
                                 <option value="">Select</option>
                                 <option value="" Selected>Islam</option>
                                 <option value="">Budha</option>
@@ -237,7 +237,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" value="01234567890">
+                            <input type="text" name="guestPhoneNumber" id="" class="form-control" value="01234567890">
                         </div>
                     </div>
 
@@ -249,7 +249,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" value="Karikram@gmail.com">
+                            <input type="text" name="guestEmail" id="" class="form-control" th:value="${guest.guestEmail}>
                         </div>
                     </div>
 
@@ -262,7 +262,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" value="Karikram@77">
+                            <input type="text" name="guestPassword" id="" class="form-control" th:value="${guest.guestPassword}>
                         </div>
                     </div>
 
@@ -280,9 +280,13 @@
 
 
                         <div class="col-6 text-center">
-                            <a th:href="@{/guestProfile}" class="btn btn-dark btn-md"
-                                style="border-radius: 3px 3px 3px 3px; height: auto; width:150px" onclick="success()">Done</a>
+                            <!-- <a th:href="@{/guestProfile}" class="btn btn-dark btn-md"
+                                style="border-radius: 3px 3px 3px 3px; height: auto; width:150px" onclick="success()">Done</a> -->
 
+                            <button type="submit" class="btn btn-dark btn-md"
+                                style="border-radius: 3px 3px 3px 3px; height: auto; width:150px" onclick="success()">
+                                Done
+                            </button>
                             <script>
                                 function success() {
                                     alert("Successfully Update");
