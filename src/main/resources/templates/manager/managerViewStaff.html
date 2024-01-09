@@ -156,7 +156,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" value="Karim bin Ikram" disabled>
+                            <input type="text" name="" th:value="${staff.staffName}" class="form-control" value="Karim bin Ikram" disabled>
                         </div>
                     </div>
 
@@ -168,7 +168,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" value="770604051231" disabled>
+                            <input type="text" name="" th:value="${staff.staffICNumber}" class="form-control" value="770604051231" disabled>
                         </div>
                     </div>
 
@@ -180,7 +180,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" value="Silentmode, Bangi" disabled>
+                            <input type="text" name="" th:value="${staff.staffAddress}" class="form-control" value="Silentmode, Bangi" disabled>
                         </div>
                     </div>
 
@@ -192,11 +192,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <select name="" id="" class="form-control form-select" disabled>
-                                <option value="">Select</option>
-                                <option value="" Selected>Male</option>
-                                <option value="">Female</option>
-                            </select>
+                             <input type="text" name="" th:value="${staff.staffGender}" class="form-control" value="Silentmode, Bangi" disabled>
                         </div>
                     </div>
 
@@ -208,12 +204,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <select name="" id="" class="form-control form-select" disabled>
-                                <option value="">Select</option>
-                                <option value="" Selected>Melayu</option>
-                                <option value="">Cina</option>
-                                <option value="">India</option>
-                            </select>
+                             <input type="text" name="" th:value="${staff.staffRace}" class="form-control" value="Silentmode, Bangi" disabled>
                         </div>
                     </div>
 
@@ -225,12 +216,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <select name="" id="" class="form-control form-select" disabled>
-                                <option value="">Select</option>
-                                <option value="" Selected>Islam</option>
-                                <option value="">Budha</option>
-                                <option value="">Christian</option>
-                            </select>
+                             <input type="text" name="" th:value="${staff.staffReligion}" class="form-control" value="Silentmode, Bangi" disabled>
 
                         </div>
                     </div>
@@ -243,13 +229,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <select name="" id="" class="form-control form-select" disabled>
-                                <option value="">Select</option>
-                                <option value="" Selected>Single</option>
-                                <option value="">Married</option>
-                                <option value="">Divorce</option>
-                                <option value="">Widowed</option>
-                            </select>
+                           <input type="text" name="" th:value="${staff.staffMaritalStatus}" class="form-control" value="Silentmode, Bangi" disabled>
 
                         </div>
                     </div>
@@ -262,12 +242,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <select name="" id="" class="form-control form-select" disabled>
-                                <option value="">Select</option>
-                                <option value="" Selected>Manager</option>
-                                <option value="">Front Office</option>
-                                <option value="">Finanace</option>
-                            </select>
+                             <input type="text" name="" th:value="${staff.staffRole}" class="form-control" value="Silentmode, Bangi" disabled>
 
                         </div>
                     </div>
@@ -280,7 +255,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" value="01234567890" disabled>
+                            <input type="text" name="" th:value="${staff.staffPhoneNumber}" class="form-control" value="01234567890" disabled>
                         </div>
                     </div>
 
@@ -292,28 +267,18 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" value="Karikram@gmail.com" disabled>
+                            <input type="text" name="" th:value="${staff.staffEmail}" class="form-control" value="Karikram@gmail.com" disabled>
                         </div>
                     </div>
 
-                    <div class="row m-3">
-                        <div class="col-1"></div>
-                        <div class="col pt-3">
-                            <span>
-                                <h6>Password</h6>
-                            </span>
-                        </div>
-                        <div class="col-8">
-                            <input type="password" name="" id="" class="form-control" value="AnasAli@95" disabled>
-                        </div>
-                    </div>
+                 
 
 
                     <div class="row m-5">
                         <div class="col"></div>
 
                         <div class="col-6 text-center">
-                            <a th:href="@{/managerStaffUpdate}" class="btn btn-dark btn-md"
+                            <a th:href="@{/managerStaffUpdate?=}+${staff.staffICNumber}" class="btn btn-dark btn-md"
                                 style="border-radius: 3px 3px 3px 3px; height: auto; width:150px">Edit</a>
 
                             <a th:href="@{/managerStaffList}" class="btn btn-danger btn-md"
