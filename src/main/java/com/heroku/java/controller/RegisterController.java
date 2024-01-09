@@ -43,7 +43,7 @@ public RegisterController(DataSource dataRegister){
 }
 
 @PostMapping("/guestRegister")
-public String guestRegisterAccount(HttpSession session, @ModelAttribute("guestRegister") reservation\ reserve) {
+public String guestRegisterAccount(HttpSession session, @ModelAttribute("guestRegister") reservation reserve) {
 
     try{
 Connection conn = dataRegister.getConnection();
