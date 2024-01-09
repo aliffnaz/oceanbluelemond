@@ -50,7 +50,7 @@ public class reservationModel {
      * @return String return the guestQuantity
      */
     public String getGuestQuantity() {
-        return guestQuantity;
+        guestQuantity = this.totalAdult + this.totalKids;
     }
 
     /**
