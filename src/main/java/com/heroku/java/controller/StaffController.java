@@ -102,7 +102,7 @@ public class StaffController {
 
         try {
             Connection connection = dataSource.getConnection();
-            String sql = "INSERT INTO public.staff(stafficnumber,staffname,staffgender,staffphonenumber,staffrace,staffreligion,staffmaritalstatus, staffaddress, staffrole, staffstatus, managerICNumber, staffemail) VALUES(?,?,?,?,?,?)";
+            String sql = "INSERT INTO public.staff(stafficnumber,staffname,staffgender,staffphonenumber,staffrace,staffreligion,staffmaritalstatus,staffaddress,staffrole,staffstatus,managerICNumber,staffemail) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
             final var statement = connection.prepareStatement(sql);
 
             String staffICNumber = staff.getStaffICNumber();
