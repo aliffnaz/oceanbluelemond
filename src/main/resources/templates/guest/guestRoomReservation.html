@@ -148,19 +148,20 @@
 
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>RS001</td>
-                                <td>770901012341</td>
-                                <td>-</td>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>June 29, 2023</td>
-                                <td>June 30, 2023</td>
+                            <tr th:each="reservation : ${reservations}">
+                                <td th:text="${reservation.reservationID}" ></td>
+                                <td th:text="${reservation.guestICNumber}"></td>
+                                <td th:text="${reservation.totalRoom}"></td>
+                                <td th:text="${reservation.totalRoom}"></td>
+                                <td th:text="${reservation.durationOfStay}"></td>
+                                <td th:text="${reservation.dateStart}"></td>
+                                <td th:text="${reservation.dateEnd}"></td>
 
-                                <td>Barcbecue Set</td>
-                                <td>RM 210.00</td>
-                                <td>Incomplete</td>
-                                <td class="text-center"><a th:href="@{/guestViewRoomReservation}">
+                                <td th:text="${}"></td>
+                                <td th:text="${reservation.totalPayment}">RM 210.00</td>
+                                <td th:text="${reservation.reservationStatus}">Incomplete</td>
+                                
+                                <td class="text-center"><a th:href="@{/guestViewRoomReservation?=}+${guestICNumber}">
                                         <div class="bi bi-eye-fill" style="font-size: 20px;"></div>
                                     </a></td>
                             </tr>
