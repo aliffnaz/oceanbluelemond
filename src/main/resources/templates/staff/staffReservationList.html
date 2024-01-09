@@ -132,18 +132,18 @@
                             </thead>
                             <tbody>
                                 <tr th:each="reservation : ${reservations}">
-                                    <td class="text-center" th:value="${reservation.reservationId}"></td>
-                                    <td class="text-center" th:value="${reservation.guestICNumber}"></td>
-                                    <td class="text-center" th:value="${reservation.guestQuantity}"></td>
-                                    <td class="text-center" th:value="${reservation.DurationOfStay}"></td>
-                                    <td class="text-center" width="100" th:value="${reservation.DateStart}"></td>
-                                    <td class="text-center" width="100" th:value="${reservation.DateEnd}"></td>
-                                    <td class="text-center" th:value="${reservation.totalAdult}"></td>
-                                    <td class="text-center" th:value="${reservation.totalKids}"></td>
-                                    <td class="text-center" th:value="${reservation.totalRoom}"></td>
-                                    <td class="text-center" th:value="${reservation.totalPayment}"></td>
-                                     <td class="text-center" th:value="${reservation.totalPayment}"></td>
-                                     <td class="text-center" th:value="${reservation.reservationStatus}"></td>
+                                    <td class="text-center" th:text="${reservation.reservationId}"></td>
+                                    <td class="text-center" th:text="${reservation.guestICNumber}"></td>
+                                    <td class="text-center" th:text="${reservation.guestQuantity}"></td>
+                                    <td class="text-center" th:text="${reservation.DurationOfStay}"></td>
+                                    <td class="text-center" width="100" th:text="${reservation.DateStart}"></td>
+                                    <td class="text-center" width="100" th:text="${reservation.DateEnd}"></td>
+                                    <td class="text-center" th:text="${reservation.totalAdult}"></td>
+                                    <td class="text-center" th:text="${reservation.totalKids}"></td>
+                                    <td class="text-center" th:text="${reservation.totalRoom}"></td>
+                                    <td class="text-center" th:text="${reservation.totalPayment}"></td>
+                                     <td class="text-center" th:text="${reservation.totalPayment}"></td>
+                                     <td class="text-center" th:text="${reservation.reservationStatus}"></td>
                                <!--     <td class="text-center">
                                         <form method="post" th:action="@{/StaffReservation}" th:object="(${staffUpdateReservation})" encType="multipart/form-data">
                                             <div class="custom_select text-center">
