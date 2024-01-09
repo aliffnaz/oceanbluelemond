@@ -149,7 +149,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" placeholder="010205012313" disabled>
+                            <input type="text" name="" th:value="${guest.guestICNumber}" class="form-control" placeholder="010205012313" disabled>
                         </div>
                     </div>
 
@@ -161,7 +161,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" placeholder="Haiqal" disabled>
+                            <input type="text" name="" th:value="${guest.guestName}" class="form-control" placeholder="" disabled>
                         </div>
                     </div>
 
@@ -173,7 +173,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" placeholder="011-17246568" disabled>
+                            <input type="text" name="" th:value="${guest.guestPhoneNumber}" class="form-control" placeholder="" disabled>
                         </div>
                     </div>
 
@@ -186,11 +186,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <select name="" id="" class="form-control form-select" disabled>
-                                <option value="">Select</option>
-                                <option value="" Selected>Male</option>
-                                <option value="">Female</option>
-                            </select>
+                           <input type="text" name="" th:value="${guest.guestGender}" class="form-control" placeholder="" disabled>
                         </div>
                     </div>
 
@@ -202,12 +198,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <select name="" id="" class="form-control form-select" disabled>
-                                <option value="">Select</option>
-                                <option value="" Selected>Melayu</option>
-                                <option value="">Cina</option>
-                                <option value="">India</option>
-                            </select>
+                          <input type="text" name="" th:value="${guest.guestRace}" class="form-control" placeholder="" disabled>
                         </div>
                     </div>
 
@@ -219,12 +210,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <select name="" id="" class="form-control form-select" disabled>
-                                <option value="">Select</option>
-                                <option value="" Selected>Islam</option>
-                                <option value="">Budha</option>
-                                <option value="">Christian</option>
-                            </select>
+                            <input type="text" name="" th:value="${guest.guestReligion}" class="form-control" placeholder="" disabled>
                         </div>
                     </div>
                     <div class="row m-3">
@@ -236,7 +222,7 @@
                         </div>
                         <div class="col-8">
                             <div class="col-8">
-                                <input type="text" name="" id="" class="form-control" placeholder="haiqalizze02@gmail.com" disabled>
+                              <input type="text" name="" th:value="${guest.guestEmail}" class="form-control" placeholder="" disabled>
                             </div>
                         </div>
                     </div>
@@ -249,7 +235,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <textarea name="" id="" class="form-control" placeholder="275 Jln 4 Off Jln Chan Sow Lin, 55200 Wilayah Persekutuan Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur" disabled></textarea>
+                            <textarea name="" th:value="${guest.guestAddress}" class="form-control" placeholder="275 Jln 4 Off Jln Chan Sow Lin, 55200 Wilayah Persekutuan Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur" disabled></textarea>
                         </div>
                     </div>
 
