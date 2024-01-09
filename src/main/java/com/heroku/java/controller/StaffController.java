@@ -140,7 +140,7 @@ public class StaffController {
            System.out.println("Staff IC Number : " + staffICNumber);
            try {
              Connection connection = dataSource.getConnection();
-             String sql = "SELECT stafficnumber, staffname, staffgender, staffphonenumber, staffrace, staffreligion, staffmaritalstatus, staffaddress, staffrole, staffstatus, managerICNumber FROM public.staff where stafficnumber = ?";
+             String sql = "SELECT stafficnumber, staffname, staffgender, staffphonenumber, staffrace, staffreligion, staffmaritalstatus, staffaddress, staffrole, staffstatus, managerICNumber, staffemail FROM public.staff where stafficnumber = ?";
              final var statement = connection.prepareStatement(sql);
              statement.setString(1, staffICNumber);
              final var resultSet = statement.executeQuery();
@@ -156,6 +156,7 @@ public class StaffController {
                 String staffRole = resultSet.getString("staffrole");
                 String staffStatus = resultSet.getString("staffstatus");
                 String managerICNumber = resultSet.getString("managerICNumber");
+                String staffEmail = resultSet.getString("staffemail");
          
                 staff staff = new staff();
                 staff.setStaffICNumber(staffICNumber);
@@ -169,6 +170,7 @@ public class StaffController {
                 staff.setStaffRole(staffRole);
                 staff.setStaffStatus(staffStatus);
                 staff.setManagerICNumber(managerICNumber);
+                staff.setStaffEmail(staffEmail);
                 model.addAttribute("staff", staff); 
    
                connection.close();
