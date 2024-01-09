@@ -132,7 +132,7 @@
                                     <td th:text="${staff.staffName}"></td>
                                     <td th:text="${staff.staffICNumber}"></td>
                                     <td th:text="${staff.staffRole}"></td>
-                                    <td class="text-center"><a th:href="@{/managerViewStaff}"><i class="bi bi-eye-fill"></i></a></td>
+                                    <td class="text-center"><a th:href="@{/managerViewStaff?=}+${staff.staffICNumber}"><i class="bi bi-eye-fill"></i></a></td>
                                 </tr>
                                 <tr>
                                     <td class="text-center">2</td>
