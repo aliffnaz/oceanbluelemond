@@ -97,42 +97,52 @@ public class StaffController {
         
     }
 
-    // @PostMapping("/managerAddRoom")
-    // public String managerAddRoom(@ModelAttribute("managerAddRoom")room room){
+    @PostMapping("/managerAddStaff")
+    public String managerAddStaff(@ModelAttribute("managerAddStaff")staff staff){
 
-    //     try {
-    //         Connection connection = dataSource.getConnection();
-    //         String sql = "INSERT INTO public.room(roomnum,roomtype,maxguest,roomrate,roomsize,roomstatus) VALUES(?,?,?,?,?,?)";
-    //         final var statement = connection.prepareStatement(sql);
+        try {
+            Connection connection = dataSource.getConnection();
+            String sql = "INSERT INTO public.staff(stafficnumber,staffname,staffgender,staffphonenumber,staffrace,staffreligion,staffmaritalstatus, staffaddress, staffrole, staffstatus, managerICNumber, staffemail) VALUES(?,?,?,?,?,?)";
+            final var statement = connection.prepareStatement(sql);
 
-    //         String roomNum = room.getRoomNum();
-    //         String roomType = room.getRoomType();
-    //         String maxGuest = room.getMaxGuest();
-    //         String roomRate = room.getRoomRate();
-    //         String roomSize = room.getRoomSize();
-    //         String roomstatus = room.getRoomStatus();
+            String staffICNumber = staff.getStaffICNumber();
+            String staffName = staff.getStaffName();
+            String staffGender = staff.getStaffGender();
+            String staffPhoneNumber = staff.getStaffPhoneNumber();
+            String staffRace = staff.getStaffRace();
+            String staffReligion = staff.getStaffReligion();
+            String staffMaritalStatus = staff.getStaffMaritalStatus();
+            String staffAddress = staff.getStaffAddress();
+            String staffRole = staff.getStaffRole();
+            String staffStatus = "Employed";
+            String managerICNumber = staff.getManagerICNumber();
+            String staffEmail = staff.getStaffEmail();
             
-    //         statement.setString(1, roomNum);
-    //         statement.setString(2, roomType);
-    //         statement.setString(3, maxGuest );
-    //         statement.setString(4, roomRate);
-    //         statement.setString(5, roomSize);
-    //         statement.setString(6, roomstatus);
-    //         statement.executeUpdate();
+            statement.setString(1, staffName);
+            statement.setString(2, staffGender);
+            statement.setString(3, staffPhoneNumber);
+            statement.setString(4, staffRace);
+            statement.setString(5, staffReligion);
+            statement.setString(6, staffMaritalStatus);
+            statement.setString(7, staffAddress);
+            statement.setString(8, staffRole);
+            statement.setString(9, staffStatus);
+            statement.setString(10, managerICNumber);
+            statement.setString(11, staffEmail);
+            statement.setString(12, staffICNumber);
+
+            statement.executeUpdate();
             
-    //          System.out.println("room number : "+roomNum);
-    //         // System.out.println("type : "+protype);
-    //         // System.out.println("product price : RM"+proprice);
-    //         // System.out.println("proimg: "+proimgs.getBytes());
+             System.out.println("Staff IC Number : "+staffICNumber);
             
-    //         connection.close();
+            connection.close();
                 
-    //             } catch (Exception e) {
-    //                 e.printStackTrace();
-    //                 return "redirect:/index";
-    //             }
-    //         return "redirect:/managerRoomList";
-    //      }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return "redirect:/index";
+                }
+            return "redirect:/managerStaffList";
+        }
 
 
          @GetMapping("/managerViewStaff")
