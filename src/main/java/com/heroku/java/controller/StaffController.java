@@ -102,7 +102,7 @@ public class StaffController {
 
         try {
             Connection connection = dataSource.getConnection();
-            String sql = "INSERT INTO public.staff(stafficnumber,staffname,staffgender,staffphonenumber,staffrace,staffreligion,staffmaritalstatus,staffaddress,staffrole,staffstatus,managerICNumber,staffemail) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO public.staff(stafficnumber,staffname,staffgender,staffphonenumber,staffrace,staffreligion,staffmaritalstatus,staffaddress,staffrole,staffstatus,managerICNumber,staffemail,staffpassword) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
             final var statement = connection.prepareStatement(sql);
 
             String staffICNumber = staff.getStaffICNumber();
@@ -117,6 +117,7 @@ public class StaffController {
             String staffStatus = "Employed";
             String managerICNumber = staff.getManagerICNumber();
             String staffEmail = staff.getStaffEmail();
+            String staffPassword = staff.getStaffPassword();
             
             
             statement.setString(1, staffICNumber);
@@ -131,6 +132,7 @@ public class StaffController {
             statement.setString(10, staffStatus);
             statement.setString(11, managerICNumber);
             statement.setString(12, staffEmail);
+            statement.setString(13, staffPassword);
 
             statement.executeUpdate();
             
