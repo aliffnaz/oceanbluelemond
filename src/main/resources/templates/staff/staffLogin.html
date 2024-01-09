@@ -47,7 +47,7 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-6">
-                    <a th:href="@{/index_logout}" class="logo"><img th:src="@{stylesheets/img/logo_sticky.png}" width="135" height="45"
+                    <a th:href="@{/index}" class="logo"><img th:src="@{stylesheets/img/logo_sticky.png}" width="135" height="45"
                             alt=""></a>
                 </div>
                 <div class="col-6">
@@ -123,7 +123,8 @@
                             </div>
                         </div>
                     </div>
-
+                    
+<form th:action="@{/staffLogin}" th:object="(${staffLogin})">
                     <div class="row m-3">
                         <div class="col-1"></div>
                         <div class="col pt-3">
@@ -170,7 +171,7 @@
                     </div>
 
                 </div>
-
+            </form>
 
                 <div class="col">
 
