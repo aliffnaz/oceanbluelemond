@@ -169,11 +169,6 @@ public String managerRoomServiceList() {
     return "manager/managerRoomServiceList";
 }
 
-@GetMapping("/managerStaffList")
-public String managerStaffList() {
-    return "manager/managerStaffList";
-}
-
 @GetMapping("/managerGuestList")
 public String managerGuestList() {
     return "manager/managerGuestList";
