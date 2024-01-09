@@ -118,18 +118,19 @@ public class StaffController {
             String managerICNumber = staff.getManagerICNumber();
             String staffEmail = staff.getStaffEmail();
             
-            statement.setString(1, staffName);
-            statement.setString(2, staffGender);
-            statement.setString(3, staffPhoneNumber);
-            statement.setString(4, staffRace);
-            statement.setString(5, staffReligion);
-            statement.setString(6, staffMaritalStatus);
-            statement.setString(7, staffAddress);
-            statement.setString(8, staffRole);
-            statement.setString(9, staffStatus);
-            statement.setString(10, managerICNumber);
-            statement.setString(11, staffEmail);
-            statement.setString(12, staffICNumber);
+            
+            statement.setString(1, staffICNumber);
+            statement.setString(2, staffName);
+            statement.setString(3, staffGender);
+            statement.setString(4, staffPhoneNumber);
+            statement.setString(5, staffRace);
+            statement.setString(6, staffReligion);
+            statement.setString(7, staffMaritalStatus);
+            statement.setString(8, staffAddress);
+            statement.setString(9, staffRole);
+            statement.setString(10, staffStatus);
+            statement.setString(11, managerICNumber);
+            statement.setString(12, staffEmail);
 
             statement.executeUpdate();
             
