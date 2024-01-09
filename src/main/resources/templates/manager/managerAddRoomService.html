@@ -130,6 +130,8 @@
 
                         </div>
                     </div>
+
+                    <form th:action="@{/managerAddRoomService}" th:object="(${managerAddRoomService})"
                     <div class="row m-3">
                         <div class="col-1"></div>
                         <div class="col pt-3">
@@ -138,7 +140,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" placeholder="S01">
+                            <input type="text" name="serviceID" id="" class="form-control" placeholder="S01">
                         </div>
                     </div>
                     <div class="row m-3">
@@ -149,7 +151,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" placeholder="Barbecue Set">
+                            <input type="text" name="serviceName" id="" class="form-control" placeholder="Barbecue Set">
                         </div>
                     </div>
                     <div class="row m-3">
@@ -160,7 +162,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" placeholder="Kitchen">
+                            <input type="text" name="serviceType" id="" class="form-control" placeholder="Kitchen">
                         </div>
                     </div>
                     <div class="row m-3">
@@ -171,7 +173,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" placeholder="RM15.00">
+                            <input type="text" name="servicePrice" id="" class="form-control" placeholder="RM15.00">
                         </div>
                     </div>
                     <div class="row m-5">
