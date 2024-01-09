@@ -135,40 +135,50 @@ public class StaffController {
     //      }
 
 
-    //      @GetMapping("/managerViewRoom")
-    //      public String managerViewRoom(@RequestParam("roomNum") String roomNum, Model model) {
-    //        System.out.println("Room Number : " + roomNum);
-    //        try {
-    //          Connection connection = dataSource.getConnection();
-    //          String sql = "SELECT roomnum, roomtype, maxguest, roomrate, roomsize, roomstatus FROM public.room WHERE roomnum = ?";
-    //          final var statement = connection.prepareStatement(sql);
-    //          statement.setString(1, roomNum);
-    //          final var resultSet = statement.executeQuery();
+         @GetMapping("/managerViewStaff")
+         public String managerViewStaff(@RequestParam("staffICNumber") String staffICNumber, Model model) {
+           System.out.println("Staff IC Number : " + staffICNumber);
+           try {
+             Connection connection = dataSource.getConnection();
+             String sql = "SELECT stafficnumber, staffname, staffgender, staffphonenumber, staffrace, staffreligion, staffmaritalstatus, staffaddress, staffrole, staffstatus, managerICNumber FROM public.staff where stafficnumber = ?";
+             final var statement = connection.prepareStatement(sql);
+             statement.setString(1, staffICNumber);
+             final var resultSet = statement.executeQuery();
          
-    //          if (resultSet.next()) {
-    //             String roomType = resultSet.getString("roomType");
-    //             String maxGuest = resultSet.getString("maxGuest");
-    //             String roomRate = resultSet.getString("roomRate");
-    //             String roomSize = resultSet.getString("roomSize");
-    //             String roomStatus = resultSet.getString("roomStatus");
+             if (resultSet.next()) {
+                String staffName = resultSet.getString("staffname");
+                String staffGender = resultSet.getString("staffgender");
+                String staffPhoneNumber = resultSet.getString("staffphonenumber");
+                String staffRace = resultSet.getString("staffrace");
+                String staffReligion = resultSet.getString("staffreligion");
+                String staffMaritalStatus = resultSet.getString("staffmaritalstatus");
+                String staffAddress = resultSet.getString("staffaddress");
+                String staffRole = resultSet.getString("staffrole");
+                String staffStatus = resultSet.getString("staffstatus");
+                String managerICNumber = resultSet.getString("managerICNumber");
          
-    //             room room = new room();
-    //             room.setRoomNum(roomNum);
-    //             room.setRoomType(roomType);
-    //             room.setMaxGuest(maxGuest);
-    //             room.setRoomRate(roomRate);
-    //             room.setRoomSize(roomSize);
-    //             room.setRoomStatus(roomStatus);
-    //             model.addAttribute("room", room);  
+                staff staff = new staff();
+                staff.setStaffICNumber(staffICNumber);
+                staff.setStaffName(staffName);
+                staff.setStaffGender(staffGender);
+                staff.setStaffPhoneNumber(staffPhoneNumber);
+                staff.setStaffRace(staffRace);
+                staff.setStaffReligion(staffReligion);  
+                staff.setStaffMaritalStatus(staffMaritalStatus);
+                staff.setStaffAddress(staffAddress);
+                staff.setStaffRole(staffRole);
+                staff.setStaffStatus(staffStatus);
+                staff.setManagerICNumber(managerICNumber);
+                model.addAttribute("staff", staff); 
    
-    //            connection.close();
-    //          }
-    //        } catch (Exception e) {
-    //          e.printStackTrace();
-    //        }
+               connection.close();
+             }
+           } catch (Exception e) {
+             e.printStackTrace();
+           }
          
-    //        return "manager/managerViewRoom";
-    //      }
+           return "manager/managerViewStaff";
+         }
 
     
 
