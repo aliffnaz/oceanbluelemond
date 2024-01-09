@@ -232,40 +232,48 @@ public class StaffController {
          }
         
          
-    //      @PostMapping("/managerUpdateRoom")
-    //     public String managerUpdateRoom(@ModelAttribute("managerUpdateRoom") room room){
-    //       System.out.println("pass here <<<<<<<");
-    //       try{
-    //         Connection connection = dataSource.getConnection();
-    //         String sql = "UPDATE room SET roomType=? ,maxGuest=?, roomRate=?, roomSize=?, roomStatus=? WHERE roomNum=?";
-    //         final var statement = connection.prepareStatement(sql);
-    //         String roomNum = room.getRoomNum();
-    //         String roomType = room.getRoomType();
-    //         String maxGuest = room.getMaxGuest();
-    //         String roomRate = room.getRoomRate();
-    //         String roomSize = room.getRoomSize();
-    //         String roomstatus = room.getRoomStatus();
+         @PostMapping("/managerStaffUpdate")
+        public String managerStaffUpdate(@ModelAttribute("managerStaffUpdate") room staff){
+          System.out.println("pass here <<<<<<<");
+          try{
+            Connection connection = dataSource.getConnection();
+            String sql = "UPDATE staff SET staffname=? ,staffgender=?, staffphonenumber=?, staffrace=?, staffreligion=?, staffmaritalstatus=?, staffaddress=?, staffrole=?, staffstatus=?, managerICNumber=?, staffemail=? WHERE stafficnumber=?";
+            final var statement = connection.prepareStatement(sql);
+            String staffICNumber = staff.getStaffICNumber();
+            String staffName = staff.getStaffName();
+            String staffGender = staff.getStaffGender();
+            String staffPhoneNumber = staff.getStaffPhoneNumber();
+            String staffRace = staff.getStaffRace();
+            String staffReligion = staff.getStaffReligion();
+            String staffMaritalStatus = staff.getStaffMaritalStatus();
+            String staffAddress = staff.getStaffAddress();
+            String staffRole = staff.getStaffRole();
+            String staffStatus = staff.getStaffStatus();
+            String managerICNumber = staff.getManagerICNumber();
+	        String staffEmail = staff.getStaffEmail();
 
-    //         //debug
-    //         // System.out.println("pro price update : "+proprice);
-    //         // System.out.println("pro id update : "+proid);
+            statement.setString(1, staffName);
+            statement.setString(2, staffGender);
+            statement.setString(3, staffPhoneNumber);
+            statement.setString(4, staffRace);
+            statement.setString(5, staffReligion);
+            statement.setString(6, staffMaritalStatus);
+            statement.setString(7, staffAddress);
+            statement.setString(8, staffRole);
+            statement.setString(9, staffStatus);
+            statement.setString(10, managerICNumber);
+            statement.setString(11, staffEmail);
+            statement.setString(12, staffICNumber);
 
-    //         statement.setString(1, roomType);
-    //         statement.setString(2, maxGuest );
-    //         statement.setString(3, roomRate);
-    //         statement.setString(4, roomSize);
-    //         statement.setString(5, roomstatus);
-    //         statement.setString(6, roomNum);
-
-    //         statement.executeUpdate();
+            statement.executeUpdate();
             
-    //         connection.close();
+            connection.close();
 
-    //       }catch(Exception e){
-    //         e.printStackTrace();
-    //       }
-    //         return "redirect:/managerRoomList";
-    //     }
+          }catch(Exception e){
+            e.printStackTrace();
+          }
+            return "redirect:/managerStaffList";
+        }
     
 
     //     @GetMapping("/staffRoomList")
