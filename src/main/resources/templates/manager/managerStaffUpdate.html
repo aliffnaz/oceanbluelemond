@@ -123,7 +123,7 @@
                             </div>
                         </div>
                     </div>
-<form th:action="@{/managerStaffUpdate} modelAttribute="managerStaffUpdate" th:object="(${managerStaffUpdate})"
+                    <form th:action="@{/managerStaffUpdate}" modelAttribute="managerStaffUpdate" th:object="(${managerStaffUpdate})">
                     <div class="row m-3">
                         <div class="col-1"></div>
                         <div class="col pt-3">
@@ -287,8 +287,8 @@
                     <div class="row m-5">
                         <div class="col"></div>
                         <div class="col-6 text-center">
-                            <a th:href="@{/managerViewStaff}" class="btn btn-dark btn-md"
-                                style="border-radius: 3px 3px 3px 3px; height: auto; width:150px" onclick="success()">Update</a>
+                            <!-- <a th:href="@{/managerViewStaff}" class="btn btn-dark btn-md"
+                                style="border-radius: 3px 3px 3px 3px; height: auto; width:150px" onclick="success()">Update</a> -->
 
                             <button type="submit" class="btn btn-dark btn-md"
                                 style="border-radius: 3px 3px 3px 3px; height: auto; width:150px" onclick="success()" >Update</button>
@@ -299,7 +299,7 @@
     
                                 </script>
 
-                            <a th:href="@{/managerViewStaff}" class="btn btn-danger btn-md"
+                            <a th:href="@{/managerStaffList}" class="btn btn-danger btn-md"
                                 style="border-radius: 3px 3px 3px 3px; height: auto; width:150px">Cancel</a>
 
 
@@ -307,7 +307,7 @@
                         <div class="col"></div>
                     </div>
 
-
+                </form>
                 </div>
 
 
