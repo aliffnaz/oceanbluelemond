@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 //import org.springframework.web.bind.annotation.RequestParam;
 
-import com.heroku.java.model.reservationModel;
+import com.heroku.java.model.reservation;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -43,7 +43,7 @@ public RegisterController(DataSource dataRegister){
 }
 
 @PostMapping("/guestRegister")
-public String guestRegisterAccount(HttpSession session, @ModelAttribute("guestRegister") reservationModel reserve) {
+public String guestRegisterAccount(HttpSession session, @ModelAttribute("guestRegister") reservation\ reserve) {
 
     try{
 Connection conn = dataRegister.getConnection();
