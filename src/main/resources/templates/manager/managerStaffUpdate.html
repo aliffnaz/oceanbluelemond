@@ -132,7 +132,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="staffName" id="" class="form-control" th:value="${staff.staffName}">
+                            <input type="text" name="staffName" id="staffName" class="form-control" th:value="${staff.staffName}">
                         </div>
                     </div>
 
@@ -144,7 +144,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="staffICNumber" id="" class="form-control" th:value="${staff.staffICNumber}">
+                            <input type="text" name="staffICNumber" id="staffICNumber" class="form-control" th:value="${staff.staffICNumber}" readonly>
                         </div>
                     </div>
 
@@ -156,7 +156,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="staffAddress" id="" class="form-control" th:value="${staff.staffAddress}">
+                            <input type="text" name="staffAddress" id="staffAddress" class="form-control" th:value="${staff.staffAddress}">
                         </div>
                     </div>
 
@@ -168,10 +168,10 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <select name="staffGender" id="" class="form-control form-select">
+                            <select name="staffGender" id="staffGender" class="form-control form-select">
                                 <option value="">Select</option>
-                                <option value="" Selected>Male</option>
-                                <option value="">Female</option>
+                                <option value="Male" Selected>Male</option>
+                                <option value="Female">Female</option>
                             </select>
                         </div>
                     </div>
@@ -184,11 +184,11 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <select name="staffRace" id="" class="form-control form-select">
+                            <select name="staffRace" id="staffRace" class="form-control form-select">
                                 <option value="">Select</option>
-                                <option value="" Selected>Melayu</option>
-                                <option value="">Cina</option>
-                                <option value="">India</option>
+                                <option value="Melayu" Selected>Melayu</option>
+                                <option value="Cina">Cina</option>
+                                <option value="India">India</option>
                             </select>
                         </div>
                     </div>
@@ -201,11 +201,11 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <select name="staffReligion" id="" class="form-control form-select">
+                            <select name="staffReligion" id="staffReligion" class="form-control form-select">
                                 <option value="">Select</option>
-                                <option value="" Selected>Islam</option>
-                                <option value="">Budha</option>
-                                <option value="">Christian</option>
+                                <option value="Islam" Selected>Islam</option>
+                                <option value="Budha">Budha</option>
+                                <option value="Christian">Christian</option>
                             </select>
                         </div>
                     </div>
@@ -218,12 +218,12 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <select name="staffMaritalStatus" id="" class="form-control form-select">
+                            <select name="staffMaritalStatus" id="staffMaritalStatus" class="form-control form-select">
                                 <option value="">Select</option>
-                                <option value="" Selected>Single</option>
-                                <option value="">Married</option>
-                                <option value="">Divorce</option>
-                                <option value="">Widowed</option>
+                                <option value="Single" Selected>Single</option>
+                                <option value="Married">Married</option>
+                                <option value="Divorce">Divorce</option>
+                                <option value="Widowed">Widowed</option>
                             </select>
 
                         </div>
@@ -237,11 +237,11 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <select name="staffRole" id="" class="form-control form-select">
+                            <select name="staffRole" id="staffRole" class="form-control form-select">
                                 <option value="">Select</option>
-                                <option value="" Selected>Manager</option>
-                                <option value="">Front Office</option>
-                                <option value="">Finanace</option>
+                                <option value="Manager" Selected>Manager</option>
+                                <option value="Front">Front Office</option>
+                                <option value="Finanace">Finanace</option>
                             </select>
 
                         </div>
@@ -255,7 +255,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="staffPhoneNumber" id="" class="form-control" th:value="${staff.staffPhoneNumber}">
+                            <input type="text" name="staffPhoneNumber" id="staffPhoneNumber" class="form-control" th:value="${staff.staffPhoneNumber}">
                         </div>
                     </div>
 
@@ -267,7 +267,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="staffEmail" id="" class="form-control" th:value="${staff.staffEmail}">
+                            <input type="text" name="staffEmail" id="staffEmail" class="form-control" th:value="${staff.staffEmail}">
                         </div>
                     </div>
 
@@ -277,14 +277,13 @@
                             <!-- <a th:href="@{/managerViewStaff}" class="btn btn-dark btn-md"
                                 style="border-radius: 3px 3px 3px 3px; height: auto; width:150px" onclick="success()">Update</a> -->
 
-                            <button type="submit" class="btn btn-dark btn-md"
-                                style="border-radius: 3px 3px 3px 3px; height: auto; width:150px" onclick="success()" >Update</button>
-                                <script>
+                            <button type="submit" class="btn btn-dark btn-md" style="border-radius: 3px 3px 3px 3px; height: auto; width:150px" onclick="success()" >Update</button>
+                                <!-- <script>
                                     function success() {
                                         alert("Successfully Update");
                                     }
     
-                                </script>
+                                </script> -->
 
                             <a th:href="@{/managerStaffList}" class="btn btn-danger btn-md"
                                 style="border-radius: 3px 3px 3px 3px; height: auto; width:150px">Cancel</a>
