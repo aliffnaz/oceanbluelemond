@@ -1,6 +1,6 @@
 package com.heroku.java.model;
 
-public class reservationModel {
+public class reservation {
 
     private String reservationID;
     private String guestID;
@@ -14,7 +14,7 @@ public class reservationModel {
     private String totalRoom;
     private String totalPayment;
 
-    public reservationModel() {
+    public reservation() {
 
     }
 
