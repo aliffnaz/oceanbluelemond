@@ -116,13 +116,13 @@
                                 <th class="text-center" colspan="2">Action</th>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="text-center">S01</td>
-                                    <td>Barbecue Set</td>
-                                    <td>Kitchen</td>
-                                    <td>RM15.00</td>
+                                <tr th:each="service : ${services}">
+                                    <td class="text-center" th:text="${service.serviceID}">S01</td>
+                                    <td th:text="${service.serviceName}">Barbecue Set</td>
+                                    <td th:text="${service.serviceType}">Kitchen</td>
+                                    <td th:text="${service.servicePrice}">RM15.00</td>
                                     <td class="text-center">
-                                        <a th:href="@{/managerUpdateRoomService}"><i class="bi bi-eye-fill"
+                                        <a th:href="@{/managerUpdateRoomService?=}+${service.serviceID}"><i class="bi bi-eye-fill"
                                                 style="font-size: 20px;"></i></a>
 
                                     </td>
