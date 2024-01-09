@@ -120,28 +120,25 @@
 
                         <table class="table table-hover table-bordered">
                             <thead>
-                                <th class="text-center">#</th>
                                 <th class="text-center">Staff Name</th>
                                 <th class="text-center">Staff IC Number</th>
                                 <th class="text-center">Staff Role</th>
                                 <th class="text-center">Action</th>
                             </thead>
                             <tbody>
-                                <tr th:each="staff : ${staffs}">]
+                                <tr th:each="staff : ${staffs}">
                                     <td th:text="${staff.staffName}"></td>
                                     <td th:text="${staff.staffICNumber}"></td>
                                     <td th:text="${staff.staffRole}"></td>
                                     <td class="text-center"><a th:href="@{/managerViewStaff?=}+${staff.staffICNumber}"><i class="bi bi-eye-fill"></i></a></td>
                                 </tr>
                                 <tr>
-                                    <td class="text-center">2</td>
                                     <td>Anas Ali</td>
                                     <td>990912035671</td>
                                     <td>Front Office</td>
                                     <td class="text-center"><a th:href="@{/managerViewStaff}"><i class="bi bi-eye-fill"></i></a></td>
                                 </tr>
                                 <tr>
-                                    <td class="text-center">3</td>
                                     <td>Tengku Sofiya</td>
                                     <td>971203045644</td>
                                     <td>Finance</td>
