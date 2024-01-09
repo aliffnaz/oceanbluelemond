@@ -233,7 +233,7 @@ public class StaffController {
         
          
          @PostMapping("/managerStaffUpdate")
-        public String managerStaffUpdate(@ModelAttribute("managerStaffUpdate") room staff){
+        public String managerStaffUpdate(@ModelAttribute("managerStaffUpdate") staff staff){
           System.out.println("pass here <<<<<<<");
           try{
             Connection connection = dataSource.getConnection();
