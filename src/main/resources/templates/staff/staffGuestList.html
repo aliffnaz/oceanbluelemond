@@ -128,7 +128,7 @@
                                 <th class="text-center">Guest Race</th>
                                 <th class="text-center">Guest Religion</th>
                                 <th class="text-center">Guest Address</th>
-                                <th class="text-center" colspan="2">Action</th>
+                                <th class="text-center">Action</th>
                             </thead>
                             <tbody>
                                 <tr th:each="guest : ${guests}">
@@ -140,7 +140,7 @@
                                     <td class="text-center" th:value="${guest.guestReligion}"></td>
                                     <td class="text-center" th:value="${guest.guestAddress}"></td>
                                     <td class="text-center" ><a th:href="@{/staffViewGuest?=}+${guest.guestICNumber}" th:value="${guest.guestICNumber}"><i class="bi bi-eye-fill" style="font-size: 20px;"></i></a></td>
-                                    <td class="text-center" ><a href=" "><i class="bi bi-trash3-fill" style="font-size: 20px;"></i></a></td>
+                                  
                                 </tr>
                                 <tr>
                                     <td class="text-center">G02</td>
