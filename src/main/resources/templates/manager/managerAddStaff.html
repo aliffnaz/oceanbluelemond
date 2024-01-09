@@ -1,521 +1,412 @@
-package com.heroku.java.controller;
+<!DOCTYPE html>
+<html lang="zxx">
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Ansonika">
+    <title>D Chalet Ombak Biru</title>
+    <!-- Favicons-->
+    <link rel="shortcut icon" th:href="@{stylesheets/img/favicon.png}" type="image/x-icon">
+    <link rel="apple-touch-icon" type="image/x-icon"
+        th:href="@{stylesheets/img/apple-touch-icon-57x57-precomposed.png}">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72"
+        th:href="@{stylesheets/img/apple-touch-icon-72x72-precomposed.png}">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114"
+        th:href="@{stylesheets/img/apple-touch-icon-114x114-precomposed.png}">
+    <link th:rel="apple-touch-icon" type="image/x-icon" sizes="144x144"
+        th:href="@{stylesheets/img/apple-touch-icon-144x144-precomposed.png}">
 
-import com.heroku.java.model.staff;
+    <!-- GOOGLE WEB FONT-->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500&family=Montserrat:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
 
-import jakarta.servlet.http.HttpSession;
+    <!-- BASE CSS -->
+    <link th:href="@{stylesheets/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{stylesheets/css/style.css}" rel="stylesheet">
+    <link th:href="@{stylesheets/css/vendors.min.css}" rel="stylesheet">
 
-import java.sql.*;
-import javax.sql.DataSource;
-import java.util.ArrayList;
-import java.util.Map;
+    <!-- SEPCIFIC CSS -->
+    <link th:href="@{stylesheets/css/flex_slider.css}" rel="stylesheet">
 
-import java.util.List;
+    <!-- YOUR CUSTOM CSS -->
+    <link th:href="@{stylesheets/css/custom.css}" rel="stylesheet">
+</head>
+    
+<body class="datepicker_mobile_full">
+    <div id="preloader">
+        <div data-loader="circle-side"></div>
+    </div><!-- /Page Preload -->
 
-@Controller
-public class StaffController {
-    private final DataSource dataSource;
-
-    @Autowired
-    public StaffController(DataSource dataSource) {
-        this.dataSource = dataSource;
-    }
-
-    //original syahir punyer, guna session
-    // @GetMapping("/managerAddRoom")
-    // public String managerAddRoom(HttpSession session) {
-    //     // int roomNumber = (int) session.getAttribute("roomNumber");
-    //     // System.out.println("roomNumber id :" + roomNumber);
-    //     return "manager/managerAddRoom";
-    // }
-
-
-    @GetMapping("/managerStaffList")
-    public String managerStaffList(Model model) {
-
-        List<staff> staffs = new ArrayList<staff>();
-        // Retrieve the logged-in room's role from the session (syahir punya nih)
-        //String staffsrole = (String) session.getAttribute("staffsrole");
-        //System.out.println("staffrole managerRoomList : " + staffsrole);
-        try (Connection connection = dataSource.getConnection()) {
-            String sql = "SELECT stafficnumber, staffname, staffgender, staffphonenumber, staffrace, staffreligion, staffmaritalstatus, staffaddress, staffrole, staffstatus, managerICNumber FROM public.staff order by staffname";
-            final var statement = connection.prepareStatement(sql);
-            //statement.setString(1, "baker"); (syahir punya nih)
-            final var resultSet = statement.executeQuery();
-            System.out.println("pass try managerStaffList >>>>>");
-
-            while (resultSet.next()) {
-                String staffICNumber = resultSet.getString("stafficnumber");
-                String staffName = resultSet.getString("staffname");
-                String staffGender = resultSet.getString("staffgender");
-                String staffPhoneNumber = resultSet.getString("staffphonenumber");
-                String staffRace = resultSet.getString("staffrace");
-                String staffReligion = resultSet.getString("staffreligion");
-                String staffMaritalStatus = resultSet.getString("staffmaritalstatus");
-                String staffAddress = resultSet.getString("staffaddress");
-                String staffRole = resultSet.getString("staffrole");
-                String staffStatus = resultSet.getString("staffstatus");
-                String managerICNumber = resultSet.getString("managerICNumber");
-                
-                staff staff = new staff();
-                staff.setStaffICNumber(staffICNumber);
-                staff.setStaffName(staffName);
-                staff.setStaffGender(staffGender);
-                staff.setStaffPhoneNumber(staffPhoneNumber);
-                staff.setStaffRace(staffRace);
-                staff.setStaffReligion(staffReligion);  
-                staff.setStaffMaritalStatus(staffMaritalStatus);
-                staff.setStaffAddress(staffAddress);
-                staff.setStaffRole(staffRole);
-                staff.setStaffStatus(staffStatus);
-                staff.setManagerICNumber(managerICNumber);                
-
-                staffs.add(staff);
-                model.addAttribute("staffs", staffs);
-                //model.addAttribute("isAdmin", staffsrole != null && staffsrole.equals("admin")); // Add isAdmin flag to the modelF (syahir punya gak)
-
-            }
-
-            connection.close();
-
-        return "manager/managerStaffList";
-        } catch (SQLException e) {
-            e.printStackTrace();
-            // Handle the exception as desired (e.g., show an error message)
-            return "error";
-        }
-        
-    }
-
-    @PostMapping("/managerAddStaff")
-    public String managerAddStaff(@ModelAttribute("managerAddStaff")staff staff){
-
-        try {
-            Connection connection = dataSource.getConnection();
-            String sql = "INSERT INTO public.staff(stafficnumber,staffname,staffgender,staffphonenumber,staffrace,staffreligion,staffmaritalstatus,staffaddress,staffrole,staffstatus,managerICNumber,staffemail) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
-            final var statement = connection.prepareStatement(sql);
-
-            String staffICNumber = staff.getStaffICNumber();
-            String staffName = staff.getStaffName();
-            String staffGender = staff.getStaffGender();
-            String staffPhoneNumber = staff.getStaffPhoneNumber();
-            String staffRace = staff.getStaffRace();
-            String staffReligion = staff.getStaffReligion();
-            String staffMaritalStatus = staff.getStaffMaritalStatus();
-            String staffAddress = staff.getStaffAddress();
-            String staffRole = staff.getStaffRole();
-            String staffStatus = "Employed";
-            String managerICNumber = staff.getManagerICNumber();
-            String staffEmail = staff.getStaffEmail();
-            
-            
-            statement.setString(1, staffICNumber);
-            statement.setString(2, staffName);
-            statement.setString(3, staffGender);
-            statement.setString(4, staffPhoneNumber);
-            statement.setString(5, staffRace);
-            statement.setString(6, staffReligion);
-            statement.setString(7, staffMaritalStatus);
-            statement.setString(8, staffAddress);
-            statement.setString(9, staffRole);
-            statement.setString(10, staffStatus);
-            statement.setString(11, managerICNumber);
-            statement.setString(12, staffEmail);
-
-            statement.executeUpdate();
-            
-             System.out.println("Staff IC Number : "+staffICNumber);
-            
-            connection.close();
-                
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    return "redirect:/index";
-                }
-            return "redirect:/managerStaffList";
-        }
+    <div class="layer"></div>
 
 
-         @GetMapping("/managerViewStaff")
-         public String managerViewStaff(@RequestParam("staffICNumber") String staffICNumber, Model model) {
-           System.out.println("Staff IC Number : " + staffICNumber);
-           try {
-             Connection connection = dataSource.getConnection();
-             String sql = "SELECT stafficnumber, staffname, staffgender, staffphonenumber, staffrace, staffreligion, staffmaritalstatus, staffaddress, staffrole, staffstatus, managerICNumber, staffemail FROM public.staff where stafficnumber = ?";
-             final var statement = connection.prepareStatement(sql);
-             statement.setString(1, staffICNumber);
-             final var resultSet = statement.executeQuery();
-         
-             if (resultSet.next()) {
-                String staffName = resultSet.getString("staffname");
-                String staffGender = resultSet.getString("staffgender");
-                String staffPhoneNumber = resultSet.getString("staffphonenumber");
-                String staffRace = resultSet.getString("staffrace");
-                String staffReligion = resultSet.getString("staffreligion");
-                String staffMaritalStatus = resultSet.getString("staffmaritalstatus");
-                String staffAddress = resultSet.getString("staffaddress");
-                String staffRole = resultSet.getString("staffrole");
-                String staffStatus = resultSet.getString("staffstatus");
-                String managerICNumber = resultSet.getString("managerICNumber");
-                String staffEmail = resultSet.getString("staffemail");
-         
-                staff staff = new staff();
-                staff.setStaffICNumber(staffICNumber);
-                staff.setStaffName(staffName);
-                staff.setStaffGender(staffGender);
-                staff.setStaffPhoneNumber(staffPhoneNumber);
-                staff.setStaffRace(staffRace);
-                staff.setStaffReligion(staffReligion);  
-                staff.setStaffMaritalStatus(staffMaritalStatus);
-                staff.setStaffAddress(staffAddress);
-                staff.setStaffRole(staffRole);
-                staff.setStaffStatus(staffStatus);
-                staff.setManagerICNumber(managerICNumber);
-                staff.setStaffEmail(staffEmail);
-                model.addAttribute("staff", staff); 
-   
-               connection.close();
-             }
-           } catch (Exception e) {
-             e.printStackTrace();
-           }
-         
-           return "manager/managerViewStaff";
-         }
-
+<header class="reveal_header" style="background-color:#24262d;">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-6">
+                    <a th:href="@{/index}" class="logo"><img th:src="@{stylesheets/img/logo_sticky.png}" width="135" height="45" alt=""></a>
+                </div>
+                <div class="col-6">
+                    <nav>
+                        <ul>
+                            <li><a class="btn_1 btn_scrollto">Manager</a></li>
+                            <li>
+                                <div class="hamburger_2 open_close_nav_panel">
+                                    <div class="hamburger__box">
+                                        <div class="hamburger__inner"></div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div><!-- /container -->
+    </header><!-- /Header -->
     
 
-    @GetMapping("/managerStaffUpdate")
-         public String managerStaffUpdate(@RequestParam("staffICNumber") String staffICNumber, Model model) {
-           System.out.println("Staff IC Number : " + staffICNumber);
-           try {
-            Connection connection = dataSource.getConnection();
-            String sql = "SELECT stafficnumber, staffname, staffgender, staffphonenumber, staffrace, staffreligion, staffmaritalstatus, staffaddress, staffrole, staffstatus, managerICNumber, staffemail FROM public.staff where stafficnumber = ?";
-            final var statement = connection.prepareStatement(sql);
-            statement.setString(1, staffICNumber);
-            final var resultSet = statement.executeQuery();
-         
-            if (resultSet.next()) {
-                String staffName = resultSet.getString("staffname");
-                String staffGender = resultSet.getString("staffgender");
-                String staffPhoneNumber = resultSet.getString("staffphonenumber");
-                String staffRace = resultSet.getString("staffrace");
-                String staffReligion = resultSet.getString("staffreligion");
-                String staffMaritalStatus = resultSet.getString("staffmaritalstatus");
-                String staffAddress = resultSet.getString("staffaddress");
-                String staffRole = resultSet.getString("staffrole");
-                String staffStatus = resultSet.getString("staffstatus");
-                String managerICNumber = resultSet.getString("managerICNumber");
-                String staffEmail = resultSet.getString("staffemail");
-         
-                staff staff = new staff();
-                staff.setStaffICNumber(staffICNumber);
-                staff.setStaffName(staffName);
-                staff.setStaffGender(staffGender);
-                staff.setStaffPhoneNumber(staffPhoneNumber);
-                staff.setStaffRace(staffRace);
-                staff.setStaffReligion(staffReligion);  
-                staff.setStaffMaritalStatus(staffMaritalStatus);
-                staff.setStaffAddress(staffAddress);
-                staff.setStaffRole(staffRole);
-                staff.setStaffStatus(staffStatus);
-                staff.setManagerICNumber(managerICNumber);
-                staff.setStaffEmail(staffEmail);
-                model.addAttribute("staff", staff);  
-   
-               connection.close();
-             }
-           } catch (Exception e) {
-             e.printStackTrace();
-           }
-         
-           return "manager/managerStaffUpdate";
-         }
-        
-         
-         @PostMapping("/managerStaffUpdate")
-        public String managerStaffUpdate(@ModelAttribute("managerStaffUpdate") staff staff){
-          System.out.println("pass here <<<<<<<");
-          try{
-            Connection connection = dataSource.getConnection();
-            String sql = "UPDATE staff SET staffname=? ,staffgender=?, staffphonenumber=?, staffrace=?, staffreligion=?, staffmaritalstatus=?, staffaddress=?, staffrole=?, staffstatus=?, managerICNumber=?, staffemail=? WHERE stafficnumber=?";
-            final var statement = connection.prepareStatement(sql);
-            String staffICNumber = staff.getStaffICNumber();
-            String staffName = staff.getStaffName();
-            String staffGender = staff.getStaffGender();
-            String staffPhoneNumber = staff.getStaffPhoneNumber();
-            String staffRace = staff.getStaffRace();
-            String staffReligion = staff.getStaffReligion();
-            String staffMaritalStatus = staff.getStaffMaritalStatus();
-            String staffAddress = staff.getStaffAddress();
-            String staffRole = staff.getStaffRole();
-            String staffStatus = staff.getStaffStatus();
-            String managerICNumber = staff.getManagerICNumber();
-	        String staffEmail = staff.getStaffEmail();
+    <!-- -------------------- sidebar panel ------------------------- -->
+<div class="nav_panel">
+        <a th:href="@{#}" class="closebt open_close_nav_panel"><i class="bi bi-x"></i></a>
+        <div class="logo_panel"><img th:src="@{stylesheets/img/logo_sticky.png}" width="135" height="45" alt=""></div>
+        <div class="sidebar-navigation">
+            <nav>
+                <ul class="level-1">
+                    <li class=""><a th:href="@{/managerHome}"><i class="bi bi-house" style="font-size: 25px;"></i>
+                            &nbsp;Home</a></li>
+                    <li class=""><a th:href="@{/managerUpdateStatus}"><i class="bi bi-clipboard-check"
+                                style="font-size: 25px;"></i>&nbsp; Room Reservation</a></li>
+                    <li><a th:href="@{/managerStaffList}"><i class="bi bi-person-badge"
+                                style="font-size: 25px;"></i>&nbsp; Manage Staff</a></li>
+                    <li><a th:href="@{/managerRoomList}"><i class="bi bi-pencil-square"
+                                style="font-size: 25px;"></i>&nbsp; Manage Room</a></li>
+                    <li><a th:href="@{/managerRoomServiceList}"><i class="bi bi-nut" style="font-size: 25px;"></i>&nbsp;
+                            Manage Room Service</a></li>
+                    <li><a th:href="@{/managerGuestList}"><i class="bi bi-people"
+                            style="font-size: 25px;"></i>&nbsp; Manage Guest</a></li>
+                    <li><a th:href="@{/managerGenerateReport}"><i class="bi bi-file-earmark-bar-graph"
+                                style="font-size: 25px;"></i>&nbsp; Generate Report</a></li>
+                    <li class="mt-5"><a th:href="@{/guestLogin}" class="btn btn-danger pt-3"
+                            style="color: white; border-radius: 10px 10px 10px 10px; height: 50px;">Logout</a></li>
+                </ul>
+                <div class="panel_footer">
+                    <div class="copy">
+                        <div class="container py-3">
+                            © Ombak Biru Chalet Malaysia
+                        </div>
+                    </div>
+                </div>
+                <!-- /panel_footer -->
+            </nav>
+        </div>
+        <!-- /sidebar-navigation -->
+    </div>
+    <!-- /nav_panel -->
 
-            statement.setString(1, staffName);
-            statement.setString(2, staffGender);
-            statement.setString(3, staffPhoneNumber);
-            statement.setString(4, staffRace);
-            statement.setString(5, staffReligion);
-            statement.setString(6, staffMaritalStatus);
-            statement.setString(7, staffAddress);
-            statement.setString(8, staffRole);
-            statement.setString(9, staffStatus);
-            statement.setString(10, managerICNumber);
-            statement.setString(11, staffEmail);
-            statement.setString(12, staffICNumber);
+    <main>
 
-            statement.executeUpdate();
-            
-            connection.close();
+        <div class="container mt-5">
+            &nbsp;
+        </div>
 
-          }catch(Exception e){
-            e.printStackTrace();
-          }
-            return "redirect:/managerStaffList";
-        }
-    
+        <div class="container mt-5 mb-5 align-items-center">
 
-    //     @GetMapping("/staffRoomList")
-    // public String staffRoomList(Model model) {
+            <div class="row">
+                <div class="col">
 
-    //     List<room> rooms = new ArrayList<room>();
-    //     // Retrieve the logged-in room's role from the session (syahir punya nih)
-    //     //String staffsrole = (String) session.getAttribute("staffsrole");
-    //     //System.out.println("staffrole staffRoomList : " + staffsrole);
-    //     try (Connection connection = dataSource.getConnection()) {
-    //         String sql = "SELECT roomNum, roomType, maxGuest, roomRate, roomSize, roomStatus FROM public.room order by roomNum desc"; //ni originally WHERE staffsrole=?
-    //         final var statement = connection.prepareStatement(sql);
-    //         //statement.setString(1, "baker"); (syahir punya nih)
-    //         final var resultSet = statement.executeQuery();
-    //         System.out.println("pass try staffRoomList >>>>>");
+                </div>
 
-    //         while (resultSet.next()) {
-    //             String roomNum = resultSet.getString("roomNum");
-    //             String roomType = resultSet.getString("roomType");
-    //             String maxGuest = resultSet.getString("maxGuest");
-    //             String roomRate = resultSet.getString("roomRate");
-    //             String roomSize = resultSet.getString("roomSize");
-    //             String roomStatus = resultSet.getString("roomStatus");
-    //             //System.out.println("room number" + roomNum);
-                
-    //             room room = new room();
-    //             room.setRoomNum(roomNum);
-    //             room.setRoomType(roomType);
-    //             room.setMaxGuest(maxGuest);
-    //             room.setRoomRate(roomRate);
-    //             room.setRoomSize(roomSize);
-    //             room.setRoomStatus(roomStatus);                
+                <div class="col-md card card-body py-5">
 
-    //             rooms.add(room);
-    //             model.addAttribute("rooms", rooms);
-    //             //model.addAttribute("isAdmin", staffsrole != null && staffsrole.equals("admin")); // Add isAdmin flag to the modelF (syahir punya gak)
+                    <div class="row m-4">
+                        <div class="col-2 text-center">
+                            <a th:href="@{/managerStaffList}">
+                                <div class="bi bi-arrow-left-circle" style="font-size: 50px;"></div>
+                            </a>
+                        </div>
+                        <div class="col-md-8 text-center pt-3">
+                            <div class="">
 
-    //         }
+                                <h1>Add Staff</h1>
+                            </div>
+                        </div>
+                        <div class="col-2">
 
-    //         connection.close();
+                        </div>
+                    </div>
 
-    //     return "staff/staffRoomList";
-    //     } catch (SQLException e) {
-    //         e.printStackTrace();
-    //         // Handle the exception as desired (e.g., show an error message)
-    //         return "error";
-    //     }
-        
-    // }
+                    <div class="row m-auto">
+                        <div class="col-md-12 text-center">
+                            <div class="bi bi-person-badge" style="font-size:150px">
 
-    // @PostMapping("/staffAddRoom")
-    // public String staffAddRoom(@ModelAttribute("staffAddRoom")room room){
+                            </div>
+                        </div>
+                    </div>
+                    <form method="post" th:action="@{/managerAddStaff}" modelAttribute="managerAddStaff" th:object="(${managerAddStaff})">
+                    <div class="row m-3">
+                        <div class="col-1"></div>
+                        <div class="col pt-3">
+                            <span>
+                                <h6>Fullname</h6>
+                            </span>
+                        </div>
+                        <div class="col-8">
+                            <input type="text" name="staffName" id="" class="form-control" value="">
+                        </div>
+                    </div>
 
-    //     try {
-    //         Connection connection = dataSource.getConnection();
-    //         String sql = "INSERT INTO public.room(roomnum,roomtype,maxguest,roomrate,roomsize,roomstatus) VALUES(?,?,?,?,?,?)";
-    //         final var statement = connection.prepareStatement(sql);
+                    <div class="row m-3">
+                        <div class="col-1"></div>
+                        <div class="col pt-3">
+                            <span>
+                                <h6>IC Number</h6>
+                            </span>
+                        </div>
+                        <div class="col-8">
+                            <input type="text" name="staffICNumber" id="" class="form-control" value="">
+                        </div>
+                    </div>
 
-    //         String roomNum = room.getRoomNum();
-    //         String roomType = room.getRoomType();
-    //         String maxGuest = room.getMaxGuest();
-    //         String roomRate = room.getRoomRate();
-    //         String roomSize = room.getRoomSize();
-    //         String roomstatus = room.getRoomStatus();
-            
-    //         statement.setString(1, roomNum);
-    //         statement.setString(2, roomType);
-    //         statement.setString(3, maxGuest );
-    //         statement.setString(4, roomRate);
-    //         statement.setString(5, roomSize);
-    //         statement.setString(6, roomstatus);
-    //         statement.executeUpdate();
-            
-    //         connection.close();
-                
-    //             } catch (Exception e) {
-    //                 e.printStackTrace();
-    //                 return "redirect:/index";
-    //             }
-    //         return "redirect:/staffRoomList";
-    //      }
+                    <div class="row m-3">
+                        <div class="col-1"></div>
+                        <div class="col pt-3">
+                            <span>
+                                <h6>Address</h6>
+                            </span>
+                        </div>
+                        <div class="col-8">
+                            <input type="text" name="staffAddress" id="" class="form-control" value="">
+                        </div>
+                    </div>
 
+                    <div class="row m-3">
+                        <div class="col-1"></div>
+                        <div class="col pt-3">
+                            <span>
+                                <h6>Gender</h6>
+                            </span>
+                        </div>
+                        <div class="col-8">
+                            <div class="custom_select">
+                                <select name="staffGender" id="" class="wide">
+                                    <option th:value="Male">Male</option>
+                                    <option th:value="Female">Female</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
 
-    //       @GetMapping("/staffViewRoom")
-    //      public String staffViewRoom(@RequestParam("roomNum") String roomNum, Model model) {
-    //        System.out.println("Room Number : " + roomNum);
-    //        try {
-    //          Connection connection = dataSource.getConnection();
-    //          String sql = "SELECT roomnum, roomtype, maxguest, roomrate, roomsize, roomstatus FROM public.room WHERE roomnum = ?";
-    //          final var statement = connection.prepareStatement(sql);
-    //          statement.setString(1, roomNum);
-    //          final var resultSet = statement.executeQuery();
-         
-    //          if (resultSet.next()) {
-    //             String roomType = resultSet.getString("roomType");
-    //             String maxGuest = resultSet.getString("maxGuest");
-    //             String roomRate = resultSet.getString("roomRate");
-    //             String roomSize = resultSet.getString("roomSize");
-    //             String roomStatus = resultSet.getString("roomStatus");
-         
-    //             room room = new room();
-    //             room.setRoomNum(roomNum);
-    //             room.setRoomType(roomType);
-    //             room.setMaxGuest(maxGuest);
-    //             room.setRoomRate(roomRate);
-    //             room.setRoomSize(roomSize);
-    //             room.setRoomStatus(roomStatus);
-    //             model.addAttribute("room", room);  
-   
-    //            connection.close();
-    //          }
-    //        } catch (Exception e) {
-    //          e.printStackTrace();
-    //        }
-         
-    //        return "staff/staffViewRoom";
-    //      }
+                    <div class="row m-3">
+                        <div class="col-1"></div>
+                        <div class="col pt-3">
+                            <span>
+                                <h6>Race</h6>
+                            </span>
+                        </div>
+                        <div class="col-8">
+                            <div class="custom_select">
+                                <select name="staffRace" id="" class="wide">
+                                    <option th:value="Melayu">Melayu</option>
+                                    <option th:value="Cina">Cina</option>
+                                    <option th:value="India">India</option>
+                                    <option th:value="Others">Others</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
 
+                    <div class="row m-3">
+                        <div class="col-1"></div>
+                        <div class="col pt-3">
+                            <span>
+                                <h6>Religion</h6>
+                            </span>
+                        </div>
+                        <div class="col-8">
+                            <div class="custom_select">
+                                <select name="staffReligion" id="" class="wide">
+                                    <option th:value="Islam">Islam</option>
+                                    <option th:value="Budha">Budha</option>
+                                    <option th:value="Christian">Christian</option>
+                                    <option th:value="Others">Others</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
 
-    //      @GetMapping("/staffUpdateRoom")
-    //      public String staffUpdateRoom(@RequestParam("roomNum") String roomNum, Model model) {
-    //        System.out.println("Room Number : " + roomNum);
-    //        try {
-    //          Connection connection = dataSource.getConnection();
-    //          String sql = "SELECT roomnum, roomtype, maxguest, roomrate, roomsize, roomstatus FROM public.room WHERE roomnum = ?";
-    //          final var statement = connection.prepareStatement(sql);
-    //          statement.setString(1, roomNum);
-    //          final var resultSet = statement.executeQuery();
-         
-    //          if (resultSet.next()) {
-    //             String roomType = resultSet.getString("roomType");
-    //             String maxGuest = resultSet.getString("maxGuest");
-    //             String roomRate = resultSet.getString("roomRate");
-    //             String roomSize = resultSet.getString("roomSize");
-    //             String roomStatus = resultSet.getString("roomStatus");
-         
-    //             room room = new room();
-    //             room.setRoomNum(roomNum);
-    //             room.setRoomType(roomType);
-    //             room.setMaxGuest(maxGuest);
-    //             room.setRoomRate(roomRate);
-    //             room.setRoomSize(roomSize);
-    //             room.setRoomStatus(roomStatus);
-    //             model.addAttribute("room", room);  
-   
-    //            connection.close();
-    //          }
-    //        } catch (Exception e) {
-    //          e.printStackTrace();
-    //        }
-         
-    //        return "staff/staffUpdateRoom";
-    //      }
-        
-         
-    //      @PostMapping("/staffUpdateRoom")
-    //     public String staffUpdateRoom(@ModelAttribute("staffUpdateRoom") room room){
-    //       System.out.println("pass here <<<<<<<");
-    //       try{
-    //         Connection connection = dataSource.getConnection();
-    //         String sql = "UPDATE room SET roomType=? ,maxGuest=?, roomRate=?, roomSize=?, roomStatus=? WHERE roomNum=?";
-    //         final var statement = connection.prepareStatement(sql);
-    //         String roomNum = room.getRoomNum();
-    //         String roomType = room.getRoomType();
-    //         String maxGuest = room.getMaxGuest();
-    //         String roomRate = room.getRoomRate();
-    //         String roomSize = room.getRoomSize();
-    //         String roomstatus = room.getRoomStatus();
+                    <div class="row m-3">
+                        <div class="col-1"></div>
+                        <div class="col pt-3">
+                            <span>
+                                <h6>Marital Status</h6>
+                            </span>
+                        </div>
+                        <div class="col-8">
+                            <div class="custom_select">
+                                <select name="staffMaritalStatus" id="" class="wide">
+                                    <option th:value="Single">Single</option>
+                                    <option th:value="Married">Married</option>
+                                    <option th:value="Divorce">Divorce</option>
+                                    <option th:value="Widowed">Widowed</option>
+                                </select>
+                            </div>
 
-    //         //debug
-    //         // System.out.println("pro price update : "+proprice);
-    //         // System.out.println("pro id update : "+proid);
+                        </div>
+                    </div>
 
-    //         statement.setString(1, roomType);
-    //         statement.setString(2, maxGuest );
-    //         statement.setString(3, roomRate);
-    //         statement.setString(4, roomSize);
-    //         statement.setString(5, roomstatus);
-    //         statement.setString(6, roomNum);
+                    <div class="row m-3">
+                        <div class="col-1"></div>
+                        <div class="col pt-3">
+                            <span>
+                                <h6>Role</h6>
+                            </span>
+                        </div>
+                        <div class="col-8">
+                            <div class="custom_select">
+                                <select name="staffRole" id="" class="wide">
+                                    <option th:value="Manager">Manager</option>
+                                    <option th:value="Office">Office</option>
+                                    <option th:value="Finance">Finance</option>
+                                </select>
+                            </div>
 
-    //         statement.executeUpdate();
-            
-    //         connection.close();
+                        </div>
+                    </div>
 
-    //       }catch(Exception e){
-    //         e.printStackTrace();
-    //       }
-    //         return "redirect:/staffRoomList";
-    //     }
-    // }
+                    <div class="row m-3">
+                        <div class="col-1"></div>
+                        <div class="col pt-3">
+                            <span>
+                                <h6>Phone Number</h6>
+                            </span>
+                        </div>
+                        <div class="col-8">
+                            <input type="text" name="staffPhoneNumber" id="" class="form-control" value="">
+                        </div>
+                    </div>
+
+                    <div class="row m-3">
+                        <div class="col-1"></div>
+                        <div class="col pt-3">
+                            <span>
+                                <h6>Manager IC Number</h6>
+                            </span>
+                        </div>
+                        <div class="col-8">
+                            <input type="text" name="managerICNumber" id="" class="form-control" value="">
+                        </div>
+                    </div>
+
+                    <div class="row m-3">
+                        <div class="col-1"></div>
+                        <div class="col pt-3">
+                            <span>
+                                <h6>Email</h6>
+                            </span>
+                        </div>
+                        <div class="col-8">
+                            <input type="text" name="staffEmail" id="" class="form-control" value="">
+                        </div>
+                    </div>
 
 
-    // /* delete controller
-    // @GetMapping("/deletestaff")
-    // public String deleteProfileCust(HttpSession session, Model model) {
-    //     String fullname = (String) session.getAttribute("roomType");
-    //     int userid = (int) session.getAttribute("roomNum");
+                    <div class="row m-5">
+                        <div class="col"></div>
+                        <div class="col-6 text-center">
+                          <!--  <a th:href="@{/managerStaffList}" >Add</a> -->
 
-    //     if (fullname != null) {
-    //         try (Connection connection = dataSource.getConnection()) {
+                            <button type="submit" class="btn btn-dark btn-md"
+                                style="border-radius: 3px 3px 3px 3px; height: auto; width:150px" onclick="success()">Add</button>
 
-    //             // Delete user record
-    //             final var deleteStaffStatement = connection.prepareStatement("DELETE FROM staffs WHERE roomNum=?");
-    //             deleteStaffStatement.setInt(1, userid);
-    //             int userRowsAffected = deleteStaffStatement.executeUpdate();
+                            <!-- <script>
+                                function success() {
+                                    alert("Successfully Added");
+                                }
+                            </script> -->
 
-    //             if (userRowsAffected > 0) {
-    //                 // Deletion successful
-    //                 // You can redirect to a success page or perform any other desired actions
-                    
-    //                 session.invalidate();
-    //                 connection.close();
-    //                 return "redirect:/";
-    //             } else {
-    //                 // Deletion failed
-    //                 connection.close();
-    //                  System.out.println("Delete Failed");
-    //                 return "admin/deletestaff";
-                   
-    //             }
-    //         } catch (SQLException e) {
-    //             // Handle any potential exceptions (e.g., log the error, display an error page)
-    //             e.printStackTrace();
+                            <a th:href="@{/managerStaffList}" class="btn btn-danger btn-md"
+                                style="border-radius: 3px 3px 3px 3px; height: auto; width:150px">Cancel</a>
+                        </div>
+                        <div class="col"></div>
+                    </div>
+            </form>
 
-    //             // Deletion failed
-    //             // You can redirect to an error page or perform any other desired actions
-    //             System.out.println("Error");
-    //         }
-    //     }
-    //     // Username is null or deletion failed, handle accordingly (e.g., redirect to an
-    //     // error page)
-    //     return "staff/stafforder";
-    // }*/
-    }
+                </div>
+
+
+                <div class="col">
+
+                </div>
+            </div>
+
+            <div class="container mt-5">
+                &nbsp;
+            </div>
+
+
+            <!-- <div class="row card card-body align-items-center"> -->
+
+
+
+        </div>
+        <!-- </div> -->
+
+    </main>
+
+<footer class="revealed">
+        <div class="footer_bg">
+            <div class="gradient_over"></div>
+
+        </div>
+        <div class="container">
+            <div class="row move_content">
+                <div class="col-lg-4 col-md-12">
+                    <h5>Contacts</h5>
+                    <ul>
+                        <li>Jalan Telok Gong / Pengkalan Balak, Kampung Sungai Tuang<br>78300 Masjid Tanah,
+                            Melaka<br><br></li>
+                        <li><strong><a th:href="@{#0}">dchaletombakbiru@gmail.com</a></strong></li>
+                        <li><strong><a th:href="@{#0}">016-2115359/012-2431337</a></strong></li>
+                    </ul>
+                    <div class="social">
+                        <ul>
+                            <li><a th:href="@{#0}"><i class="bi bi-instagram"></i></a></li>
+                            <li><a th:href="@{#0}"><i class="bi bi-whatsapp"></i></a></li>
+                            <li><a th:href="@{#0}"><i class="bi bi-facebook"></i></a></li>
+                            <li><a th:href="@{#0}"><i class="bi bi-twitter"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/container-->
+        <div class="copy">
+            <div class="container">
+                © Ombak Biru Chalet - by <a th:href="@{#}">Ocean Blue Lemond</a>
+            </div>
+        </div>
+    </footer>
+    <!-- /footer -->
+
+    <div class="progress-wrap">
+        <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+            <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
+        </svg>
+    </div>
+    <!-- /back to top -->
+
+<!-- COMMON SCRIPTS -->
+    <script th:src="@{stylesheets/js/common_scripts.js}"></script>
+    <script th:src="@{stylesheets/js/common_functions.js}"></script>
+    <script th:src="@{stylesheets/js/datepicker_inline.js}"></script>
+    <script th:src="@{stylesheets/phpmailer/validate.js}"></script>
+
+    <!-- SPECIFIC SCRIPTS -->
+    <script th:src="@{stylesheets/js/jquery.flexslider.min.js}"></script>
+    <script th:src="@{stylesheets/js/slider_func.js}"></script>
+</body>
+
+</html>
