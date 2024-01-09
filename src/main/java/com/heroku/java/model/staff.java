@@ -13,6 +13,8 @@ public class staff {
     private String staffRole;
     private String staffStatus;
     private String managerICNumber;
+	private String staffEmail;
+    private String staffPassword;
 
     public String getStaffICNumber() {
 		return staffICNumber;
@@ -79,5 +81,17 @@ public class staff {
 	}
 	public void setManagerICNumber(String managerICNumber) {
 		this.managerICNumber = managerICNumber;
+	}
+	public String getStaffEmail() {
+		return staffEmail;
+	}
+	public void setStaffEmail(String staffEmail) {
+		this.staffEmail = staffEmail;
+	}
+	public String getStaffPassword() {
+		return staffPassword;
+	}
+	public void setStaffPassword(String staffPassword) {
+		this.staffPassword = staffPassword;
 	}
 } 
