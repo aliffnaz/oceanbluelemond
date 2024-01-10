@@ -13,8 +13,12 @@ public class staff {
     private String staffRole;
     private String staffStatus;
     private String managerICNumber;
-	private String staffEmail;
+    private String staffEmail;
     private String staffPassword;
+
+    public staff(){
+	    
+    }
 
     public String getStaffICNumber() {
 		return staffICNumber;
