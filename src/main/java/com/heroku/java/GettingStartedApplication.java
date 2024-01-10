@@ -159,24 +159,9 @@ public String managerAddStaff() {
     return "manager/managerAddStaff";
 }
 
-@GetMapping("/managerAddRoomService")
-public String managerAddRoomService() {
-    return "manager/managerAddRoomService";
-}
-
-@GetMapping("/managerRoomServiceList")
-public String managerRoomServiceList() {
-    return "manager/managerRoomServiceList";
-}
-
 @GetMapping("/managerGuestList")
 public String managerGuestList() {
     return "manager/managerGuestList";
-}
-
-@GetMapping("/managerUpdateRoomService")
-public String managerUpdateRoomService() {
-    return "manager/managerUpdateRoomService";
 }
 
 @GetMapping("/managerUpdateStatus")
