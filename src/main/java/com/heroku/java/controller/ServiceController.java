@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.heroku.java.model.eventService;
 import com.heroku.java.model.roomService;
 import com.heroku.java.model.service;
+import com.heroku.java.model.room;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -47,10 +48,10 @@ public class ServiceController {
             String sql = "INSERT INTO service(serviceName, serviceType, servicePrice, serviceStatus) VALUES(?, ?, ?, ?)";
             final var statement = connection.prepareStatement(sql);
 
-            String serviceName=getServiceName();
-            String serviceType=getServiceType();
-            String servicePrice=getServicePrice();
-            String serviceStatus=getServiceStatus();
+            String serviceName=service.getServiceName();
+            String serviceType=service.getServiceType();
+            String servicePrice=service.getServicePrice();
+            String serviceStatus=service.getServiceStatus();
             
             statement.setString(1, serviceName);
             statement.setString(2, serviceType);
