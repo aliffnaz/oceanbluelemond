@@ -45,47 +45,53 @@ public class ServiceController {
 
         try {
             Connection connection = dataSource.getConnection();
-            String sql = "INSERT INTO service(serviceName, serviceType, servicePrice, serviceStatus) VALUES(?, ?, ?, ?)";
+            String sql = "INSERT INTO service(serviceID, serviceName, serviceType, servicePrice, serviceStatus) VALUES(?, ?, ?, ?, ?)";
             final var statement = connection.prepareStatement(sql);
 
+            String serviceID=service.getServiceID();
             String serviceName=service.getServiceName();
             String serviceType=service.getServiceType();
             String servicePrice=service.getServicePrice();
             String serviceStatus=service.getServiceStatus();
+
+            if (serviceType.equalsIgnoreCase("roomService"))
+            serviceType = "Room Service";
+            else 
+            serviceType = "Event Service";
+
             
-            statement.setString(1, serviceName);
-            statement.setString(2, serviceType);
-            statement.setString(3, servicePrice);
-            statement.setString(4, serviceStatus);
+            statement.setString(1, serviceID);
+            statement.setString(2, serviceName);
+            statement.setString(3, serviceType);
+            statement.setString(4, servicePrice);
+            statement.setString(5, serviceStatus);
 
             statement.executeUpdate();
 
-            // Get the generated serviceID
-            var generatedKeys = statement.getGeneratedKeys();
-            if (generatedKeys.next()) {
-                String generatedServiceID = generatedKeys.getString(1);
+            // Get id from database for sql 2 from sql 1
+            String sql1 = "SELECT * FROM service where serviceid=?";
+            final var stmt = connection.prepareStatement(sql1);
+            stmt.setString(1, serviceID);
+            final var resultSet = stmt.executeQuery();
 
                 // Update fields specific to "roomService" or "eventService" based on the service type
-                if ("roomService".equalsIgnoreCase(serviceType)) {
-                    serviceType = "Room Service";
-                    String roomServiceSql = "INSERT INTO roomServices(serviceID, balance) VALUES (?, ?)";
+                if (serviceType.equalsIgnoreCase("Room Service")) {
+                    String roomServiceSql = "INSERT INTO roomService(serviceID, balance) VALUES (?, ?)";
                     final var roomServiceStatement = connection.prepareStatement(roomServiceSql);
-                    roomServiceStatement.setString(1, generatedServiceID);
+                    roomServiceStatement.setString(1, serviceID);
                     roomServiceStatement.setString(2, roomService.getBalance());
 
                     roomServiceStatement.executeUpdate();
-                } else if ("eventService".equalsIgnoreCase(serviceType)) {
-                    serviceType = "Event Service";
-                    String eventServiceSql = "INSERT INTO eventServices(serviceID, eventCapacity) VALUES (?, ?)";
+                } else if (serviceType.equalsIgnoreCase("Event Service")) {
+                    String eventServiceSql = "INSERT INTO eventService(serviceID, eventCapacity) VALUES (?, ?)";
                     final var eventServiceStatement = connection.prepareStatement(eventServiceSql);
-                    eventServiceStatement.setString(1, generatedServiceID);
+                    eventServiceStatement.setString(1, serviceID);
                     eventServiceStatement.setString(2, eventService.getEventCapacity());
 
                     eventServiceStatement.executeUpdate();
                 }
 
                 model.addAttribute("success", true);
-            }
 
             connection.close();
 
