@@ -116,14 +116,13 @@
                 <div class="col-md card card-body py-5">
                     <div class="row m-5">
                         <div class="col-2 text-center">
-                            <a th:href="@{/managerRoomServiceList}">
+                            <a th:href="@{/managerServiceList}">
                                 <div class="bi bi-arrow-left-circle" style="font-size: 50px;"></div>
                             </a>
                         </div>
                         <div class="col-md-8 text-center pt-3">
                             <div class="">
-
-                                <h1>Room Service Information</h1>
+                                <h1>Service Information</h1>
                             </div>
                         </div>
                         <div class="col-2">
@@ -131,7 +130,7 @@
                         </div>
                     </div>
 
-                    <form th:action="@{/managerAddRoomService}" modelAttribute="managerAddRoomService" th:object="(${managerAddRoomService})"
+                    <form th:action="@{/managerAddService}" modelAttribute="managerAddService" th:object="(${managerAddService})">
                     <div class="row m-3">
                         <div class="col-1"></div>
                         <div class="col pt-3">
@@ -162,7 +161,34 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="serviceType" id="" class="form-control" placeholder="Kitchen">
+                            <div class="custom_select">
+                            <select name="serviceType" id="serviceType" class="wide">
+                                <option th:value="roomService" value="roomService">Room Service</option>
+                                <option th:value="eventService" value="eventService">Event Service</option>
+                            </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row m-3" id="roomServiceField" style="display: none;">
+                        <div class="col-1"></div>
+                        <div class="col pt-3">
+                            <span>
+                                <h6>Balance</h6>
+                            </span>
+                        </div>
+                        <div class="col-8">
+                            <input type="text" name="balance" id="" class="form-control" placeholder="0">
+                        </div>
+                    </div>
+                    <div class="row m-3" id="eventServiceField" style="display: none;">
+                        <div class="col-1"></div>
+                        <div class="col pt-3">
+                            <span>
+                                <h6>Event Capacity</h6>
+                            </span>
+                        </div>
+                        <div class="col-8">
+                            <input type="text" name="eventCapacity" id="" class="form-control" placeholder="0">
                         </div>
                     </div>
                     <div class="row m-3">
@@ -178,19 +204,20 @@
                     </div>
                     <div class="row m-5">
                         <div class="col text-center">
-                            <a th:href="@{/managerRoomServiceList}" class="btn btn-dark btn-lg"
-                                style="border-radius: 3px 3px 3px 3px; height: auto; width:150px" onclick="success()">Add</a>
-
-                            <script>
+                            <!-- <a th:href="@{/managerRoomServiceList}" class="btn btn-dark btn-lg"
+                                style="border-radius: 3px 3px 3px 3px; height: auto; width:150px" onclick="success()">Add</a> -->
+                                <button type="submit" class="btn btn-dark btn-md" style="border-radius: 3px 3px 3px 3px; height: auto; width:150px" onclick="success()">Add</button>
+                            <!-- <script>
                                 function success() {
                                     alert("Successfully Added");
                                 }
-                            </script>
+                            </script> -->
                             &nbsp;
-                            <a th:href="@{/managerRoomServiceList}" class="btn btn-danger btn-lg"
+                            <a th:href="@{/managerServiceList}" class="btn btn-danger btn-lg"
                                 style="border-radius: 3px 3px 3px 3px; height: auto; width:150px">Cancel</a>
                         </div>
                     </div>
+                </form>
                 </div>
                 <div class="col">
                 </div>
@@ -242,6 +269,17 @@
         </svg>
     </div>
     <!-- /back to top -->
+
+    <script> // Show/hide additional fields based on the selected product type
+        var serviceTypeField = document.getElementById('serviceType');
+        serviceTypeField.addEventListener('change', function () {
+          var roomServiceField = document.getElementById('roomServiceField');
+          var eventServiceField = document.getElementById('eventServiceField');
+          roomServiceField.style.display = (serviceTypeField.value === 'roomService') ? 'block' : 'none';
+          eventServiceField.style.display = (serviceTypeField.value === 'eventService') ? 'block' : 'none';
+        });
+    
+      </script>
 
 <!-- COMMON SCRIPTS -->
     <script th:src="@{stylesheets/js/common_scripts.js}"></script>
