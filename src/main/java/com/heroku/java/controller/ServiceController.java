@@ -54,10 +54,10 @@ public class ServiceController {
             String servicePrice=service.getServicePrice();
             String serviceStatus=service.getServiceStatus();
 
-            if (serviceType.equalsIgnoreCase("roomService"))
-            serviceType = "Room Service";
-            else 
-            serviceType = "Event Service";
+            if (serviceType.equalsIgnoreCase("roomService")){
+            serviceType = "Room Service";}
+            else {
+            serviceType = "Event Service";}
 
             
             statement.setString(1, serviceID);
@@ -90,17 +90,16 @@ public class ServiceController {
 
                     eventServiceStatement.executeUpdate();
                 }
-
-                model.addAttribute("success", true);
+                //model.addAttribute("success", true);
 
             connection.close();
 
         } catch (SQLException e) {
             e.printStackTrace();
-            return "redirect:manager/managerAddService?success=false";
+            return "redirect:/managerAddService?success=false";
         }
 
-        return "redirect:manager/managerServiceList?success=true";
+        return "redirect:/managerServiceList?success=true";
     }
 
     @GetMapping("/managerServiceList")
