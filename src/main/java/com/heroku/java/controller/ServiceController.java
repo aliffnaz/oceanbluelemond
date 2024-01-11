@@ -96,7 +96,8 @@ public class ServiceController {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            return "redirect:/managerAddService?success=false";
+            //return "redirect:/managerAddService?success=false";
+            return "redirect:/index";
         }
 
         return "redirect:/managerServiceList?success=true";
