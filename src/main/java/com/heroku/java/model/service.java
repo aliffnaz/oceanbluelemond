@@ -8,6 +8,10 @@ public class service {
     private String servicePrice;
     private String serviceStatus;
 
+    public service(){
+	    
+    }
+
     public service(String serviceID, String serviceName, String serviceType, String servicePrice, String serviceStatus){
         this.serviceID = serviceID;
         this.serviceName = serviceName;
