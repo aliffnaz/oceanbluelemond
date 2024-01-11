@@ -103,135 +103,135 @@ public class ServiceController {
         return "redirect:/managerServiceList?success=true";
     }
 
-    @GetMapping("/managerServiceList")
-    public String managerServiceList(Model model) {
-        List<service> services = new ArrayList<>();
+//     @GetMapping("/managerServiceList")
+//     public String managerServiceList(Model model) {
+//         List<service> services = new ArrayList<>();
 
-        try {
-            Connection connection = dataSource.getConnection();
-            String sql = "SELECT * FROM service ORDER BY serviceName";
-            final var statement = connection.createStatement();
-            final var resultSet = statement.executeQuery(sql);
+//         try {
+//             Connection connection = dataSource.getConnection();
+//             String sql = "SELECT * FROM service ORDER BY serviceName";
+//             final var statement = connection.createStatement();
+//             final var resultSet = statement.executeQuery(sql);
 
-            while (resultSet.next()) {
-                String serviceID = resultSet.getString("serviceID");
-                String serviceName = resultSet.getString("serviceName");
-                String serviceType = resultSet.getString("serviceType");
-                String servicePrice = resultSet.getString("servicePrice");
+//             while (resultSet.next()) {
+//                 String serviceID = resultSet.getString("serviceID");
+//                 String serviceName = resultSet.getString("serviceName");
+//                 String serviceType = resultSet.getString("serviceType");
+//                 String servicePrice = resultSet.getString("servicePrice");
 
-                service service;
-                if ("roomService".equalsIgnoreCase(serviceType)) {
-                    String roomServiceSql = "SELECT * FROM roomServices WHERE serviceID=?";
-                    final var roomServiceStatement = connection.prepareStatement(roomServiceSql);
-                    roomServiceStatement.setString(1, serviceID);
-                    final var roomServiceResultSet = roomServiceStatement.executeQuery();
-                    if (roomServiceResultSet.next()) {
-                        String balance = roomServiceResultSet.getString("balance");
-                        service = new roomService(serviceID, serviceName, serviceType, servicePrice, null, balance);
-                    } else {
-                        service = new service(serviceID, serviceName, serviceType, servicePrice, null);
-                    }
-                } else if ("eventService".equalsIgnoreCase(serviceType)) {
-                    String eventServiceSql = "SELECT * FROM eventServices WHERE serviceID=?";
-                    final var eventServiceStatement = connection.prepareStatement(eventServiceSql);
-                    eventServiceStatement.setString(1, serviceID);
-                    final var eventServiceResultSet = eventServiceStatement.executeQuery();
-                    if (eventServiceResultSet.next()) {
-                        String eventCapacity = eventServiceResultSet.getString("eventCapacity");
-                        service = new eventService(serviceID, serviceName, serviceType, servicePrice, null, eventCapacity);
-                    } else {
-                        service = new service(serviceID, serviceName, serviceType, servicePrice, null);
-                    }
-                } else {
-                    service = new service(serviceID, serviceName, serviceType, servicePrice, null);
-                }
+//                 service service;
+//                 if ("roomService".equalsIgnoreCase(serviceType)) {
+//                     String roomServiceSql = "SELECT * FROM roomServices WHERE serviceID=?";
+//                     final var roomServiceStatement = connection.prepareStatement(roomServiceSql);
+//                     roomServiceStatement.setString(1, serviceID);
+//                     final var roomServiceResultSet = roomServiceStatement.executeQuery();
+//                     if (roomServiceResultSet.next()) {
+//                         String balance = roomServiceResultSet.getString("balance");
+//                         service = new roomService(serviceID, serviceName, serviceType, servicePrice, null, balance);
+//                     } else {
+//                         service = new service(serviceID, serviceName, serviceType, servicePrice, null);
+//                     }
+//                 } else if ("eventService".equalsIgnoreCase(serviceType)) {
+//                     String eventServiceSql = "SELECT * FROM eventServices WHERE serviceID=?";
+//                     final var eventServiceStatement = connection.prepareStatement(eventServiceSql);
+//                     eventServiceStatement.setString(1, serviceID);
+//                     final var eventServiceResultSet = eventServiceStatement.executeQuery();
+//                     if (eventServiceResultSet.next()) {
+//                         String eventCapacity = eventServiceResultSet.getString("eventCapacity");
+//                         service = new eventService(serviceID, serviceName, serviceType, servicePrice, null, eventCapacity);
+//                     } else {
+//                         service = new service(serviceID, serviceName, serviceType, servicePrice, null);
+//                     }
+//                 } else {
+//                     service = new service(serviceID, serviceName, serviceType, servicePrice, null);
+//                 }
 
-                services.add(service);
-            }
+//                 services.add(service);
+//             }
 
-            model.addAttribute("services", services);
+//             model.addAttribute("services", services);
 
-            connection.close();
+//             connection.close();
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+//         } catch (SQLException e) {
+//             e.printStackTrace();
+//         }
 
-        return "admin/servicelist";
-    }
+//         return "admin/servicelist";
+//     }
 
-    @GetMapping("/servicedetail")
-    public String servicedetail(@RequestParam("serviceID") String serviceID, Model model) {
-        try {
-            Connection connection = dataSource.getConnection();
-            String sql = "SELECT * FROM service WHERE serviceID = ?";
-            final var statement = connection.prepareStatement(sql);
-            statement.setString(1, serviceID);
-            final var resultSet = statement.executeQuery();
+//     @GetMapping("/servicedetail")
+//     public String servicedetail(@RequestParam("serviceID") String serviceID, Model model) {
+//         try {
+//             Connection connection = dataSource.getConnection();
+//             String sql = "SELECT * FROM service WHERE serviceID = ?";
+//             final var statement = connection.prepareStatement(sql);
+//             statement.setString(1, serviceID);
+//             final var resultSet = statement.executeQuery();
 
-            if (resultSet.next()) {
-                String serviceName = resultSet.getString("serviceName");
-                String serviceType = resultSet.getString("serviceType");
-                String servicePrice = resultSet.getString("servicePrice");
+//             if (resultSet.next()) {
+//                 String serviceName = resultSet.getString("serviceName");
+//                 String serviceType = resultSet.getString("serviceType");
+//                 String servicePrice = resultSet.getString("servicePrice");
 
-                service service;
-                if (serviceType.equalsIgnoreCase("roomService")) {
-                    String balance = resultSet.getString("balance");
-                    service = new roomService(serviceID, serviceName, serviceType, servicePrice, null, balance);
-                } else if (serviceType.equalsIgnoreCase("eventService")) {
-                    String eventCapacity = resultSet.getString("eventCapacity");
-                    service = new eventService(serviceID, serviceName, serviceType, servicePrice, null, eventCapacity);
-                } else {
-                    // Handle the case when serviceType is neither "roomService" nor "eventService"
-                    service = new service(serviceID, serviceName, serviceType, servicePrice, null);
-                }
+//                 service service;
+//                 if (serviceType.equalsIgnoreCase("roomService")) {
+//                     String balance = resultSet.getString("balance");
+//                     service = new roomService(serviceID, serviceName, serviceType, servicePrice, null, balance);
+//                 } else if (serviceType.equalsIgnoreCase("eventService")) {
+//                     String eventCapacity = resultSet.getString("eventCapacity");
+//                     service = new eventService(serviceID, serviceName, serviceType, servicePrice, null, eventCapacity);
+//                 } else {
+//                     // Handle the case when serviceType is neither "roomService" nor "eventService"
+//                     service = new service(serviceID, serviceName, serviceType, servicePrice, null);
+//                 }
 
-                model.addAttribute("service", service); // Use "service" as the model attribute name
+//                 model.addAttribute("service", service); // Use "service" as the model attribute name
 
-                connection.close();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+//                 connection.close();
+//             }
+//         } catch (SQLException e) {
+//             e.printStackTrace();
+//         }
 
-        return "admin/servicedetail";
-    }
+//         return "admin/servicedetail";
+//     }
 
-    @PostMapping("/updateservice")
-    public String UpdateService(@ModelAttribute("service") service service, roomService roomService, eventService eventService) {
-        try {
-            Connection connection = dataSource.getConnection();
-            String sql = "UPDATE service SET serviceName=?, serviceType=?, servicePrice=? WHERE serviceID=?";
-            final var statement = connection.prepareStatement(sql);
-            statement.setString(1, service.getServiceName());
-            statement.setString(2, service.getServiceType());
-            statement.setString(3, service.getServicePrice());
-            statement.setString(4, service.getServiceID());
+//     @PostMapping("/updateservice")
+//     public String UpdateService(@ModelAttribute("service") service service, roomService roomService, eventService eventService) {
+//         try {
+//             Connection connection = dataSource.getConnection();
+//             String sql = "UPDATE service SET serviceName=?, serviceType=?, servicePrice=? WHERE serviceID=?";
+//             final var statement = connection.prepareStatement(sql);
+//             statement.setString(1, service.getServiceName());
+//             statement.setString(2, service.getServiceType());
+//             statement.setString(3, service.getServicePrice());
+//             statement.setString(4, service.getServiceID());
 
-            statement.executeUpdate();
+//             statement.executeUpdate();
 
-            // Update fields specific to "roomService" or "eventService" based on the service type
-            if ("roomService".equalsIgnoreCase(service.getServiceType())) {
-                String roomServiceSql = "UPDATE roomServices SET balance=? WHERE serviceID=?";
-                final var roomServiceStatement = connection.prepareStatement(roomServiceSql);
-                roomServiceStatement.setString(1, roomService.getBalance());
-                roomServiceStatement.setString(2, service.getServiceID());
+//             // Update fields specific to "roomService" or "eventService" based on the service type
+//             if ("roomService".equalsIgnoreCase(service.getServiceType())) {
+//                 String roomServiceSql = "UPDATE roomServices SET balance=? WHERE serviceID=?";
+//                 final var roomServiceStatement = connection.prepareStatement(roomServiceSql);
+//                 roomServiceStatement.setString(1, roomService.getBalance());
+//                 roomServiceStatement.setString(2, service.getServiceID());
 
-                roomServiceStatement.executeUpdate();
-            } else if ("eventService".equalsIgnoreCase(service.getServiceType())) {
-                String eventServiceSql = "UPDATE eventServices SET eventCapacity=? WHERE serviceID=?";
-                final var eventServiceStatement = connection.prepareStatement(eventServiceSql);
-                eventServiceStatement.setString(1, eventService.getEventCapacity());
-                eventServiceStatement.setString(2, service.getServiceID());
+//                 roomServiceStatement.executeUpdate();
+//             } else if ("eventService".equalsIgnoreCase(service.getServiceType())) {
+//                 String eventServiceSql = "UPDATE eventServices SET eventCapacity=? WHERE serviceID=?";
+//                 final var eventServiceStatement = connection.prepareStatement(eventServiceSql);
+//                 eventServiceStatement.setString(1, eventService.getEventCapacity());
+//                 eventServiceStatement.setString(2, service.getServiceID());
 
-                eventServiceStatement.executeUpdate();
-            }
+//                 eventServiceStatement.executeUpdate();
+//             }
 
-            connection.close();
+//             connection.close();
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return "redirect:/staffmenu?success=true";
-    }
-}
+//         } catch (SQLException e) {
+//             e.printStackTrace();
+//         }
+//         return "redirect:/staffmenu?success=true";
+//     }
+// }
