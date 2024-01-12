@@ -33,6 +33,11 @@ public class GettingStartedApplication {
         return "index_logout";
     }
 
+    @GetMapping("/logoutViewRoom")
+    public String logoutViewRoom() {
+        return "logoutViewRoom";
+    }
+
     @GetMapping("/index")
     public String index1() {
         return "index";
