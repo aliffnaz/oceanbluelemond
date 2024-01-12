@@ -165,7 +165,11 @@ public class ServiceController {
     public String managerViewService(@RequestParam("serviceID") String serviceID, Model model) {
         try {
             Connection connection = dataSource.getConnection();
-            String sql = "SELECT  FROM service WHERE serviceid = ?";
+            String sql = "SELECT service.serviceid, service.servicename, service.servicetype, service.serviceprice, service.servicestatus, roomservice.balance, eventservice.eventcapacity "
+            + "FROM service "
+            + "LEFT JOIN roomservice ON service.serviceid = roomservice.serviceid "
+            + "LEFT JOIN eventservice ON eventservice.serviceid = service.serviceid "
+            + "WHERE serviceid = ?";
             final var statement = connection.prepareStatement(sql);
             statement.setString(1, serviceID);
             final var resultSet = statement.executeQuery();
