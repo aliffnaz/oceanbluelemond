@@ -113,15 +113,16 @@
                                 <th class="text-center">Service Name</th>
                                 <th class="text-center">Service Type</th>
                                 <th class="text-center">Service Price</th>
+                                <th class="text-center">Service Status</th>
                                 <th class="text-center" colspan="2">Action</th>
                             </thead>
                             <tbody>
                                 <tr th:each="service : ${services}">
-                                    <td class="text-center" th:text="${service.serviceID}">S01</td>
-                                    <td th:text="${service.serviceName}">Barbecue Set</td>
-                                    <td th:text="${service.serviceType}">Kitchen</td>
-                                    <td th:text="${service.servicePrice}">RM15.00</td>
-                                    <td th:text="${service.serviceStatus}">RM15.00</td>
+                                    <td class="text-center" th:text="${service.serviceID}"></td>
+                                    <td th:text="${service.serviceName}"></td>
+                                    <td th:text="${service.serviceType}"></td>
+                                    <td th:text="${service.servicePrice}"></td>
+                                    <td th:text="${service.serviceStatus}"></td>
                                     <td class="text-center">
                                         <a th:href="@{/managerViewService?serviceID=}+${service.serviceID}"><i class="bi bi-eye-fill"
                                                 style="font-size: 20px;"></i></a>
