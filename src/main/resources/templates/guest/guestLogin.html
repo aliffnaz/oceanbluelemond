@@ -122,7 +122,7 @@
                             </div>
                         </div>
                     </div>
-                <form method="post" th:action="@{/guestLogin}" modelAttribute="guestLogin" th:object="@{$guestLogin}" encType="multipart/form-data">
+                <form method="post" th:action="@{/guestLogin}" modelAttribute="guestLogin" th:object="${guestLogin}" encType="multipart/form-data">
                     <div class="row m-3">
                         <div class="col-1"></div>
                         <div class="col pt-3">
