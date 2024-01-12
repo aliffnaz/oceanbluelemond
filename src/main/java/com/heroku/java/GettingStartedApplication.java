@@ -39,7 +39,7 @@ public class GettingStartedApplication {
     }
 
     @GetMapping("/index")
-    public String index1() {
+    public String index1(@RequestParam(name = "success", required = false) Boolean success) {
         return "index";
     }
 
