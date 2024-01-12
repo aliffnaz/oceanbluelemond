@@ -197,7 +197,7 @@
                         <div class="col-1"></div>
                         <div class="col pt-3">
                             <span>
-                                <h6>Product Type:</h6>
+                                <label for="protype">Product Type:</label>
                             </span>
                         </div>
                         <div class="col-8">
@@ -314,8 +314,8 @@
     <script> // Show/hide additional fields based on the selected product type
         var serviceTypeField = document.getElementById('serviceType');
         serviceTypeField.addEventListener('change', function () {
-          var roomServiceField = document.getElementById('roomServiceField');
-          var eventServiceField = document.getElementById('eventServiceField');
+          var roomServiceField = document.getElementsByClassName('roomServiceField');
+          var eventServiceField = document.getElementsByClassName('eventServiceField');
           roomServiceField.style.display = (serviceTypeField.value === 'roomService') ? 'block' : 'none';
           eventServiceField.style.display = (serviceTypeField.value === 'eventService') ? 'block' : 'none';
         });
