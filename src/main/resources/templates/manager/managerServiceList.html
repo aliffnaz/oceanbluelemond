@@ -122,78 +122,22 @@
                                     <td th:text="${service.serviceType}">Kitchen</td>
                                     <td th:text="${service.servicePrice}">RM15.00</td>
                                     <td class="text-center">
-                                        <a th:href="@{/managerUpdateRoomService?=}+${service.serviceID}"><i class="bi bi-eye-fill"
+                                        <a th:href="@{/managerViewService?serviceID=}+${service.serviceID}"><i class="bi bi-eye-fill"
                                                 style="font-size: 20px;"></i></a>
 
                                     </td>
-                                    <td class="text-center"><a href=" " onclick="success()"><i class="bi bi-trash3-fill"
+                                    <!-- <td class="text-center"><a href=" " onclick="success()"><i class="bi bi-trash3-fill"
                                                 style="font-size: 20px;"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">S02</td>
-                                    <td>Dapur & Gas (SET A)</td>
-                                    <td>Kitchen</td>
-                                    <td>RM30.00</td>
-                                    <td class="text-center">
-                                        <a th:href="@{/managerUpdateRoomService}"><i class="bi bi-eye-fill"
-                                                style="font-size: 20px;"></i></a>
-
-                                    </td>
-                                    <td class="text-center"><a href=" " onclick="success()"><i class="bi bi-trash3-fill"
-                                                style="font-size: 20px;"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">S03</td>
-                                    <td>Dapur & Gas (SET B)</td>
-                                    <td>Kitchen</td>
-                                    <td>RM50.00</td>
-                                    <td class="text-center">
-                                        <a th:href="@{/managerUpdateRoomService}"><i class="bi bi-eye-fill"
-                                                style="font-size: 20px;"></i></a>
-
-                                    </td>
-                                    <td class="text-center"><a href=" " onclick="success()"><i class="bi bi-trash3-fill"
-                                                style="font-size: 20px;"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">S04</td>
-                                    <td>Toto (SET A)</td>
-                                    <td>Bed</td>
-                                    <td>RM15.00</td>
-                                    <td class="text-center">
-                                        <a th:href="@{/managerUpdateRoomService}"><i class="bi bi-eye-fill"
-                                                style="font-size: 20px;"></i></a>
-
-                                    </td>
-                                    <td class="text-center"><a href=" " onclick="success()"><i class="bi bi-trash3-fill"
-                                                style="font-size: 20px;"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">S05</td>
-                                    <td>Toto (SET B)</td>
-                                    <td>Bed</td>
-                                    <td>RM10.00</td>
-                                    <td class="text-center">
-                                        <a th:href="@{/managerUpdateRoomService}"><i class="bi bi-eye-fill"
-                                                style="font-size: 20px;"></i></a>
-
-                                    </td>
-                                    <td class="text-center"><a href=" " onclick="success()"><i class="bi bi-trash3-fill"
-                                                style="font-size: 20px;"></i></a>
-                                    </td>
+                                    </td> -->
                                 </tr>
                             </tbody>
                         </table>
 
-                        <script>
+                        <!-- <script>
                             function success() {
                                 alert("Successfully Deleted");
                             }
-                        </script>
+                        </script> -->
                     </div>
                     <div class="row">
                         <div class="col"></div>

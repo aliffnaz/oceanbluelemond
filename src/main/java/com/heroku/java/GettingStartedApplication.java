@@ -70,16 +70,6 @@ public class GettingStartedApplication {
         return "guest/guestRoomReservation";
     }
 
-    @GetMapping("/guestRegister")
-    public String guestRegister() {
-        return "guest/guestRegister";
-    }
-
-    @GetMapping("/guestUpdate")
-    public String guestUpdate() {
-        return "guest/guestUpdate";
-    }
-
     @GetMapping("/guestViewRoomReservation")
     public String guestViewRoomReservation() {
         return "guest/guestViewRoomReservation";
@@ -159,19 +149,9 @@ public String managerAddStaff() {
     return "manager/managerAddStaff";
 }
 
-@GetMapping("/managerGuestList")
-public String managerGuestList() {
-    return "manager/managerGuestList";
-}
-
 @GetMapping("/managerUpdateStatus")
 public String managerUpdateStatus() {
     return "manager/managerUpdateStatus";
-}
-    
-@GetMapping("/managerViewGuest")
-public String managerViewGuest() {
-    return "manager/managerViewGuest";
 }
 
 @GetMapping("/managerGenerateReport")
