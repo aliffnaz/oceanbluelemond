@@ -160,43 +160,43 @@ public class ServiceController {
         return "manager/managerServiceList";
     }
 
-//     @GetMapping("/servicedetail")
-//     public String servicedetail(@RequestParam("serviceID") String serviceID, Model model) {
-//         try {
-//             Connection connection = dataSource.getConnection();
-//             String sql = "SELECT * FROM service WHERE serviceID = ?";
-//             final var statement = connection.prepareStatement(sql);
-//             statement.setString(1, serviceID);
-//             final var resultSet = statement.executeQuery();
+    @GetMapping("/managerViewService")
+    public String managerViewService(@RequestParam("serviceID") String serviceID, Model model) {
+        try {
+            Connection connection = dataSource.getConnection();
+            String sql = "SELECT * FROM service WHERE serviceID = ?";
+            final var statement = connection.prepareStatement(sql);
+            statement.setString(1, serviceID);
+            final var resultSet = statement.executeQuery();
 
-//             if (resultSet.next()) {
-//                 String serviceName = resultSet.getString("serviceName");
-//                 String serviceType = resultSet.getString("serviceType");
-//                 String servicePrice = resultSet.getString("servicePrice");
+            if (resultSet.next()) {
+                String serviceName = resultSet.getString("serviceName");
+                String serviceType = resultSet.getString("serviceType");
+                String servicePrice = resultSet.getString("servicePrice");
 
-//                 service service;
-//                 if (serviceType.equalsIgnoreCase("roomService")) {
-//                     String balance = resultSet.getString("balance");
-//                     service = new roomService(serviceID, serviceName, serviceType, servicePrice, null, balance);
-//                 } else if (serviceType.equalsIgnoreCase("eventService")) {
-//                     String eventCapacity = resultSet.getString("eventCapacity");
-//                     service = new eventService(serviceID, serviceName, serviceType, servicePrice, null, eventCapacity);
-//                 } else {
-//                     // Handle the case when serviceType is neither "roomService" nor "eventService"
-//                     service = new service(serviceID, serviceName, serviceType, servicePrice, null);
-//                 }
+                service service;
+                if (serviceType.equalsIgnoreCase("roomService")) {
+                    String balance = resultSet.getString("balance");
+                    service = new roomService(serviceID, serviceName, serviceType, servicePrice, null, balance);
+                } else if (serviceType.equalsIgnoreCase("eventService")) {
+                    String eventCapacity = resultSet.getString("eventCapacity");
+                    service = new eventService(serviceID, serviceName, serviceType, servicePrice, null, eventCapacity);
+                } else {
+                    // Handle the case when serviceType is neither "roomService" nor "eventService"
+                    service = new service(serviceID, serviceName, serviceType, servicePrice, null);
+                }
 
-//                 model.addAttribute("service", service); // Use "service" as the model attribute name
+                model.addAttribute("service", service); // Use "service" as the model attribute name
 
-//                 connection.close();
-//             }
-//         } catch (SQLException e) {
-//             e.printStackTrace();
-//         }
+                connection.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
-//         return "admin/servicedetail";
-//     }
-
+        return "manager/managerViewService";
+    }
+    
 //     @PostMapping("/updateservice")
 //     public String UpdateService(@ModelAttribute("service") service service, roomService roomService, eventService eventService) {
 //         try {
