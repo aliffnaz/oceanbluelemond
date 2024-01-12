@@ -163,14 +163,13 @@
                         <div class="col-8">
                             <div class="custom_select">
                             <select name="serviceType" id="serviceType" class="wide">
-                                <option value="" selected>Choose</option>
                                 <option value="roomService">Room Service</option>
                                 <option value="eventService">Event Service</option>
                             </select>
                             </div>
                         </div>
                     </div>
-                    <div id="roomServiceField" style="display: none;">
+                    <div id="roomServiceField">
                         <div class="col-1"></div>
                         <div class="col pt-3">
                             <span>
@@ -181,7 +180,7 @@
                             <input type="text" name="balance" id="" class="form-control" placeholder="0">
                         </div>
                     </div>
-                    <div id="eventServiceField" style="display: none;">
+                    <div id="eventServiceField">
                         <div class="col-1"></div>
                         <div class="col pt-3">
                             <span>
@@ -192,43 +191,6 @@
                             <input type="text" name="eventCapacity" id="" class="form-control" placeholder="0">
                         </div>
                     </div>
-
-                    <div class="row m-3">
-                        <div class="col-1"></div>
-                        <div class="col pt-3">
-                                <label for="protype">Product Type:</label>
-                        </div>
-                        <div class="col-8">
-                            <div class="custom_select">
-                                <select name="protype" id="protype" required>
-                                    <option value="" selected>choose ..</option>
-                                    <option value="cake">Cake</option>
-                                    <option value="cupcake">Cupcake</option>
-                                  </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mb-3" id="cakesizeField" style="display: none;">
-                        <label for="cakesizeField" class="form-label" style="font-weight: bold;">Size</label>
-                        <div class="input-group">
-                          <span class="input-group-text" for="inputGroupSelect01">Size</span>
-                          <select class="form-select" name="cakesize" id="cakesize">
-                            <option type="number" value="6" selected>6"</option>
-                            <option type="number" value="8">8"</option>
-                          </select>
-                          <input type="text" name="balance" id="" class="form-control" placeholder="0">
-                        </div>
-                      </div>
-                      <div id="cuptoppingsField" style="display: none;">
-                        <label for="cupcake.cuptoppings">Cupcake Toppings:</label>
-                        <select class="form-select" name="cuptoppings" id="cuptoppings">
-                          <option type="text" value="chocchips" selected>Choc Chips</option>
-                          <option type="text" value="sprinkles">Sprinkles</option>
-                          <option type="text" value="marshmallow">Marshmallow</option>
-                        </select>
-                        <input type="text" name="eventCapacity" id="" class="form-control" placeholder="0">
-                      </div>
 
                     <div class="row m-3">
                         <div class="col-1"></div>
@@ -309,27 +271,34 @@
     </div>
     <!-- /back to top -->
 
-    <script> // Show/hide additional fields based on the selected product type
-        var serviceTypeField = document.getElementById('serviceType');
-        serviceTypeField.addEventListener('change', function () {
-          var roomServiceField = document.getElementsByClassName('roomServiceField');
-          var eventServiceField = document.getElementsByClassName('eventServiceField');
-          roomServiceField.style.display = (serviceTypeField.value === 'roomService') ? 'block' : 'none';
-          eventServiceField.style.display = (serviceTypeField.value === 'eventService') ? 'block' : 'none';
-        });
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var serviceTypeField = document.getElementById('serviceType');
+            var roomServiceField = document.getElementById('roomServiceField');
+            var eventServiceField = document.getElementById('eventServiceField');
     
+            // Initial check on page load
+            toggleFieldsVisibility();
+    
+            // Add event listener for changes in service type
+            serviceTypeField.addEventListener('change', function () {
+                toggleFieldsVisibility();
+            });
+    
+            function toggleFieldsVisibility() {
+                // Hide both fields initially
+                roomServiceField.style.display = 'none';
+                eventServiceField.style.display = 'none';
+    
+                // Show the appropriate field based on the selected service type
+                if (serviceTypeField.value === 'roomService') {
+                    roomServiceField.style.display = 'block';
+                } else if (serviceTypeField.value === 'eventService') {
+                    eventServiceField.style.display = 'block';
+                }
+            }
+        });
     </script>
-
-      <script> // Show/hide additional fields based on the selected product type
-        var protypeField = document.getElementById('protype');
-        protypeField.addEventListener('change', function () {
-          var cakesizeField = document.getElementById('cakesizeField');
-          var cuptoppingsField = document.getElementById('cuptoppingsField');
-          cakesizeField.style.display = (protypeField.value === 'cake') ? 'block' : 'none';
-          cuptoppingsField.style.display = (protypeField.value === 'cupcake') ? 'block' : 'none';
-        });
-    
-      </script>
 
 <!-- COMMON SCRIPTS -->
     <script th:src="@{stylesheets/js/common_scripts.js}"></script>
