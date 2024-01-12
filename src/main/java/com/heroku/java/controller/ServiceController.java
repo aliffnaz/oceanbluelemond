@@ -91,75 +91,74 @@ public class ServiceController {
 
                     eventServiceStatement.executeUpdate();
                 }
-                //model.addAttribute("success", true);
+                model.addAttribute("success", true);
 
             connection.close();
 
         } catch (SQLException e) {
             e.printStackTrace();
-            //return "redirect:/managerAddService?success=false";
-            return "redirect:/index";
+            return "redirect:/managerAddService?success=false";
         }
 
         return "redirect:/managerServiceList?success=true";
     }
 
-//     @GetMapping("/managerServiceList")
-//     public String managerServiceList(Model model) {
-//         List<service> services = new ArrayList<>();
+    @GetMapping("/managerServiceList")
+    public String managerServiceList(Model model) {
+        List<service> services = new ArrayList<>();
 
-//         try {
-//             Connection connection = dataSource.getConnection();
-//             String sql = "SELECT * FROM service ORDER BY serviceName";
-//             final var statement = connection.createStatement();
-//             final var resultSet = statement.executeQuery(sql);
+        try {
+            Connection connection = dataSource.getConnection();
+            String sql = "SELECT * FROM service ORDER BY serviceName";
+            final var statement = connection.createStatement();
+            final var resultSet = statement.executeQuery(sql);
 
-//             while (resultSet.next()) {
-//                 String serviceID = resultSet.getString("serviceID");
-//                 String serviceName = resultSet.getString("serviceName");
-//                 String serviceType = resultSet.getString("serviceType");
-//                 String servicePrice = resultSet.getString("servicePrice");
+            while (resultSet.next()) {
+                String serviceID = resultSet.getString("serviceID");
+                String serviceName = resultSet.getString("serviceName");
+                String serviceType = resultSet.getString("serviceType");
+                String servicePrice = resultSet.getString("servicePrice");
 
-//                 service service;
-//                 if ("roomService".equalsIgnoreCase(serviceType)) {
-//                     String roomServiceSql = "SELECT * FROM roomServices WHERE serviceID=?";
-//                     final var roomServiceStatement = connection.prepareStatement(roomServiceSql);
-//                     roomServiceStatement.setString(1, serviceID);
-//                     final var roomServiceResultSet = roomServiceStatement.executeQuery();
-//                     if (roomServiceResultSet.next()) {
-//                         String balance = roomServiceResultSet.getString("balance");
-//                         service = new roomService(serviceID, serviceName, serviceType, servicePrice, null, balance);
-//                     } else {
-//                         service = new service(serviceID, serviceName, serviceType, servicePrice, null);
-//                     }
-//                 } else if ("eventService".equalsIgnoreCase(serviceType)) {
-//                     String eventServiceSql = "SELECT * FROM eventServices WHERE serviceID=?";
-//                     final var eventServiceStatement = connection.prepareStatement(eventServiceSql);
-//                     eventServiceStatement.setString(1, serviceID);
-//                     final var eventServiceResultSet = eventServiceStatement.executeQuery();
-//                     if (eventServiceResultSet.next()) {
-//                         String eventCapacity = eventServiceResultSet.getString("eventCapacity");
-//                         service = new eventService(serviceID, serviceName, serviceType, servicePrice, null, eventCapacity);
-//                     } else {
-//                         service = new service(serviceID, serviceName, serviceType, servicePrice, null);
-//                     }
-//                 } else {
-//                     service = new service(serviceID, serviceName, serviceType, servicePrice, null);
-//                 }
+                service service;
+                if ("roomService".equalsIgnoreCase(serviceType)) {
+                    String roomServiceSql = "SELECT * FROM roomService WHERE serviceID=?";
+                    final var roomServiceStatement = connection.prepareStatement(roomServiceSql);
+                    roomServiceStatement.setString(1, serviceID);
+                    final var roomServiceResultSet = roomServiceStatement.executeQuery();
+                    if (roomServiceResultSet.next()) {
+                        String balance = roomServiceResultSet.getString("balance");
+                        service = new roomService(serviceID, serviceName, serviceType, servicePrice, null, balance);
+                    } else {
+                        service = new service(serviceID, serviceName, serviceType, servicePrice, null);
+                    }
+                } else if ("eventService".equalsIgnoreCase(serviceType)) {
+                    String eventServiceSql = "SELECT * FROM eventService WHERE serviceID=?";
+                    final var eventServiceStatement = connection.prepareStatement(eventServiceSql);
+                    eventServiceStatement.setString(1, serviceID);
+                    final var eventServiceResultSet = eventServiceStatement.executeQuery();
+                    if (eventServiceResultSet.next()) {
+                        String eventCapacity = eventServiceResultSet.getString("eventCapacity");
+                        service = new eventService(serviceID, serviceName, serviceType, servicePrice, null, eventCapacity);
+                    } else {
+                        service = new service(serviceID, serviceName, serviceType, servicePrice, null);
+                    }
+                } else {
+                    service = new service(serviceID, serviceName, serviceType, servicePrice, null);
+                }
 
-//                 services.add(service);
-//             }
+                services.add(service);
+            }
 
-//             model.addAttribute("services", services);
+            model.addAttribute("services", services);
 
-//             connection.close();
+            connection.close();
 
-//         } catch (SQLException e) {
-//             e.printStackTrace();
-//         }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
-//         return "admin/servicelist";
-//     }
+        return "manager/managerServiceList";
+    }
 
 //     @GetMapping("/servicedetail")
 //     public String servicedetail(@RequestParam("serviceID") String serviceID, Model model) {
