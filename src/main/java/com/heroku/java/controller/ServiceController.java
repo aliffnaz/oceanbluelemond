@@ -169,7 +169,7 @@ public class ServiceController {
             + "FROM service "
             + "LEFT JOIN roomservice ON service.serviceid = roomservice.serviceid "
             + "LEFT JOIN eventservice ON eventservice.serviceid = service.serviceid "
-            + "WHERE serviceid = ?";
+            + "WHERE service.serviceid = ?";
             final var statement = connection.prepareStatement(sql);
             statement.setString(1, serviceID);
             final var resultSet = statement.executeQuery();
