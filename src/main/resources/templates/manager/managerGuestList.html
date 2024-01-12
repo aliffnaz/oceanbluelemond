@@ -136,7 +136,7 @@
                                     <td class="text-center" th:text="${guest.guestRace}"></td>
                                     <td class="text-center" th:text="${guest.guestReligion}"></td>
                                     <td class="text-center" th:text="${guest.guestAddress}"></td>
-                                    <td class="text-center"><a th:href="@{/managerViewGuest?=}+${guest.guestICNumber}"><i class="bi bi-eye-fill" style="font-size: 20px;"></i></a></td>
+                                    <td class="text-center"><a th:href="@{/managerViewGuest?guestICNumber=}+${guest.guestICNumber}"><i class="bi bi-eye-fill" style="font-size: 20px;"></i></a></td>
                                     <td class="text-center"><a href=" "><i class="bi bi-trash3-fill" style="font-size: 20px;"></i></a></td>
                                 </tr>
                                 <tr>
