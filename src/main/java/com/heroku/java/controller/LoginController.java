@@ -32,8 +32,7 @@ public class LoginController {
     }
 
     @PostMapping("/guestLogin")
-    public String guestLogin(HttpSession session, Model model, @ModelAttribute("guestLogin") String email,
-            String password, Model Model, guest guest) {
+    public String guestLogin(@RequestParam(name = "success", required = false) Boolean success, String email, String password, HttpSession session, Model model, guest guest) {
 
         try {
             // String returnPage = null;
@@ -50,21 +49,21 @@ public class LoginController {
 
             if (resultSet.next()) {
 
-                int userid = resultSet.getInt("guestICNumber");
-                String fullname = resultSet.getString("guestname");
+                String guestICNumber = resultSet.getString("guestICNumber");
+                String guestName = resultSet.getString("guestname");
                 String guestEmail = resultSet.getString("guestemail");
                 String guestPassword = resultSet.getString("guestpassword");
 
-                System.out.println(fullname);
+                System.out.println(guestName);
                 // if they're admin
                 System.out.println("Email : " + guestEmail.equals(email) + " | " + email);
                 System.out.println("Password status : " + guestPassword.equals(password));
 
-                if (guestEmail.equals(email)
-                        && guestPassword.equals(password)) {
+                if (guestEmail.equals(email) && guestPassword.equals(password)) {
 
-                    session.setAttribute("guestname", fullname);
-                    session.setAttribute("guestICNumber", userid);
+                    session.setAttribute("guestname", guestName);
+                    session.setAttribute("guestICNumber", guestICNumber);
+                    return "redirect:/index?success=true";
 
                     // if (staffsrole.equals("admin")) {
 
@@ -91,7 +90,7 @@ public class LoginController {
             }
 
             connection.close();
-            return "redirect:/login?invalidUsername&Password";
+            return "redirect:/guestLogin?invalidUsername&Password";
 
         } catch (SQLException sqe) {
             System.out.println("Error Code = " + sqe.getErrorCode());
@@ -100,10 +99,10 @@ public class LoginController {
             System.out.println("printTrace /n");
             sqe.printStackTrace();
 
-            return "redirect:/login?error";
+            return "redirect:/guestLogin?error";
         } catch (Exception e) {
             System.out.println("E message : " + e.getMessage());
-            return "redirect:/login?error";
+            return "redirect:/guestLogin?error";
         }
 
     }
