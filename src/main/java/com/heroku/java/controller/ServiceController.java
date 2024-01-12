@@ -56,7 +56,7 @@ public class ServiceController {
             String serviceStatus=service.getServiceStatus();
 
             if (serviceType.equalsIgnoreCase("roomService")){
-            serviceType = "RoomService";}
+            serviceType = "Room Service";}
             else {
             serviceType = "Event Service";}
 
