@@ -70,21 +70,21 @@ public class ServiceController {
             statement.executeUpdate();
 
             // Get id from database for sql 2 from sql 1
-            String sql1 = "SELECT * FROM service where serviceid=?";
+            String sql1 = "SELECT serviceid, servicename, servicetype, serviceprice, servicestatus FROM service where serviceid=?";
             final var stmt = connection.prepareStatement(sql1);
             stmt.setString(1, serviceID);
             final var resultSet = stmt.executeQuery();
 
                 // Update fields specific to "roomService" or "eventService" based on the service type
                 if (serviceType.equalsIgnoreCase("Room Service")) {
-                    String roomServiceSql = "INSERT INTO roomService(serviceID, balance) VALUES (?, ?)";
+                    String roomServiceSql = "INSERT INTO roomService(serviceid, balance) VALUES (?, ?)";
                     final var roomServiceStatement = connection.prepareStatement(roomServiceSql);
                     roomServiceStatement.setString(1, serviceID);
                     roomServiceStatement.setString(2, roomService.getBalance());
 
                     roomServiceStatement.executeUpdate();
                 } else if (serviceType.equalsIgnoreCase("Event Service")) {
-                    String eventServiceSql = "INSERT INTO eventService(serviceID, eventCapacity) VALUES (?, ?)";
+                    String eventServiceSql = "INSERT INTO eventService(serviceid, eventcapacity) VALUES (?, ?)";
                     final var eventServiceStatement = connection.prepareStatement(eventServiceSql);
                     eventServiceStatement.setString(1, serviceID);
                     eventServiceStatement.setString(2, eventService.getEventCapacity());
@@ -109,41 +109,42 @@ public class ServiceController {
 
         try {
             Connection connection = dataSource.getConnection();
-            String sql = "SELECT * FROM service ORDER BY serviceName";
+            String sql = "SELECT serviceid, servicename, servicetype, serviceprice, servicestatus FROM service ORDER BY serviceName";
             final var statement = connection.createStatement();
             final var resultSet = statement.executeQuery(sql);
 
             while (resultSet.next()) {
-                String serviceID = resultSet.getString("serviceID");
-                String serviceName = resultSet.getString("serviceName");
-                String serviceType = resultSet.getString("serviceType");
-                String servicePrice = resultSet.getString("servicePrice");
+                String serviceID = resultSet.getString("serviceid");
+                String serviceName = resultSet.getString("servicename");
+                String serviceType = resultSet.getString("servicetype");
+                String servicePrice = resultSet.getString("serviceprice");
+                String serviceStatus = resultSet.getString("servicestatus");
 
                 service service;
                 if ("roomService".equalsIgnoreCase(serviceType)) {
-                    String roomServiceSql = "SELECT * FROM roomService WHERE serviceID=?";
+                    String roomServiceSql = "SELECT serviceid, balance FROM roomService WHERE serviceid=?";
                     final var roomServiceStatement = connection.prepareStatement(roomServiceSql);
                     roomServiceStatement.setString(1, serviceID);
                     final var roomServiceResultSet = roomServiceStatement.executeQuery();
                     if (roomServiceResultSet.next()) {
                         String balance = roomServiceResultSet.getString("balance");
-                        service = new roomService(serviceID, serviceName, serviceType, servicePrice, null, balance);
+                        service = new roomService(serviceID, serviceName, serviceType, servicePrice, serviceStatus, balance);
                     } else {
-                        service = new service(serviceID, serviceName, serviceType, servicePrice, null);
+                        service = new service(serviceID, serviceName, serviceType, servicePrice, serviceStatus);
                     }
                 } else if ("eventService".equalsIgnoreCase(serviceType)) {
-                    String eventServiceSql = "SELECT * FROM eventService WHERE serviceID=?";
+                    String eventServiceSql = "SELECT serviceid, eventcapacity FROM eventService WHERE serviceid=?";
                     final var eventServiceStatement = connection.prepareStatement(eventServiceSql);
                     eventServiceStatement.setString(1, serviceID);
                     final var eventServiceResultSet = eventServiceStatement.executeQuery();
                     if (eventServiceResultSet.next()) {
                         String eventCapacity = eventServiceResultSet.getString("eventCapacity");
-                        service = new eventService(serviceID, serviceName, serviceType, servicePrice, null, eventCapacity);
+                        service = new eventService(serviceID, serviceName, serviceType, servicePrice, serviceStatus, eventCapacity);
                     } else {
-                        service = new service(serviceID, serviceName, serviceType, servicePrice, null);
+                        service = new service(serviceID, serviceName, serviceType, servicePrice, serviceStatus);
                     }
                 } else {
-                    service = new service(serviceID, serviceName, serviceType, servicePrice, null);
+                    service = new service(serviceID, serviceName, serviceType, servicePrice, serviceStatus);
                 }
 
                 services.add(service);
@@ -164,26 +165,27 @@ public class ServiceController {
     public String managerViewService(@RequestParam("serviceID") String serviceID, Model model) {
         try {
             Connection connection = dataSource.getConnection();
-            String sql = "SELECT * FROM service WHERE serviceID = ?";
+            String sql = "SELECT  FROM service WHERE serviceid = ?";
             final var statement = connection.prepareStatement(sql);
             statement.setString(1, serviceID);
             final var resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
-                String serviceName = resultSet.getString("serviceName");
-                String serviceType = resultSet.getString("serviceType");
-                String servicePrice = resultSet.getString("servicePrice");
+                String serviceName = resultSet.getString("servicename");
+                String serviceType = resultSet.getString("servicetype");
+                String servicePrice = resultSet.getString("serviceprice");
+                String serviceStatus = resultSet.getString("servicestatus");
 
                 service service;
-                if (serviceType.equalsIgnoreCase("roomService")) {
+                if (serviceType.equalsIgnoreCase("Room Service")) {
                     String balance = resultSet.getString("balance");
-                    service = new roomService(serviceID, serviceName, serviceType, servicePrice, null, balance);
-                } else if (serviceType.equalsIgnoreCase("eventService")) {
+                    service = new roomService(serviceID, serviceName, serviceType, servicePrice, serviceStatus, balance);
+                } else if (serviceType.equalsIgnoreCase("Event Service")) {
                     String eventCapacity = resultSet.getString("eventCapacity");
-                    service = new eventService(serviceID, serviceName, serviceType, servicePrice, null, eventCapacity);
+                    service = new eventService(serviceID, serviceName, serviceType, servicePrice, serviceStatus, eventCapacity);
                 } else {
                     // Handle the case when serviceType is neither "roomService" nor "eventService"
-                    service = new service(serviceID, serviceName, serviceType, servicePrice, null);
+                    service = new service(serviceID, serviceName, serviceType, servicePrice, serviceStatus);
                 }
 
                 model.addAttribute("service", service); // Use "service" as the model attribute name
@@ -196,7 +198,7 @@ public class ServiceController {
 
         return "manager/managerViewService";
     }
-    
+
 //     @PostMapping("/updateservice")
 //     public String UpdateService(@ModelAttribute("service") service service, roomService roomService, eventService eventService) {
 //         try {
