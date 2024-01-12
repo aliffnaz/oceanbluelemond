@@ -50,12 +50,6 @@ public class GettingStartedApplication {
         return "guest/guestLogin";
     }
 
-    @GetMapping("/logout")
-    public String logout(HttpSession session) {
-        session.invalidate();
-        return "index_logout";
-    }
-
     @GetMapping("/index_logout")
     public String index_logout() {
         return "index_logout";
