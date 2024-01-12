@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import jakarta.servlet.http.HttpSession;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -49,6 +50,11 @@ public class GettingStartedApplication {
         return "guest/guestLogin";
     }
 
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "index_logout";
+    }
 
     @GetMapping("/index_logout")
     public String index_logout() {
@@ -59,7 +65,6 @@ public class GettingStartedApplication {
     public String guestViewRoom() {
         return "guest/guestViewRoom";
     }
-
 
      @GetMapping("/guestMakeRoomReservation")
     public String guestMakeRoomReservation() {
@@ -175,9 +180,6 @@ public String salesReport() {
     return "manager/salesReport";
 }
 
-
-
-  
 
     @GetMapping("/database")
     String database(Map<String, Object> model) {
