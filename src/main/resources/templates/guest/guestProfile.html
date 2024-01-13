@@ -87,7 +87,7 @@
                             &nbsp;Make Reservation</a></li>
                     <li><a th:href="@{/guestRoomReservation}"><i class="bi bi-receipt-cutoff"
                                 style="font-size: 25px;"></i> &nbsp;Records</a></li>
-                    <li class="mt-5"><a th:href="@{/guestLogin}" class="btn btn-danger pt-3" type="button"
+                    <li class="mt-5"><a th:href="@{/logout}" class="btn btn-danger pt-3" type="button"
                             style="color: white; border-radius: 10px 10px 10px 10px; height: 50px;">Logout</a></li>
                 </ul>
                 <div class="panel_footer">
@@ -149,7 +149,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" th:value="${guest.guestName}" disabled>
+                            <input type="text" name="guestName" id="guestName" class="form-control" th:value="${guest.guestName}" disabled>
                         </div>
                     </div>
 
@@ -161,7 +161,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" th:value="${guest.guestICNumber}" disabled>
+                            <input type="text" name="guestICNumber" id="guestICNumber" class="form-control" th:value="${guest.guestICNumber}" disabled>
                         </div>
                     </div>
 
@@ -173,7 +173,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" th:value="${guest.guestAddress}" disabled>
+                            <input type="text" name="guestAddress" id="guestAddress" class="form-control" th:value="${guest.guestAddress}" disabled>
                         </div>
                     </div>
 
@@ -185,7 +185,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                           <input type="text" name="" id="" class="form-control" th:value="${guest.guestGender}" disabled>
+                           <input type="text" name="guestGender" id="guestGender" class="form-control" th:value="${guest.guestGender}" disabled>
                         </div>
                     </div>
 
@@ -197,7 +197,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                       <input type="text" name="" id="" class="form-control" th:value="${guest.guestRace}" disabled>
+                       <input type="text" name="guestRace" id="guestRace" class="form-control" th:value="${guest.guestRace}" disabled>
                         </div>
                     </div>
 
@@ -209,7 +209,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                          <input type="text" name="" id="" class="form-control" th:value="${guest.guestReligion}" disabled>
+                          <input type="text" name="guestReligion" id="guestReligion" class="form-control" th:value="${guest.guestReligion}" disabled>
 
                         </div>
                     </div>
@@ -222,7 +222,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" th:value="${guest.guestPhonNumber}" disabled>
+                            <input type="text" name="guestPhoneNumber" id="guestPhoneNumber" class="form-control" th:value="${guest.guestPhoneNumber}" disabled>
                         </div>
                     </div>
 
@@ -234,39 +234,19 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" th:value="${guest.guestEmail}" disabled>
+                            <input type="text" name="guestEmail" id="guestEmail" class="form-control" th:value="${guest.guestEmail}" disabled>
                         </div>
                     </div>
-
-                    <div class="row m-3">
-                        <div class="col-1"></div>
-                        <div class="col pt-3">
-                            <span>
-                                <h6>Password</h6>
-                            </span>
-                        </div>
-                        <div class="col-8">
-                            <input type="password" name="" id="" class="form-control" th:value="${guest.guestPassword}" disabled>
-                        </div>
-                    </div>
-
 
                     <div class="row m-5">
                         <div class="col-9"></div>
-
-
                         <div class="col">
                             <a th:href="@{/guestUpdate}" class="btn btn-dark btn-lg"
                                 style="border-radius: 3px 3px 3px 3px; height: auto; width:150px">Edit</a>
                         </div>
                     </div>
-
-
                 </div>
-
-
                 <div class="col">
-
                 </div>
             </div>
 
