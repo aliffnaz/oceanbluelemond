@@ -290,7 +290,7 @@ public class StaffController {
 
         @GetMapping("/staffProfile")
          public String staffProfile(HttpSession session, Model model) {
-          String staffICNumber = session.getAttribute("staffICNumber") ;
+          String staffICNumber = (String) session.getAttribute("staffICNumber") ;
           System.out.println("Staff IC Number : " + staffICNumber);
            try {
              Connection connection = dataSource.getConnection();
