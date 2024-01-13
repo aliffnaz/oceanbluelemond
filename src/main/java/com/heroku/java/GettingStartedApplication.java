@@ -65,11 +65,6 @@ public class GettingStartedApplication {
         return "guest/guestMakeRoomReservation";
     }
 
-    @GetMapping("/guestProfile")
-    public String guestProfile() {
-        return "guest/guestProfile";
-    }
-
     @GetMapping("/guestRoomReservation")
     public String guestRoomReservation() {
         return "guest/guestRoomReservation";
@@ -80,11 +75,6 @@ public class GettingStartedApplication {
         return "guest/guestViewRoomReservation";
     }
 
-    @GetMapping("/guestViewService")
-    public String guestViewService() {
-        return "guest/guestViewService";
-    }
-
     @GetMapping("/guestGenerateReceipt")
     public String guestGenerateReceipt() {
         return "guest/guestGenerateReceipt";
@@ -92,7 +82,7 @@ public class GettingStartedApplication {
 
     // for staff
 
-        @GetMapping("/staffHome")
+    @GetMapping("/staffHome")
     public String staffHome(@RequestParam(name = "success", required = false) Boolean success) {
         return "staff/staffHome";
     }
@@ -102,29 +92,19 @@ public class GettingStartedApplication {
         return "staff/staffLogin";
     }
 
-    @GetMapping("/staffViewGuest")
-    public String staffViewGuest() {
-        return "staff/staffViewGuest";
-    }
-
     @GetMapping("/staffReservationList")
     public String staffReservationList() {
         return "staff/staffReservationList";
     }
 
     @GetMapping("/staffAddRoom")
-public String staffAddRoom() {
+    public String staffAddRoom() {
     return "staff/staffAddRoom";
 }
 
 @GetMapping("/staffGenerateReport")
 public String staffGenerateReport() {
     return "staff/staffGenerateReport";
-}
-
-@GetMapping("/staffGuestList")
-public String staffGuestList() {
-    return "staff/staffGuestList";
 }
 
 // for manager
