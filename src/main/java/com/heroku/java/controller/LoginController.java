@@ -63,29 +63,8 @@ public class LoginController {
 
                     session.setAttribute("guestname", guestName);
                     session.setAttribute("guestICNumber", guestICNumber);
+                    
                     return "redirect:/index?success=true";
-
-                    // if (staffsrole.equals("admin")) {
-
-                    // session.setAttribute("staffsrole","admin" );
-                    // connection.close();
-                    // // debug
-                    // System.out.println("admin name : " + fullname);
-                    // System.out.println("admin id: " + userid);
-                    // System.out.println("admin role: " + staffsrole);
-                    // return "redirect:/stafforder";
-
-                    // } else if(staffsrole.equals("baker")){
-
-                    // session.setAttribute("staffsrole","baker" );
-                    // connection.close();
-
-                    // // debug
-                    // System.out.println("staff name : " + fullname);
-                    // System.out.println("staff id: " + userid);
-                    // System.out.println("staff role: " + staffsrole);
-                    // return "redirect:/stafforder";
-                    // }
                 }
             }
 
@@ -100,6 +79,7 @@ public class LoginController {
             sqe.printStackTrace();
 
             return "redirect:/guestLogin?error";
+
         } catch (Exception e) {
             System.out.println("E message : " + e.getMessage());
             return "redirect:/guestLogin?error";
@@ -107,9 +87,8 @@ public class LoginController {
 
     }
 
-    @PostMapping("/stafflogin")
-    public String stafflogin(HttpSession session, Model model, @ModelAttribute("stafflogin") String email,
-            String password, Model Model, staff staff) {
+    @PostMapping("/staffLogin")
+    public String staffLogin(HttpSession session, Model model, @ModelAttribute("staffLogin") String email, String password, Model Model, staff staff) {
 
         try {
             // String returnPage = null;
@@ -126,13 +105,13 @@ public class LoginController {
 
             if (resultSet.next()) {
 
-                int userid = resultSet.getInt("staffICNumber");
-                String fullname = resultSet.getString("staffName");
+                String stafficnumber = resultSet.getString("staffICNumber");
+                String staffname = resultSet.getString("staffName");
                 String guestEmail = resultSet.getString("staffEmail");
                 String guestPassword = resultSet.getString("staffPassword");
                 String staffrole = resultSet.getString("staffrole");
 
-                System.out.println(fullname);
+                System.out.println(staffname);
                 // if they're admin
                 System.out.println("Email : " + guestEmail.equals(email) + " | " + email);
                 System.out.println("Password status : " + guestPassword.equals(password));
@@ -140,29 +119,29 @@ public class LoginController {
                 if (guestEmail.equals(email)
                         && guestPassword.equals(password)) {
 
-                    session.setAttribute("staffName", fullname);
-                    session.setAttribute("staffICNumber", userid);
+                    session.setAttribute("staffName", staffname);
+                    session.setAttribute("staffICNumber", stafficnumber);
 
-                    if (staffrole.equals("manager")) {
-
-                        session.setAttribute("staffRole", "manager");
+                    if (staffrole.equals("Manager")) {
+                        session.setAttribute("staffRole", "Manager");
                         connection.close();
+                        
                         // debug
-                        System.out.println("admin name : " + fullname);
-                        System.out.println("admin id: " + userid);
-                        System.out.println("admin role: " + staffrole);
-                        return "redirect:/managerHome";
+                        System.out.println("manager name : " + staffname);
+                        System.out.println("manager id: " + stafficnumber);
+                        System.out.println("manager role: " + staffrole);
+                        return "redirect:/managerHome?success=true";
 
-                    } else if (staffrole.equals("staff")) {
+                    } else {
 
-                        session.setAttribute("staffRole", "staff");
+                        session.setAttribute("staffRole", "Staff");
                         connection.close();
 
                         // debug
-                        System.out.println("staff name : " + fullname);
-                        System.out.println("staff id: " + userid);
+                        System.out.println("staff name : " + staffname);
+                        System.out.println("staff id: " + stafficnumber);
                         System.out.println("staff role: " + staffrole);
-                        return "redirect:/staffHome";
+                        return "redirect:/staffHome?success=true";
                     }
 
                 }
