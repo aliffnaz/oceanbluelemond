@@ -184,7 +184,7 @@ public class GuestController {
 
     @GetMapping("/guestProfile")
     public String guestProfile(HttpSession session, Model model) {
-        String guestICNumber = session.getAttribute("guestICNumber");
+        String guestICNumber = (String) session.getAttribute("guestICNumber");
         System.out.println("IC Number : " + guestICNumber);
         try {
             Connection connection = dataSource.getConnection();
