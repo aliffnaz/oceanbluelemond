@@ -203,41 +203,84 @@ public class ServiceController {
         return "manager/managerViewService";
     }
 
-//     @PostMapping("/updateservice")
-//     public String UpdateService(@ModelAttribute("service") service service, roomService roomService, eventService eventService) {
-//         try {
-//             Connection connection = dataSource.getConnection();
-//             String sql = "UPDATE service SET serviceName=?, serviceType=?, servicePrice=? WHERE serviceID=?";
-//             final var statement = connection.prepareStatement(sql);
-//             statement.setString(1, service.getServiceName());
-//             statement.setString(2, service.getServiceType());
-//             statement.setString(3, service.getServicePrice());
-//             statement.setString(4, service.getServiceID());
+    @GetMapping("/managerUpdateService")
+    public String managerUpdateService(@RequestParam("serviceID") String serviceID, Model model) {
+        try {
+            Connection connection = dataSource.getConnection();
+            String sql = "SELECT service.serviceid, service.servicename, service.servicetype, service.serviceprice, service.servicestatus, roomservice.balance, eventservice.eventcapacity "
+            + "FROM service "
+            + "LEFT JOIN roomservice ON service.serviceid = roomservice.serviceid "
+            + "LEFT JOIN eventservice ON eventservice.serviceid = service.serviceid "
+            + "WHERE service.serviceid = ?";
+            final var statement = connection.prepareStatement(sql);
+            statement.setString(1, serviceID);
+            final var resultSet = statement.executeQuery();
 
-//             statement.executeUpdate();
+            if (resultSet.next()) {
+                String serviceName = resultSet.getString("servicename");
+                String serviceType = resultSet.getString("servicetype");
+                String servicePrice = resultSet.getString("serviceprice");
+                String serviceStatus = resultSet.getString("servicestatus");
 
-//             // Update fields specific to "roomService" or "eventService" based on the service type
-//             if ("roomService".equalsIgnoreCase(service.getServiceType())) {
-//                 String roomServiceSql = "UPDATE roomServices SET balance=? WHERE serviceID=?";
-//                 final var roomServiceStatement = connection.prepareStatement(roomServiceSql);
-//                 roomServiceStatement.setString(1, roomService.getBalance());
-//                 roomServiceStatement.setString(2, service.getServiceID());
+                service service;
+                if (serviceType.equalsIgnoreCase("Room Service")) {
+                    String balance = resultSet.getString("balance");
+                    service = new roomService(serviceID, serviceName, serviceType, servicePrice, serviceStatus, balance);
+                } else if (serviceType.equalsIgnoreCase("Event Service")) {
+                    String eventCapacity = resultSet.getString("eventCapacity");
+                    service = new eventService(serviceID, serviceName, serviceType, servicePrice, serviceStatus, eventCapacity);
+                } else {
+                    // Handle the case when serviceType is neither "roomService" nor "eventService"
+                    service = new service(serviceID, serviceName, serviceType, servicePrice, serviceStatus);
+                }
 
-//                 roomServiceStatement.executeUpdate();
-//             } else if ("eventService".equalsIgnoreCase(service.getServiceType())) {
-//                 String eventServiceSql = "UPDATE eventServices SET eventCapacity=? WHERE serviceID=?";
-//                 final var eventServiceStatement = connection.prepareStatement(eventServiceSql);
-//                 eventServiceStatement.setString(1, eventService.getEventCapacity());
-//                 eventServiceStatement.setString(2, service.getServiceID());
+                model.addAttribute("service", service); // Use "service" as the model attribute name
 
-//                 eventServiceStatement.executeUpdate();
-//             }
+                connection.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
-//             connection.close();
+        return "manager/managerUpdateService";
+    }
 
-//         } catch (SQLException e) {
-//             e.printStackTrace();
-//         }
-//         return "redirect:/staffmenu?success=true";
-//     }
+    @PostMapping("/managerUpdateService")
+    public String managerUpdateService(@ModelAttribute("managerUpdateService") service service, roomService roomService, eventService eventService) {
+        try {
+            Connection connection = dataSource.getConnection();
+            String sql = "UPDATE service SET serviceName=?, serviceType=?, servicePrice=? WHERE serviceID=?";
+            final var statement = connection.prepareStatement(sql);
+            statement.setString(1, service.getServiceName());
+            statement.setString(2, service.getServiceType());
+            statement.setString(3, service.getServicePrice());
+            statement.setString(4, service.getServiceID());
+
+            statement.executeUpdate();
+
+            // Update fields specific to "roomService" or "eventService" based on the service type
+            if ("Room Service".equalsIgnoreCase(service.getServiceType())) {
+                String roomServiceSql = "UPDATE roomService SET balance=? WHERE serviceID=?";
+                final var roomServiceStatement = connection.prepareStatement(roomServiceSql);
+                roomServiceStatement.setString(1, roomService.getBalance());
+                roomServiceStatement.setString(2, service.getServiceID());
+
+                roomServiceStatement.executeUpdate();
+            } else if ("Event Service".equalsIgnoreCase(service.getServiceType())) {
+                String eventServiceSql = "UPDATE eventService SET eventCapacity=? WHERE serviceID=?";
+                final var eventServiceStatement = connection.prepareStatement(eventServiceSql);
+                eventServiceStatement.setString(1, eventService.getEventCapacity());
+                eventServiceStatement.setString(2, service.getServiceID());
+
+                eventServiceStatement.executeUpdate();
+            }
+
+            connection.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return "redirect:/managerUpdateService?success=false";
+        }
+        return "redirect:/managerServiceList?success=true";
+    }
  }
