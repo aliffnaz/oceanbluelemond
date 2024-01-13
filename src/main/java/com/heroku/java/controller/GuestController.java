@@ -47,17 +47,14 @@ public class GuestController {
         // String staffsrole = (String) session.getAttribute("staffsrole");
         // System.out.println("staffrole managerRoomList : " + staffsrole);
         try (Connection connection = dataSource.getConnection()) {
-            String sql = "SELECT guesticnumber, guestname, guestphonenumber, guestgender, guestreligion, guestrace, guestaddress FROM public.guest"; // ni
-            // originally
-            // WHERE
-            // staffsrole=?
+            String sql = "SELECT guesticnumber, guestname, guestphonenumber, guestgender, guestreligion, guestrace, guestaddress, guestemail, guestpassword FROM public.guest order by guestname"; // ni
             final var statement = connection.prepareStatement(sql);
             // statement.setString(1, "baker"); (syahir punya nih)
             final var resultSet = statement.executeQuery();
-            System.out.println("pass try managerRoomList >>>>>");
+            System.out.println("pass try managerGuestList >>>>>");
 
             while (resultSet.next()) {
-                 String guestName = resultSet.getString("guestName");
+                String guestName = resultSet.getString("guestName");
                 String guestPhoneNumber = resultSet.getString("guestPhoneNumber");
                 String guestICNumber = resultSet.getString("guestICNumber");
                 String guestGender = resultSet.getString("guestGender");
@@ -70,7 +67,6 @@ public class GuestController {
                 // System.out.println("room number" + roomNum);
 
                 guest guest = new guest();
-
                 guest.setGuestName(guestName);
                 guest.setGuestPhoneNumber(guestPhoneNumber);
                 guest.setGuestICNumber(guestICNumber);
@@ -118,7 +114,6 @@ public class GuestController {
             String guestEmail = guest.getGuestEmail();
             String guestPassword = guest.getGuestPassword();
 
-        
 
             statement.setString(1, guestICNumber);
             statement.setString(2, guestName);
@@ -187,8 +182,9 @@ public class GuestController {
         return "manager/managerViewGuest";
     }
 
-    @GetMapping("/guestUpdate")
-    public String managerUpdateRoom(@RequestParam("guestICNumber") String guestICNumber, Model model) {
+    @GetMapping("/guestProfile")
+    public String guestProfile(HttpSession session, Model model) {
+        String guestICNumber = session.getAttribute("guestICNumber");
         System.out.println("IC Number : " + guestICNumber);
         try {
             Connection connection = dataSource.getConnection();
@@ -207,10 +203,8 @@ public class GuestController {
                 String guestEmail = resultSet.getString("guestEmail");
                 String guestPassword = resultSet.getString("guestPassword");
 
-                // System.out.println("room number" + roomNum);
-
                 guest guest = new guest();
-
+                
                 guest.setGuestName(guestName);
                 guest.setGuestPhoneNumber(guestPhoneNumber);
                 guest.setGuestICNumber(guestICNumber);
@@ -220,7 +214,49 @@ public class GuestController {
                 guest.setGuestAddress(guestAddress);
                 guest.setGuestEmail(guestEmail);
                 guest.setGuestPassword(guestPassword);
+                
+                model.addAttribute("guest", guest);
 
+                connection.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return "manager/guestProfile";
+    }
+
+    @GetMapping("/guestUpdate")
+    public String managerUpdateRoom(HttpSession session, Model model) {
+        String guestICNumber = (String) session.getAttribute("guestICNumber");
+        System.out.println("IC Number : " + guestICNumber);
+        try {
+            Connection connection = dataSource.getConnection();
+            String sql = "SELECT guesticnumber, guestname, guestphonenumber, guestgender, guestreligion, guestrace, guestaddress, guestemail, guestpassword FROM public.guest WHERE guesticnumber LIKE ?";
+            final var statement = connection.prepareStatement(sql);
+            statement.setString(1, guestICNumber);
+            final var resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                String guestName = resultSet.getString("guestName");
+                String guestPhoneNumber = resultSet.getString("guestPhoneNumber");
+                String guestGender = resultSet.getString("guestGender");
+                String guestReligion = resultSet.getString("guestReligion");
+                String guestRace = resultSet.getString("guestRace");
+                String guestAddress = resultSet.getString("guestAddress");
+                String guestEmail = resultSet.getString("guestEmail");
+                String guestPassword = resultSet.getString("guestPassword");
+
+                guest guest = new guest();
+                guest.setGuestName(guestName);
+                guest.setGuestPhoneNumber(guestPhoneNumber);
+                guest.setGuestICNumber(guestICNumber);
+                guest.setGuestGender(guestGender);
+                guest.setGuestRace(guestRace);
+                guest.setGuestReligion(guestReligion);
+                guest.setGuestAddress(guestAddress);
+                guest.setGuestEmail(guestEmail);
+                guest.setGuestPassword(guestPassword);
                 model.addAttribute("guest", guest);
 
                 connection.close();
@@ -233,16 +269,16 @@ public class GuestController {
     }
 
     @PostMapping("/guestUpdate")
-    public String guestUpdate(@ModelAttribute("guestUpdate") guest guest) {
+    public String guestUpdate1(HttpSession session, @ModelAttribute("guestUpdate1") guest guest, Model model) {
+        String guestICNumber = (String) session.getAttribute("guestICNumber");
         System.out.println("pass here <<<<<<<");
         try {
             Connection connection = dataSource.getConnection();
-            String sql = "UPDATE public.guest SET guesticnumber=?, guestname=?, guestphonenumber=?, guestgender=?, guestreligion=?, guestrace=?, guestaddress=?, guestemail=?, guestpassword=? WHERE guesticnumber=?";
+            String sql = "UPDATE public.guest SET guestname=?, guestphonenumber=?, guestgender=?, guestreligion=?, guestrace=?, guestaddress=?, guestemail=?, guestpassword=? WHERE guesticnumber=?";
             final var statement = connection.prepareStatement(sql);
 
             String guestName = guest.getGuestName();
             String guestPhoneNumber = guest.getGuestPhoneNumber();
-            String guestICNumber = guest.getGuestICNumber();
             String guestGender = guest.getGuestGender();
             String guestReligion = guest.getGuestReligion();
             String guestRace = guest.getGuestRace();
@@ -250,17 +286,16 @@ public class GuestController {
             String guestEmail = guest.getGuestEmail();
             String guestPassword = guest.getGuestPassword();
 
-        
 
-            statement.setString(1, guestICNumber);
-            statement.setString(2, guestName);
-            statement.setString(3, guestPhoneNumber);
-            statement.setString(4, guestGender);
-            statement.setString(5, guestReligion);
-            statement.setString(6, guestRace);
-            statement.setString(7, guestAddress);
-            statement.setString(8, guestEmail);
-            statement.setString(9, guestPassword);
+            statement.setString(1, guestName);
+            statement.setString(2, guestPhoneNumber);
+            statement.setString(3, guestGender);
+            statement.setString(4, guestReligion);
+            statement.setString(5, guestRace);
+            statement.setString(6, guestAddress);
+            statement.setString(7, guestEmail);
+            statement.setString(8, guestPassword);
+            statement.setString(9, guestICNumber);
             statement.setString(10, guestICNumber);
             statement.executeUpdate();
 
