@@ -93,7 +93,7 @@ public class GettingStartedApplication {
     // for staff
 
         @GetMapping("/staffHome")
-    public String staffHome() {
+    public String staffHome(@RequestParam(name = "success", required = false) Boolean success) {
         return "staff/staffHome";
     }
 
@@ -140,7 +140,7 @@ public String staffGuestList() {
 // for manager
 
 @GetMapping("/managerHome")
-public String managerHome() {
+public String managerHome(@RequestParam(name = "success", required = false) Boolean success) {
     return "manager/managerHome";
 }
 
