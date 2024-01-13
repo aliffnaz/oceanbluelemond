@@ -163,7 +163,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" th:value="${staff.staffName}">
+                            <input type="text" name="staffName" id="staffName" class="form-control" th:value="${staff.staffName}">
                         </div>
                     </div>
 
@@ -175,7 +175,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" th:value="${staff.staffICNumber}" readonly>
+                            <input type="text" name="staffICNumber" id="staffICNumber" class="form-control" th:value="${staff.staffICNumber}" readonly>
                         </div>
                     </div>
 
@@ -187,7 +187,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" th:value="${staff.staffAddress}">
+                            <input type="text" name="staffAddress" id="staffAddress" class="form-control" th:value="${staff.staffAddress}">
                         </div>
                     </div>
 
@@ -199,8 +199,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <select name="" id="" class="form-control form-select">
-                                <option th:value="${staff.staffGender}">Select</option>
+                            <select name="staffGender" id="staffGender" class="form-control form-select">
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
                             </select>
@@ -215,11 +214,10 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <select name="" id="" class="form-control form-select">
-                                <option value="">Select</option>
-                                <option value="" Selected>Melayu</option>
-                                <option value="">Cina</option>
-                                <option value="">India</option>
+                            <select name="" id="staffRace" class="form-control form-select">
+                                <option value="Melayu">Melayu</option>
+                                <option value="Cina">Cina</option>
+                                <option value="India">India</option>
                             </select>
                         </div>
                     </div>
@@ -232,11 +230,10 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <select name="" id="" class="form-control form-select">
-                                <option value="">Select</option>
-                                <option value="" Selected>Islam</option>
-                                <option value="">Budha</option>
-                                <option value="">Christian</option>
+                            <select name="staffReligion" id="staffReligion" class="form-control form-select">
+                                <option value="Islam">Islam</option>
+                                <option value="Budha">Budha</option>
+                                <option value="Christian">Christian</option>
                             </select>
 
                         </div>
@@ -250,12 +247,11 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <select name="" id="" class="form-control form-select">
-                                <option value="">Select</option>
-                                <option value="" Selected>Single</option>
-                                <option value="">Married</option>
-                                <option value="">Divorce</option>
-                                <option value="">Widowed</option>
+                            <select name="staffMaritalStatus" id="staffMaritalStatus" class="form-control form-select">
+                                <option value="Single">Single</option>
+                                <option value="Married">Married</option>
+                                <option value="Divorce">Divorce</option>
+                                <option value="Widowed">Widowed</option>
                             </select>
 
                         </div>
@@ -269,7 +265,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" th:value="${staff.staffRole}" readonly>
+                            <input type="text" name="staffRole" id="staffRole" class="form-control" th:value="${staff.staffRole}" readonly>
                         </div>
                     </div>
 
@@ -281,7 +277,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" th:value="${staff.staffPhoneNumber}">
+                            <input type="text" name="staffPhoneNumber" id="staffPhoneNumber" class="form-control" th:value="${staff.staffPhoneNumber}">
                         </div>
                     </div>
 
@@ -293,7 +289,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" th:value="${staff.staffEmail}">
+                            <input type="email" name="staffEmail" id="staffEmail" class="form-control" th:value="${staff.staffEmail}">
                         </div>
                     </div>
 
@@ -306,7 +302,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="password" name="" id="" class="form-control">
+                            <input type="password" name="staffPassword" id="staffPassword" class="form-control">
                         </div>
                     </div>
                     <div class="row m-5">
