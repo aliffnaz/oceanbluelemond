@@ -293,7 +293,6 @@ public class GuestController {
             statement.setString(7, guestEmail);
             statement.setString(8, guestPassword);
             statement.setString(9, guestICNumber);
-            statement.setString(10, guestICNumber);
             statement.executeUpdate();
 
             connection.close();
