@@ -184,7 +184,7 @@ public class GuestController {
 
     @GetMapping("/guestProfile")
     public String guestProfile(HttpSession session, Model model) {
-        String guestICNumber = (String) session.getAttribute("guestICNumber");
+        String guestICNumber = session.getAttribute("guestICNumber");
         System.out.println("IC Number : " + guestICNumber);
         try {
             Connection connection = dataSource.getConnection();
@@ -223,11 +223,11 @@ public class GuestController {
             e.printStackTrace();
         }
 
-        return "manager/guestProfile";
+        return "guest/guestProfile";
     }
 
     @GetMapping("/guestUpdate")
-    public String managerUpdateRoom(HttpSession session, Model model) {
+    public String guestUpdate(HttpSession session, Model model) {
         String guestICNumber = (String) session.getAttribute("guestICNumber");
         System.out.println("IC Number : " + guestICNumber);
         try {
