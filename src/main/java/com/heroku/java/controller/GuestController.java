@@ -30,14 +30,11 @@ public class GuestController {
     public GuestController(DataSource dataSource) {
         this.dataSource = dataSource;
     }
-
-    // original syahir punyer, guna session
-    // @GetMapping("/managerAddRoom")
-    // public String managerAddRoom(HttpSession session) {
-    // // int roomNumber = (int) session.getAttribute("roomNumber");
-    // // System.out.println("roomNumber id :" + roomNumber);
-    // return "manager/managerAddRoom";
-    // }
+    
+    @GetMapping("/guestRegister")
+    public String managerAddRoom() {
+        return "guest/guestRegister";
+    }
 
     @GetMapping("/managerGuestList")
     public String managerGuestList(Model model) {
