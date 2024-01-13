@@ -88,7 +88,7 @@ public class LoginController {
     }
 
     @PostMapping("/staffLogin")
-    public String staffLogin(HttpSession session, Model model, @ModelAttribute("staffLogin") String email, String password, Model Model, staff staff) {
+    public String staffLogin(@RequestParam(name = "success", required = false) Boolean success, HttpSession session, Model model, String email, String password, Model Model, staff staff) {
 
         try {
             // String returnPage = null;
