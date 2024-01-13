@@ -386,7 +386,7 @@ public class StaffController {
          
          @PostMapping("/staffUpdate")
          public String staffUpdate1(HttpSession session, @ModelAttribute("staffUpdate") staff staff, Model model) {
-          String staffICNumber = (String) session.addAttribute("staffICNumber");
+          String staffICNumber = (String) session.getAttribute("staffICNumber");
           System.out.println("Staff IC Number : " + staffICNumber);
            try {
 
