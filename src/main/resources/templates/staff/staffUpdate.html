@@ -154,7 +154,7 @@
                     </div>
 
                     
-<form th:action="@{/staffUpdate}" modelAttribute="staffUpdate" th:object="(${staffUpdate})">
+                    <form method="post" th:action="@{/staffUpdate}" modelAttribute="staffUpdate" th:object="(${staffUpdate})">
                     <div class="row m-3">
                         <div class="col-1"></div>
                         <div class="col pt-3">
@@ -175,7 +175,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" th:value="${staff.staffICNumber}">
+                            <input type="text" name="" id="" class="form-control" th:value="${staff.staffICNumber}" readonly>
                         </div>
                     </div>
 
@@ -269,13 +269,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <select name="" id="" class="form-control form-select">
-                                <option value="">Select</option>
-                                <option value="Manager" th:if="${staff.staffRole == 'Manager'}">Manager</option>
-                                <option value="Front Officer">Front Office</option>
-                                <option value="Finance">Finance</option>
-                            </select>
-
+                            <input type="text" name="" id="" class="form-control" th:value="${staff.staffRole}" readonly>
                         </div>
                     </div>
 
@@ -312,7 +306,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="" id="" class="form-control" th:value="${staff.staffPassword}">
+                            <input type="text" name="" id="" class="form-control">
                         </div>
                     </div>
                     <div class="row m-5">
@@ -320,47 +314,30 @@
                         <div class="col-6 text-center">
                            <!-- <a th:href="@{/staffProfile}" class="btn btn-dark btn-md"
                                 style="border-radius: 3px 3px 3px 3px; height: auto; width:150px" onclick="success()">Update</a> -->
-                            <button type="submit" class="btn btn-dark btn-md"
-                                style="border-radius: 3px 3px 3px 3px; height: auto; width:150px" onclick="success()">
-                                Update
-                                
-                            </button>
+                            <button type="submit" class="btn btn-dark btn-md" style="border-radius: 3px 3px 3px 3px; height: auto; width:150px" onclick="success()">Update</button>
 
-                            <script>
+<!--                             <script>
                                 function success() {
                                     alert("Successfully Update");
                                 }
-                            </script>
-
+                            </script> -->
                             <a th:href="@{/staffProfile}" class="btn btn-danger btn-md"
                                 style="border-radius: 3px 3px 3px 3px; height: auto; width:150px">Cancel</a>
-
-
                         </div>
                         <div class="col"></div>
                     </div>
-</form>
-
+                </form>
                 </div>
-
-
                 <div class="col">
-
                 </div>
             </div>
 
             <div class="container mt-5">
                 &nbsp;
             </div>
-
-
             <!-- <div class="row card card-body align-items-center"> -->
-
-
-
         </div>
         <!-- </div> -->
-
     </main>
 
     <footer class="revealed">
