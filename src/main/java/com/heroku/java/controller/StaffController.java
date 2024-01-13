@@ -385,7 +385,7 @@ public class StaffController {
          }
          
          @PostMapping("/staffUpdate")
-         public String staffUpdate1(HttpSession session, @ModelAttribute("staffUpdate") staff staff, Model model) {
+         public String staffUpdate1(HttpSession session, @ModelAttribute("staffUpdate1") staff staff, Model model) {
           String staffICNumber = (String) session.getAttribute("staffICNumber");
           System.out.println("Staff IC Number : " + staffICNumber);
            try {
@@ -402,7 +402,7 @@ public class StaffController {
             String staffMaritalStatus = staff.getStaffMaritalStatus();
             String staffAddress = staff.getStaffAddress();
             String staffRole = staff.getStaffRole();
-            String staffStatus = "Employed";
+            String staffStatus = staff.getStaffStatus();
             String managerICNumber = staff.getManagerICNumber();
             String staffEmail = staff.getStaffEmail();
             String staffPassword = staff.getStaffPassword();
