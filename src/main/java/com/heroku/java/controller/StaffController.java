@@ -384,7 +384,7 @@ public class StaffController {
          }
          
          @PostMapping("/staffUpdate")
-         public String staffUpdate(@RequestParam("staffICNumber") String staffICNumber, Model model) {
+         public String staffUpdate(HttpSession session, Model model) {
            System.out.println("Staff IC Number : " + staffICNumber);
            try {
             Connection connection = dataSource.getConnection();
