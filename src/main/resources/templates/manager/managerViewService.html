@@ -135,7 +135,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="serviceID" id="" class="form-control" th:value ="${service.serviceID}" disabled>
+                            <input type="text" name="serviceID" id="" class="form-control" th:value ="${service.serviceID}" readonly>
                         </div>
                     </div>
 
@@ -147,7 +147,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="serviceName" id="" class="form-control" th:value ="${service.serviceName}" disabled>
+                            <input type="text" name="serviceName" id="" class="form-control" th:value ="${service.serviceName}" readonly>
                         </div>
                     </div>
 
@@ -159,7 +159,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="serviceType" id="" class="form-control" th:value ="${service.serviceType}" disabled>
+                            <input type="text" name="serviceType" id="" class="form-control" th:value ="${service.serviceType}" readonly>
                         </div>
                     </div>
 
@@ -172,7 +172,7 @@
                                 </span>
                             </div>
                             <div class="col-8">
-                                <input type="text" name="balance" id="" class="form-control" th:value ="${service.balance}" disabled>
+                                <input type="text" name="balance" id="" class="form-control" th:value ="${service.balance}" readonly>
                             </div>
                         </div>
                     </th:block>
@@ -186,7 +186,7 @@
                                 </span>
                             </div>
                             <div class="col-8">
-                                <input type="text" name="eventCapacity" id="" class="form-control" th:value ="${service.eventCapacity}" disabled>
+                                <input type="text" name="eventCapacity" id="" class="form-control" th:value ="${service.eventCapacity}" readonly>
                             </div>
                         </div>
                     </th:block> -->
@@ -199,7 +199,19 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="servicePrice" id="" class="form-control" th:value ="${service.servicePrice}" disabled>
+                            <input type="text" name="servicePrice" id="" class="form-control" th:value ="${service.servicePrice}" readonly>
+                        </div>
+                    </div>
+
+                    <div class="row m-3">
+                        <div class="col-1"></div>
+                        <div class="col pt-3">
+                            <span>
+                                <h6>Service Status</h6>
+                            </span>
+                        </div>
+                        <div class="col-8">
+                            <input type="text" name="serviceStatus" id="" class="form-control" th:value ="${service.serviceStatus}" readonly>
                         </div>
                     </div>
 
