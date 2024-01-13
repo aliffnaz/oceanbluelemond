@@ -102,16 +102,6 @@ public class GettingStartedApplication {
         return "staff/staffLogin";
     }
 
-    @GetMapping("/staffProfile")
-    public String staffProfile() {
-        return "staff/staffProfile";
-    }
-
-    @GetMapping("/staffUpdate")
-    public String staffUpdate() {
-        return "staff/staffUpdate";
-    }
-
     @GetMapping("/staffViewGuest")
     public String staffViewGuest() {
         return "staff/staffViewGuest";
