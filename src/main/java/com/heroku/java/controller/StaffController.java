@@ -337,8 +337,9 @@ public class StaffController {
          }
 
          @GetMapping("/staffUpdate")
-         public String staffUpdate(@RequestParam("staffICNumber") String staffICNumber, Model model) {
-           System.out.println("Staff IC Number : " + staffICNumber);
+         public String staffUpdate(HttpSession session, Model model) {
+          String staffICNumber = (String) session.getAttribute("staffICNumber");
+          System.out.println("Staff IC Number : " + staffICNumber);
            try {
             Connection connection = dataSource.getConnection();
             String sql = "SELECT stafficnumber, staffname, staffgender, staffphonenumber, staffrace, staffreligion, staffmaritalstatus, staffaddress, staffrole, staffstatus, managerICNumber, staffemail FROM public.staff where stafficnumber = ?";
@@ -383,52 +384,105 @@ public class StaffController {
            return "staff/staffUpdate";
          }
          
-        //  @PostMapping("/staffUpdate")
-        //  public String staffUpdate(HttpSession session, Model model) {
-        //    System.out.println("Staff IC Number : " + staffICNumber);
-        //    try {
-        //     Connection connection = dataSource.getConnection();
-        //     String sql = "SELECT stafficnumber, staffname, staffgender, staffphonenumber, staffrace, staffreligion, staffmaritalstatus, staffaddress, staffrole, staffstatus, managerICNumber, staffemail FROM public.staff where stafficnumber = ?";
-        //     final var statement = connection.prepareStatement(sql);
-        //     statement.setString(1, staffICNumber);
-        //     final var resultSet = statement.executeQuery();
+         @PostMapping("/staffUpdate")
+         public String staffUpdate1(HttpSession session, @ModelAttribute("staffUpdate") staff staff, Model model) {
+          String staffICNumber = (String) session.addAttribute("staffICNumber");
+          System.out.println("Staff IC Number : " + staffICNumber);
+           try {
+
+            Connection connection = dataSource.getConnection();
+            String sql = "UPDATE staff SET staffname=?, staffgender=?, staffphonenumber=?, staffrace=?, staffreligion=?, staffmaritalstatus=?, staffaddress=?, staffrole=?, staffstatus=?, managerICNumber=?, staffemail=?, staffpassword=? WHERE stafficnumber=?";
+            final var statement = connection.prepareStatement(sql);
+
+            String staffName = staff.getStaffName();
+            String staffGender = staff.getStaffGender();
+            String staffPhoneNumber = staff.getStaffPhoneNumber();
+            String staffRace = staff.getStaffRace();
+            String staffReligion = staff.getStaffReligion();
+            String staffMaritalStatus = staff.getStaffMaritalStatus();
+            String staffAddress = staff.getStaffAddress();
+            String staffRole = staff.getStaffRole();
+            String staffStatus = "Employed";
+            String managerICNumber = staff.getManagerICNumber();
+            String staffEmail = staff.getStaffEmail();
+            String staffPassword = staff.getStaffPassword();
+            
+            
+            statement.setString(1, staffName);
+            statement.setString(2, staffGender);
+            statement.setString(3, staffPhoneNumber);
+            statement.setString(4, staffRace);
+            statement.setString(5, staffReligion);
+            statement.setString(6, staffMaritalStatus);
+            statement.setString(7, staffAddress);
+            statement.setString(8, staffRole);
+            statement.setString(9, staffStatus);
+            statement.setString(10, managerICNumber);
+            statement.setString(11, staffEmail);
+            statement.setString(12, staffPassword);
+            statement.setString(13, staffICNumber);
+
+            statement.executeUpdate();
+            
+             System.out.println("Staff IC Number : "+staffICNumber);
+            
+            connection.close();
+                
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return "redirect:/index";
+                }
+            return "redirect:/managerStaffList";
+        }
+
+
+         @GetMapping("/managerViewStaff")
+         public String managerViewStaff(@RequestParam("staffICNumber") String staffICNumber, Model model) {
+           System.out.println("Staff IC Number : " + staffICNumber);
+           try {
+             Connection connection = dataSource.getConnection();
+             String sql = "SELECT stafficnumber, staffname, staffgender, staffphonenumber, staffrace, staffreligion, staffmaritalstatus, staffaddress, staffrole, staffstatus, managerICNumber, staffemail FROM public.staff where stafficnumber = ?";
+             final var statement = connection.prepareStatement(sql);
+             statement.setString(1, staffICNumber);
+             final var resultSet = statement.executeQuery();
          
-        //     if (resultSet.next()) {
-        //         String staffName = resultSet.getString("staffname");
-        //         String staffGender = resultSet.getString("staffgender");
-        //         String staffPhoneNumber = resultSet.getString("staffphonenumber");
-        //         String staffRace = resultSet.getString("staffrace");
-        //         String staffReligion = resultSet.getString("staffreligion");
-        //         String staffMaritalStatus = resultSet.getString("staffmaritalstatus");
-        //         String staffAddress = resultSet.getString("staffaddress");
-        //         String staffRole = resultSet.getString("staffrole");
-        //         String staffStatus = resultSet.getString("staffstatus");
-        //         String managerICNumber = resultSet.getString("managerICNumber");
-        //         String staffEmail = resultSet.getString("staffemail");
+             if (resultSet.next()) {
+                String staffName = resultSet.getString("staffname");
+                String staffGender = resultSet.getString("staffgender");
+                String staffPhoneNumber = resultSet.getString("staffphonenumber");
+                String staffRace = resultSet.getString("staffrace");
+                String staffReligion = resultSet.getString("staffreligion");
+                String staffMaritalStatus = resultSet.getString("staffmaritalstatus");
+                String staffAddress = resultSet.getString("staffaddress");
+                String staffRole = resultSet.getString("staffrole");
+                String staffStatus = resultSet.getString("staffstatus");
+                String managerICNumber = resultSet.getString("managerICNumber");
+                String staffEmail = resultSet.getString("staffemail");
          
-        //         staff staff = new staff();
-        //         staff.setStaffICNumber(staffICNumber);
-        //         staff.setStaffName(staffName);
-        //         staff.setStaffGender(staffGender);
-        //         staff.setStaffPhoneNumber(staffPhoneNumber);
-        //         staff.setStaffRace(staffRace);
-        //         staff.setStaffReligion(staffReligion);  
-        //         staff.setStaffMaritalStatus(staffMaritalStatus);
-        //         staff.setStaffAddress(staffAddress);
-        //         staff.setStaffRole(staffRole);
-        //         staff.setStaffStatus(staffStatus);
-        //         staff.setManagerICNumber(managerICNumber);
-        //         staff.setStaffEmail(staffEmail);
-        //         model.addAttribute("staff", staff);  
+                staff staff = new staff();
+                staff.setStaffICNumber(staffICNumber);
+                staff.setStaffName(staffName);
+                staff.setStaffGender(staffGender);
+                staff.setStaffPhoneNumber(staffPhoneNumber);
+                staff.setStaffRace(staffRace);
+                staff.setStaffReligion(staffReligion);  
+                staff.setStaffMaritalStatus(staffMaritalStatus);
+                staff.setStaffAddress(staffAddress);
+                staff.setStaffRole(staffRole);
+                staff.setStaffStatus(staffStatus);
+                staff.setManagerICNumber(managerICNumber);
+                staff.setStaffEmail(staffEmail);
+                model.addAttribute("staff", staff); 
    
-        //        connection.close();
-        //      }
-        //    } catch (Exception e) {
-        //      e.printStackTrace();
-        //    }
+               connection.close();
+
+             }
+           } catch (Exception e) {
+             e.printStackTrace();
+           }
          
-        //    return "staff/staffUpdate";
-        //  }
+           return "staff/staffUpdate";
+         }
 
     // /* delete controller
     // @GetMapping("/deletestaff")
