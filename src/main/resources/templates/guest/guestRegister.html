@@ -109,7 +109,7 @@
                 <div class="col">
 
                 </div>
-<form th:action="@{/guestRegister}" modelAttribute="guestRegister" method="post"></form>
+                <form th:action="@{/guestRegister}" modelAttribute="guestRegister" method="post" th:object="${guestRegister}">
                 <div class="col-md card card-body py-5">
                     <div class="row m-4">
                         <div class="col-3 text-center">
@@ -237,7 +237,6 @@
                         </div>
                     </div>
 
-
                     <div class="row m-3">
                         <div class="col-1"></div>
                         <div class="col pt-3">
@@ -255,39 +254,27 @@
                             <span>Already have an account? Sign in <a th:href="@{/guestLogin}">Here</a></span>
                         </div>
                     </div>
-
-
-
                     <div class="row m-5">
-
-
-
                         <div class="col text-center">
                             <!-- <a th:href="@{/index}" class="btn btn-dark btn-lg"
                                 style="border-radius: 3px 3px 3px 3px; height: auto; width:150px"
                                 onclick="success()">Sign Up</a> -->
 
-                            <button type="submit"  class="btn btn-dark btn-lg"
-                                style="border-radius: 3px 3px 3px 3px; height: auto; width:150px"
-                                onclick="success()">
+                            <button type="submit"  class="btn btn-dark btn-lg" style="border-radius: 3px 3px 3px 3px; height: auto; width:150px" onclick="success()">
                                 Sign Up
                             </button>
 
-                            <script>
+<!--                             <script>
                                 function success() {
                                     alert("Successfully Signed Up");
                                     // window.location('index.html');
                                 }
-                            </script>
+                            </script> -->
                         </div>
                     </div>
-
-
                 </div>
-
-
+            </form>
                 <div class="col">
-
                 </div>
             </div>
 
