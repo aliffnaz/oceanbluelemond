@@ -383,7 +383,7 @@ public class StaffController {
            return "staff/staffUpdate";
          }
          
-         @GetMapping("/staffUpdate")
+         @PostMapping("/staffUpdate")
          public String staffUpdate(@RequestParam("staffICNumber") String staffICNumber, Model model) {
            System.out.println("Staff IC Number : " + staffICNumber);
            try {
