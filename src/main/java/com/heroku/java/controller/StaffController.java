@@ -144,7 +144,7 @@ public class StaffController {
                     e.printStackTrace();
                     return "redirect:/index";
                 }
-            return "redirect:/staffProfile";
+            return "redirect:/managerStaffList";
         }
 
 
@@ -432,7 +432,7 @@ public class StaffController {
                     e.printStackTrace();
                     return "redirect:/index";
                 }
-            return "redirect:/managerStaffList";
+            return "redirect:/staffProfile";
         }
 
     // /* delete controller
