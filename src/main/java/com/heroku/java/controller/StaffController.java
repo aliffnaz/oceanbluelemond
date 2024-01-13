@@ -402,7 +402,7 @@ public class StaffController {
             String staffMaritalStatus = staff.getStaffMaritalStatus();
             String staffAddress = staff.getStaffAddress();
             String staffRole = staff.getStaffRole();
-            String staffStatus = staff.getStaffStatus();
+            String staffStatus = "Employed";
             String managerICNumber = staff.getManagerICNumber();
             String staffEmail = staff.getStaffEmail();
             String staffPassword = staff.getStaffPassword();
