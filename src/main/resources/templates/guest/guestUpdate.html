@@ -141,7 +141,7 @@
                             </div>
                         </div>
                     </div>
-<form th:action="${/guestUpdate}" modelAttribute="guestUpdate" th:object="(${guestUpdate})">
+                    <form method="post" th:action="${/guestUpdate}" modelAttribute="guestUpdate1" th:object="(${guestUpdate1})">
                     <div class="row m-3">
                         <div class="col-1"></div>
                         <div class="col pt-3">
@@ -150,7 +150,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="guestName" id="" class="form-control" th:value="${guest.guestName}">
+                            <input type="text" name="guestName" id="guestName" class="form-control" th:value="${guest.guestName}">
                         </div>
                     </div>
 
@@ -162,7 +162,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="guestICNumber" id="" class="form-control" th:value="${guest.guestICNumber}">
+                            <input type="text" name="guestICNumber" id="guestICNumber" class="form-control" th:value="${guest.guestICNumber}" readonly>
                         </div>
                     </div>
 
@@ -174,7 +174,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="gusetAddress" id="" class="form-control" th:value="${guest.guestAddress}">
+                            <input type="text" name="guestAddress" id="guestAddress" class="form-control" th:value="${guest.guestAddress}">
                         </div>
                     </div>
 
@@ -186,8 +186,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <select name="guestGender" id="" class="form-control form-select">
-                                <option value="">Select</option>
+                            <select name="guestGender" id="guestGender" class="form-control form-select">
                                 <option value="Male" >Male</option>
                                 <option value="Female">Female</option>
                             </select>
@@ -202,8 +201,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <select name="guestRace" id="" class="form-control form-select">
-                                <option value="">Select</option>
+                            <select name="guestRace" id="guestRace" class="form-control form-select">
                                 <option value="Melayu" >Melayu</option>
                                 <option value="Cina">Cina</option>
                                 <option value="India">India</option>
@@ -220,14 +218,12 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <select name="guestReligion" id="" class="form-control form-select">
-                                <option value="">Select</option>
+                            <select name="guestReligion" id="guestReligion" class="form-control form-select">
                                 <option value="Islam" >Islam</option>
-                                <option value="Budha">Budha</option>
+                                <option value="Buddha">Buddha</option>
                                 <option value="Christian">Christian</option>
                                 <option value="Others">Others</option>
                             </select>
-
                         </div>
                     </div>
 
@@ -239,7 +235,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="guestPhoneNumber" th:value="${guest.guestPhoneNumber}" class="form-control" value="01234567890">
+                            <input type="text" name="guestPhoneNumber" id="guestPhoneNumber" th:value="${guest.guestPhoneNumber}" class="form-control">
                         </div>
                     </div>
 
@@ -251,7 +247,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="guestEmail" id="" class="form-control" th:value="${guest.guestEmail}">
+                            <input type="text" name="guestEmail" id="guestEmail" class="form-control" th:value="${guest.guestEmail}">
                         </div>
                     </div>
 
@@ -264,16 +260,14 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="guestPassword" id="" class="form-control" th:value="${guest.guestPassword}">
+                            <input type="password" name="guestPassword" id="guestPassword" class="form-control" th:value="${guest.guestPassword}">
                         </div>
                     </div>
 
 
                     <div class="row mt-3">
                         <div class="col"></div>
-                        <div class="col-9 text-center"><span>Want to delete your account? Click <a
-                                    th:href="@{/index}">Here</a></span></div>
-
+                        <div class="col-9 text-center"><span>Want to delete your account? Click <a th:href="@{/logout}">Here</a></span></div>
                         <div class="col"></div>
                     </div>
 
@@ -285,43 +279,30 @@
                             <!-- <a th:href="@{/guestProfile}" class="btn btn-dark btn-md"
                                 style="border-radius: 3px 3px 3px 3px; height: auto; width:150px" onclick="success()">Done</a> -->
 
-                            <button type="submit" class="btn btn-dark btn-md"
-                                style="border-radius: 3px 3px 3px 3px; height: auto; width:150px" onclick="success()">
+                            <button type="submit" class="btn btn-dark btn-md" style="border-radius: 3px 3px 3px 3px; height: auto; width:150px" onclick="success()">
                                 Done
                             </button>
-                            <script>
+<!--                             <script>
                                 function success() {
                                     alert("Successfully Update");
                                     // window.location('index.html');
                                 }
-                            </script>
+                            </script> -->
 
                             <a th:href="@{/guestProfile}" class="btn btn-danger btn-md"
                                 style="border-radius: 3px 3px 3px 3px; height: auto; width:150px">Cancel</a>
                         </form>
-
                         </div>
                         <div class="col"></div>
                     </div>
-
-
                 </div>
-
-
-                <div class="col">
-
-                </div>
+                <div class="col"></div>
             </div>
 
             <div class="container mt-5">
                 &nbsp;
             </div>
-
-
             <!-- <div class="row card card-body align-items-center"> -->
-
-
-
         </div>
         <!-- </div> -->
 
