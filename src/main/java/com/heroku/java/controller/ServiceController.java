@@ -37,7 +37,8 @@ public class ServiceController {
     }
 
     @GetMapping("/managerAddService")
-    public String managerAddService() {
+    public String managerAddService(HttpSession session) {
+        String staffICNumber = (String) session.getAttribute("staffICNumber");
         return "manager/managerAddService";
     }
 
