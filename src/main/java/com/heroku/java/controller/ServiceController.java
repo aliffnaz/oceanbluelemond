@@ -53,7 +53,7 @@ public class ServiceController {
             String serviceName=service.getServiceName();
             String serviceType=service.getServiceType();
             String servicePrice=service.getServicePrice();
-            String serviceStatus=service.getServiceStatus();
+            String serviceStatus="Available";
 
             if (serviceType.equalsIgnoreCase("roomService")){
             serviceType = "Room Service";}
