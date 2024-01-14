@@ -34,11 +34,11 @@ import java.util.Base64;
 @SpringBootApplication
 @Controller
 
-public class OrderController {
+public class ReservationController {
   private final DataSource dataSource;
 
   @Autowired
-  public OrderController(DataSource dataSource) {
+  public ReservationController(DataSource dataSource) {
     this.dataSource = dataSource;
   }
 
@@ -73,7 +73,7 @@ public class OrderController {
         e.printStackTrace();
         return "redirect:/index";
     }
-  }
-  return "guest/guestMakeRoomService";
+    return "guest/guestMakeRoomService";  
+}
   
 }
