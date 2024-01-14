@@ -48,7 +48,7 @@ public class ReservationController {
   }
 
   @PostMapping("/guestMakeRoomReservation")
-  public String guestMakeRoomReservation(HttpSession session, @ModelAttribute("guestMakeRoomReservation") reservation reservation, room room, service service, reservationservice reservationservice, roomreservation roomreservation, staff staff){
+  public String guestMakeRoomReservation(HttpSession session, @ModelAttribute("guestMakeRoomReservation") reservation reservation, room room, service service, reservationservice reservationservice, roomreservation roomreservation, staff staff, Model model){
 
     try{
         Connection connection = dataSource.getConnection();
