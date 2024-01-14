@@ -36,7 +36,7 @@ public class GettingStartedApplication {
     }
 
     @GetMapping("/guestMakeRoomService")
-    public String guestMakeRoomService() {
+    public String guestMakeRoomService() { 
         return "guest/guestMakeRoomService";
     }
 
