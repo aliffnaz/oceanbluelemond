@@ -1,4 +1,5 @@
 package com.heroku.java.model;
+import java.util.Date;
 
 public class reservation {
 
@@ -6,8 +7,8 @@ public class reservation {
     private String guestID;
     private String guestQuantity;
     private String durationOfStay;
-    private String dateStart;
-    private String dateEnd;
+    private Date dateStart;
+    private Date dateEnd;
     private String totalAdult;
     private String totalKids;
     private String reserveStatus;
@@ -78,28 +79,28 @@ public class reservation {
     /**
      * @return String return the dateStart
      */
-    public String getDateStart() {
+    public Date getDateStart() {
         return dateStart;
     }
 
     /**
      * @param dateStart the dateStart to set
      */
-    public void setDateStart(String dateStart) {
+    public void setDateStart(Date dateStart) {
         this.dateStart = dateStart;
     }
 
     /**
      * @return String return the dateEnd
      */
-    public String getDateEnd() {
+    public Date getDateEnd() {
         return dateEnd;
     }
 
     /**
      * @param dateEnd the dateEnd to set
      */
-    public void setDateEnd(String dateEnd) {
+    public void setDateEnd(Date dateEnd) {
         this.dateEnd = dateEnd;
     }
 
