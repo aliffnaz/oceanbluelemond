@@ -1,4 +1,5 @@
 package com.heroku.java.model;
+import java.util.Date;
 
 public class reservation {
 
