@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -135,7 +135,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="serviceID" id="" class="form-control" th:value ="${service.serviceID}" readonly>
+                            <input type="text" name="serviceID" id="serviceID" class="form-control" th:value ="${service.serviceID}" readonly>
                         </div>
                     </div>
 
@@ -147,7 +147,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="serviceName" id="" class="form-control" th:value ="${service.serviceName}" readonly>
+                            <input type="text" name="serviceName" id="serviceName" class="form-control" th:value ="${service.serviceName}" readonly>
                         </div>
                     </div>
 
@@ -159,11 +159,11 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="serviceType" id="" class="form-control" th:value ="${service.serviceType}" readonly>
+                            <input type="text" name="serviceType" id="serviceType" class="form-control" th:value ="${service.serviceType}" readonly>
                         </div>
                     </div>
 
-                    <!-- <th:block th:if="${service.serviceType == 'Room Service'}">
+                    <th:block th:if="${service.serviceType == 'Room Service'}">
                         <div class="row m-3">
                             <div class="col-1"></div>
                             <div class="col pt-3">
@@ -172,7 +172,7 @@
                                 </span>
                             </div>
                             <div class="col-8">
-                                <input type="text" name="balance" id="" class="form-control" th:value ="${service.balance}" readonly>
+                                <input type="text" name="balance" id="balance" class="form-control" th:value ="${service.balance}" readonly>
                             </div>
                         </div>
                     </th:block>
@@ -186,10 +186,10 @@
                                 </span>
                             </div>
                             <div class="col-8">
-                                <input type="text" name="eventCapacity" id="" class="form-control" th:value ="${service.eventCapacity}" readonly>
+                                <input type="text" name="eventCapacity" id="eventCapacity" class="form-control" th:value ="${service.eventCapacity}" readonly>
                             </div>
                         </div>
-                    </th:block> -->
+                    </th:block>
 
                     <div class="row m-3">
                         <div class="col-1"></div>
@@ -211,7 +211,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="serviceStatus" id="" class="form-control" th:value ="${service.serviceStatus}" readonly>
+                            <input type="text" name="serviceStatus" id="serviceStatus" class="form-control" th:value ="${service.serviceStatus}" readonly>
                         </div>
                     </div>
 
