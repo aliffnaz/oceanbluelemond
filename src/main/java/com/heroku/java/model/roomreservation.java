@@ -1,19 +1,19 @@
 package com.heroku.java.model;
 
-public class roomreservation {
+public class roomReservation {
 
-    private String roomreservationid;
-    private String roomnum;
-    private String reservationid;
+    private String roomReservationID;
+    private String roomNum;
+    private String reservationID;
 
-    public roomreservation() {
+    public roomReservation() {
 
     }
 
-    public roomreservation(String roomreservationid, String roomnum, String reservationid){
-      this.roomreservationid = roomreservationid;
-      this.roomnum = roomnum;
-      this.reservationid = reservationid;
+    public roomReservation(String roomReservationID, String roomNum, String reservationID){
+      this.roomReservationID = roomReservationID;
+      this.roomNum = roomNum;
+      this.reservationID = reservationID;
     }
 
 }
