@@ -14,6 +14,7 @@ public class reservation {
     private String reserveStatus;
     private int totalRoom;
     private String totalPayment;
+    private String addon;
 
     public reservation() {
 
@@ -172,6 +173,20 @@ public class reservation {
      */
     public void setTotalPayment(String totalPayment) {
         this.totalPayment = totalPayment;
+    }
+
+    /**
+     * @return String return the addon
+     */
+    public String getAddon() {
+        return addon;
+    }
+
+    /**
+     * @param addon the addon to set
+     */
+    public void setAddon(String addon) {
+        this.addon = addon;
     }
 
 }
