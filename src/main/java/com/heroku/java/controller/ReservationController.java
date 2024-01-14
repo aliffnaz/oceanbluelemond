@@ -56,12 +56,12 @@ public class ReservationController {
         // final var statement = connection.prepareStatement(sql);
 
         String reservationID = reservation.getReservationID();
-        String guestICNumber = (String) session.getAttribute();
+        String guestICNumber = (String) session.getAttribute("guestICNumber");
         // Date dateStart = reservation.getAttribute("dateStart");
         // Date dateEnd = reservation.getAttribute("dateEnd");
-        String startDate = session.getStartDate();
-        String totalAdult = reservation.getTotalAdult();
-        String totalKids = reservation.getTotalKids();
+        String dateStart = session.getStartDate();
+        int totalAdult = reservation.getTotalAdult();
+        int totalKids = reservation.getTotalKids();
         String reserveStatus = "Pending";
         int totalRoom = reservation.getTotalRoom();
         String totalPayment = "0.00";
