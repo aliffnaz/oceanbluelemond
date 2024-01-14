@@ -5,14 +5,14 @@ public class reservation {
 
     private String reservationID;
     private String guestID;
-    private String guestQuantity;
-    private String durationOfStay;
-    private Date dateStart;
-    private Date dateEnd;
-    private String totalAdult;
-    private String totalKids;
+    private int guestQuantity;
+    private int durationOfStay;
+    private String dateStart;
+    private String dateEnd;
+    private int totalAdult;
+    private int totalKids;
     private String reserveStatus;
-    private String totalRoom;
+    private int totalRoom;
     private String totalPayment;
 
     public reservation() {
@@ -50,7 +50,7 @@ public class reservation {
     /**
      * @return String return the guestQuantity
      */
-    public String getGuestQuantity() {
+    public int getGuestQuantity() {
         this.guestQuantity = this.totalAdult + this.totalKids;
         return this.guestQuantity;
     }
@@ -58,77 +58,77 @@ public class reservation {
     /**
      * @param guestQuantity the guestQuantity to set
      */
-    public void setGuestQuantity(String guestQuantity) {
+    public void setGuestQuantity(int guestQuantity) {
         this.guestQuantity = guestQuantity;
     }
 
     /**
      * @return String return the durationOfStay
      */
-    public String getDurationOfStay() {
+    public int getDurationOfStay() {
         return durationOfStay;
     }
 
     /**
      * @param durationOfStay the durationOfStay to set
      */
-    public void setDurationOfStay(String durationOfStay) {
+    public void setDurationOfStay(int durationOfStay) {
         this.durationOfStay = durationOfStay;
     }
 
     /**
      * @return String return the dateStart
      */
-    public Date getDateStart() {
+    public String getDateStart() {
         return dateStart;
     }
 
     /**
      * @param dateStart the dateStart to set
      */
-    public void setDateStart(Date dateStart) {
+    public void setDateStart(String dateStart) {
         this.dateStart = dateStart;
     }
 
     /**
      * @return String return the dateEnd
      */
-    public Date getDateEnd() {
+    public String getDateEnd() {
         return dateEnd;
     }
 
     /**
      * @param dateEnd the dateEnd to set
      */
-    public void setDateEnd(Date dateEnd) {
+    public void setDateEnd(String dateEnd) {
         this.dateEnd = dateEnd;
     }
 
     /**
      * @return String return the totalAdult
      */
-    public String getTotalAdult() {
+    public int getTotalAdult() {
         return totalAdult;
     }
 
     /**
      * @param totalAdult the totalAdult to set
      */
-    public void setTotalAdult(String totalAdult) {
+    public void setTotalAdult(int totalAdult) {
         this.totalAdult = totalAdult;
     }
 
     /**
      * @return String return the totalKids
      */
-    public String getTotalKids() {
+    public int getTotalKids() {
         return totalKids;
     }
 
     /**
      * @param totalKids the totalKids to set
      */
-    public void setTotalKids(String totalKids) {
+    public void setTotalKids(int totalKids) {
         this.totalKids = totalKids;
     }
 
@@ -149,14 +149,14 @@ public class reservation {
     /**
      * @return String return the totalRoom
      */
-    public String getTotalRoom() {
+    public int getTotalRoom() {
         return totalRoom;
     }
 
     /**
      * @param totalRoom the totalRoom to set
      */
-    public void setTotalRoom(String totalRoom) {
+    public void setTotalRoom(int totalRoom) {
         this.totalRoom = totalRoom;
     }
 
