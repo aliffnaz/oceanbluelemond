@@ -60,11 +60,6 @@ public class GettingStartedApplication {
         return "guest/guestViewRoom";
     }
 
-     @GetMapping("/guestMakeRoomReservation")
-    public String guestMakeRoomReservation() {
-        return "guest/guestMakeRoomReservation";
-    }
-
     @GetMapping("/guestRoomReservation")
     public String guestRoomReservation() {
         return "guest/guestRoomReservation";
