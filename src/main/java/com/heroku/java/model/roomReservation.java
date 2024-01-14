@@ -16,4 +16,23 @@ public class roomReservation {
       this.reservationID = reservationID;
     }
 
+    public String getRoomReservationID() {
+		return roomReservationID;
+	}
+	public void setRoomReservationID(String roomReservationID) {
+		this.roomReservationID = roomReservationID;
+	}
+	public String getRoomNum() {
+		return roomNum;
+	}
+	public void setRoomNum(String roomNum) {
+		this.roomNum = roomNum;
+	}
+	public String getReservationID() {
+		return reservationID;
+	}
+	public void setReservationID(String reservationID) {
+		this.reservationID = reservationID;
+	}
+
 }
