@@ -341,6 +341,10 @@
                 eventServiceField.style.display = 'block';
             }
         }
+
+        // Trigger initial change to set the correct initial state
+        var event = new Event('change');
+        serviceTypeField.dispatchEvent(event);
     });
 </script>
 
