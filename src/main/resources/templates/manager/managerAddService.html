@@ -325,7 +325,7 @@
         toggleFieldsVisibility();
 
         // Add event listener for changes in service type
-        serviceTypeField.addEventListener('change', function () {
+        serviceTypeField.addEventListener('input', function () {
             toggleFieldsVisibility();
         });
 
@@ -341,10 +341,6 @@
                 eventServiceField.style.display = 'block';
             }
         }
-
-        // Trigger initial change to set the correct initial state
-        var event = new Event('change');
-        serviceTypeField.dispatchEvent(event);
     });
 </script>
 
