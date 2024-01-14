@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 //import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -48,7 +48,7 @@ public class ReservationController {
   }
 
   @PostMapping("/guestMakeRoomReservation")
-  public String guestMakeRoomReservation(HttpSession session, @ModelAttribute("guestMakeRoomReservation") reservation reservation, room room, service service, reservationservice reservationservice, roomreservation roomreservation, staff staff, Model model){
+  public String guestMakeRoomReservation(HttpSession session, @ModelAttribute("guestMakeRoomReservation") reservation reservation, room room, service service, reservationService reservationService, roomReservation roomReservation, staff staff, Model model){
 
     try{
         Connection connection = dataSource.getConnection();
@@ -56,7 +56,7 @@ public class ReservationController {
         // final var statement = connection.prepareStatement(sql);
 
         String reservationID = reservation.getAttribute("reservationID");
-        String guestICNumber = session.getAttribute("guestICNumber");
+        String guestICNumber = (String) session.getAttribute("guestICNumber");
         // Date dateStart = reservation.getAttribute("dateStart");
         // Date dateEnd = reservation.getAttribute("dateEnd");
         String reservationdate = reservation.getAttribute("date_booking");
