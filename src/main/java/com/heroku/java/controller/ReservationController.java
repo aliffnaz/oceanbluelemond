@@ -59,7 +59,7 @@ public class ReservationController {
         String guestICNumber = (String) session.getAttribute("guestICNumber");
         // Date dateStart = reservation.getAttribute("dateStart");
         // Date dateEnd = reservation.getAttribute("dateEnd");
-        String dateStart = session.getDateStart();
+        String dateStart = reservation.getDateStart();
         int totalAdult = reservation.getTotalAdult();
         int totalKids = reservation.getTotalKids();
         String reserveStatus = "Pending";
