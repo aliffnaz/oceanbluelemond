@@ -321,13 +321,8 @@
         var roomServiceField = document.getElementById('roomServiceField');
         var eventServiceField = document.getElementById('eventServiceField');
 
-        // Initial check on page load
-        toggleFieldsVisibility();
-
         // Add event listener for changes in service type
-        serviceTypeField.addEventListener('input', function () {
-            toggleFieldsVisibility();
-        });
+        serviceTypeField.addEventListener('input', toggleFieldsVisibility);
 
         function toggleFieldsVisibility() {
             // Hide both fields initially
@@ -341,6 +336,9 @@
                 eventServiceField.style.display = 'block';
             }
         }
+
+        // Initial check on page load
+        toggleFieldsVisibility();
     });
 </script>
 
