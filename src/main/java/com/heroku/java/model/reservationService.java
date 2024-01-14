@@ -20,4 +20,36 @@ public class reservationService {
       this.serviceQuantity = serviceQuantity;
     }
 
+    public String getReservationServiceID() {
+		return reservationServiceID;
+	}
+	public void setReservationServiceID(String reservationServiceID) {
+		this.reservationServiceID = reservationServiceID;
+	}
+	public String getServiceID() {
+		return serviceID;
+	}
+	public void setServiceID(String serviceID) {
+		this.serviceID = serviceID;
+	}
+	public String getReservationID() {
+		return reservationID;
+	}
+	public void setReservationID(String reservationID) {
+		this.reservationID = reservationID;
+	}
+	public String getServiceDuration() {
+		return serviceDuration;
+	}
+	public void setServiceDuration(String serviceDuration) {
+		this.serviceDuration = serviceDuration;
+	}
+	public String getServiceQuantity() {
+		return serviceQuantity;
+	}
+	public void setServiceQuantity(String serviceQuantity) {
+		this.serviceQuantity = serviceQuantity;
+	}
+
+
 }
