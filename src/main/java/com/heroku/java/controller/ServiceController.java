@@ -249,12 +249,13 @@ public class ServiceController {
     public String managerUpdateService(@ModelAttribute("managerUpdateService") service service, roomService roomService, eventService eventService) {
         try {
             Connection connection = dataSource.getConnection();
-            String sql = "UPDATE service SET serviceName=?, serviceType=?, servicePrice=? WHERE serviceID=?";
+            String sql = "UPDATE service SET serviceName=?, serviceType=?, servicePrice=?, servicestatus=? WHERE serviceID=?";
             final var statement = connection.prepareStatement(sql);
             statement.setString(1, service.getServiceName());
             statement.setString(2, service.getServiceType());
             statement.setString(3, service.getServicePrice());
-            statement.setString(4, service.getServiceID());
+            statement.setString(4, service.getServicePrice());
+            statement.setString(5, service.getServiceID());
 
             statement.executeUpdate();
 
