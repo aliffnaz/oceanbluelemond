@@ -35,6 +35,11 @@ public class GettingStartedApplication {
         return "index_logout";
     }
 
+    @GetMapping("/guestMakeRoomService")
+    public String guestMakeRoomService() {
+        return "guestMakeRoomService";
+    }
+
     @GetMapping("/logoutViewRoom")
     public String logoutViewRoom() {
         return "logoutViewRoom";
