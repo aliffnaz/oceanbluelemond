@@ -60,10 +60,10 @@ public class ReservationController {
         // Date dateStart = reservation.getAttribute("dateStart");
         // Date dateEnd = reservation.getAttribute("dateEnd");
         String dateStart = reservation.getDateStart();
-        int totalAdult = reservation.getTotalAdult();
-        int totalKids = reservation.getTotalKids();
+        int totalAdult = Integer.parseInt(reservation.getTotalAdult());
+        int totalKids = Integer.parseInt(reservation.getTotalKids());
         String reserveStatus = "Pending";
-        int totalRoom = reservation.getTotalRoom();
+        int totalRoom = Integer.parseInt(reservation.getTotalRoom());
         String totalPayment = "0.00";
 
         System.out.println("reservation date: " + dateStart);
