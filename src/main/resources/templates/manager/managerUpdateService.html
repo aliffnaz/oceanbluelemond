@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -160,9 +160,37 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="serviceType" id="serviceType" class="form-control" th:value ="${service.seviceType}">
+                            <input type="text" name="serviceType" id="serviceType" class="form-control" th:value ="${service.serviceType}">
                         </div>
                     </div>
+
+                    <th:block th:if="${service.serviceType == 'Room Service'}">
+                        <div class="row m-3">
+                            <div class="col-1"></div>
+                            <div class="col pt-3">
+                                <span>
+                                    <h6>Balance</h6>
+                                </span>
+                            </div>
+                            <div class="col-8">
+                                <input type="text" name="balance" id="balance" class="form-control" th:value ="${service.balance}">
+                            </div>
+                        </div>
+                    </th:block>
+
+                    <th:block th:if="${service.serviceType == 'Event Service'}">
+                        <div class="row m-3">
+                            <div class="col-1"></div>
+                            <div class="col pt-3">
+                                <span>
+                                    <h6>Capacity</h6>
+                                </span>
+                            </div>
+                            <div class="col-8">
+                                <input type="text" name="eventCapacity" id="eventCapacity" class="form-control" th:value ="${service.eventCapacity}">
+                            </div>
+                        </div>
+                    </th:block>
 
                     <div class="row m-3">
                         <div class="col-1"></div>
