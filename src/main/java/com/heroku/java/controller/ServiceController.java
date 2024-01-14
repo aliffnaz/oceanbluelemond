@@ -254,7 +254,7 @@ public class ServiceController {
             statement.setString(1, service.getServiceName());
             statement.setString(2, service.getServiceType());
             statement.setString(3, service.getServicePrice());
-            statement.setString(4, service.getServicePrice());
+            statement.setString(4, service.getServiceStatus());
             statement.setString(5, service.getServiceID());
 
             statement.executeUpdate();
