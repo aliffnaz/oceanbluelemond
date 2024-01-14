@@ -6,8 +6,8 @@ public class reservation {
     private String guestID;
     private String guestQuantity;
     private String durationOfStay;
-    private String dateStart;
-    private String dateEnd;
+    private Date dateStart;
+    private Date dateEnd;
     private String totalAdult;
     private String totalKids;
     private String reserveStatus;
