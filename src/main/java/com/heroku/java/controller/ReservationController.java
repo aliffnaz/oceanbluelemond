@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
 //import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+
 
 import com.heroku.java.model.*;
 
@@ -55,18 +55,18 @@ public class ReservationController {
         // String sql = "INSERT INTO reservation() VALUES (?)";
         // final var statement = connection.prepareStatement(sql);
 
-        String reservationID = reservation.getAttribute("reservationID");
-        String guestICNumber = (String) session.getAttribute("guestICNumber");
+        String reservationID = reservation.getReservationID();
+        String guestICNumber = (String) session.getAttribute();
         // Date dateStart = reservation.getAttribute("dateStart");
         // Date dateEnd = reservation.getAttribute("dateEnd");
-        String reservationdate = reservation.getAttribute("date_booking");
-        String totalAdult = reservation.getAttribute("totalAdult");
-        String totalKids = reservation.getAttribute("totalKids");
+        String startDate = session.getStartDate();
+        String totalAdult = reservation.getTotalAdult();
+        String totalKids = reservation.getTotalKids();
         String reserveStatus = "Pending";
-        int totalRoom = reservation.getAttribute("totalRoom");
+        int totalRoom = reservation.getTotalRoom();
         String totalPayment = "0.00";
 
-        System.out.println("reservation date: " + reservationdate);
+        System.out.println("reservation date: " + startDate);
 
     }
     catch (Exception e) {
