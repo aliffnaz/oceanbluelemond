@@ -68,38 +68,73 @@ public class ReservationController {
     }
 
     //Method to check availability of rooms based on room type
-    private boolean checkRoomAvailability(String roomType, String dateStart, String dateEnd, Connection connection) throws SQLException {
+    // private boolean checkRoomAvailability(String roomType, String dateStart, String dateEnd, Connection connection) throws SQLException {
+    //     // Check if there are any overlapping reservations for the selected room type and date range
+    //     String sql = "SELECT COUNT(*) FROM roomreservation rr " +
+    //                  "JOIN reservation r ON rr.reservationid = r.reservationid " +
+    //                  "JOIN room room ON room.roomnum = rr.roomnum " +
+    //                  "WHERE room.roomtype = ? " +
+    //                  "  AND r.dateStart <= ? AND r.dateEnd >= ?";
+                     
+    //     try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            
+    //         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+    //         try{
+    //             java.util.Date utilStartDate = dateFormat.parse(dateStart);
+    //             java.util.Date utilEndDate = dateFormat.parse(dateEnd);
+    //             Date dateStartDate = new Date (utilStartDate.getTime());
+    //             Date dateEndDate = new Date (utilEndDate.getTime());
+    //             statement.setString(1, roomType);
+    //             statement.setDate(2, dateEndDate);  // Check if the reservation end date is after the selected start date
+    //             statement.setDate(3, dateStartDate); // Check if the reservation start date is before the selected end date
+    //         }
+    //         catch (ParseException e) {
+    //             e.printStackTrace();
+    //         }
+    //         try (ResultSet resultSet = statement.executeQuery()) {
+    //             if (resultSet.next()) {
+    //                 int overlappingReservationsCount = resultSet.getInt(1);
+    //                 // Adjust the logic based on your requirements
+    //                 return overlappingReservationsCount == 0;
+    //             }
+    //         }
+    //     }
+    //     return false;
+    // }
+
+    public static boolean checkRoomAvailability(String roomType, int totalRooms, Date startDate, Date endDate, Connection connection) throws SQLException {
         // Check if there are any overlapping reservations for the selected room type and date range
         String sql = "SELECT COUNT(*) FROM roomreservation rr " +
-                     "JOIN reservation r ON rr.reservationid = r.reservationid " +
-                     "JOIN room room ON room.roomnum = rr.roomnum " +
-                     "WHERE room.roomtype = ? " +
-                     "  AND r.dateStart <= ? AND r.dateEnd >= ?";
-                     
+                "JOIN reservation r ON rr.reservationid = r.reservationid " +
+                "WHERE rr.roomnum IN (SELECT roomnum FROM room WHERE roomtype = ? AND roomstatus = 'Available') " +
+                "  AND ((r.datestart <= ? AND r.dateend >= ?) OR (r.datestart <= ? AND r.dateend >= ?))";
+
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
-            try{
-                java.util.Date utilStartDate = dateFormat.parse(dateStart);
-                java.util.Date utilEndDate = dateFormat.parse(dateEnd);
-                Date dateStartDate = new Date (utilStartDate.getTime());
-                Date dateEndDate = new Date (utilEndDate.getTime());
-                statement.setString(1, roomType);
-                statement.setDate(2, dateEndDate);  // Check if the reservation end date is after the selected start date
-                statement.setDate(3, dateStartDate); // Check if the reservation start date is before the selected end date
-            }
-            catch (ParseException e) {
-                e.printStackTrace();
-            }
+            statement.setString(1, roomType);
+            statement.setDate(2, new java.sql.Date(endDate.getTime()));  // Check if the reservation end date is after the selected start date
+            statement.setDate(3, new java.sql.Date(startDate.getTime())); // Check if the reservation start date is before the selected end date
+            statement.setDate(4, new java.sql.Date(startDate.getTime())); // Check if the reservation start date is before the selected end date
+            statement.setDate(5, new java.sql.Date(endDate.getTime()));   // Check if the reservation end date is after the selected start date
+
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
                     int overlappingReservationsCount = resultSet.getInt(1);
-                    // Adjust the logic based on your requirements
                     return overlappingReservationsCount == 0;
                 }
             }
         }
         return false;
+    }
+
+    public static boolean updateRoomStatus(String roomType, int totalRooms, Connection connection) throws SQLException {
+        String updateSql = "UPDATE room SET roomstatus = 'Booked' WHERE roomtype = ? LIMIT ?";
+        try (PreparedStatement updateStatement = connection.prepareStatement(updateSql)) {
+            updateStatement.setString(1, roomType);
+            updateStatement.setInt(2, totalRooms);
+
+            int updatedRows = updateStatement.executeUpdate();
+            return updatedRows > 0;
+        }
     }
 
   @PostMapping("/guestMakeRoomReservation")
@@ -148,28 +183,29 @@ public class ReservationController {
         System.out.println("roomType: " + roomType);
 
         //get rooms according to roomtype
-        String sqlRoom = "SELECT roomNum, maxGuest from room where roomType=?";
-        final var statementRoom = connection.prepareStatement(sqlRoom);
-        statementRoom.setString(1, roomType);
+        // String sqlRoom = "SELECT roomNum, maxGuest from room where roomType=?";
+        // final var statementRoom = connection.prepareStatement(sqlRoom);
+        // statementRoom.setString(1, roomType);
         
         ResultSet availableRoomsResult = statementRoom.executeQuery();
         List<String> availableRoomNumbers = new ArrayList<>();
 
         boolean available = checkRoomAvailability(roomType, dateStart, dateEnd, connection);
+        System.out.println(available);
         
-        if (available){
-            int totalMaxGuests = 0;
-            while (availableRoomsResult.next()) {
-                availableRoomNumbers.add(availableRoomsResult.getString("roomNumber"));
-                totalMaxGuests += availableRoomsResult.getInt("maxGuest");
-            }
-            //List<String> selectedRoomNumbers = getRandomRoomNumbers(availableRoomNumbers, totalRoom);
-        if (totalMaxGuests < guestQuantity){
-            System.out.println("lebih ni");
-        }
+        // if (available){
+        //     int totalMaxGuests = 0;
+        //     while (availableRoomsResult.next()) {
+        //         availableRoomNumbers.add(availableRoomsResult.getString("roomNumber"));
+        //         totalMaxGuests += availableRoomsResult.getInt("maxGuest");
+        //     }
+        //     //List<String> selectedRoomNumbers = getRandomRoomNumbers(availableRoomNumbers, totalRoom);
+        // if (totalMaxGuests < guestQuantity){
+        //     System.out.println("lebih ni");
+        // }
             
-        System.out.println("totalMaxGuests: " + totalMaxGuests);
-        }
+        // System.out.println("totalMaxGuests: " + totalMaxGuests);
+        // }
         System.out.println("reservation date: " + date);
         
         //set reservation id into session
