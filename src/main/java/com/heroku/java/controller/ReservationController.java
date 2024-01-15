@@ -134,7 +134,7 @@ public class ReservationController {
         ResultSet availableRoomsResult = statementAvailableRooms.executeQuery();
         List<String> availableRoomNumbers = new ArrayList<>();
 
-        boolean available = checkRoomAvailability(roomType, dateStart, dateEnd, connection)
+        boolean available = checkRoomAvailability(roomType, dateStart, dateEnd, connection);
         
         if (available){
             int totalMaxGuests = 0;
