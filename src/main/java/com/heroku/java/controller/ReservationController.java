@@ -118,7 +118,6 @@ public class ReservationController {
 
         if (resultSetStaff.next()) {
             String staffICNumber = resultSetStaff.getString("staffICNumber");
-        }
 
         // String sql = "INSERT INTO reservation() VALUES (?)";
         // final var statement = connection.prepareStatement(sql);
@@ -146,7 +145,6 @@ public class ReservationController {
         System.out.println("totalKids: " + totalKids);
         System.out.println("totalRoom: " + totalRoom);
         System.out.println("guestQuantity: " + guestQuantity);
-        System.out.println("staffICNumber: " + staffICNumber);
         System.out.println("roomType: " + roomType);
 
         //get rooms according to roomtype
@@ -170,14 +168,14 @@ public class ReservationController {
             System.out.println("lebih ni");
         }
             
-        
-        }
         System.out.println("totalMaxGuests: " + totalMaxGuests);
+        }
         System.out.println("reservation date: " + date);
         
         //set reservation id into session
         session.setAttribute("reservationID", reservationID);
 
+        }
     }
     catch (Exception e) {
         e.printStackTrace();
