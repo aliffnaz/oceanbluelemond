@@ -130,13 +130,24 @@ public class ReservationController {
         String dateEnd = dateParts[1];
         String reservationID = reservation.getReservationID();
         String guestICNumber = (String) session.getAttribute("guestICNumber");
-        //String dateStart = reservation.getDateStart();
         int totalAdult = reservation.getTotalAdult();
         int totalKids = reservation.getTotalKids();
         String reserveStatus = "Pending";
         int totalRoom = reservation.getTotalRoom();
         String totalPayment = "0.00";
         int guestQuantity = totalAdult + totalKids;
+        
+        //debugging
+        System.out.println("dateStart: " + dateStart);
+        System.out.println("dateEnd: " + dateEnd);
+        System.out.println("reservationID: " + reservationID);
+        System.out.println("guestICNumber: " + guestICNumber);
+        System.out.println("totalAdult: " + totalAdult);
+        System.out.println("totalKids: " + totalKids);
+        System.out.println("totalRoom: " + totalRoom);
+        System.out.println("guestQuantity: " + guestQuantity);
+        System.out.println("staffICNumber: " + staffICNumber);
+        System.out.println("roomType: " + roomType);
 
         //get rooms according to roomtype
         String sqlRoom = "SELECT roomNum, maxGuest from room where roomType=?";
@@ -155,10 +166,13 @@ public class ReservationController {
                 totalMaxGuests += availableRoomsResult.getInt("maxGuest");
             }
             //List<String> selectedRoomNumbers = getRandomRoomNumbers(availableRoomNumbers, totalRoom);
-        
+        if (totalMaxGuests < guestQuantity){
+            System.out.println("lebih ni");
+        }
             
         
         }
+        System.out.println("totalMaxGuests: " + totalMaxGuests);
         System.out.println("reservation date: " + date);
         
         //set reservation id into session
