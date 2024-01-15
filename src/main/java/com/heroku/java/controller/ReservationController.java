@@ -69,7 +69,7 @@ public class ReservationController {
     private boolean checkRoomAvailability(String roomType, String dateStart, String dateEnd, Connection connection) throws SQLException {
         // Check if there are any overlapping reservations for the selected room type and date range
         String sql = "SELECT COUNT(*) FROM roomreservation rr " +
-                     "JOIN reservation r ON rr.reservation_id = r.reservation_id " +
+                     "JOIN reservation r ON rr.reservationid = r.reservationid " +
                      "JOIN room room ON room.roomnum = rr.roomnum " +
                      "WHERE rr.room_type = ? " +
                      "  AND r.start_date <= ? AND r.end_date >= ?";
@@ -115,7 +115,7 @@ public class ReservationController {
         
         // Extract start date and end date
         String dateStart = dateParts[0];
-        String dateEnd = dateParts[1];
+        //String dateEnd = dateParts[1];
         String reservationID = reservation.getReservationID();
         String guestICNumber = (String) session.getAttribute("guestICNumber");
         //String dateStart = reservation.getDateStart();
@@ -143,6 +143,9 @@ public class ReservationController {
                 totalMaxGuests += availableRoomsResult.getInt("maxGuest");
             }
             List<String> selectedRoomNumbers = getRandomRoomNumbers(availableRoomNumbers, totalRoom);
+        
+            
+        
         }
         System.out.println("reservation date: " + date);
         
@@ -152,6 +155,7 @@ public class ReservationController {
     }
     catch (Exception e) {
         e.printStackTrace();
+        System.out.println("reservation date: " + date);
         return "redirect:/index";
     }
     return "guest/guestMakeRoomService";  
