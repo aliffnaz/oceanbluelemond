@@ -79,14 +79,18 @@ public class ReservationController {
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
-            java.util.Date utilStartDate = dateFormat.parse(dateStart);
-            java.util.Date utilEndDate = dateFormat.parse(dateEnd);
-            Date dateStartDate = new Date (utilStartDate.getTime());
-            Date dateEndDate = new Date (utilEndDate.getTime());
-            statement.setString(1, roomType);
-            statement.setDate(2, dateEndDate);  // Check if the reservation end date is after the selected start date
-            statement.setDate(3, dateStartDate); // Check if the reservation start date is before the selected end date
-    
+            try{
+                java.util.Date utilStartDate = dateFormat.parse(dateStart);
+                java.util.Date utilEndDate = dateFormat.parse(dateEnd);
+                Date dateStartDate = new Date (utilStartDate.getTime());
+                Date dateEndDate = new Date (utilEndDate.getTime());
+                statement.setString(1, roomType);
+                statement.setDate(2, dateEndDate);  // Check if the reservation end date is after the selected start date
+                statement.setDate(3, dateStartDate); // Check if the reservation start date is before the selected end date
+            }
+            catch (ParseException e) {
+                e.printStackTrace();
+            }
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
                     int overlappingReservationsCount = resultSet.getInt(1);
