@@ -187,10 +187,10 @@ public class ReservationController {
         // final var statementRoom = connection.prepareStatement(sqlRoom);
         // statementRoom.setString(1, roomType);
         
-        ResultSet availableRoomsResult = statementRoom.executeQuery();
-        List<String> availableRoomNumbers = new ArrayList<>();
+        // ResultSet availableRoomsResult = statementRoom.executeQuery();
+        // List<String> availableRoomNumbers = new ArrayList<>();
 
-        boolean available = checkRoomAvailability(roomType, dateStart, dateEnd, connection);
+        boolean available = checkRoomAvailability(roomType, totalRoom, dateStart, dateEnd, connection);
         System.out.println(available);
         
         // if (available){
