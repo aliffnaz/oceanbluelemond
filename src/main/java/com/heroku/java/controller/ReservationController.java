@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import com.heroku.java.model.*;
 
@@ -75,9 +78,13 @@ public class ReservationController {
                      "  AND r.dateStart <= ? AND r.dateEnd >= ?";
                      
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+            Date dateStartDate = dateFormat.parse(dateStart);
+            Date dateEndDate = dateFormat.parse(dateEnd);
             statement.setString(1, roomType);
-            statement.setString(2, dateEnd);  // Check if the reservation end date is after the selected start date
-            statement.setString(3, dateStart); // Check if the reservation start date is before the selected end date
+            statement.setDate(2, dateEndDate);  // Check if the reservation end date is after the selected start date
+            statement.setDate(3, dateStartDate); // Check if the reservation start date is before the selected end date
     
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
