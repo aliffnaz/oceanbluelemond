@@ -196,6 +196,8 @@ public class ReservationController {
             java.util.Date utilEndDate = dateFormat.parse(dateEnd);
             Date dateStartDate = new Date (utilStartDate.getTime());
             Date dateEndDate = new Date (utilEndDate.getTime());
+            System.out.println("date start in new format: " + dateStartDate);
+            System.out.println("date end in new format: " + dateEndDate);
             // statement.setString(1, roomType);
             // statement.setDate(2, dateEndDate);  // Check if the reservation end date is after the selected start date
             // statement.setDate(3, dateStartDate); // Check if the reservation start date is before the selected end date
