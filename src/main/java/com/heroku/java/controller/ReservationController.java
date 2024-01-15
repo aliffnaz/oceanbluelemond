@@ -199,13 +199,14 @@ public class ReservationController {
             // statement.setString(1, roomType);
             // statement.setDate(2, dateEndDate);  // Check if the reservation end date is after the selected start date
             // statement.setDate(3, dateStartDate); // Check if the reservation start date is before the selected end date
+            
+            boolean available = checkRoomAvailability(roomType, totalRoom, dateStartDate, dateEndDate, connection);
+            System.out.println(available);
+        
         }
         catch (ParseException e) {
             e.printStackTrace();
         }
-
-        boolean available = checkRoomAvailability(roomType, totalRoom, dateStartDate, dateEndDate, connection);
-        System.out.println(available);
         
         // if (available){
         //     int totalMaxGuests = 0;
