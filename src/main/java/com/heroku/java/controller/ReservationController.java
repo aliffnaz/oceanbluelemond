@@ -105,7 +105,7 @@ public class ReservationController {
         final var resultSetStaff = statementStaff.executeQuery();
 
         if (resultSetStaff.next()) {
-            String staffICNumber = resultSet.getString("staffICNumber");
+            String staffICNumber = resultSetStaff.getString("staffICNumber");
         }
 
         // String sql = "INSERT INTO reservation() VALUES (?)";
@@ -114,8 +114,8 @@ public class ReservationController {
         String[] dateParts = date.split(" to ");
         
         // Extract start date and end date
-        String startDate = dateParts[0];
-        String endDate = dateParts[1];
+        String dateStart = dateParts[0];
+        String dateEnd = dateParts[1];
         String reservationID = reservation.getReservationID();
         String guestICNumber = (String) session.getAttribute("guestICNumber");
         //String dateStart = reservation.getDateStart();
@@ -131,7 +131,7 @@ public class ReservationController {
         final var statementRoom = connection.prepareStatement(sqlRoom);
         statementRoom.setString(1, roomType);
         
-        ResultSet availableRoomsResult = statementAvailableRooms.executeQuery();
+        ResultSet availableRoomsResult = statementRoom.executeQuery();
         List<String> availableRoomNumbers = new ArrayList<>();
 
         boolean available = checkRoomAvailability(roomType, dateStart, dateEnd, connection);
