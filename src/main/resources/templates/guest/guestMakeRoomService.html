@@ -133,22 +133,7 @@
                         </div>
                     </div>
                    
-                    <div class="row m-3">
-                        <div class="col-1"></div>
-                        <div class="col pt-3">
-                            <span>
-                                <h6>Service Name</h6>
-                            </span>
-                        </div>
-                        <div class="col-8">
-                            <select class="wide" name="serviceID" id="serviceID">
-                                <option value="">Select Service</option>
-
-                                <option th:each="service : ${service}" value="${service.serviceID}" th:text="${service.serviceName}"></option>
-                           
-                            </select>
-                        </div>
-                    </div>
+                    
 
                     <div class="row m-3">
                         <div class="col-1"></div>
@@ -166,11 +151,28 @@
                             </select>
                         </div>
                     </div>
+                    
                     <div class="row m-3">
                         <div class="col-1"></div>
                         <div class="col pt-3">
                             <span>
-                                <h6>Duration</h6>
+                                <h6>Quantity</h6>
+                            </span>
+                        </div>
+                        <div class="col-8">
+                            <div class="qty-buttons mb-3 version_2">
+                                <input type="button" value="+" class="qtyplus" name="serviceQuantity">
+                                <input type="text" name="serviceQuantity" id="serviceQuantity" value=""
+                                    class="qty form-control" placeholder="Adults">
+                                <input type="button" value="-" class="qtyminus" name="serviceQuantity">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row m-3">
+                        <div class="col-1"></div>
+                        <div class="col pt-3">
+                            <span>
+                                <h6>Duration (days)</h6>
                             </span>
                         </div>
                         <div class="col-8">
@@ -217,6 +219,8 @@
                     <th class="text-center">Service Name</th>
                     <th class="text-center" width="130">Service Type</th>
                     <th class="text-center">Service Price</th>
+                    <th class="text-center">Service Quantity</th>
+                    <th class="text-center">Service Duration</th>
                    
                 </thead>
                 <tbody>
@@ -226,6 +230,8 @@
                         <td class="text-center" th:text="${service.serviceName}"></td>
                         <td class="text-center" th:text="${service.serviceType}"></td>
                         <td class="text-center" th:text="${service.servicePrice}"></td>
+                        <td class="text-center" th:text="${service.serviceQuantity}"></td>
+                        <td class="text-center" th:text="${service.serviceDuration}"></td>
                         
                     </tr>
                 

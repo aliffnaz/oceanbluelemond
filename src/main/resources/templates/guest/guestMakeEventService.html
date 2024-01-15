@@ -108,9 +108,9 @@
         <div class="container mt-5 mb-5 align-items-center">
             <form 
             method="post"
-            th:action="@{/guestMakeRoomService}"
-            modelAttribute="guestMakeRoomService"
-            th:object="(${guestMakeRoomService})"
+            th:action="@{/guestMakeEventService}"
+            modelAttribute="guestMakeEventService"
+            th:object="(${guestMakeEventService})"
             enctype="multipart/form-data">
             <div class="row">
                 <div class="col">
@@ -125,11 +125,28 @@
                         <div class="col-md-8 text-center pt-3">
                             <div class="">
 
-                                <h1>Add Service</h1>
+                                <h1>Add Event Service</h1>
                             </div>
                         </div>
                         <div class="col-2">
 
+                        </div>
+                    </div>
+
+                    <div class="row m-3">
+                        <div class="col-1"></div>
+                        <div class="col pt-3">
+                            <span>
+                                <h6>Service Name</h6>
+                            </span>
+                        </div>
+                        <div class="col-8">
+                            <select class="wide" name="serviceID" id="serviceID">
+                                <option value="">Select Service</option>
+
+                                <option th:each="service : ${service}" value="${service.serviceID}" th:text="${service.serviceName}"></option>
+                           
+                            </select>
                         </div>
                     </div>
                    
@@ -137,37 +154,30 @@
                         <div class="col-1"></div>
                         <div class="col pt-3">
                             <span>
-                                <h6>Service Name</h6>
+                                <h6>Event Capacity</h6>
                             </span>
                         </div>
                         <div class="col-8">
-                            <select class="wide" name="serviceID" id="serviceID">
-                                <option value="">Select Service</option>
-
-                                <option th:each="service : ${service}" value="${service.serviceID}" th:text="${service.serviceName}"></option>
-                           
-                            </select>
+                            <input type="number" name="EventCapacity" class="form-control" />
                         </div>
                     </div>
+
 
                     <div class="row m-3">
                         <div class="col-1"></div>
                         <div class="col pt-3">
                             <span>
-                                <h6>Service Name</h6>
+                                <h6>Duration (days)</h6>
                             </span>
                         </div>
                         <div class="col-8">
-                            <select class="wide" name="serviceID" id="serviceID">
-                                <option value="">Select Service</option>
-
-                                <option th:each="service : ${service}" value="${service.serviceID}" th:text="${service.serviceName}"></option>
-                           
-                            </select>
+                            <div class="qty-buttons mb-3 version_2">
+                                <input type="button" value="+" class="qtyplus" name="serviceDuration">
+                                <input type="text" name="serviceDuration" id="serviceDuration" value=""
+                                    class="qty form-control" placeholder="Adults">
+                                <input type="button" value="-" class="qtyminus" name="serviceDuration">
+                            </div>
                         </div>
-                    </div>
-                    <div class="row text-center">
-                        <span>Want to create event ? <a th:href="@{/guestMakeEventService}">Click Here</a></span>
                     </div>
                     
                     
@@ -206,6 +216,8 @@
                     <th class="text-center">Service Name</th>
                     <th class="text-center" width="130">Service Type</th>
                     <th class="text-center">Service Price</th>
+                    <th class="text-center">Event Capacity</th>
+                    <th class="text-center">Event Duration</th>
                    
                 </thead>
                 <tbody>
@@ -215,6 +227,8 @@
                         <td class="text-center" th:text="${service.serviceName}"></td>
                         <td class="text-center" th:text="${service.serviceType}"></td>
                         <td class="text-center" th:text="${service.servicePrice}"></td>
+                        <td class="text-center" th:text="${service.EventCapacity}"></td>
+                        <td class="text-center" th:text="${service.Duration}"></td>
                         
                     </tr>
                 
