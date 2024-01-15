@@ -91,7 +91,69 @@ public class GuestController {
             return "error";
         }
 
+        
+
     }
+
+    @GetMapping("/staffGuestList")
+    public String staffGuestList(Model model) {
+
+        List<guest> guests = new ArrayList<guest>();
+        // Retrieve the logged-in room's role from the session (syahir punya nih)
+        // String staffsrole = (String) session.getAttribute("staffsrole");
+        // System.out.println("staffrole managerRoomList : " + staffsrole);
+        try (Connection connection = dataSource.getConnection()) {
+            String sql = "SELECT guesticnumber, guestname, guestphonenumber, guestgender, guestreligion, guestrace, guestaddress, guestemail, guestpassword FROM public.guest order by guestname"; // ni
+            final var statement = connection.prepareStatement(sql);
+            // statement.setString(1, "baker"); (syahir punya nih)
+            final var resultSet = statement.executeQuery();
+            System.out.println("pass try staffGuestList >>>>>");
+
+            while (resultSet.next()) {
+                String guestName = resultSet.getString("guestName");
+                String guestPhoneNumber = resultSet.getString("guestPhoneNumber");
+                String guestICNumber = resultSet.getString("guestICNumber");
+                String guestGender = resultSet.getString("guestGender");
+                String guestReligion = resultSet.getString("guestReligion");
+                String guestRace = resultSet.getString("guestRace");
+                String guestAddress = resultSet.getString("guestAddress");
+                String guestEmail = resultSet.getString("guestEmail");
+                String guestPassword = resultSet.getString("guestPassword");
+
+                // System.out.println("room number" + roomNum);
+
+                guest guest = new guest();
+                guest.setGuestName(guestName);
+                guest.setGuestPhoneNumber(guestPhoneNumber);
+                guest.setGuestICNumber(guestICNumber);
+                guest.setGuestGender(guestGender);
+                guest.setGuestRace(guestRace);
+                guest.setGuestReligion(guestReligion);
+                guest.setGuestAddress(guestAddress);
+                guest.setGuestEmail(guestEmail);
+                guest.setGuestPassword(guestPassword);
+
+                guests.add(guest);
+                model.addAttribute("guests", guests);
+                // model.addAttribute("isAdmin", staffsrole != null &&
+                // staffsrole.equals("admin")); // Add isAdmin flag to the modelF (syahir punya
+                // gak)
+
+            }
+
+            connection.close();
+
+            return "staff/staffGuestList";
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle the exception as desired (e.g., show an error message)
+            return "error";
+        }
+
+    }
+
+
+
 
     @PostMapping("/guestRegister")
     public String guestRegister(@ModelAttribute("guestRegister") guest guest) {
@@ -177,6 +239,49 @@ public class GuestController {
         }
 
         return "manager/managerViewGuest";
+    }
+
+
+    @GetMapping("/staffViewGuest")
+    public String staffViewGuest(@RequestParam("guestICNumber") String guestICNumber, Model model) {
+        System.out.println("IC Number : " + guestICNumber);
+        try {
+            Connection connection = dataSource.getConnection();
+            String sql = "SELECT guesticnumber, guestname, guestphonenumber, guestgender, guestreligion, guestrace, guestaddress, guestemail, guestpassword FROM public.guest WHERE guesticnumber LIKE ?";
+            final var statement = connection.prepareStatement(sql);
+            statement.setString(1, guestICNumber);
+            final var resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                String guestName = resultSet.getString("guestName");
+                String guestPhoneNumber = resultSet.getString("guestPhoneNumber");
+                String guestGender = resultSet.getString("guestGender");
+                String guestReligion = resultSet.getString("guestReligion");
+                String guestRace = resultSet.getString("guestRace");
+                String guestAddress = resultSet.getString("guestAddress");
+                String guestEmail = resultSet.getString("guestEmail");
+                String guestPassword = resultSet.getString("guestPassword");
+
+                guest guest = new guest();
+
+                guest.setGuestName(guestName);
+                guest.setGuestPhoneNumber(guestPhoneNumber);
+                guest.setGuestICNumber(guestICNumber);
+                guest.setGuestGender(guestGender);
+                guest.setGuestRace(guestRace);
+                guest.setGuestReligion(guestReligion);
+                guest.setGuestAddress(guestAddress);
+                guest.setGuestEmail(guestEmail);
+                guest.setGuestPassword(guestPassword);
+                model.addAttribute("guest", guest);
+
+                connection.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return "staff/staffViewGuest";
     }
 
     @GetMapping("/guestProfile")
