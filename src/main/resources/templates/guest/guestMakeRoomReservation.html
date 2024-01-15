@@ -139,7 +139,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="guestICNumber" id="" class="form-control">
+                            <input type="text" name="guestICNumber" id="" class="form-control" th:value="${session.guestICNumber}" readonly>
                         </div>
                     </div>
 
@@ -153,20 +153,9 @@
                         <div class="col-8">
                             <div class="booking_wrapper">
                                 <p id="daterangepicker-result" class="d-none"></p>
-                                <input type="hidden" id="date_booking" name="startDate">
+                                <input type="hidden" id="date_booking" name="date">
                                 <div id="daterangepicker-embedded-container"
                                     class="embedded-daterangepicker clearfix mb-4"></div>
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="custom_select">
-                                            <select class="wide" name="roomType" id="rooms_booking">
-                                                <option value="">Select Room</option>
-                                                <option value="Deluxe Room">Deluxe Room</option>
-                                                <option value="Superior Room">Standard Room</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
 
@@ -180,7 +169,6 @@
                             <div class="col-8">
                                 <div class="custom_select">
                                     <select class="wide" name="roomType" id="rooms_booking">
-                                        <option value="">Select Room</option>
                                         <option value="Deluxe Room">Deluxe Room</option>
                                         <option value="Superior Room">Standard Room</option>
                                     </select>
@@ -287,23 +275,20 @@
                         <div class="col-8">
                             <div class="custom_radio mb-3 version_2">
                                
-                                <input type="radio" name="addon" class="form-check-input" />
+                                <input type="radio" name="addon" value="Yes" class="form-check-input" />
                                 <label class="form-check-label">Yes</label>
                                 
-                                <input type="radio" name="addon" class="form-check-input" />
+                                <input type="radio" name="addon" value="No" class="form-check-input" />
                                 <label class="form-check-label">No</label>
                             </div>
                         </div>
                     </div>
-
-                    
 
                     <div class="row m-5">
                         <div class="col text-center">
                             <button type="submit" class="btn btn-dark btn-lg" style="border-radius: 3px 3px 3px 3px; height: auto; width:150px">Submit</button>
                             </div>
                     </div>
-
 
                 </div>
                 <div class="col">
