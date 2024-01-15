@@ -72,7 +72,7 @@ public class ReservationController {
                      "JOIN reservation r ON rr.reservationid = r.reservationid " +
                      "JOIN room room ON room.roomnum = rr.roomnum " +
                      "WHERE room.roomtype = ? " +
-                     "  AND r.start_date <= ? AND r.end_date >= ?";
+                     "  AND r.dateStart <= ? AND r.dateEnd >= ?";
                      
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, roomType);
