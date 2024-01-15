@@ -154,7 +154,7 @@ public class ReservationController {
                 availableRoomNumbers.add(availableRoomsResult.getString("roomNumber"));
                 totalMaxGuests += availableRoomsResult.getInt("maxGuest");
             }
-            List<String> selectedRoomNumbers = getRandomRoomNumbers(availableRoomNumbers, totalRoom);
+            //List<String> selectedRoomNumbers = getRandomRoomNumbers(availableRoomNumbers, totalRoom);
         
             
         
