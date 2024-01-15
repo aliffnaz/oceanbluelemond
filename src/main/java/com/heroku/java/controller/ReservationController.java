@@ -115,7 +115,7 @@ public class ReservationController {
         
         // Extract start date and end date
         String dateStart = dateParts[0];
-        //String dateEnd = dateParts[1];
+        String dateEnd = dateParts[1];
         String reservationID = reservation.getReservationID();
         String guestICNumber = (String) session.getAttribute("guestICNumber");
         //String dateStart = reservation.getDateStart();
