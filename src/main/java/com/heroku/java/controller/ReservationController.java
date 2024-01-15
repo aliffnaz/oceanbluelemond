@@ -71,7 +71,7 @@ public class ReservationController {
         String sql = "SELECT COUNT(*) FROM roomreservation rr " +
                      "JOIN reservation r ON rr.reservationid = r.reservationid " +
                      "JOIN room room ON room.roomnum = rr.roomnum " +
-                     "WHERE rr.room_type = ? " +
+                     "WHERE room.roomtype = ? " +
                      "  AND r.start_date <= ? AND r.end_date >= ?";
                      
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
