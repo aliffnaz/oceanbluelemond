@@ -137,6 +137,26 @@ public class ReservationController {
         }
     }
 
+    public static Date convertToPostgresDate(String originalDateString) {
+        SimpleDateFormat originalFormat = new SimpleDateFormat("MM-dd-yy");
+
+        try {
+            // Parse the original string
+            java.util.Date utilDate = originalFormat.parse(originalDateString);
+
+            // Format it for PostgreSQL (YYYY-MM-DD)
+            SimpleDateFormat postgresqlFormat = new SimpleDateFormat("yyyy-MM-dd");
+            String formattedDateString = postgresqlFormat.format(utilDate);
+
+            // Convert the formatted string to java.sql.Date
+            return Date.valueOf(formattedDateString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            // Handle the exception according to your needs
+            return null; // or throw an exception
+        }
+    }
+
   @PostMapping("/guestMakeRoomReservation")
   public String guestMakeRoomReservation(HttpSession session, @ModelAttribute("guestMakeRoomReservation") reservation reservation, 
   room room, roomReservation roomReservation, staff staff, Model model, @RequestParam("addon") String addon,
@@ -190,25 +210,13 @@ public class ReservationController {
         // ResultSet availableRoomsResult = statementRoom.executeQuery();
         // List<String> availableRoomNumbers = new ArrayList<>();
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
-        try{
-            java.util.Date utilStartDate = dateFormat.parse(dateStart);
-            java.util.Date utilEndDate = dateFormat.parse(dateEnd);
-            Date dateStartDate = new Date (utilStartDate.getTime());
-            Date dateEndDate = new Date (utilEndDate.getTime());
-            System.out.println("date start in new format: " + dateStartDate);
-            System.out.println("date end in new format: " + dateEndDate);
-            // statement.setString(1, roomType);
-            // statement.setDate(2, dateEndDate);  // Check if the reservation end date is after the selected start date
-            // statement.setDate(3, dateStartDate); // Check if the reservation start date is before the selected end date
-            
-            boolean available = checkRoomAvailability(roomType, totalRoom, dateStartDate, dateEndDate, connection);
-            System.out.println(available);
+        Date dateStartDate = convertToPostgresDate(dateStart);
+        Date dateEndDate = convertToPostgresDate(dateEnd);
+        System.out.println(dateStartDate);
+        System.out.println(dateEndDate);
         
-        }
-        catch (ParseException e) {
-            e.printStackTrace();
-        }
+        boolean available = checkRoomAvailability(roomType, totalRoom, dateStartDate, dateEndDate, connection);
+        System.out.println(available);
         
         // if (available){
         //     int totalMaxGuests = 0;
