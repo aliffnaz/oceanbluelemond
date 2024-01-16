@@ -233,14 +233,15 @@ public class ReservationController {
         session.setAttribute("reservationID", reservationID);
 
         }
+        catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("reservation date: " + date);
+            return "redirect:/index";
+        }
+        return "guest/guestMakeRoomService";
     }
-    catch (Exception e) {
-        e.printStackTrace();
-        System.out.println("reservation date: " + date);
-        return "redirect:/index";
-    }
-    return "guest/guestMakeRoomService";  
-}
+      
+
   
 @GetMapping("/guestMakeRoomService")
 public String guestMakeRoomService(HttpSession session) {
