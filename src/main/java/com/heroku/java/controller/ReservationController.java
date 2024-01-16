@@ -167,7 +167,7 @@ public class ReservationController {
         System.out.println("guestQuantity: " + guestQuantity);
         System.out.println("roomType: " + roomType);
 
-        get rooms according to roomtype
+        //get rooms according to roomtype
         String sqlRoom = "SELECT roomNum, maxGuest from room where roomType=?";
         final var statementRoom = connection.prepareStatement(sqlRoom);
         statementRoom.setString(1, roomType);
