@@ -42,8 +42,8 @@ public class ServiceController {
     }
 
     @PostMapping("/managerAddService")
-    public String managerAddService(Model model, @ModelAttribute("managerAddService") service service, roomService roomService, eventService eventService) {
-
+    public String managerAddService(Model model, @ModelAttribute("managerAddService") service service, roomService roomService, eventService eventService, HttpSession session) {
+String staffICNumber = (String) session.getAttribute("staffICNumber") ;
         try {
             Connection connection = dataSource.getConnection();
             String sql = "INSERT INTO service(serviceID, serviceName, serviceType, servicePrice, serviceStatus) VALUES(?, ?, ?, ?, ?)";
@@ -104,7 +104,8 @@ public class ServiceController {
     }
 
     @GetMapping("/managerServiceList")
-    public String managerServiceList(Model model) {
+    public String managerServiceList(Model model, HttpSession session) {
+        String staffICNumber = (String) session.getAttribute("staffICNumber") ;
         List<service> services = new ArrayList<>();
 
         try {
@@ -162,7 +163,8 @@ public class ServiceController {
     }
 
     @GetMapping("/managerViewService")
-    public String managerViewService(@RequestParam("serviceID") String serviceID, Model model) {
+    public String managerViewService(@RequestParam("serviceID") String serviceID, Model model,HttpSession session) {
+        String staffICNumber = (String) session.getAttribute("staffICNumber") ;
         try {
             Connection connection = dataSource.getConnection();
             String sql = "SELECT service.serviceid, service.servicename, service.servicetype, service.serviceprice, service.servicestatus, roomservice.balance, eventservice.eventcapacity "
@@ -204,7 +206,8 @@ public class ServiceController {
     }
 
     @GetMapping("/managerUpdateService")
-    public String managerUpdateService(@RequestParam("serviceID") String serviceID, Model model) {
+    public String managerUpdateService(@RequestParam("serviceID") String serviceID, Model model, HttpSession session) {
+        String staffICNumber = (String) session.getAttribute("staffICNumber") ;
         try {
             Connection connection = dataSource.getConnection();
             String sql = "SELECT service.serviceid, service.servicename, service.servicetype, service.serviceprice, service.servicestatus, roomservice.balance, eventservice.eventcapacity "
@@ -246,7 +249,8 @@ public class ServiceController {
     }
 
     @PostMapping("/managerUpdateService")
-    public String managerUpdateService(@ModelAttribute("managerUpdateService") service service, roomService roomService, eventService eventService) {
+    public String managerUpdateService(@ModelAttribute("managerUpdateService") service service, roomService roomService, eventService eventService, HttpSession session) {
+        String staffICNumber = (String) session.getAttribute("staffICNumber") ;
         try {
             Connection connection = dataSource.getConnection();
             String sql = "UPDATE service SET serviceName=?, serviceType=?, servicePrice=?, servicestatus=? WHERE serviceID=?";
