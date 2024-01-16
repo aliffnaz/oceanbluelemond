@@ -41,8 +41,8 @@ public class RoomController {
 
 
     @GetMapping("/managerRoomList")
-    public String managerRoomList(Model model) {
-
+    public String managerRoomList(Model model, HttpSession session) {
+String staffICNumber = (String) session.getAttribute("staffICNumber") ;
         List<room> rooms = new ArrayList<room>();
         // Retrieve the logged-in room's role from the session (syahir punya nih)
         //String staffsrole = (String) session.getAttribute("staffsrole");
@@ -89,7 +89,8 @@ public class RoomController {
     }
 
     @PostMapping("/managerAddRoom")
-    public String managerAddRoom(@ModelAttribute("managerAddRoom")room room){
+    public String managerAddRoom(@ModelAttribute("managerAddRoom")room room, HttpSession session){
+        String staffICNumber = (String) session.getAttribute("staffICNumber") ;
 
         try {
             Connection connection = dataSource.getConnection();
@@ -127,7 +128,8 @@ public class RoomController {
 
 
          @GetMapping("/managerViewRoom")
-         public String managerViewRoom(@RequestParam("roomNum") String roomNum, Model model) {
+         public String managerViewRoom(@RequestParam("roomNum") String roomNum, Model model,HttpSession session) {
+             String staffICNumber = (String) session.getAttribute("staffICNumber") ;
            System.out.println("Room Number : " + roomNum);
            try {
              Connection connection = dataSource.getConnection();
@@ -164,7 +166,8 @@ public class RoomController {
     
 
     @GetMapping("/managerUpdateRoom")
-         public String managerUpdateRoom(@RequestParam("roomNum") String roomNum, Model model) {
+         public String managerUpdateRoom(@RequestParam("roomNum") String roomNum, Model model, HttpSession session) {
+             String staffICNumber = (String) session.getAttribute("staffICNumber") ;
            System.out.println("Room Number : " + roomNum);
            try {
              Connection connection = dataSource.getConnection();
@@ -200,7 +203,8 @@ public class RoomController {
         
          
          @PostMapping("/managerUpdateRoom")
-        public String managerUpdateRoom(@ModelAttribute("managerUpdateRoom") room room){
+        public String managerUpdateRoom(@ModelAttribute("managerUpdateRoom") room room, HttpSession session){
+            String staffICNumber = (String) session.getAttribute("staffICNumber") ;
           System.out.println("pass here <<<<<<<");
           try{
             Connection connection = dataSource.getConnection();
@@ -236,7 +240,8 @@ public class RoomController {
     
 
         @GetMapping("/staffRoomList")
-    public String staffRoomList(Model model) {
+    public String staffRoomList(Model model, HttpSession session) {
+        String staffICNumber = (String) session.getAttribute("staffICNumber") ;
 
         List<room> rooms = new ArrayList<room>();
         // Retrieve the logged-in room's role from the session (syahir punya nih)
@@ -284,7 +289,8 @@ public class RoomController {
     }
 
     @PostMapping("/staffAddRoom")
-    public String staffAddRoom(@ModelAttribute("staffAddRoom")room room){
+    public String staffAddRoom(@ModelAttribute("staffAddRoom")room room, HttpSession session){
+        String staffICNumber = (String) session.getAttribute("staffICNumber") ;
 
         try {
             Connection connection = dataSource.getConnection();
@@ -317,7 +323,8 @@ public class RoomController {
 
 
           @GetMapping("/staffViewRoom")
-         public String staffViewRoom(@RequestParam("roomNum") String roomNum, Model model) {
+         public String staffViewRoom(@RequestParam("roomNum") String roomNum, Model model, HttpSession session) {
+             String staffICNumber = (String) session.getAttribute("staffICNumber") ;
            System.out.println("Room Number : " + roomNum);
            try {
              Connection connection = dataSource.getConnection();
@@ -353,7 +360,8 @@ public class RoomController {
 
 
          @GetMapping("/staffUpdateRoom")
-         public String staffUpdateRoom(@RequestParam("roomNum") String roomNum, Model model) {
+         public String staffUpdateRoom(@RequestParam("roomNum") String roomNum, Model model, HttpSession session) {
+             String staffICNumber = (String) session.getAttribute("staffICNumber") ;
            System.out.println("Room Number : " + roomNum);
            try {
              Connection connection = dataSource.getConnection();
@@ -389,7 +397,8 @@ public class RoomController {
         
          
          @PostMapping("/staffUpdateRoom")
-        public String staffUpdateRoom(@ModelAttribute("staffUpdateRoom") room room){
+        public String staffUpdateRoom(@ModelAttribute("staffUpdateRoom") room room, HttpSession session){
+            String staffICNumber = (String) session.getAttribute("staffICNumber") ;
           System.out.println("pass here <<<<<<<");
           try{
             Connection connection = dataSource.getConnection();
@@ -427,7 +436,8 @@ public class RoomController {
 
     /* delete controller
     @GetMapping("/deletestaff")
-    public String deleteProfileCust(HttpSession session, Model model) {
+    public String deleteProfileCust(HttpSession session, Model model, HttpSession session) {
+    String staffICNumber = (String) session.getAttribute("staffICNumber") ;
         String fullname = (String) session.getAttribute("roomType");
         int userid = (int) session.getAttribute("roomNum");
 
