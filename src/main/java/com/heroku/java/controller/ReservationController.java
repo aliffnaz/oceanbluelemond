@@ -122,6 +122,25 @@ public class ReservationController {
         }
     }
 
+    public static int calculateDurationOfStay(String startDateString, String endDateString) {
+        try {
+            // Convert start date to java.sql.Date
+            Date startDate = convertToPostgresDate(startDateString);
+    
+            // Convert end date to java.sql.Date
+            Date endDate = convertToPostgresDate(endDateString);
+    
+            // Calculate the duration in milliseconds
+            long durationMillis = endDate.getTime() - startDate.getTime();
+    
+            // Convert duration to days and cast to int
+            return (int) Duration.ofMillis(durationMillis).toDays();
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Handle the exception according to your needs
+            return -1; // or throw an exception
+        }
+
   @PostMapping("/guestMakeRoomReservation")
   public String guestMakeRoomReservation(HttpSession session, @ModelAttribute("guestMakeRoomReservation") reservation reservation, 
   room room, roomReservation roomReservation, staff staff, Model model, @RequestParam("addon") String addon,
@@ -139,9 +158,6 @@ public class ReservationController {
         if (resultSetStaff.next()) {
             String staffICNumber = resultSetStaff.getString("staffICNumber");
 
-        // String sql = "INSERT INTO reservation() VALUES (?)";
-        // final var statement = connection.prepareStatement(sql);
-
         String[] dateParts = date.split(" to ");
         
         // Extract start date and end date
@@ -153,8 +169,9 @@ public class ReservationController {
         int totalKids = reservation.getTotalKids();
         String reserveStatus = "Pending";
         int totalRoom = reservation.getTotalRoom();
-        String totalPayment = "0.00";
+        double totalPayment = "0.00";
         int guestQuantity = totalAdult + totalKids;
+        String reservationID = "1";
         
         //debugging
         System.out.println("dateStart: " + dateStart);
@@ -179,19 +196,35 @@ public class ReservationController {
         Date dateEndDate = convertToPostgresDate(dateEnd);
         System.out.println(dateStartDate);
         System.out.println(dateEndDate);
+        int durationOfStay = calculateDurationOfStay(dateStartDate, dateEndDate);
         
         boolean available = checkRoomAvailability(roomType, totalRoom, dateStartDate, dateEndDate, connection);
         System.out.println(available);
         
         if (available){
-            int totalMaxGuests = 0;
-            while (availableRoomsResult.next()) {
-                availableRoomNumbers.add(availableRoomsResult.getString("roomNum"));
-                totalMaxGuests += availableRoomsResult.getInt("maxGuest");
-            }
             List<String> selectedRoomNumbers = getRandomRoomNumbers(availableRoomNumbers, totalRoom);
-            
-        System.out.println("totalMaxGuests: " + totalMaxGuests);
+            }
+        
+        String sqlReservation = "INSERT INTO reservation(reservationid, guestICNumber, guestQuantity, durationOfStay, datestart, dateend, totaladult, totalkids, reservestatus, totalroom, totalpayment, stafficnumber) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+        final var statementReservation = connection.prepareStatement(sqlReservation);
+        
+        statementReservation.setString(1,reservationID);
+        statementReservation.setString(2,guestICNumber);
+        statementReservation.setInt(3,guestQuantity);
+        statementReservation.setInt(4,durationOfStay);
+        statementReservation.setDate(5,dateStart);
+        statementReservation.setDate(6,dateEnd);
+        statementReservation.setInt(7,totalAdult);
+        statementReservation.setInt(8,totalKids);
+        statementReservation.setString(9,reserveStatus);
+        statementReservation.setInt(10,totalRoom);
+        statementReservation.setDouble(11,totalPayment);
+        statementReservation.setString(12,staffICNumber);
+
+        statementReservation.executeQuery();
+
+        connection.close();
+
         }
         System.out.println("reservation date: " + date);
         
