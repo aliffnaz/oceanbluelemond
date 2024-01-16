@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.sql.Date;
+import java.time.Duration;
 
 import com.heroku.java.model.*;
 
@@ -164,13 +165,12 @@ public class ReservationController {
         // Extract start date and end date
         String dateStart = dateParts[0];
         String dateEnd = dateParts[1];
-        String reservationID = reservation.getReservationID();
         String guestICNumber = (String) session.getAttribute("guestICNumber");
         int totalAdult = reservation.getTotalAdult();
         int totalKids = reservation.getTotalKids();
         String reserveStatus = "Pending";
         int totalRoom = reservation.getTotalRoom();
-        double totalPayment = "0.00";
+        double totalPayment = 0.00;
         int guestQuantity = totalAdult + totalKids;
         String reservationID = "1";
         
@@ -197,7 +197,7 @@ public class ReservationController {
         Date dateEndDate = convertToPostgresDate(dateEnd);
         System.out.println(dateStartDate);
         System.out.println(dateEndDate);
-        int durationOfStay = calculateDurationOfStay(dateStartDate, dateEndDate);
+        int durationOfStay = calculateDurationOfStay(dateStart, dateEnd);
         
         boolean available = checkRoomAvailability(roomType, totalRoom, dateStartDate, dateEndDate, connection);
         System.out.println(available);
@@ -213,8 +213,8 @@ public class ReservationController {
         statementReservation.setString(2,guestICNumber);
         statementReservation.setInt(3,guestQuantity);
         statementReservation.setInt(4,durationOfStay);
-        statementReservation.setDate(5,dateStart);
-        statementReservation.setDate(6,dateEnd);
+        statementReservation.setDate(5,dateStartDate);
+        statementReservation.setDate(6,dateEndDate);
         statementReservation.setInt(7,totalAdult);
         statementReservation.setInt(8,totalKids);
         statementReservation.setString(9,reserveStatus);
