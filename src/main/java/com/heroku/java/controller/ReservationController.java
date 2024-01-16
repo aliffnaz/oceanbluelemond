@@ -140,6 +140,7 @@ public class ReservationController {
             // Handle the exception according to your needs
             return -1; // or throw an exception
         }
+    }
 
   @PostMapping("/guestMakeRoomReservation")
   public String guestMakeRoomReservation(HttpSession session, @ModelAttribute("guestMakeRoomReservation") reservation reservation, 
