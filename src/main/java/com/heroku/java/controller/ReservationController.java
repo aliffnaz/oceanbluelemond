@@ -226,11 +226,10 @@ public class ReservationController {
 
         connection.close();
 
-        }
-        System.out.println("reservation date: " + date);
-        
         //set reservation id into session
         session.setAttribute("reservationID", reservationID);
+        }
+        System.out.println("reservation date: " + date);
 
         }
         catch (Exception e) {
