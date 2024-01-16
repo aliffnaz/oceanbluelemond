@@ -92,7 +92,8 @@ public class ReservationController {
         return false;
     }
 
-    public static boolean updateRoomStatus(String roomType, int totalRooms, Connection connection) throws SQLException {
+    public static boolean updateRoomStatus(String roomType, int totalRooms, Connection connection, HttpSession session) throws SQLException {
+      String guestICNumber = (String) session.getAttribute("guestICNumber") ;
         String updateSql = "UPDATE room SET roomstatus = 'Booked' WHERE roomtype = ? LIMIT ?";
         try (PreparedStatement updateStatement = connection.prepareStatement(updateSql)) {
             updateStatement.setString(1, roomType);
