@@ -37,8 +37,8 @@ public class GuestController {
     }
 
     @GetMapping("/managerGuestList")
-    public String managerGuestList(Model model) {
-
+    public String managerGuestList(Model model, HttpSession session) {
+   String staffICNumber = (String) session.getAttribute("staffICNumber") ;
         List<guest> guests = new ArrayList<guest>();
         // Retrieve the logged-in room's role from the session (syahir punya nih)
         // String staffsrole = (String) session.getAttribute("staffsrole");
@@ -96,8 +96,8 @@ public class GuestController {
     }
 
     @GetMapping("/staffGuestList")
-    public String staffGuestList(Model model) {
-
+    public String staffGuestList(Model model, HttpSession session) {
+   String staffICNumber = (String) session.getAttribute("staffICNumber") ;
         List<guest> guests = new ArrayList<guest>();
         // Retrieve the logged-in room's role from the session (syahir punya nih)
         // String staffsrole = (String) session.getAttribute("staffsrole");
@@ -200,7 +200,8 @@ public class GuestController {
     }
 
     @GetMapping("/managerViewGuest")
-    public String managerViewGuest(@RequestParam("guestICNumber") String guestICNumber, Model model) {
+    public String managerViewGuest(@RequestParam("guestICNumber") String guestICNumber, Model model, HttpSession session) {
+           String staffICNumber = (String) session.getAttribute("staffICNumber") ;
         System.out.println("IC Number : " + guestICNumber);
         try {
             Connection connection = dataSource.getConnection();
@@ -243,7 +244,8 @@ public class GuestController {
 
 
     @GetMapping("/staffViewGuest")
-    public String staffViewGuest(@RequestParam("guestICNumber") String guestICNumber, Model model) {
+    public String staffViewGuest(@RequestParam("guestICNumber") String guestICNumber, Model model, HttpSession) {
+           String staffICNumber = (String) session.getAttribute("staffICNumber") ;
         System.out.println("IC Number : " + guestICNumber);
         try {
             Connection connection = dataSource.getConnection();
