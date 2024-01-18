@@ -233,18 +233,16 @@ public class ReservationController {
         boolean available = checkRoomAvailability(roomType, totalRoom, dateStartDate, dateEndDate, connection);
         System.out.println(available);
 
-        int totalMaxGuests = availableRoomNumbers.stream()
-        .mapToInt(roomNumber -> getMaxGuestsForRoom(roomNumber, connection))
-        .sum();
-
         // Check if the total guest quantity exceeds the total maximum allowed guests
         boolean exceedsMaxGuests = guestQuantity > totalMaxGuests;
 
-        if (!exceedsMaxGuests){
         if (available) {
-            // Get available room numbers
-            List<String> availableRoomNumbers = getAvailableRoomNumbers(roomType, totalRoom, dateStartDate, dateEndDate, connection);
-
+             // Get available room numbers
+             List<String> availableRoomNumbers = getAvailableRoomNumbers(roomType, totalRoom, dateStartDate, dateEndDate, connection);
+            int totalMaxGuests = availableRoomNumbers.stream()
+            .mapToInt(roomNumber -> getMaxGuestsForRoom(roomNumber, connection))
+            .sum();
+            if (!exceedsMaxGuests){
             // Insert room numbers into roomreservation table
             for (String roomNumber : availableRoomNumbers) {
                 String sqlRoomReservation = "INSERT INTO roomreservation(roomnum, reservationid) VALUES (?, ?)";
@@ -256,14 +254,12 @@ public class ReservationController {
                 }
             }
         } else {
-            // Handle the case where rooms are not available (display an error message or redirect)
-            // ...
+            System.out.println("Guest quantity exceeds max guest allowed");
         }
-    }
-    else{
-        System.out.println("Guest quantity exceeds max guest allowed");
-        return "redirect:/index";
-    }
+        }
+        else {
+            System.out.println("Room not available")
+        }
 
         connection.close();
 
