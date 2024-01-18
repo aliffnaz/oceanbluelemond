@@ -259,10 +259,12 @@ public class ReservationController {
             }
         } else {
             System.out.println("Guest quantity exceeds max guest allowed");
+            return "redirect:/guestMakeRoomReservation";
         }
         }
         else {
             System.out.println("Room not available");
+            return "redirect:/guestMakeRoomReservation";
         }
 
         connection.close();
@@ -278,7 +280,11 @@ public class ReservationController {
             System.out.println("reservation date: " + date);
             return "redirect:/index";
         }
+
+        if (addon.equalsIgnoreCase("Yes"))
         return "guest/guestMakeRoomService";
+        else
+        return "guest/guestRoomReservation";
     }
       
 
