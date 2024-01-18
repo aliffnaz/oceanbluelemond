@@ -156,8 +156,7 @@ public class ReservationController {
                 }
             }
         }
-    
-        return -1; // Default value or handle accordingly
+        throw new SQLException("Failed to get max guests for room: " + roomNumber);
     }
 
   @PostMapping("/guestMakeRoomReservation")
