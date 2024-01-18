@@ -235,35 +235,40 @@ public class ReservationController {
         if (available) {
              // Get available room numbers
              List<String> availableRoomNumbers = getAvailableRoomNumbers(roomType, totalRoom, dateStartDate, dateEndDate, connection);
-            int totalMaxGuests = availableRoomNumbers.stream()
-            .mapToInt(roomNumber -> getMaxGuestsForRoom(roomNumber, connection))
-            .sum();
-            // Check if the total guest quantity exceeds the total maximum allowed guests
-            boolean exceedsMaxGuests = guestQuantity > totalMaxGuests;
-            if (!exceedsMaxGuests){
-            // Insert room numbers into roomreservation table
-            for (String roomNumber : availableRoomNumbers) {
-                String sqlRoomReservation = "INSERT INTO roomreservation(roomnum, reservationid) VALUES (?, ?)";
-                try (PreparedStatement statementRoomReservation = connection.prepareStatement(sqlRoomReservation)) {
-                    statementRoomReservation.setString(1, roomNumber);
-                    statementRoomReservation.setInt(2, reservationID);
-                    statementRoomReservation.executeUpdate();
-                    System.out.println("room number: "+roomNumber);
+            try {
+                int totalMaxGuests = availableRoomNumbers.stream()
+                .mapToInt(roomNumber -> getMaxGuestsForRoom(roomNumber, connection))
+                .sum();
+                // Check if the total guest quantity exceeds the total maximum allowed guests
+                boolean exceedsMaxGuests = guestQuantity > totalMaxGuests;
+                if (!exceedsMaxGuests){
+                // Insert room numbers into roomreservation table
+                for (String roomNumber : availableRoomNumbers) {
+                    String sqlRoomReservation = "INSERT INTO roomreservation(roomnum, reservationid) VALUES (?, ?)";
+                    try (PreparedStatement statementRoomReservation = connection.prepareStatement(sqlRoomReservation)) {
+                        statementRoomReservation.setString(1, roomNumber);
+                        statementRoomReservation.setInt(2, reservationID);
+                        statementRoomReservation.executeUpdate();
+                        System.out.println("room number: "+roomNumber);
+                    }
+                    }
+                } else {
+                    System.out.println("Guest quantity exceeds max guest allowed");
                 }
             }
-        } else {
-            System.out.println("Guest quantity exceeds max guest allowed");
-        }
-        }
-        else {
-            System.out.println("Room not available");
-        }
+            catch (SQLException e){
+                e.printStackTrace();
+            }
+                }
+                else {
+                    System.out.println("Room not available");
+                }
 
-        connection.close();
+                connection.close();
 
-        //set reservation id into session
-        session.setAttribute("reservationID", reservationID);
-        }
+                //set reservation id into session
+                session.setAttribute("reservationID", reservationID);
+                }
         System.out.println("reservation date: " + date);
 
         }
