@@ -236,8 +236,14 @@ public class ReservationController {
              // Get available room numbers
              List<String> availableRoomNumbers = getAvailableRoomNumbers(roomType, totalRoom, dateStartDate, dateEndDate, connection);
             int totalMaxGuests = availableRoomNumbers.stream()
-            .mapToInt(roomNumber -> getMaxGuestsForRoom(roomNumber, connection))
-            .sum();
+            .mapToInt(roomNumber -> {
+                try{ return getMaxGuestsForRoom(roomNumber, connection);
+            }
+            catch (SQLException e){
+                e.printStackTrace();
+                return 0;
+            }
+        }).sum();
             // Check if the total guest quantity exceeds the total maximum allowed guests
             boolean exceedsMaxGuests = guestQuantity > totalMaxGuests;
             if (!exceedsMaxGuests){
