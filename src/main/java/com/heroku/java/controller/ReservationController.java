@@ -172,12 +172,10 @@ public class ReservationController {
         int totalRoom = reservation.getTotalRoom();
         double totalPayment = 0.00;
         int guestQuantity = totalAdult + totalKids;
-        String reservationID = "1";
         
         //debugging
         System.out.println("dateStart: " + dateStart);
         System.out.println("dateEnd: " + dateEnd);
-        System.out.println("reservationID: " + reservationID);
         System.out.println("guestICNumber: " + guestICNumber);
         System.out.println("totalAdult: " + totalAdult);
         System.out.println("totalKids: " + totalKids);
@@ -187,9 +185,34 @@ public class ReservationController {
 
         Date dateStartDate = convertToPostgresDate(dateStart);
         Date dateEndDate = convertToPostgresDate(dateEnd);
-        System.out.println(dateStartDate);
-        System.out.println(dateEndDate);
+        System.out.println(date start: dateStartDate);
+        System.out.println(date end: dateEndDate);
         int durationOfStay = calculateDurationOfStay(dateStart, dateEnd);
+
+        String sqlReservation = "INSERT INTO reservation(reservationid, guestICNumber, guestQuantity, durationOfStay, datestart, dateend, totaladult, totalkids, reservestatus, totalroom, totalpayment, stafficnumber) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+        final var statementReservation = connection.prepareStatement(sqlReservation);
+        
+        statementReservation.setString(1,reservationID);
+        statementReservation.setString(2,guestICNumber);
+        statementReservation.setInt(3,guestQuantity);
+        statementReservation.setInt(4,durationOfStay);
+        statementReservation.setDate(5,dateStartDate);
+        statementReservation.setDate(6,dateEndDate);
+        statementReservation.setInt(7,totalAdult);
+        statementReservation.setInt(8,totalKids);
+        statementReservation.setString(9,reserveStatus);
+        statementReservation.setInt(10,totalRoom);
+        statementReservation.setDouble(11,totalPayment);
+        statementReservation.setString(12,staffICNumber);
+
+        final var resultSetReservation = statementReservation.executeQuery();
+
+        int reservationID = 0;
+        // Retrieve the auto-generated reservationID
+        if (resultSetReservation.next()) {
+            reservationID = resultSetReservation.getInt("reservationID");
+        }
+        System.out.println("id from db reservation : " + reservationID);
         
         boolean available = checkRoomAvailability(roomType, totalRoom, dateStartDate, dateEndDate, connection);
         System.out.println(available);
@@ -212,24 +235,6 @@ public class ReservationController {
             // Handle the case where rooms are not available (display an error message or redirect)
             // ...
         }
-        
-        String sqlReservation = "INSERT INTO reservation(reservationid, guestICNumber, guestQuantity, durationOfStay, datestart, dateend, totaladult, totalkids, reservestatus, totalroom, totalpayment, stafficnumber) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
-        final var statementReservation = connection.prepareStatement(sqlReservation);
-        
-        statementReservation.setString(1,reservationID);
-        statementReservation.setString(2,guestICNumber);
-        statementReservation.setInt(3,guestQuantity);
-        statementReservation.setInt(4,durationOfStay);
-        statementReservation.setDate(5,dateStartDate);
-        statementReservation.setDate(6,dateEndDate);
-        statementReservation.setInt(7,totalAdult);
-        statementReservation.setInt(8,totalKids);
-        statementReservation.setString(9,reserveStatus);
-        statementReservation.setInt(10,totalRoom);
-        statementReservation.setDouble(11,totalPayment);
-        statementReservation.setString(12,staffICNumber);
-
-        statementReservation.executeQuery();
 
         connection.close();
 
