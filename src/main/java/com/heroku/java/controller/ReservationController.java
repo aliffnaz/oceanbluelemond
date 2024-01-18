@@ -203,7 +203,7 @@ public class ReservationController {
                 String sqlRoomReservation = "INSERT INTO roomreservation(roomnum, reservationid) VALUES (?, ?)";
                 try (PreparedStatement statementRoomReservation = connection.prepareStatement(sqlRoomReservation)) {
                     statementRoomReservation.setString(1, roomNumber);
-                    statementRoomReservation.setString(2, reservationID);
+                    statementRoomReservation.setInt(2, reservationID);
                     statementRoomReservation.executeUpdate();
                     System.out.println(roomNumber);
                 }
