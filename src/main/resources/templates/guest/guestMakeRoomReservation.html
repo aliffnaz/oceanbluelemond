@@ -139,7 +139,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="guestICNumber" id="" class="form-control" th:value="${session.guestICNumber}">
+                            <input type="text" name="guestICNumber" id="" class="form-control" th:value="${session.guestICNumber}" readonly>
                         </div>
                     </div>
 
@@ -170,7 +170,6 @@
                             <div class="col-8">
                                 <div class="custom_select">
                                     <select class="wide" name="roomType" id="rooms_booking">
-                                        <option value="">Select Room</option>
                                         <option value="Deluxe Room">Deluxe Room</option>
                                         <option value="Standard Room">Standard Room</option>
                                     </select>
