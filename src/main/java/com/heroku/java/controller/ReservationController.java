@@ -51,23 +51,6 @@ public class ReservationController {
     return "guest/guestMakeRoomReservation";
   }
 
-  // Method to get a list of random room numbers from the available list
-    private List<String> getRandomRoomNumbers(List<String> availableRoomNumbers, int totalRooms) {
-        if (availableRoomNumbers.isEmpty() || totalRooms <= 0) {
-            throw new IllegalStateException("No available rooms or invalid total rooms.");
-    }
-
-        List<String> selectedRoomNumbers = new ArrayList<>();
-        int numberOfRoomsToSelect = Math.min(totalRooms, availableRoomNumbers.size());
-
-        for (int i = 0; i < numberOfRoomsToSelect; i++) {
-            int randomIndex = (int) (Math.random() * availableRoomNumbers.size());
-            selectedRoomNumbers.add(availableRoomNumbers.remove(randomIndex));
-        }
-
-        return selectedRoomNumbers;
-    }
-
     public static boolean checkRoomAvailability(String roomType, int totalRooms, Date startDate, Date endDate, Connection connection) throws SQLException {
         // Check if there are any overlapping reservations for the selected room type and date range
         String sql = "SELECT COUNT(*) FROM roomreservation rr " +
@@ -92,16 +75,32 @@ public class ReservationController {
         return false;
     }
 
-    public static boolean updateRoomStatus(String roomType, int totalRooms, Connection connection, HttpSession session) throws SQLException {
-      String guestICNumber = (String) session.getAttribute("guestICNumber") ;
-        String updateSql = "UPDATE room SET roomstatus = 'Booked' WHERE roomtype = ? LIMIT ?";
-        try (PreparedStatement updateStatement = connection.prepareStatement(updateSql)) {
-            updateStatement.setString(1, roomType);
-            updateStatement.setInt(2, totalRooms);
-
-            int updatedRows = updateStatement.executeUpdate();
-            return updatedRows > 0;
+    public static List<String> getAvailableRoomNumbers(String roomType, int totalRooms, Date startDate, Date endDate, Connection connection) throws SQLException {
+        // Query to get available room numbers
+        String sql = "SELECT roomnum FROM room WHERE roomtype = ? AND roomstatus = 'Available' " +
+                "AND roomnum NOT IN (SELECT roomnum FROM roomreservation rr " +
+                "JOIN reservation r ON rr.reservationid = r.reservationid " +
+                "WHERE (r.datestart <= ? AND r.dateend >= ?) OR (r.datestart <= ? AND r.dateend >= ?)) " +
+                "LIMIT ?";
+    
+        List<String> availableRoomNumbers = new ArrayList<>();
+    
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, roomType);
+            statement.setDate(2, new java.sql.Date(endDate.getTime()));
+            statement.setDate(3, new java.sql.Date(startDate.getTime()));
+            statement.setDate(4, new java.sql.Date(startDate.getTime()));
+            statement.setDate(5, new java.sql.Date(endDate.getTime()));
+            statement.setInt(6, totalRooms);
+    
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    availableRoomNumbers.add(resultSet.getString("roomnum"));
+                }
+            }
         }
+    
+        return availableRoomNumbers;
     }
 
     public static Date convertToPostgresDate(String originalDateString) {
@@ -186,14 +185,6 @@ public class ReservationController {
         System.out.println("guestQuantity: " + guestQuantity);
         System.out.println("roomType: " + roomType);
 
-        //get rooms according to roomtype
-        String sqlRoom = "SELECT roomNum, maxGuest from room where roomType=?";
-        final var statementRoom = connection.prepareStatement(sqlRoom);
-        statementRoom.setString(1, roomType);
-        
-        ResultSet availableRoomsResult = statementRoom.executeQuery();
-        List<String> availableRoomNumbers = new ArrayList<>();
-
         Date dateStartDate = convertToPostgresDate(dateStart);
         Date dateEndDate = convertToPostgresDate(dateEnd);
         System.out.println(dateStartDate);
@@ -202,10 +193,25 @@ public class ReservationController {
         
         boolean available = checkRoomAvailability(roomType, totalRoom, dateStartDate, dateEndDate, connection);
         System.out.println(available);
-        
-        if (available){
-            List<String> selectedRoomNumbers = getRandomRoomNumbers(availableRoomNumbers, totalRoom);
+
+        if (available) {
+            // Get available room numbers
+            List<String> availableRoomNumbers = getAvailableRoomNumbers(roomType, totalRoom, dateStartDate, dateEndDate, connection);
+
+            // Insert room numbers into roomreservation table
+            for (String roomNumber : availableRoomNumbers) {
+                String sqlRoomReservation = "INSERT INTO roomreservation(roomnum, reservationid) VALUES (?, ?)";
+                try (PreparedStatement statementRoomReservation = connection.prepareStatement(sqlRoomReservation)) {
+                    statementRoomReservation.setString(1, roomNumber);
+                    statementRoomReservation.setString(2, reservationID);
+                    statementRoomReservation.executeUpdate();
+                    System.out.println(roomNumber);
+                }
             }
+        } else {
+            // Handle the case where rooms are not available (display an error message or redirect)
+            // ...
+        }
         
         String sqlReservation = "INSERT INTO reservation(reservationid, guestICNumber, guestQuantity, durationOfStay, datestart, dateend, totaladult, totalkids, reservestatus, totalroom, totalpayment, stafficnumber) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
         final var statementReservation = connection.prepareStatement(sqlReservation);
