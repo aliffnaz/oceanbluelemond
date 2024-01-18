@@ -32,7 +32,7 @@ public class GuestController {
     }
     
     @GetMapping("/guestRegister")
-    public String managerAddRoom() {
+    public String guestRegister() {
         return "guest/guestRegister";
     }
 
@@ -83,7 +83,6 @@ public class GuestController {
             }
 
             connection.close();
-
             return "manager/managerGuestList";
         } catch (SQLException e) {
             e.printStackTrace();
@@ -201,7 +200,7 @@ public class GuestController {
 
     @GetMapping("/managerViewGuest")
     public String managerViewGuest(@RequestParam("guestICNumber") String guestICNumber, Model model, HttpSession session) {
-           String staffICNumber = (String) session.getAttribute("staffICNumber") ;
+        String staffICNumber = (String) session.getAttribute("staffICNumber") ;
         System.out.println("IC Number : " + guestICNumber);
         try {
             Connection connection = dataSource.getConnection();
@@ -244,8 +243,8 @@ public class GuestController {
 
 
     @GetMapping("/staffViewGuest")
-    public String staffViewGuest(@RequestParam("guestICNumber") String guestICNumber, Model model, HttpSession) {
-           String staffICNumber = (String) session.getAttribute("staffICNumber") ;
+    public String staffViewGuest(@RequestParam("guestICNumber") String guestICNumber, Model model, HttpSession session) {
+        String staffICNumber = (String) session.getAttribute("staffICNumber") ;
         System.out.println("IC Number : " + guestICNumber);
         try {
             Connection connection = dataSource.getConnection();
