@@ -143,6 +143,23 @@ public class ReservationController {
         }
     }
 
+    private int getMaxGuestsForRoom(String roomNumber, Connection connection) throws SQLException {
+        // Query to get the max guests for the specified room
+        String sql = "SELECT maxGuest FROM room WHERE roomnum = ?";
+    
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, roomNumber);
+    
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getInt("maxGuest");
+                }
+            }
+        }
+    
+        return -1; // Default value or handle accordingly
+    }
+
   @PostMapping("/guestMakeRoomReservation")
   public String guestMakeRoomReservation(HttpSession session, @ModelAttribute("guestMakeRoomReservation") reservation reservation, 
   room room, roomReservation roomReservation, staff staff, Model model, @RequestParam("addon") String addon,
@@ -216,6 +233,14 @@ public class ReservationController {
         boolean available = checkRoomAvailability(roomType, totalRoom, dateStartDate, dateEndDate, connection);
         System.out.println(available);
 
+        int totalMaxGuests = availableRoomNumbers.stream()
+        .mapToInt(roomNumber -> getMaxGuestsForRoom(roomNumber, connection))
+        .sum();
+
+        // Check if the total guest quantity exceeds the total maximum allowed guests
+        boolean exceedsMaxGuests = guestQuantity > totalMaxGuests;
+
+        if (!exceedsMaxGuests){
         if (available) {
             // Get available room numbers
             List<String> availableRoomNumbers = getAvailableRoomNumbers(roomType, totalRoom, dateStartDate, dateEndDate, connection);
@@ -227,13 +252,18 @@ public class ReservationController {
                     statementRoomReservation.setString(1, roomNumber);
                     statementRoomReservation.setInt(2, reservationID);
                     statementRoomReservation.executeUpdate();
-                    System.out.println(roomNumber);
+                    System.out.println("room number: "+roomNumber);
                 }
             }
         } else {
             // Handle the case where rooms are not available (display an error message or redirect)
             // ...
         }
+    }
+    else{
+        System.out.println("Guest quantity exceeds max guest allowed");
+        return "redirect:/index";
+    }
 
         connection.close();
 
