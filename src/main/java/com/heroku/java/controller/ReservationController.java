@@ -185,8 +185,8 @@ public class ReservationController {
 
         Date dateStartDate = convertToPostgresDate(dateStart);
         Date dateEndDate = convertToPostgresDate(dateEnd);
-        System.out.println(date start: dateStartDate);
-        System.out.println(date end: dateEndDate);
+        System.out.println("date start: " + dateStartDate);
+        System.out.println("date end: " + dateEndDate);
         int durationOfStay = calculateDurationOfStay(dateStart, dateEnd);
 
         String sqlReservation = "INSERT INTO reservation(reservationid, guestICNumber, guestQuantity, durationOfStay, datestart, dateend, totaladult, totalkids, reservestatus, totalroom, totalpayment, stafficnumber) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
