@@ -258,7 +258,7 @@ public class ReservationController {
         }
         }
         else {
-            System.out.println("Room not available")
+            System.out.println("Room not available");
         }
 
         connection.close();
