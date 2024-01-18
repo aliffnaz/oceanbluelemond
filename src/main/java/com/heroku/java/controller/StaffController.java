@@ -42,7 +42,7 @@ public class StaffController {
 
     @GetMapping("/managerStaffList")
     public String managerStaffList(Model model, HttpSession session) {
-String staffICNumber = (String) session.getAttribute("staffICNumber") ;
+	String userStaffICNumber = (String) session.getAttribute("staffICNumber") ;
         List<staff> staffs = new ArrayList<staff>();
         // Retrieve the logged-in room's role from the session (syahir punya nih)
         //String staffsrole = (String) session.getAttribute("staffsrole");
@@ -99,7 +99,7 @@ String staffICNumber = (String) session.getAttribute("staffICNumber") ;
 
     @PostMapping("/managerAddStaff")
     public String managerAddStaff(@ModelAttribute("managerAddStaff")staff staff, HttpSession session){
-String staffICNumber = (String) session.getAttribute("staffICNumber") ;
+	String userStaffICNumber = (String) session.getAttribute("staffICNumber") ;
         try {
             Connection connection = dataSource.getConnection();
             String sql = "INSERT INTO public.staff(stafficnumber,staffname,staffgender,staffphonenumber,staffrace,staffreligion,staffmaritalstatus,staffaddress,staffrole,staffstatus,managerICNumber,staffemail,staffpassword) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -150,7 +150,7 @@ String staffICNumber = (String) session.getAttribute("staffICNumber") ;
 
          @GetMapping("/managerViewStaff")
          public String managerViewStaff(@RequestParam("staffICNumber") String staffICNumber, Model model, HttpSession session) {
-		 String staffICNumber = (String) session.getAttribute("staffICNumber") ;
+	 String userStaffICNumber = (String) session.getAttribute("staffICNumber") ;
            System.out.println("Staff IC Number : " + staffICNumber);
            try {
              Connection connection = dataSource.getConnection();
@@ -200,7 +200,7 @@ String staffICNumber = (String) session.getAttribute("staffICNumber") ;
 
     @GetMapping("/managerStaffUpdate")
          public String managerStaffUpdate(@RequestParam("staffICNumber") String staffICNumber, Model model, HttpSession session) {
-		 String staffICNumber = (String) session.getAttribute("staffICNumber") ;
+           String userStaffICNumber = (String) session.getAttribute("staffICNumber") ;
            System.out.println("Staff IC Number : " + staffICNumber);
            try {
             Connection connection = dataSource.getConnection();
@@ -249,7 +249,7 @@ String staffICNumber = (String) session.getAttribute("staffICNumber") ;
          
          @PostMapping("/managerStaffUpdate")
         public String managerStaffUpdate(@ModelAttribute("managerStaffUpdate") staff staff, HttpSession session){
-		String staffICNumber = (String) session.getAttribute("staffICNumber") ;
+	  String userStaffICNumber = (String) session.getAttribute("staffICNumber") ;
           System.out.println("pass here <<<<<<<");
           try{
             Connection connection = dataSource.getConnection();
@@ -292,9 +292,8 @@ String staffICNumber = (String) session.getAttribute("staffICNumber") ;
         }
 
         @GetMapping("/staffProfile")
-         public String staffProfile(HttpSession session, Model model, HttpSession session) {
-		 String staffICNumber = (String) session.getAttribute("staffICNumber") ;
-          String staffICNumber = (String) session.getAttribute("staffICNumber") ;
+         public String staffProfile(HttpSession session, Model model) {
+	  String staffICNumber = (String) session.getAttribute("staffICNumber") ;
           System.out.println("Staff IC Number : " + staffICNumber);
            try {
              Connection connection = dataSource.getConnection();
@@ -341,9 +340,8 @@ String staffICNumber = (String) session.getAttribute("staffICNumber") ;
          }
 
          @GetMapping("/staffUpdate")
-         public String staffUpdate(HttpSession session, Model model, HttpSession session) {
-		 String staffICNumber = (String) session.getAttribute("staffICNumber") ;
-          String staffICNumber = (String) session.getAttribute("staffICNumber");
+         public String staffUpdate(HttpSession session, Model model) {
+	  String staffICNumber = (String) session.getAttribute("staffICNumber") ;
           System.out.println("Staff IC Number : " + staffICNumber);
            try {
             Connection connection = dataSource.getConnection();
@@ -392,9 +390,8 @@ String staffICNumber = (String) session.getAttribute("staffICNumber") ;
          }
          
          @PostMapping("/staffUpdate")
-         public String staffUpdate1(HttpSession session, @ModelAttribute("staffUpdate1") staff staff, Model model, HttpSession session) {
-		 String staffICNumber = (String) session.getAttribute("staffICNumber") ;
-          String staffICNumber = (String) session.getAttribute("staffICNumber");
+         public String staffUpdate1(HttpSession session, @ModelAttribute("staffUpdate1") staff staff, Model model) {
+	  String staffICNumber = (String) session.getAttribute("staffICNumber") ;
           System.out.println("Staff IC Number : " + staffICNumber);
            try {
 
