@@ -233,15 +233,14 @@ public class ReservationController {
         boolean available = checkRoomAvailability(roomType, totalRoom, dateStartDate, dateEndDate, connection);
         System.out.println(available);
 
-        // Check if the total guest quantity exceeds the total maximum allowed guests
-        boolean exceedsMaxGuests = guestQuantity > totalMaxGuests;
-
         if (available) {
              // Get available room numbers
              List<String> availableRoomNumbers = getAvailableRoomNumbers(roomType, totalRoom, dateStartDate, dateEndDate, connection);
             int totalMaxGuests = availableRoomNumbers.stream()
             .mapToInt(roomNumber -> getMaxGuestsForRoom(roomNumber, connection))
             .sum();
+            // Check if the total guest quantity exceeds the total maximum allowed guests
+            boolean exceedsMaxGuests = guestQuantity > totalMaxGuests;
             if (!exceedsMaxGuests){
             // Insert room numbers into roomreservation table
             for (String roomNumber : availableRoomNumbers) {
