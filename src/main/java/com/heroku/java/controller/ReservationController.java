@@ -189,7 +189,7 @@ public class ReservationController {
         System.out.println("date end: " + dateEndDate);
         int durationOfStay = calculateDurationOfStay(dateStart, dateEnd);
 
-        String sqlReservation = "INSERT INTO reservation(guestICNumber, guestQuantity, durationOfStay, datestart, dateend, totaladult, totalkids, reservestatus, totalroom, totalpayment, stafficnumber) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+        String sqlReservation = "INSERT INTO reservation(guestICNumber, guestQuantity, durationOfStay, datestart, dateend, totaladult, totalkids, reservestatus, totalroom, totalpayment, stafficnumber) VALUES (?,?,?,?,?,?,?,?,?,?,?) RETURNING reservationid";
         final var statementReservation = connection.prepareStatement(sqlReservation);
         
         statementReservation.setString(1,guestICNumber);
