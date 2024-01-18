@@ -192,17 +192,17 @@ public class ReservationController {
         String sqlReservation = "INSERT INTO reservation(guestICNumber, guestQuantity, durationOfStay, datestart, dateend, totaladult, totalkids, reservestatus, totalroom, totalpayment, stafficnumber) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
         final var statementReservation = connection.prepareStatement(sqlReservation);
         
-        statementReservation.setString(2,guestICNumber);
-        statementReservation.setInt(3,guestQuantity);
-        statementReservation.setInt(4,durationOfStay);
-        statementReservation.setDate(5,dateStartDate);
-        statementReservation.setDate(6,dateEndDate);
-        statementReservation.setInt(7,totalAdult);
-        statementReservation.setInt(8,totalKids);
-        statementReservation.setString(9,reserveStatus);
-        statementReservation.setInt(10,totalRoom);
-        statementReservation.setDouble(11,totalPayment);
-        statementReservation.setString(12,staffICNumber);
+        statementReservation.setString(1,guestICNumber);
+        statementReservation.setInt(2,guestQuantity);
+        statementReservation.setInt(3,durationOfStay);
+        statementReservation.setDate(4,dateStartDate);
+        statementReservation.setDate(5,dateEndDate);
+        statementReservation.setInt(6,totalAdult);
+        statementReservation.setInt(7,totalKids);
+        statementReservation.setString(8,reserveStatus);
+        statementReservation.setInt(9,totalRoom);
+        statementReservation.setDouble(10,totalPayment);
+        statementReservation.setString(11,staffICNumber);
 
         final var resultSetReservation = statementReservation.executeQuery();
 
