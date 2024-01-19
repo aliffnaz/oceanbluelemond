@@ -288,7 +288,7 @@ public class ReservationController {
             System.out.println("Room not available");
             return "redirect:/guestMakeRoomReservation";
         }
-        
+
         totalPayment = calculateTotalPayment(availableRoomNumbers, connection);
         String sqlUpdateTotalPayment = "UPDATE reservation SET totalpayment = ? WHERE reservationid = ?";
         try (PreparedStatement statementUpdateTotalPayment = connection.prepareStatement(sqlUpdateTotalPayment)) {
