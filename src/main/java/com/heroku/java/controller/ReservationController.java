@@ -159,6 +159,27 @@ public class ReservationController {
         throw new SQLException("Failed to get max guests for room: " + roomNumber);
     }
 
+    private double calculateTotalPayment(List<String> availableRoomNumbers, Connection connection) throws SQLException {
+        double totalPayment = 0.0;
+    
+        // Iterate through each room and fetch its roomrate
+        for (String roomNumber : availableRoomNumbers) {
+            String sqlRoomRate = "SELECT roomrate FROM room WHERE roomnum = ?";
+            try (PreparedStatement statementRoomRate = connection.prepareStatement(sqlRoomRate)) {
+                statementRoomRate.setString(1, roomNumber);
+    
+                try (ResultSet resultSetRoomRate = statementRoomRate.executeQuery()) {
+                    if (resultSetRoomRate.next()) {
+                        double roomRate = resultSetRoomRate.getDouble("roomrate");
+                        totalPayment += roomRate;
+                    }
+                }
+            }
+        }
+    
+        return totalPayment;
+    }
+
   @PostMapping("/guestMakeRoomReservation")
   public String guestMakeRoomReservation(HttpSession session, @ModelAttribute("guestMakeRoomReservation") reservation reservation, 
   room room, roomReservation roomReservation, staff staff, Model model, @RequestParam("addon") String addon,
@@ -255,16 +276,25 @@ public class ReservationController {
                     statementRoomReservation.setInt(2, reservationID);
                     statementRoomReservation.executeUpdate();
                     System.out.println("room number: "+roomNumber);
+                    }
                 }
+            } else {
+                System.out.println("Guest quantity exceeds max guest allowed");
+                return "redirect:/guestMakeRoomReservation";
             }
-        } else {
-            System.out.println("Guest quantity exceeds max guest allowed");
-            return "redirect:/guestMakeRoomReservation";
-        }
+
         }
         else {
             System.out.println("Room not available");
             return "redirect:/guestMakeRoomReservation";
+        }
+        
+        totalPayment = calculateTotalPayment(availableRoomNumbers, connection);
+        String sqlUpdateTotalPayment = "UPDATE reservation SET totalpayment = ? WHERE reservationid = ?";
+        try (PreparedStatement statementUpdateTotalPayment = connection.prepareStatement(sqlUpdateTotalPayment)) {
+            statementUpdateTotalPayment.setDouble(1, totalPayment);
+            statementUpdateTotalPayment.setInt(2, reservationID);
+            statementUpdateTotalPayment.executeUpdate();
         }
 
         connection.close();
@@ -283,6 +313,7 @@ public class ReservationController {
 
         if (addon.equalsIgnoreCase("Yes"))
         return "guest/guestMakeRoomService";
+        
         else
         return "guest/guestRoomReservation";
     }
