@@ -283,18 +283,17 @@ public class ReservationController {
                 return "redirect:/guestMakeRoomReservation";
             }
 
+            totalPayment = calculateTotalPayment(availableRoomNumbers, connection);
+            String sqlUpdateTotalPayment = "UPDATE reservation SET totalpayment = ? WHERE reservationid = ?";
+            try (PreparedStatement statementUpdateTotalPayment = connection.prepareStatement(sqlUpdateTotalPayment)) {
+                statementUpdateTotalPayment.setDouble(1, totalPayment);
+                statementUpdateTotalPayment.setInt(2, reservationID);
+                statementUpdateTotalPayment.executeUpdate();
+            }
         }
         else {
             System.out.println("Room not available");
             return "redirect:/guestMakeRoomReservation";
-        }
-
-        totalPayment = calculateTotalPayment(availableRoomNumbers, connection);
-        String sqlUpdateTotalPayment = "UPDATE reservation SET totalpayment = ? WHERE reservationid = ?";
-        try (PreparedStatement statementUpdateTotalPayment = connection.prepareStatement(sqlUpdateTotalPayment)) {
-            statementUpdateTotalPayment.setDouble(1, totalPayment);
-            statementUpdateTotalPayment.setInt(2, reservationID);
-            statementUpdateTotalPayment.executeUpdate();
         }
 
         connection.close();
