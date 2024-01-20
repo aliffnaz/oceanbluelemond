@@ -316,11 +316,11 @@ public class ReservationController {
 
         if (addon.equalsIgnoreCase("Yes")){
             System.out.println("yes for addon");
-            return "guest/guestMakeRoomService";
+            return "redirect:/guestMakeRoomService";
         }
         else{
             System.out.println("no for addon");
-            return "guest/guestRoomReservation";
+            return "redirect:/guestRoomReservation";
         }
     }
       
