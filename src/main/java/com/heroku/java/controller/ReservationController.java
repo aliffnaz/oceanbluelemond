@@ -277,6 +277,10 @@ public class ReservationController {
                     statementRoomReservation.executeUpdate();
                     System.out.println("room number: "+roomNumber);
                     }
+                    catch (SQLException e){
+                        e.printStackTrace();
+                        System.out.println("fail to insert into roomreservation table");
+                    }
                 }
             } else {
                 System.out.println("Guest quantity exceeds max guest allowed");
