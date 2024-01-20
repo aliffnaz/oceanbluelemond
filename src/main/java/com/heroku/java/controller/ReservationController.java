@@ -314,11 +314,14 @@ public class ReservationController {
             return "redirect:/index";
         }
 
-        if (addon.equalsIgnoreCase("Yes"))
-        return "guest/guestMakeRoomService";
-        
-        else
-        return "guest/guestRoomReservation";
+        if (addon.equalsIgnoreCase("Yes")){
+            System.out.println("yes for addon");
+            return "guest/guestMakeRoomService";
+        }
+        else{
+            System.out.println("no for addon");
+            return "guest/guestRoomReservation";
+        }
     }
       
 
