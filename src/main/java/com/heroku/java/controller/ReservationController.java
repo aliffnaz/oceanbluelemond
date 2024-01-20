@@ -329,14 +329,18 @@ public class ReservationController {
 @GetMapping("/guestMakeRoomService")
 public String guestMakeRoomService(HttpSession session) {
   String guestICNumber = (String) session.getAttribute("guestICNumber");
-  String reservationID = (String) session.getAttribute("reservationID");
+  int reservationID = (int) session.getAttribute("reservationID");
+  System.out.println("guestICNumber: " + guestICNumber);
+  System.out.println("reservationID: " + reservationID);
   return "guest/guestMakeRoomService";
 }
 
 @GetMapping("/guestMakeEventService")
 public String guestMakeEventService(HttpSession session) {
   String guestICNumber = (String) session.getAttribute("guestICNumber");
-  String reservationID = (String) session.getAttribute("reservationID");
+  int reservationID = (int) session.getAttribute("reservationID");
+  System.out.println("guestICNumber: " + guestICNumber);
+  System.out.println("reservationID: " + reservationID);
   return "guest/guestMakeEventService";
 }
 
