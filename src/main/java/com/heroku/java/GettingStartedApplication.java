@@ -41,7 +41,8 @@ public class GettingStartedApplication {
     }
 
     @GetMapping("/index")
-    public String index1(@RequestParam(name = "success", required = false) Boolean success) {
+    public String index1(@RequestParam(name = "success", required = false) Boolean success, HttpSession session) {
+        String guestICNumber = (String) session.getAttribute("guestICNumber");
         return "index";
     }
 
@@ -56,29 +57,34 @@ public class GettingStartedApplication {
     }
 
         @GetMapping("/guestViewRoom")
-    public String guestViewRoom() {
+    public String guestViewRoom(HttpSession session) {
+        String guestICNumber = (String) session.getAttribute("guestICNumber");
         return "guest/guestViewRoom";
     }
 
     @GetMapping("/guestRoomReservation")
-    public String guestRoomReservation() {
+    public String guestRoomReservation(HttpSession session) {
+        String guestICNumber = (String) session.getAttribute("guestICNumber");
         return "guest/guestRoomReservation";
     }
 
     @GetMapping("/guestViewRoomReservation")
-    public String guestViewRoomReservation() {
+    public String guestViewRoomReservation(HttpSession session) {
+        String guestICNumber = (String) session.getAttribute("guestICNumber");
         return "guest/guestViewRoomReservation";
     }
 
     @GetMapping("/guestGenerateReceipt")
-    public String guestGenerateReceipt() {
+    public String guestGenerateReceipt(HttpSession session) {
+        String guestICNumber = (String) session.getAttribute("guestICNumber");
         return "guest/guestGenerateReceipt";
     }
 
     // for staff
 
     @GetMapping("/staffHome")
-    public String staffHome(@RequestParam(name = "success", required = false) Boolean success) {
+    public String staffHome(@RequestParam(name = "success", required = false) Boolean success, HttpSession session) {
+        String staffICNumber = (String) session.getAttribute("staffICNumber") ;
         return "staff/staffHome";
     }
 
@@ -88,54 +94,64 @@ public class GettingStartedApplication {
     }
 
     @GetMapping("/staffReservationList")
-    public String staffReservationList() {
+    public String staffReservationList(HttpSession session) {
+        String staffICNumber = (String) session.getAttribute("staffICNumber") ;
         return "staff/staffReservationList";
     }
 
     @GetMapping("/staffAddRoom")
-    public String staffAddRoom() {
+    public String staffAddRoom(HttpSession session) {
+    String staffICNumber = (String) session.getAttribute("staffICNumber") ;
     return "staff/staffAddRoom";
 }
 
 @GetMapping("/staffGenerateReport")
-public String staffGenerateReport() {
+public String staffGenerateReport(HttpSession session) {
+    String staffICNumber = (String) session.getAttribute("staffICNumber") ;
     return "staff/staffGenerateReport";
 }
 
 // for manager
 
 @GetMapping("/managerHome")
-public String managerHome(@RequestParam(name = "success", required = false) Boolean success) {
+public String managerHome(@RequestParam(name = "success", required = false) Boolean success, HttpSession session) {
+    String staffICNumber = (String) session.getAttribute("staffICNumber") ;
     return "manager/managerHome";
 }
 
 @GetMapping("/managerAddRoom")
-public String managerAddRoom() {
+public String managerAddRoom(HttpSession session) {
+    String staffICNumber = (String) session.getAttribute("staffICNumber") ;
     return "manager/managerAddRoom";
 }
 
 @GetMapping("/managerAddStaff")
-public String managerAddStaff() {
+public String managerAddStaff(HttpSession session) {
+    String staffICNumber = (String) session.getAttribute("staffICNumber") ;
     return "manager/managerAddStaff";
 }
 
 @GetMapping("/managerUpdateStatus")
-public String managerUpdateStatus() {
+public String managerUpdateStatus(HttpSession session) {
+    String staffICNumber = (String) session.getAttribute("staffICNumber") ;
     return "manager/managerUpdateStatus";
 }
 
 @GetMapping("/managerGenerateReport")
-public String managerGenerateReport() {
+public String managerGenerateReport(HttpSession session) {
+    String staffICNumber = (String) session.getAttribute("staffICNumber") ;
     return "manager/managerGenerateReport";
 }
 
 @GetMapping("/reservationReport")
-public String reservationReport() {
+public String reservationReport(HttpSession session) {
+    String staffICNumber = (String) session.getAttribute("staffICNumber") ;
     return "manager/reservationReport";
 }
 
 @GetMapping("/salesReport")
-public String salesReport() {
+public String salesReport(HttpSession session) {
+    String staffICNumber = (String) session.getAttribute("staffICNumber") ;
     return "manager/salesReport";
 }
 
