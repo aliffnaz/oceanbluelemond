@@ -2,17 +2,17 @@ package com.heroku.java.model;
 
 public class reservationService {
 
-    private String reservationServiceID;
+    private int reservationServiceID;
     private String serviceID;
-    private String reservationID;
-    private String serviceDuration;
-    private String serviceQuantity;
+    private int reservationID;
+    private int serviceDuration;
+    private int serviceQuantity;
 
     public reservationService() {
 
     }
 
-    public reservationService(String reservationServiceID, String serviceID, String reservationID, String serviceDuration, String serviceQuantity){
+    public reservationService(int reservationServiceID, String serviceID, int reservationID, int serviceDuration, int serviceQuantity){
       this.reservationServiceID = reservationServiceID;
       this.serviceID = serviceID;
       this.reservationID = reservationID;
@@ -20,10 +20,10 @@ public class reservationService {
       this.serviceQuantity = serviceQuantity;
     }
 
-    public String getReservationServiceID() {
+    public int getReservationServiceID() {
 		return reservationServiceID;
 	}
-	public void setReservationServiceID(String reservationServiceID) {
+	public void setReservationServiceID(int reservationServiceID) {
 		this.reservationServiceID = reservationServiceID;
 	}
 	public String getServiceID() {
@@ -32,22 +32,22 @@ public class reservationService {
 	public void setServiceID(String serviceID) {
 		this.serviceID = serviceID;
 	}
-	public String getReservationID() {
+	public int getReservationID() {
 		return reservationID;
 	}
-	public void setReservationID(String reservationID) {
+	public void setReservationID(int reservationID) {
 		this.reservationID = reservationID;
 	}
-	public String getServiceDuration() {
+	public int getServiceDuration() {
 		return serviceDuration;
 	}
-	public void setServiceDuration(String serviceDuration) {
+	public void setServiceDuration(int serviceDuration) {
 		this.serviceDuration = serviceDuration;
 	}
-	public String getServiceQuantity() {
+	public int getServiceQuantity() {
 		return serviceQuantity;
 	}
-	public void setServiceQuantity(String serviceQuantity) {
+	public void setServiceQuantity(int serviceQuantity) {
 		this.serviceQuantity = serviceQuantity;
 	}
 
