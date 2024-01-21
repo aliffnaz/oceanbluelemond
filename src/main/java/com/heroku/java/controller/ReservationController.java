@@ -189,7 +189,7 @@ public class ReservationController {
                      "  AND rs.maxquantity >= ?";
     
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setString(1, serviceId);
+            statement.setInt(1, serviceId);
             statement.setDate(2, startDate);
             statement.setDate(3, endDate);
             statement.setDate(4, startDate);
