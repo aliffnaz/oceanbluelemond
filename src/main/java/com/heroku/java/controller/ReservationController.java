@@ -453,7 +453,7 @@ public String guestMakeRoomService(HttpSession session, Model model) {
 }
 
 @PostMapping("/guestMakeRoomService")
-public String guestMakeRoomService(HttpSession session, @ModelAttribute("guestMakeRoomService")service service, @RequestParam("serviceQuantity") int serviceQuantity, @RequestParam("serviceDuration") int serviceDuration){
+public String guestMakeRoomService(HttpSession session, @ModelAttribute("guestMakeRoomService")service service, @RequestParam("serviceID") String serviceIDString, @RequestParam("serviceQuantity") int serviceQuantity, @RequestParam("serviceDuration") int serviceDuration){
     
     try {
     Connection connection = dataSource.getConnection();
@@ -464,7 +464,7 @@ public String guestMakeRoomService(HttpSession session, @ModelAttribute("guestMa
     Date dateEnd = (Date) session.getAttribute("dateEnd");
     double totalPayment = (double) session.getAttribute("totalPayment");
     int totalRoom = (int) session.getAttribute("totalRoom");
-    int serviceID = service.getServiceID();
+    int serviceID = Integer.parseInt(serviceIDString);
 
     System.out.println("guestICNumber: " + guestICNumber);
     System.out.println("reservationID: " + reservationID);
