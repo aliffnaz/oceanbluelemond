@@ -343,7 +343,7 @@ public String guestMakeRoomService(HttpSession session, Model model) {
             int serviceID = resultSet.getInt("serviceid");
             String serviceName = resultSet.getString("servicename");
 
-            service = new service();
+            service service = new service();
             service.setServiceID(serviceID);
             service.setServiceName(serviceName);
 
@@ -378,9 +378,9 @@ public String guestMakeRoomService(HttpSession session, Model model) {
         while (resultSetGuestService.next()){
             String guestServiceName = resultSetGuestService.getString("servicename");
             String guestServiceType = resultSetGuestService.getString("servicetype");
-            double guestServicePrice = resultSetGuestService.getString("serviceprice");
-            int guestServiceDuration = resultSetGuestService.getString("serviceduration");
-            int guestServiceQuantity = resultSetGuestService.getString("servicequantity");
+            double guestServicePrice = resultSetGuestService.getDouble("serviceprice");
+            int guestServiceDuration = resultSetGuestService.getInt("serviceduration");
+            int guestServiceQuantity = resultSetGuestService.getInt("servicequantity");
 
             service service = new service();
             reservationService reservationService = new reservationService();
