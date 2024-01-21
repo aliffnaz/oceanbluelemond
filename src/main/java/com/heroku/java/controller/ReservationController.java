@@ -184,7 +184,7 @@ public class ReservationController {
         // Query to check if the room service is available for the given date range and maximum quantity constraint
         String sql = "SELECT COUNT(*) FROM reservationservice rs " +
                      "JOIN reservation r ON rs.reservationid = r.reservationid " +
-                     "JOIN roomservice ON roomservice.serviceid = rs.serviceid" +
+                     "JOIN roomservice ON roomservice.serviceid = rs.serviceid " +
                      "WHERE rs.serviceid = ? " +
                      "  AND (r.datestart <= ? AND r.dateend >= ? OR r.datestart <= ? AND r.dateend >= ?) " +
                      "  AND roomservice.maxquantity >= ?";
