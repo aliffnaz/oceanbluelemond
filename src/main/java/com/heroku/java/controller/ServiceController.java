@@ -43,16 +43,15 @@ public class ServiceController {
 
     @PostMapping("/managerAddService")
     public String managerAddService(Model model, @ModelAttribute("managerAddService") service service, roomService roomService, eventService eventService, HttpSession session) {
-String staffICNumber = (String) session.getAttribute("staffICNumber") ;
+    String staffICNumber = (String) session.getAttribute("staffICNumber") ;
         try {
             Connection connection = dataSource.getConnection();
-            String sql = "INSERT INTO service(serviceID, serviceName, serviceType, servicePrice, serviceStatus) VALUES(?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO service(serviceName, serviceType, servicePrice, serviceStatus) VALUES(?, ?, ?, ?)";
             final var statement = connection.prepareStatement(sql);
 
-            String serviceID=service.getServiceID();
             String serviceName=service.getServiceName();
             String serviceType=service.getServiceType();
-            String servicePrice=service.getServicePrice();
+            double servicePrice=service.getServicePrice();
             String serviceStatus="Available";
 
             if (serviceType.equalsIgnoreCase("roomService")){
@@ -60,34 +59,36 @@ String staffICNumber = (String) session.getAttribute("staffICNumber") ;
             else {
             serviceType = "Event Service";}
 
-            
-            statement.setString(1, serviceID);
-            statement.setString(2, serviceName);
-            statement.setString(3, serviceType);
-            statement.setString(4, servicePrice);
-            statement.setString(5, serviceStatus);
+            statement.setString(1, serviceName);
+            statement.setString(2, serviceType);
+            statement.setString(3, servicePrice);
+            statement.setString(4, serviceStatus);
 
             statement.executeUpdate();
 
             // Get id from database for sql 2 from sql 1
-            String sql1 = "SELECT serviceid, servicename, servicetype, serviceprice, servicestatus FROM service where serviceid=?";
+            String sql1 = "SELECT * FROM service where servicename=?";
             final var stmt = connection.prepareStatement(sql1);
-            stmt.setString(1, serviceID);
+            stmt.setString(1, serviceName);
             final var resultSet = stmt.executeQuery();
-
+            int serviceID = 0;
+            while (resultSet.next()){
+              serviceID = resultSet.getInt("serviceid");
+            }
+            System.out.println("service id from database: " + serviceID);
                 // Update fields specific to "roomService" or "eventService" based on the service type
                 if (serviceType.equalsIgnoreCase("Room Service")) {
                     String roomServiceSql = "INSERT INTO roomService(serviceid, balance) VALUES (?, ?)";
                     final var roomServiceStatement = connection.prepareStatement(roomServiceSql);
-                    roomServiceStatement.setString(1, serviceID);
-                    roomServiceStatement.setString(2, roomService.getBalance());
+                    roomServiceStatement.setInt(1, serviceID);
+                    roomServiceStatement.setInt(2, roomService.getBalance());
 
                     roomServiceStatement.executeUpdate();
                 } else if (serviceType.equalsIgnoreCase("Event Service")) {
                     String eventServiceSql = "INSERT INTO eventService(serviceid, eventcapacity) VALUES (?, ?)";
                     final var eventServiceStatement = connection.prepareStatement(eventServiceSql);
-                    eventServiceStatement.setString(1, serviceID);
-                    eventServiceStatement.setString(2, eventService.getEventCapacity());
+                    eventServiceStatement.setInt(1, serviceID);
+                    eventServiceStatement.setInt(2, eventService.getEventCapacity());
 
                     eventServiceStatement.executeUpdate();
                 }
@@ -115,20 +116,20 @@ String staffICNumber = (String) session.getAttribute("staffICNumber") ;
             final var resultSet = statement.executeQuery(sql);
 
             while (resultSet.next()) {
-                String serviceID = resultSet.getString("serviceid");
+                int serviceID = resultSet.getInt("serviceid");
                 String serviceName = resultSet.getString("servicename");
                 String serviceType = resultSet.getString("servicetype");
-                String servicePrice = resultSet.getString("serviceprice");
+                double servicePrice = resultSet.getDouble("serviceprice");
                 String serviceStatus = resultSet.getString("servicestatus");
 
                 service service;
                 if ("roomService".equalsIgnoreCase(serviceType)) {
                     String roomServiceSql = "SELECT serviceid, balance FROM roomService WHERE serviceid=?";
                     final var roomServiceStatement = connection.prepareStatement(roomServiceSql);
-                    roomServiceStatement.setString(1, serviceID);
+                    roomServiceStatement.setInt(1, serviceID);
                     final var roomServiceResultSet = roomServiceStatement.executeQuery();
                     if (roomServiceResultSet.next()) {
-                        String balance = roomServiceResultSet.getString("balance");
+                        int balance = roomServiceResultSet.getInt("balance");
                         service = new roomService(serviceID, serviceName, serviceType, servicePrice, serviceStatus, balance);
                     } else {
                         service = new service(serviceID, serviceName, serviceType, servicePrice, serviceStatus);
@@ -139,7 +140,7 @@ String staffICNumber = (String) session.getAttribute("staffICNumber") ;
                     eventServiceStatement.setString(1, serviceID);
                     final var eventServiceResultSet = eventServiceStatement.executeQuery();
                     if (eventServiceResultSet.next()) {
-                        String eventCapacity = eventServiceResultSet.getString("eventCapacity");
+                        int eventCapacity = eventServiceResultSet.getInt("eventCapacity");
                         service = new eventService(serviceID, serviceName, serviceType, servicePrice, serviceStatus, eventCapacity);
                     } else {
                         service = new service(serviceID, serviceName, serviceType, servicePrice, serviceStatus);
@@ -179,15 +180,15 @@ String staffICNumber = (String) session.getAttribute("staffICNumber") ;
             if (resultSet.next()) {
                 String serviceName = resultSet.getString("servicename");
                 String serviceType = resultSet.getString("servicetype");
-                String servicePrice = resultSet.getString("serviceprice");
+                double servicePrice = resultSet.getDouble("serviceprice");
                 String serviceStatus = resultSet.getString("servicestatus");
 
                 service service;
                 if (serviceType.equalsIgnoreCase("Room Service")) {
-                    String balance = resultSet.getString("balance");
+                    int balance = resultSet.getInt("balance");
                     service = new roomService(serviceID, serviceName, serviceType, servicePrice, serviceStatus, balance);
                 } else if (serviceType.equalsIgnoreCase("Event Service")) {
-                    String eventCapacity = resultSet.getString("eventCapacity");
+                    int eventCapacity = resultSet.getInt("eventCapacity");
                     service = new eventService(serviceID, serviceName, serviceType, servicePrice, serviceStatus, eventCapacity);
                 } else {
                     // Handle the case when serviceType is neither "roomService" nor "eventService"
@@ -222,15 +223,15 @@ String staffICNumber = (String) session.getAttribute("staffICNumber") ;
             if (resultSet.next()) {
                 String serviceName = resultSet.getString("servicename");
                 String serviceType = resultSet.getString("servicetype");
-                String servicePrice = resultSet.getString("serviceprice");
+                double servicePrice = resultSet.getDouble("serviceprice");
                 String serviceStatus = resultSet.getString("servicestatus");
 
                 service service;
                 if (serviceType.equalsIgnoreCase("Room Service")) {
-                    String balance = resultSet.getString("balance");
+                    int balance = resultSet.getInt("balance");
                     service = new roomService(serviceID, serviceName, serviceType, servicePrice, serviceStatus, balance);
                 } else if (serviceType.equalsIgnoreCase("Event Service")) {
-                    String eventCapacity = resultSet.getString("eventCapacity");
+                    int eventCapacity = resultSet.getInt("eventCapacity");
                     service = new eventService(serviceID, serviceName, serviceType, servicePrice, serviceStatus, eventCapacity);
                 } else {
                     // Handle the case when serviceType is neither "roomService" nor "eventService"
@@ -257,9 +258,9 @@ String staffICNumber = (String) session.getAttribute("staffICNumber") ;
             final var statement = connection.prepareStatement(sql);
             statement.setString(1, service.getServiceName());
             statement.setString(2, service.getServiceType());
-            statement.setString(3, service.getServicePrice());
+            statement.setDouble(3, service.getServicePrice());
             statement.setString(4, service.getServiceStatus());
-            statement.setString(5, service.getServiceID());
+            statement.setInt(5, service.getServiceID());
 
             statement.executeUpdate();
 
@@ -267,15 +268,15 @@ String staffICNumber = (String) session.getAttribute("staffICNumber") ;
             if ("Room Service".equalsIgnoreCase(service.getServiceType())) {
                 String roomServiceSql = "UPDATE roomService SET balance=? WHERE serviceID=?";
                 final var roomServiceStatement = connection.prepareStatement(roomServiceSql);
-                roomServiceStatement.setString(1, roomService.getBalance());
-                roomServiceStatement.setString(2, service.getServiceID());
+                roomServiceStatement.setInt(1, roomService.getBalance());
+                roomServiceStatement.setInt(2, service.getServiceID());
 
                 roomServiceStatement.executeUpdate();
             } else if ("Event Service".equalsIgnoreCase(service.getServiceType())) {
                 String eventServiceSql = "UPDATE eventService SET eventCapacity=? WHERE serviceID=?";
                 final var eventServiceStatement = connection.prepareStatement(eventServiceSql);
-                eventServiceStatement.setString(1, eventService.getEventCapacity());
-                eventServiceStatement.setString(2, service.getServiceID());
+                eventServiceStatement.setInt(1, eventService.getEventCapacity());
+                eventServiceStatement.setInt(2, service.getServiceID());
 
                 eventServiceStatement.executeUpdate();
             }
