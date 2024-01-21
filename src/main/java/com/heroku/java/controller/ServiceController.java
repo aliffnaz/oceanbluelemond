@@ -61,7 +61,7 @@ public class ServiceController {
 
             statement.setString(1, serviceName);
             statement.setString(2, serviceType);
-            statement.setString(3, servicePrice);
+            statement.setDouble(3, servicePrice);
             statement.setString(4, serviceStatus);
 
             statement.executeUpdate();
