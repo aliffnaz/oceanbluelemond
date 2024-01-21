@@ -2,10 +2,10 @@ package com.heroku.java.model;
 
 public class service {
 
-    private String serviceID;
+    private int serviceID;
     private String serviceName;
     private String serviceType;
-    private String servicePrice;
+    private double servicePrice;
     private String serviceStatus;
 
     public service(){
