@@ -2,21 +2,21 @@ package com.heroku.java.model;
 
 public class eventService extends service {
 
-    private String eventCapacity;
+    private int eventCapacity;
 
     public eventService(){
 
     }
 
-    public eventService(String serviceID, String serviceName, String serviceType, String servicePrice, String serviceStatus, String eventCapacity){
+    public eventService(int serviceID, String serviceName, String serviceType, double servicePrice, String serviceStatus, int eventCapacity){
         super(serviceID, serviceName, serviceType, servicePrice, serviceStatus);
         this.eventCapacity = eventCapacity;
     }
 
-    public String getEventCapacity() {
+    public int getEventCapacity() {
 		return eventCapacity;
 	}
-	public void setEventCapacity(String eventCapacity) {
+	public void setEventCapacity(int eventCapacity) {
 		this.eventCapacity = eventCapacity;
 	}
 
