@@ -373,7 +373,7 @@ public String guestMakeRoomService(HttpSession session, Model model) {
         + "from service JOIN roomservice ON service.serviceid = roomservice.serviceid "
         + "JOIN reservationservice ON reservationservice.serviceid = service.serviceid "
         + "JOIN reservation ON reservationservice.reservationid = reservation.reservationid "
-        + "WHERE reservationid = ?";
+        + "WHERE reservation.reservationid = ?";
         final var statementGuestService = connection.prepareStatement(sqlGuestService);
         statementGuestService.setInt(1, reservationID);
         final var resultSetGuestService = statementGuestService.executeQuery();
