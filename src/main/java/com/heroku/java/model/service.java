@@ -12,7 +12,7 @@ public class service {
 	    
     }
 
-    public service(String serviceID, String serviceName, String serviceType, String servicePrice, String serviceStatus){
+    public service(int serviceID, String serviceName, String serviceType, double servicePrice, String serviceStatus){
         this.serviceID = serviceID;
         this.serviceName = serviceName;
         this.serviceType = serviceType;
@@ -20,10 +20,10 @@ public class service {
         this.serviceStatus = serviceStatus;
     }
     
-    public String getServiceID() {
+    public int getServiceID() {
 		return serviceID;
 	}
-	public void setServiceID(String serviceID) {
+	public void setServiceID(int serviceID) {
 		this.serviceID = serviceID;
 	}
 	public String getServiceName() {
@@ -38,10 +38,10 @@ public class service {
 	public void setServiceType(String serviceType) {
 		this.serviceType = serviceType;
 	}
-	public String getServicePrice() {
+	public double getServicePrice() {
 		return servicePrice;
 	}
-	public void setServicePrice(String servicePrice) {
+	public void setServicePrice(double servicePrice) {
 		this.servicePrice = servicePrice;
 	}
 	public String getServiceStatus() {
