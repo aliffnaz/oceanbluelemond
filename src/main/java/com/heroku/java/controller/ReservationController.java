@@ -180,6 +180,37 @@ public class ReservationController {
         return totalPayment;
     }
 
+    public static boolean isRoomServiceAvailable(String serviceId, Date startDate, Date endDate, int totalRooms, Connection connection) throws SQLException {
+        // Query to check if the room service is available for the given date range and maximum quantity constraint
+        String sql = "SELECT COUNT(*) FROM reservationservice rs " +
+                     "JOIN reservation r ON rs.reservationid = r.reservationid " +
+                     "WHERE rs.serviceid = ? " +
+                     "  AND (r.datestart <= ? AND r.dateend >= ? OR r.datestart <= ? AND r.dateend >= ?) " +
+                     "  AND rs.maxquantity >= ?";
+    
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, serviceId);
+            statement.setDate(2, startDate);
+            statement.setDate(3, endDate);
+            statement.setDate(4, startDate);
+            statement.setDate(5, endDate);
+            statement.setInt(6, totalRooms);
+    
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    int existingReservationsCount = resultSet.getInt(1);
+                    return existingReservationsCount == 0;
+                }
+            }
+        }
+        catch(SQLException e) {
+            System.out.println("fail at method isRoomServiceAvailable()");
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
   @PostMapping("/guestMakeRoomReservation")
   public String guestMakeRoomReservation(HttpSession session, @ModelAttribute("guestMakeRoomReservation") reservation reservation, 
   room room, roomReservation roomReservation, staff staff, Model model, @RequestParam("addon") String addon,
@@ -225,30 +256,6 @@ public class ReservationController {
         System.out.println("date start: " + dateStartDate);
         System.out.println("date end: " + dateEndDate);
         int durationOfStay = calculateDurationOfStay(dateStart, dateEnd);
-
-        String sqlReservation = "INSERT INTO reservation(guestICNumber, guestQuantity, durationOfStay, datestart, dateend, totaladult, totalkids, reservestatus, totalroom, totalpayment, stafficnumber) VALUES (?,?,?,?,?,?,?,?,?,?,?) RETURNING reservationid";
-        final var statementReservation = connection.prepareStatement(sqlReservation);
-        
-        statementReservation.setString(1,guestICNumber);
-        statementReservation.setInt(2,guestQuantity);
-        statementReservation.setInt(3,durationOfStay);
-        statementReservation.setDate(4,dateStartDate);
-        statementReservation.setDate(5,dateEndDate);
-        statementReservation.setInt(6,totalAdult);
-        statementReservation.setInt(7,totalKids);
-        statementReservation.setString(8,reserveStatus);
-        statementReservation.setInt(9,totalRoom);
-        statementReservation.setDouble(10,totalPayment);
-        statementReservation.setString(11,staffICNumber);
-
-        final var resultSetReservation = statementReservation.executeQuery();
-
-        int reservationID = 0;
-        // Retrieve the auto-generated reservationID
-        if (resultSetReservation.next()) {
-            reservationID = resultSetReservation.getInt("reservationID");
-        }
-        System.out.println("id from db reservation : " + reservationID);
         
         boolean available = checkRoomAvailability(roomType, totalRoom, dateStartDate, dateEndDate, connection);
         System.out.println(available);
@@ -258,16 +265,49 @@ public class ReservationController {
              List<String> availableRoomNumbers = getAvailableRoomNumbers(roomType, totalRoom, dateStartDate, dateEndDate, connection);
             int totalMaxGuests = availableRoomNumbers.stream()
             .mapToInt(roomNumber -> {
-                try{ return getMaxGuestsForRoom(roomNumber, connection);
+                try{ 
+                    return getMaxGuestsForRoom(roomNumber, connection);
             }
             catch (SQLException e){
                 e.printStackTrace();
                 return 0;
             }
-        }).sum();
+            }).sum();
             // Check if the total guest quantity exceeds the total maximum allowed guests
             boolean exceedsMaxGuests = guestQuantity > totalMaxGuests;
             if (!exceedsMaxGuests){
+
+            //insert into table reservation    
+            String sqlReservation = "INSERT INTO reservation(guestICNumber, guestQuantity, durationOfStay, datestart, dateend, totaladult, totalkids, reservestatus, totalroom, totalpayment, stafficnumber) VALUES (?,?,?,?,?,?,?,?,?,?,?) RETURNING reservationid";
+            final var statementReservation = connection.prepareStatement(sqlReservation);
+            
+            statementReservation.setString(1,guestICNumber);
+            statementReservation.setInt(2,guestQuantity);
+            statementReservation.setInt(3,durationOfStay);
+            statementReservation.setDate(4,dateStartDate);
+            statementReservation.setDate(5,dateEndDate);
+            statementReservation.setInt(6,totalAdult);
+            statementReservation.setInt(7,totalKids);
+            statementReservation.setString(8,reserveStatus);
+            statementReservation.setInt(9,totalRoom);
+            statementReservation.setDouble(10,totalPayment);
+            statementReservation.setString(11,staffICNumber);
+
+            final var resultSetReservation = statementReservation.executeQuery();
+
+            int reservationID = 0;
+            // Retrieve the auto-generated reservationID
+            if (resultSetReservation.next()) {
+                reservationID = resultSetReservation.getInt("reservationID");
+            }
+            System.out.println("id from db reservation : " + reservationID);
+            session.setAttribute("reservationID", reservationID);
+            session.setAttribute("durationOfStay", durationOfStay);
+            session.setAttribute("dateStart", dateStartDate);
+            session.setAttribute("dateEnd", dateEndDate);
+            session.setAttribute("totalRoom", totalRoom);
+
+
             // Insert room numbers into roomreservation table
             for (String roomNumber : availableRoomNumbers) {
                 String sqlRoomReservation = "INSERT INTO roomreservation(roomnum, reservationid) VALUES (?, ?)";
@@ -287,6 +327,7 @@ public class ReservationController {
                 return "redirect:/guestMakeRoomReservation";
             }
 
+            int reservationID = session.getAttribute("reservationID");
             totalPayment = calculateTotalPayment(availableRoomNumbers, connection);
             String sqlUpdateTotalPayment = "UPDATE reservation SET totalpayment = ? WHERE reservationid = ?";
             try (PreparedStatement statementUpdateTotalPayment = connection.prepareStatement(sqlUpdateTotalPayment)) {
@@ -302,8 +343,8 @@ public class ReservationController {
 
         connection.close();
 
-        //set reservation id into session
-        session.setAttribute("reservationID", reservationID);
+        //set payment into session
+        session.setAttribute("totalPayment", totalPayment);
         }
         System.out.println("reservation date: " + date);
 
@@ -412,12 +453,53 @@ public String guestMakeRoomService(HttpSession session, Model model) {
 }
 
 @PostMapping("/guestMakeRoomService")
-public String guestMakeRoomService(HttpSession session, @ModelAttribute("guestMakeRoomService")service service){
+public String guestMakeRoomService(HttpSession session, @ModelAttribute("guestMakeRoomService")service service, @RequestParam("serviceQuantity") int serviceQuantity, @RequestParam("serviceDuration") int serviceDuration){
+    
+    try {
+    Connection connection = dataSource.getConnection();
     String guestICNumber = (String) session.getAttribute("guestICNumber");
     int reservationID = (int) session.getAttribute("reservationID");
+    int durationOfStay = (int) session.getAttribute("durationOfStay");
+    date dateStart = (date) session.getAttribute("dateStart");
+    date dateEnd = (date) session.getAttribute("dateEnd");
+    double totalPayment = (double) session.getAttribute("totalPayment");
+    int totalRoom = (int) session.getAttribute("totalRoom");
+    int serviceID = service.getServiceID();
 
-    return "redirect:/guestMakeRoomService";
+    System.out.println("guestICNumber: " + guestICNumber);
+    System.out.println("reservationID: " + reservationID);
+    System.out.println("durationOfStay: " + durationOfStay);
+    System.out.println("dateStart: " + dateStart);
+    System.out.println("dateEnd: " + dateEnd);
+    System.out.println("totalPayment: " + totalPayment);
+    System.out.println("serviceID: " + serviceID);
+    System.out.println("total room: " + totalRoom);
+
+    if (serviceDuration > durationOfStay){
+        System.out.println("Service duration cannot exceed Duration of stay");
+        return "redirect:/guestMakeRoomService";
+    }
     
+    boolean serviceAvailability = isRoomServiceAvailable(serviceID, dateStart, dateEnd, totalRoom, connection);
+    if (serviceAvailability){
+        String sql = "INSERT INTO reservationservice(reservationid, serviceduration, servicequantity, serviceid) VALUES (?,?,?,?)";
+        final var statement = connection.prepareStatement(sql);
+        
+        statement.setInt(1, reservationID);
+        statement.setInt(1, serviceDuration);
+        statement.setInt(1, serviceQuantity);
+        statement.setInt(1, serviceID);
+
+        statement.executeUpdate();
+        System.out.println("sukses innsert into table reservationservice");
+    }
+    connection.close();
+
+    } catch(SQLException e){
+        System.out.println("failed to insert into reservationservice");
+        e.printStackTrace();
+    }
+    return "redirect:/guestMakeRoomService";
 }
 
 @GetMapping("/guestMakeEventService")
