@@ -327,7 +327,7 @@ public class ReservationController {
                 return "redirect:/guestMakeRoomReservation";
             }
 
-            int reservationID = session.getAttribute("reservationID");
+            int reservationID = (int) session.getAttribute("reservationID");
             totalPayment = calculateTotalPayment(availableRoomNumbers, connection);
             String sqlUpdateTotalPayment = "UPDATE reservation SET totalpayment = ? WHERE reservationid = ?";
             try (PreparedStatement statementUpdateTotalPayment = connection.prepareStatement(sqlUpdateTotalPayment)) {
@@ -460,8 +460,8 @@ public String guestMakeRoomService(HttpSession session, @ModelAttribute("guestMa
     String guestICNumber = (String) session.getAttribute("guestICNumber");
     int reservationID = (int) session.getAttribute("reservationID");
     int durationOfStay = (int) session.getAttribute("durationOfStay");
-    date dateStart = (date) session.getAttribute("dateStart");
-    date dateEnd = (date) session.getAttribute("dateEnd");
+    Date dateStart = (Date) session.getAttribute("dateStart");
+    Date dateEnd = (Date) session.getAttribute("dateEnd");
     double totalPayment = (double) session.getAttribute("totalPayment");
     int totalRoom = (int) session.getAttribute("totalRoom");
     int serviceID = service.getServiceID();
