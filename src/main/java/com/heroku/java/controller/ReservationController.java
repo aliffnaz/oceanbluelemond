@@ -335,9 +335,10 @@ public String guestMakeRoomService(HttpSession session, Model model) {
     List <service> services = new ArrayList<service>();
     try {
         Connection connection = dataSource.getConnection();
-        String sql = "SELECT serviceid, servicename from service where servicetype = ?";
+        String sql = "SELECT serviceid, servicename from service where servicetype = ? and servicestatus = ?";
         final var statement = connection.prepareStatement(sql);
         statement.setString(1, "Room Service");
+        statement.setString(2, "Available");
         final var resultSet = statement.executeQuery();
         while (resultSet.next()){
             int serviceID = resultSet.getInt("serviceid");
@@ -346,6 +347,9 @@ public String guestMakeRoomService(HttpSession session, Model model) {
             service service = new service();
             service.setServiceID(serviceID);
             service.setServiceName(serviceName);
+            
+            //debug
+            System.out.println("add into array");
 
             services.add(service);
             model.addAttribute("services", services);
