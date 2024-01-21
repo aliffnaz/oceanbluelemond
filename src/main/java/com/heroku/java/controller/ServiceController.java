@@ -137,7 +137,7 @@ public class ServiceController {
                 } else if ("eventService".equalsIgnoreCase(serviceType)) {
                     String eventServiceSql = "SELECT serviceid, eventcapacity FROM eventService WHERE serviceid=?";
                     final var eventServiceStatement = connection.prepareStatement(eventServiceSql);
-                    eventServiceStatement.setString(1, serviceID);
+                    eventServiceStatement.setInt(1, serviceID);
                     final var eventServiceResultSet = eventServiceStatement.executeQuery();
                     if (eventServiceResultSet.next()) {
                         int eventCapacity = eventServiceResultSet.getInt("eventCapacity");
