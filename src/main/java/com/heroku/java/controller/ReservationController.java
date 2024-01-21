@@ -494,11 +494,15 @@ public String guestMakeRoomService(HttpSession session, @ModelAttribute("guestMa
         statement.executeUpdate();
         System.out.println("sukses innsert into table reservationservice");
     }
+    else{
+        System.out.println("gagal innsert into table reservationservice sebab tak available");
+    }
     connection.close();
 
     } catch(SQLException e){
         System.out.println("failed to insert into reservationservice");
         e.printStackTrace();
+        return "redirect:/index";
     }
     return "redirect:/guestMakeRoomService";
 }
