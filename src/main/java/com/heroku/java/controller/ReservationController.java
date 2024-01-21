@@ -487,9 +487,9 @@ public String guestMakeRoomService(HttpSession session, @ModelAttribute("guestMa
         final var statement = connection.prepareStatement(sql);
         
         statement.setInt(1, reservationID);
-        statement.setInt(1, serviceDuration);
-        statement.setInt(1, serviceQuantity);
-        statement.setInt(1, serviceID);
+        statement.setInt(2, serviceDuration);
+        statement.setInt(3, serviceQuantity);
+        statement.setInt(4, serviceID);
 
         statement.executeUpdate();
         System.out.println("sukses innsert into table reservationservice");
