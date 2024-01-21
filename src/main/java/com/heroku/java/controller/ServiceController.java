@@ -164,7 +164,7 @@ public class ServiceController {
     }
 
     @GetMapping("/managerViewService")
-    public String managerViewService(@RequestParam("serviceID") String serviceID, Model model,HttpSession session) {
+    public String managerViewService(@RequestParam("serviceID") int serviceID, Model model,HttpSession session) {
         String staffICNumber = (String) session.getAttribute("staffICNumber") ;
         try {
             Connection connection = dataSource.getConnection();
@@ -174,7 +174,7 @@ public class ServiceController {
             + "LEFT JOIN eventservice ON eventservice.serviceid = service.serviceid "
             + "WHERE service.serviceid = ?";
             final var statement = connection.prepareStatement(sql);
-            statement.setString(1, serviceID);
+            statement.setInt(1, serviceID);
             final var resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
@@ -207,7 +207,7 @@ public class ServiceController {
     }
 
     @GetMapping("/managerUpdateService")
-    public String managerUpdateService(@RequestParam("serviceID") String serviceID, Model model, HttpSession session) {
+    public String managerUpdateService(@RequestParam("serviceID") int serviceID, Model model, HttpSession session) {
         String staffICNumber = (String) session.getAttribute("staffICNumber") ;
         try {
             Connection connection = dataSource.getConnection();
@@ -217,7 +217,7 @@ public class ServiceController {
             + "LEFT JOIN eventservice ON eventservice.serviceid = service.serviceid "
             + "WHERE service.serviceid = ?";
             final var statement = connection.prepareStatement(sql);
-            statement.setString(1, serviceID);
+            statement.setInt(1, serviceID);
             final var resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
