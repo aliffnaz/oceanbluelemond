@@ -180,7 +180,7 @@ public class ReservationController {
         return totalPayment;
     }
 
-    public static boolean isRoomServiceAvailable(String serviceId, Date startDate, Date endDate, int totalRooms, Connection connection) throws SQLException {
+    public static boolean isRoomServiceAvailable(int serviceId, Date startDate, Date endDate, int totalRooms, Connection connection) throws SQLException {
         // Query to check if the room service is available for the given date range and maximum quantity constraint
         String sql = "SELECT COUNT(*) FROM reservationservice rs " +
                      "JOIN reservation r ON rs.reservationid = r.reservationid " +
