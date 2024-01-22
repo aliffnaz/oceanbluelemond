@@ -246,21 +246,21 @@
                             <div class="col-1"></div>
                             <div class="col pt-3">
                                 <span>
-                                    <h6>Add-on Room Service</h6>
+                                    <h6>Service Info</h6>
                                 </span>
                             </div>
                             <div class="col-8">
-                                <table>
+                                <table class="table table-hover table-bordered">
                                     <thead>
                                         <th>Name</th>
                                         <th>Quantity</th>
                                         <th>Price</th>
                                     </thead>
                                     <tbody>
-                                        <tr th:each="guestService : ${guestServices}">
-                                            <td class="text-center" th:text="${guestService.serviceName}"></td>
-                                            <td class="text-center" th:text="${guestService.serviceQuantity}"></td>
-                                            <td class="text-center" th:text="${guestService.servicePrice}"></td>
+                                        <tr th:each="service : ${services}">
+                                            <td class="text-center" th:text="${service.serviceName}"></td>
+                                            <td class="text-center" th:text="${service.serviceQuantity}"></td>
+                                            <td class="text-center" th:text="${service.servicePrice}"></td>
                                         </tr>
                                     </tbody>
                                 </table>
