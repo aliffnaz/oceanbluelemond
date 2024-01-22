@@ -377,7 +377,7 @@ public String guestMakeRoomService(HttpSession session, Model model) {
     List <service> services = new ArrayList<service>();
     try {
         Connection connection = dataSource.getConnection();
-        String sql = "SELECT serviceid, servicename from service where servicetype = ? and servicestatus = ?";
+        String sql = "SELECT serviceid, servicename, serviceprice from service where servicetype = ? and servicestatus = ?";
         final var statement = connection.prepareStatement(sql);
         statement.setString(1, "Room Service");
         statement.setString(2, "Available");
@@ -385,10 +385,12 @@ public String guestMakeRoomService(HttpSession session, Model model) {
         while (resultSet.next()){
             int serviceID = resultSet.getInt("serviceid");
             String serviceName = resultSet.getString("servicename");
+            double servicePrice = resultSet.getDouble("serviceprice");
 
             service service = new service();
             service.setServiceID(serviceID);
             service.setServiceName(serviceName);
+            service.setServicePrice(servicePrice);
             
             //debug
             System.out.println("add into array");
@@ -408,8 +410,8 @@ public String guestMakeRoomService(HttpSession session, Model model) {
     }
 
     //second part, table of service that the guest added
-    List <service> guestService = new ArrayList<service>();
-    List <reservationService> guestReservationService = new ArrayList<reservationService>();
+    List <service> guestServices = new ArrayList<service>();
+    List <reservationService> guestReservationServices = new ArrayList<reservationService>();
     try (Connection connection = dataSource.getConnection()){
         String sqlGuestService = "SELECT service.servicename, service.servicetype, service.serviceprice, reservationservice.serviceduration, reservationservice.servicequantity "
         + "from service "
@@ -428,18 +430,18 @@ public String guestMakeRoomService(HttpSession session, Model model) {
             int guestServiceDuration = resultSetGuestService.getInt("serviceduration");
             int guestServiceQuantity = resultSetGuestService.getInt("servicequantity");
 
-            service service = new service();
-            reservationService reservationService = new reservationService();
-            service.setServiceName(guestServiceName);
-            service.setServiceType(guestServiceType);
-            service.setServicePrice(guestServicePrice);
-            reservationService.setServiceDuration(guestServiceDuration);
-            reservationService.setServiceQuantity(guestServiceQuantity);
+            service guestService = new service();
+            reservationService guestReservationService = new reservationService();
+            guestService.setServiceName(guestServiceName);
+            guestService.setServiceType(guestServiceType);
+            guestService.setServicePrice(guestServicePrice);
+            guestReservationService.setServiceDuration(guestServiceDuration);
+            guestReservationService.setServiceQuantity(guestServiceQuantity);
 
-            guestService.add(service);
-            guestReservationService.add(reservationService);
-            model.addAttribute("guestService", guestService);
-            model.addAttribute("guestReservationService", guestReservationService);
+            guestServices.add(guestService);
+            guestReservationServices.add(guestReservationService);
+            model.addAttribute("guestServices", guestServices);
+            model.addAttribute("guestReservationServices", guestReservationServices);
             System.out.println("service added");
         }
 
