@@ -512,7 +512,7 @@ public String guestMakeRoomService(HttpSession session, @ModelAttribute("guestMa
 }
 
 @GetMapping("/guestMakeEventService")
-public String guestMakeEventService(HttpSession session) {
+public String guestMakeEventService(HttpSession session, Model model) {
 
     String guestICNumber = (String) session.getAttribute("guestICNumber");
     int reservationID = (int) session.getAttribute("reservationID");
