@@ -777,4 +777,56 @@ public String deleteGuestEventService(HttpSession session, Model model, @Request
     return "redirect:/guestMakeEventService";
 }
 
+@GetMapping("/guestRoomReservation")
+public String guestRoomReservation(Model model, HttpSession session){
+    String guestICNumber = (String) session.getAttribute("guestICNumber");
+    List<reservation> reservations = new ArrayList<reservation>();
+    try (Connection connection = dataSource.getConnection()){
+        String sql = "SELECT * from reservation where guesticnumber = ?";
+        final var statement = connection.prepareStatement(sql);
+        statement.setString(guestICNumber);
+        final var resultSet = statement.executeQuery();
+        System.out.println("pass try guestRoomReservation >>>>>");
+
+        while (resultSet.nect()){
+            int reservationID = resultSet.getInt("reservationid");
+            int guestQuantity = resultSet.getInt("guestquantity");
+            int durationOfStay = resultSet.getInt("durationofstay");
+            Date dateStart = resultSet.getDate("datestart");
+            Date dateEnd = resultSet.getDate("dateend");
+            int totalAdult = resultSet.getInt("totaladult");
+            int totalKids= resultSet.getInt("totalkids");
+            String reserveStatus = resultSet.getInt("reservestatus");
+            int totalRoom = resultSet.getInt("totalroom");
+            double totalPayment = resultSet.getInt("totalpayment");
+
+            reservation reservation = new reservation();
+            reservation.setReservationID(reservationID);
+            reservation.setGuestICNumber(guestICNumber);
+            reservation.setGuestQuantity(guestQuantity);
+            reservation.setDurationOfStay(durationOfStay);
+            reservation.setDateStart(dateStart);
+            reservation.setDateEnd(dateEnd);
+            reservation.setTotalAdult(totalAdult);
+            reservation.setTotalKids(totalKids);
+            reservation.setReserveStatus(reserveStatus);
+            reservation.setTotalRoom(totalRoom);
+            reservation.setTotalPayment(totalPayment);
+
+            reservations.add(reservation);
+            model.addAttribute("reservations", reservations);
+
+        }
+        connection.close();
+
+    }
+    catch (SQLException e) {
+        e.printStackTrace();
+        // Handle the exception as desired (e.g., show an error message)
+        System.out.println("error getting guestRoomReservation");
+        return "redirect:/index";
+    }
+    return "guest/guestRoomReservation";
+}
+
 }
