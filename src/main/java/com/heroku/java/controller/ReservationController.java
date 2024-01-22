@@ -877,22 +877,21 @@ public class ReservationController {
                 guest guest = new guest();
                 guest.setGuestName(resultSet.getString("guestName"));
                 model.addAttribute("guest", guest);
+            }
 
-                List <service> services = new ArrayList<service>();
+            List <service> services = new ArrayList<service>();
                 while (resultSet.next()){
                 String serviceName = resultSet.getString("servicename");
                 double servicePrice = resultSet.getDouble("serviceprice");
                 int serviceQuantity = resultSet.getInt("serviceQuantity");
 
-                service guestService = new service();
-                guestService.setServiceName(serviceName);
-                guestService.setServicePrice(servicePrice);
-                guestService.setServiceQuantity(serviceQuantity);
+                service service = new service();
+                service.setServiceName(serviceName);
+                service.setServicePrice(servicePrice);
+                service.setServiceQuantity(serviceQuantity);
 
                 services.add(guestService);
                 model.addAttribute("services", services);
-            
-                }
             }
             connection.close();
 
