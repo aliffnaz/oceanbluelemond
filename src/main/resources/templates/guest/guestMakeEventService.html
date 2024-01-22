@@ -141,7 +141,7 @@
                         <div class="col-8">
                             <div class="custom_select">
                                 <select class="wide" name="serviceID" id="serviceID">
-                                    <option th:each="service : ${services}" value="${service.serviceID}" th:text="${service.serviceName}+'RM'+${service.servicePrice}"></option>
+                                    <option th:each="service : ${services}" value="${service.serviceID}" th:text="${service.serviceName}"></option>
                                 </select>
                             </div>
                         </div>
