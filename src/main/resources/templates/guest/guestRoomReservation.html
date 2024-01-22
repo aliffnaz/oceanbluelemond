@@ -127,82 +127,34 @@
                     </span>
                 </div>
 
-
                 <div class="row mx-2">
-
                     <table class="table table-hover table-bordered">
                         <thead>
                             <th class="text-center">Reservation ID</th>
-                            <th class="text-center">Guest IC Number</th>
-                            <th class="text-center">Standard</th>
-                            <th class="text-center">Deluxe</th>
+                            <th class="text-center">Total Room</th>
                             <th class="text-center">Duration Of Stay</th>
                             <th class="text-center">Check-in Date</th>
                             <th class="text-center">Check-out Date</th>
-
-                            <th class="text-center">Add-on Room Services</th>
                             <th class="text-center">Total Amount</th>
                             <th class="text-center">Status</th>
                             <th class="text-center">Action</th>
-
-
                         </thead>
                         <tbody>
                             <tr th:each="reservation : ${reservations}">
-                                <td th:text="${reservation.reservationID}" ></td>
-                                <td th:text="${reservation.guestICNumber}"></td>
-                                <td th:text="${reservation.totalRoom}"></td>
+                                <td th:text="${reservation.reservationID}"></td>
                                 <td th:text="${reservation.totalRoom}"></td>
                                 <td th:text="${reservation.durationOfStay}"></td>
                                 <td th:text="${reservation.dateStart}"></td>
                                 <td th:text="${reservation.dateEnd}"></td>
-
-                                <td th:text="${}"></td>
-                                <td th:text="${reservation.totalPayment}">RM 210.00</td>
-                                <td th:text="${reservation.reservationStatus}">Incomplete</td>
-                                
-                                <td class="text-center"><a th:href="@{/guestViewRoomReservation?=}+${guestICNumber}">
-                                        <div class="bi bi-eye-fill" style="font-size: 20px;"></div>
-                                    </a></td>
-                            </tr>
-                            <tr>
-                                <td>RS002</td>
-                                <td>770901012341</td>
-                                <td>-</td>
-                                <td>1</td>
-                                <td>2</td>
-                                <td>July 12, 2023</td>
-                                <td>July 14, 2023</td>
-
-                                <td>Dapur & Gas (Set B) </td>
-                                <td>RM 210.00</td>
-                                <td>Complete</td>
-                                <td class="text-center"><a th:href="@{/guestViewRoomReservation}">
-                                        <div class="bi bi-eye-fill" style="font-size: 20px;"></div>
-                                    </a></td>
-                            </tr>
-                            <tr>
-                                <td>RS003</td>
-                                <td>770901012341</td>
-                                <td>-</td>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>November 12, 2023</td>
-                                <td>November 13, 2023</td>
-
-                                <td>Toto (Set B)</td>
-                                <td>RM 410.00</td>
-                                <td>Complete</td>
-                                <td class="text-center"><a th:href="@{/guestViewRoomReservation}">
+                                <td th:text="${reservation.totalPayment}"></td>
+                                <td th:text="${reservation.reservationStatus}"></td>
+                                <td class="text-center"><a th:href="@{/guestViewRoomReservation?=}+${reservation.reservationID}">
                                         <div class="bi bi-eye-fill" style="font-size: 20px;"></div>
                                     </a></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-
-
-
                 <div class="col">
                 </div>
             </div>
