@@ -617,6 +617,8 @@ public String guestMakeEventService(HttpSession session, Model model) {
     return "guest/guestMakeEventService";
 }
 
+
+
 @GetMapping("/deleteGuestRoomService")
 public String deleteGuestRoomService(HttpSession session, Model model, @RequestParam("serviceID") int serviceID){
     String guestICNumber = (String) session.getAttribute("guestICNumber");
