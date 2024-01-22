@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="Ansonika">
-    <title>Login</title>
+    <title>D Chalet Ombak Biru</title>
     <!-- Favicons-->
     <link rel="shortcut icon" th:href="@{stylesheets/img/favicon.png}" type="image/x-icon">
     <link rel="apple-touch-icon" type="image/x-icon"
@@ -142,7 +142,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" value="770901012341" name="" id="" class="form-control" disabled>
+                            <input type="text" th:value="${session.guestICNumber}" name="guestICNumber" id="guestICNumber" class="form-control" readonly>
                         </div>
                     </div>
 
@@ -154,7 +154,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" value="Haiqal Izzee" name="" id="" class="form-control" disabled>
+                            <input type="text" th:value="${guest.guestName}" name="guestName" id="guestName" class="form-control" readonly>
                         </div>
                     </div>
 
@@ -166,10 +166,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <div class="qty-buttons mb-3 version_2">
-                                <input type="text" name="guestQuantity" id="guestQuantity" value="3"
-                                    class="qty form-control" placeholder="Guest Quantity" disabled>
-                            </div>
+                                <input type="text" name="guestQuantity" id="guestQuantity" th:value="${reservation.guestQuantity}" class="qty form-control" readonly>
                         </div>
                     </div>
 
@@ -177,14 +174,11 @@
                         <div class="col-1"></div>
                         <div class="col pt-3">
                             <span>
-                                <h6>Duartion of Stay</h6>
+                                <h6>Duration of Stay</h6>
                             </span>
                         </div>
                         <div class="col-8">
-                            <div class="qty-buttons mb-3 version_2">
-                                <input type="text" name="durationOfStay" id="durationOfStay" value="2"
-                                    class="qty form-control" placeholder="Nights" disabled>
-                            </div>
+                                <input type="text" name="durationOfStay" id="durationOfStay" value="${reservation.durationOfStay}" class="qty form-control" placeholder="" readonly>
                         </div>
                     </div>
 
@@ -192,20 +186,25 @@
                         <div class="col-1"></div>
                         <div class="col pt-3">
                             <span>
-                                <h6>Check-in & Check-out Date</h6>
+                                <h6>Check-In Date</h6>
                             </span>
                         </div>
                         <div class="col-8">
-                            <div class="booking_wrapper">
-                                <p id="daterangepicker-result" class="d-none"></p>
-                                <input type="hidden" id="date_booking" name="date_booking">
-                                <div id="daterangepicker-embedded-container"
-                                    class="embedded-daterangepicker clearfix mb-4"></div>
-                                <div class="row">
-
-                                </div>
-                            </div>
+                                <input type="text" name="dateStart" id="dateStart" value="${reservation.dateStart}" class="qty form-control" placeholder="" readonly>
                         </div>
+                    </div>
+
+                    <div class="row m-3">
+                        <div class="col-1"></div>
+                        <div class="col pt-3">
+                            <span>
+                                <h6>Check-Out Date</h6>
+                            </span>
+                        </div>
+                        <div class="col-8">
+                                <input type="text" name="dateEnd" id="dateEnd" value="${reservation.dateEnd}" class="qty form-control" placeholder="" readonly>
+                        </div>
+                    </div>
 
                         <div class="row m-3">
                             <div class="col-1"></div>
@@ -215,13 +214,8 @@
                                 </span>
                             </div>
                             <div class="col-8">
-                                <div class="custom_select">
-                                    <select class="wide" name="rooms_booking" id="rooms_booking" disabled>
-                                        <option value="">Select Room</option>
-                                        <option value="Deluxe Room" selected>Deluxe Room</option>
-                                        <option value="Superior Room">Standard Room</option>
-                                    </select>
-                                </div>
+                                <input type="text" name="roomType" id="dateEnd" value="${room.roomType}" class="qty form-control" placeholder="" readonly>
+                            </div>
                             </div>
                         </div>
 
@@ -233,10 +227,7 @@
                                 </span>
                             </div>
                             <div class="col-8">
-                                <div class="qty-buttons mb-3 version_2">
-                                    <input type="text" name="totalAdult" id="totalAdult" value="2"
-                                        class="qty form-control" placeholder="Adults" disabled>
-                                </div>
+                                <input type="text" name="totalAdult" id="totalAdult" value="${reservation.totalAdult}" class="qty form-control" placeholder="" readonly>
                             </div>
                         </div>
 
@@ -248,10 +239,7 @@
                                 </span>
                             </div>
                             <div class="col-8">
-                                <div class="mb-3 qty-buttons mb-3 version_2">
-                                    <input type="text" name="totalKids" id="totalKids" value="1"
-                                        class="qty form-control" placeholder="Childs" disabled>
-                                </div>
+                                <input type="text" name="totalKids" id="totalKids" value="${reservation.totalKids}" class="qty form-control" placeholder="" readonly>
                             </div>
                         </div>
 
@@ -260,21 +248,23 @@
                             <div class="col pt-3">
                                 <span>
                                     <h6>Add-on Room Service</h6>
-                                    <div class="col-9"><a class="" th:href="@{/guestViewRoomService}" target="blank">View
-                                            Catalogue</a></div>
                                 </span>
                             </div>
                             <div class="col-8">
-                                <div class="custom_select">
-                                    <select name="" id="" class="wide" disabled>
-                                        <option value="">Select</option>
-                                        <option value="S01- Barbecue Set" selected>S01- Barbecue Set</option>
-                                        <option value="Dapur & Gas (Set A)">S02 - Dapur & Gas (Set A) </option>
-                                        <option value="S03 - Dapur & Gas (Set B) " selected>S03 - Dapur & Gas (Set B) </option>
-                                        <option value="S04- Toto (Set A)">S04- Toto (Set A)</option>
-                                        <option value="S05 - Toto (Set B)">S05 - Toto (Set B)</option>
-                                    </select>
-                                </div>
+                                <table>
+                                    <thead>
+                                        <th>Name</th>
+                                        <th>Quantity</th>
+                                        <th>Price</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="guestService : ${guestServices}">
+                                            <td class="text-center" th:text="${guestService.serviceName}"></td>
+                                            <td class="text-center" th:text="${guestService.serviceQuantity}"></td>
+                                            <td class="text-center" th:text="${guestService.servicePrice}"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
 
                         <div class="row m-3">
@@ -285,10 +275,7 @@
                                 </span>
                             </div>
                             <div class="col-8">
-                                <div class="qty-buttons mb-3 version_2">
-                                    <input type="text" name="totalRoom" id="totalRoom" value="1"
-                                        class="qty form-control" placeholder="Total Room" disabled>
-                                </div>
+                                <input type="text" name="totalRoom" id="totalRoom" value="${reservation.totalRoom}" class="qty form-control" placeholder="" readonly>
                             </div>
                         </div>
 
@@ -300,9 +287,7 @@
                                 </span>
                             </div>
                             <div class="col-8">
-                                <div class="qty-buttons mb-3 version_2">
-                                    <input type="text" name="" id="" value="150.00" class="form-control" disabled>
-                                </div>
+                                <input type="text" name="totalPayment" id="totalPayment" value="${reservation.totalPayment}" class="qty form-control" placeholder="" readonly>
                             </div>
                         </div>
                         <div class="row">
@@ -318,11 +303,8 @@
                                 style="border-radius: 3px 3px 3px 3px; height: auto; width:150px">Back</a>
                         </div>
                     </div>
-
-
                 </div>
                 <div class="col">
-
                 </div>
             </div>
 
