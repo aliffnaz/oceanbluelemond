@@ -853,7 +853,7 @@ public class ReservationController {
                 int totalAdult = resultSet.getInt("totalAdult");
                 int totalKids = resultSet.getInt("totalKids");
                 int totalRoom = resultSet.getInt("totalRoom");
-                String totalPayment = resultSet.getString("totalPayment");
+                double totalPayment = resultSet.getString("totalPayment");
                 String reserveStatus = resultSet.getString("reserveStatus");
 
                 reservation reservation = new reservation();
@@ -889,8 +889,8 @@ public class ReservationController {
                 guestService.setServicePrice(servicePrice);
                 guestService.setServiceQuantity(serviceQuantity);
 
-                service.add(guestService);
-                model.addAttribute("services", guestServices);
+                services.add(guestService);
+                model.addAttribute("services", services);
             
                 }
             }
