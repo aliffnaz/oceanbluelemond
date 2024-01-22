@@ -373,7 +373,7 @@ public String guestMakeRoomService(HttpSession session, Model model) {
     System.out.println("guestICNumber: " + guestICNumber);
     System.out.println("reservationID: " + reservationID);
 
-    //first part, getting all services and putting them into the dropdown menu
+    //first part, getting all room services and putting them into the dropdown menu
     List <service> services = new ArrayList<service>();
     try {
         Connection connection = dataSource.getConnection();
@@ -415,9 +415,10 @@ public String guestMakeRoomService(HttpSession session, Model model) {
         + "from service "
         + "JOIN reservationservice ON reservationservice.serviceid = service.serviceid "
         + "JOIN reservation ON reservationservice.reservationid = reservation.reservationid "
-        + "WHERE reservation.reservationid = ?";
+        + "WHERE reservation.reservationid = ? AND service.servicetype = ?";
         final var statementGuestService = connection.prepareStatement(sqlGuestService);
         statementGuestService.setInt(1, reservationID);
+        statementGuestService.setString(2, "Room Service");
         final var resultSetGuestService = statementGuestService.executeQuery();
         System.out.println("pass for getting guest services for this reservationid");
 
@@ -498,7 +499,7 @@ public String guestMakeRoomService(HttpSession session, @ModelAttribute("guestMa
         System.out.println("sukses insert into table reservationservice");
     }
     else{
-        System.out.println("gagal innsert into table reservationservice sebab tak available");
+        System.out.println("gagal insert into table reservationservice sebab tak available");
     }
     connection.close();
 
@@ -512,15 +513,145 @@ public String guestMakeRoomService(HttpSession session, @ModelAttribute("guestMa
 
 @GetMapping("/guestMakeEventService")
 public String guestMakeEventService(HttpSession session) {
-  String guestICNumber = (String) session.getAttribute("guestICNumber");
-  int reservationID = (int) session.getAttribute("reservationID");
-  System.out.println("guestICNumber: " + guestICNumber);
-  System.out.println("reservationID: " + reservationID);
-  return "guest/guestMakeEventService";
+
+    String guestICNumber = (String) session.getAttribute("guestICNumber");
+    int reservationID = (int) session.getAttribute("reservationID");
+    int durationOfStay = (int) session.getAttribute("durationOfStay");
+    Date dateStart = (Date) session.getAttribute("dateStart");
+    Date dateEnd = (Date) session.getAttribute("dateEnd");
+    double totalPayment = (double) session.getAttribute("totalPayment");
+    int totalRoom = (int) session.getAttribute("totalRoom");
+
+    //for debugging purposes only
+    System.out.println("guestICNumber: " + guestICNumber);
+    System.out.println("reservationID: " + reservationID);
+    System.out.println("durationOfStay: " + durationOfStay);
+    System.out.println("dateStart: " + dateStart);
+    System.out.println("dateEnd: " + dateEnd);
+    System.out.println("totalPayment: " + totalPayment);
+    System.out.println("total room: " + totalRoom);
+
+    //first part, getting all services and putting them into the dropdown menu
+    List <service> services = new ArrayList<service>();
+    try {
+        Connection connection = dataSource.getConnection();
+        String sql = "SELECT serviceid, servicename from service where servicetype = ? and servicestatus = ?";
+        final var statement = connection.prepareStatement(sql);
+        statement.setString(1, "Event Service");
+        statement.setString(2, "Available");
+        final var resultSet = statement.executeQuery();
+        while (resultSet.next()){
+            int serviceID = resultSet.getInt("serviceid");
+            String serviceName = resultSet.getString("servicename");
+
+            service service = new service();
+            service.setServiceID(serviceID);
+            service.setServiceName(serviceName);
+            
+            //debug
+            System.out.println("add into array for dropdown");
+
+            services.add(service);
+            model.addAttribute("services", services);
+        }
+        connection.close();
+    }
+    catch(SQLException e){
+        e.printStackTrace();
+        // Handle the exception as desired (e.g., show an error message)
+        System.out.println("error to execute dropdown menu for service type");
+
+    }
+
+    //second part, table of service that the guest added
+    List <service> guestServices = new ArrayList<service>();
+    List <reservationService> guestReservationServices = new ArrayList<reservationService>();
+    try (Connection connection = dataSource.getConnection()){
+        String sqlGuestService = "SELECT service.serviceid, service.servicename, service.servicetype, service.serviceprice, reservationservice.serviceduration, reservationservice.servicequantity "
+        + "from service "
+        + "JOIN reservationservice ON reservationservice.serviceid = service.serviceid "
+        + "JOIN reservation ON reservationservice.reservationid = reservation.reservationid "
+        + "WHERE reservation.reservationid = ? AND service.servicetype = ?";
+        final var statementGuestService = connection.prepareStatement(sqlGuestService);
+        statementGuestService.setInt(1, reservationID);
+        statementGuestService.setString(2, "Event Service");
+        final var resultSetGuestService = statementGuestService.executeQuery();
+        System.out.println("pass for getting guest services for this reservationid");
+
+        while (resultSetGuestService.next()){
+            int guestServiceID = resultSetGuestService.getInt("serviceid");
+            String guestServiceName = resultSetGuestService.getString("servicename");
+            String guestServiceType = resultSetGuestService.getString("servicetype");
+            double guestServicePrice = resultSetGuestService.getDouble("serviceprice");
+            int guestServiceDuration = resultSetGuestService.getInt("serviceduration");
+            int guestServiceQuantity = resultSetGuestService.getInt("servicequantity");
+
+            service guestService = new service();
+            reservationService guestReservationService = new reservationService();
+            guestService.setServiceID(guestServiceID);
+            guestService.setServiceName(guestServiceName);
+            guestService.setServiceType(guestServiceType);
+            guestService.setServicePrice(guestServicePrice);
+            guestReservationService.setServiceDuration(guestServiceDuration);
+            guestReservationService.setServiceQuantity(guestServiceQuantity);
+
+            guestServices.add(guestService);
+            guestReservationServices.add(guestReservationService);
+            model.addAttribute("guestServices", guestServices);
+            model.addAttribute("guestReservationServices", guestReservationServices);
+            System.out.println("service added into list");
+        }
+
+        connection.close();
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+        // Handle the exception as desired (e.g., show an error message)
+        System.out.println("error to display list of service that the guest reserve");
+    }
+
+    return "guest/guestMakeEventService";
 }
 
 @GetMapping("/deleteGuestRoomService")
 public String deleteGuestRoomService(HttpSession session, Model model, @RequestParam("serviceID") int serviceID){
+    String guestICNumber = (String) session.getAttribute("guestICNumber");
+    int reservationID = (int) session.getAttribute("reservationID");
+    int durationOfStay = (int) session.getAttribute("durationOfStay");
+    Date dateStart = (Date) session.getAttribute("dateStart");
+    Date dateEnd = (Date) session.getAttribute("dateEnd");
+    double totalPayment = (double) session.getAttribute("totalPayment");
+    int totalRoom = (int) session.getAttribute("totalRoom");
+
+    //for debugging purposes only
+    System.out.println("guestICNumber: " + guestICNumber);
+    System.out.println("reservationID: " + reservationID);
+    System.out.println("durationOfStay: " + durationOfStay);
+    System.out.println("dateStart: " + dateStart);
+    System.out.println("dateEnd: " + dateEnd);
+    System.out.println("totalPayment: " + totalPayment);
+    System.out.println("serviceID: " + serviceID);
+    System.out.println("total room: " + totalRoom);
+    System.out.println("service id: " + serviceID);
+
+    try (Connection connection = dataSource.getConnection()){
+        //delete servvice from the guest reservation list
+        final var deleteServiceStatement = connection.prepareStatement("DELETE from reservationservice where reservationid = ? AND serviceid = ?");
+        deleteServiceStatement.setInt(1, reservationID);
+        deleteServiceStatement.setInt(2, serviceID);
+        deleteServiceStatement.executeUpdate();
+        connection.close();
+        System.out.println("succeed to delete service from the guest service list");
+    }
+    catch (Exception e){
+        System.out.println("failed to delete service from the guest service list");
+        e.printStackTrace();
+    }
+    return "redirect:/guestMakeRoomService";
+}
+
+@GetMapping("/deleteGuestEventService")
+public String deleteGuestEventService(HttpSession session, Model model, @RequestParam("serviceID") int serviceID){
     String guestICNumber = (String) session.getAttribute("guestICNumber");
     int reservationID = (int) session.getAttribute("reservationID");
     int durationOfStay = (int) session.getAttribute("durationOfStay");
