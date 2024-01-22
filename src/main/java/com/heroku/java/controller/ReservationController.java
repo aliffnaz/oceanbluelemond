@@ -393,7 +393,7 @@ public String guestMakeRoomService(HttpSession session, Model model) {
             service.setServicePrice(servicePrice);
             
             //debug
-            System.out.println("add into array");
+            System.out.println("add into array for dropdown");
 
             services.add(service);
             model.addAttribute("services", services);
