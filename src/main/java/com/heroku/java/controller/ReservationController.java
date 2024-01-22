@@ -890,7 +890,7 @@ public class ReservationController {
                 service.setServicePrice(servicePrice);
                 service.setServiceQuantity(serviceQuantity);
 
-                services.add(guestService);
+                services.add(service);
                 model.addAttribute("services", services);
             }
             connection.close();
