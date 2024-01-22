@@ -139,12 +139,11 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <select class="wide" name="serviceID" id="serviceID">
-                                <option value="">Select Service</option>
-
-                                <option th:each="service : ${service}" value="${service.serviceID}" th:text="${service.serviceName}"></option>
-                           
-                            </select>
+                            <div class="custom_select">
+                                <select class="wide" name="serviceID" id="serviceID">
+                                    <option th:each="service : ${services}" value="${service.serviceID}" th:text="${service.serviceName}+'RM'+${service.servicePrice}"></option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                    
