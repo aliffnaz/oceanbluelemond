@@ -519,8 +519,8 @@ public String guestMakeEventService(HttpSession session) {
   return "guest/guestMakeEventService";
 }
 
-@GetMapping("/deleteGuestService")
-public String deleteGuestService(HttpSession session, Model model, @RequestParam("serviceID") int serviceID){
+@GetMapping("/deleteGuestRoomService")
+public String deleteGuestRoomService(HttpSession session, Model model, @RequestParam("serviceID") int serviceID){
     String guestICNumber = (String) session.getAttribute("guestICNumber");
     int reservationID = (int) session.getAttribute("reservationID");
     int durationOfStay = (int) session.getAttribute("durationOfStay");
