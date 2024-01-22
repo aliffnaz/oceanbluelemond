@@ -148,7 +148,7 @@ public class LoginController {
             }
 
             connection.close();
-            return "redirect:/guestLogin?invalidUsername&Password";
+            return "redirect:/staffLogin?invalidUsername&Password";
 
         } catch (SQLException sqe) {
             System.out.println("Error Code = " + sqe.getErrorCode());
@@ -157,10 +157,10 @@ public class LoginController {
             System.out.println("printTrace /n");
             sqe.printStackTrace();
 
-            return "redirect:/guestLogin?error";
+            return "redirect:/staffLogin?error";
         } catch (Exception e) {
             System.out.println("E message : " + e.getMessage());
-            return "redirect:/guestLogin?error";
+            return "redirect:/staffLogin?error";
         }
 
     }
