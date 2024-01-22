@@ -833,11 +833,11 @@ public class ReservationController {
         try {
             Connection connection = dataSource.getConnection();
             String sql = "SELECT * from reservation " +
-            "JOIN roomreservation ON reservation.reservationid = roomreservation.reservationid " +
-            "JOIN reservationservice ON reservation.reservationid = reservationservice.reservationid " +
-            "JOIN room ON roomreservation.roomnum = room.roomnum " +
-            "JOIN service ON reservationservice.serviceid = service.serviceid " +
-            "JOIN guest ON reservation.guestICNumber = guest.guestICNumber " +
+            "FULL OUTER JOIN roomreservation ON reservation.reservationid = roomreservation.reservationid " +
+            "FULL OUTER JOIN reservationservice ON reservation.reservationid = reservationservice.reservationid " +
+            "FULL OUTER JOIN room ON roomreservation.roomnum = room.roomnum " +
+            "FULL OUTER JOIN service ON reservationservice.serviceid = service.serviceid " +
+            "FULL OUTER JOIN guest ON reservation.guestICNumber = guest.guestICNumber " +
             "WHERE reservation.reservationid = ?";
             final var statement = connection.prepareStatement(sql);
             statement.setInt(1, reservationID);
