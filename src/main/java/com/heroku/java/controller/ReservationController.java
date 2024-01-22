@@ -505,7 +505,7 @@ public String guestMakeRoomService(HttpSession session, @ModelAttribute("guestMa
         e.printStackTrace();
         return "redirect:/index";
     }
-    return "redirect:/guestMakeRoomService";
+    return "guest/guestMakeRoomService";
 }
 
 @GetMapping("/guestMakeEventService")
