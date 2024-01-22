@@ -895,10 +895,10 @@ public class ReservationController {
                 }
             }
             connection.close();
-            
+
         }
         catch (SQLException e){
-            System.out.println("failed at guestViewRoomReservation")
+            System.out.println("failed at guestViewRoomReservation");
             e.printStackTrace();
             return "redirect:/index";
         }
