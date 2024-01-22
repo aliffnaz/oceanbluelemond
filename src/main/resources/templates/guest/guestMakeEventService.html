@@ -211,35 +211,18 @@
         <div class="row mx-2">
             <table class="table table-hover table-bordered">
                 <thead style="vertical-align: middle;">
-                    <th class="text-center">No</th>
-                    <th class="text-center">Service ID</th>
                     <th class="text-center">Service Name</th>
                     <th class="text-center" width="130">Service Type</th>
                     <th class="text-center">Service Price</th>
-                    <th class="text-center">Event Capacity</th>
-                    <th class="text-center">Event Duration</th>
-                   
                 </thead>
                 <tbody>
-                    
-                    <tr th:each="guest : ${services}">
-                        <td class="text-center" th:text="${service.serviceID}"></td>
-                        <td class="text-center" th:text="${service.serviceName}"></td>
-                        <td class="text-center" th:text="${service.serviceType}"></td>
-                        <td class="text-center" th:text="${service.servicePrice}"></td>
-                        <td class="text-center" th:text="${service.EventCapacity}"></td>
-                        <td class="text-center" th:text="${service.Duration}"></td>
-                        
+                    <tr th:each="guestService : ${guestServices}">
+                        <td class="text-center" th:text="${guestService.serviceName}"></td>
+                        <td class="text-center" th:text="${guestService.serviceType}"></td>
+                        <td class="text-center" th:text="${guestService.servicePrice}"></td>
+                        <td class="text-center"><a th:href="@{/deleteGuestEventService?serviceID=}+${guestService.serviceID}"><i class="bi bi-trash3-fill"
+                            style="font-size: 20px;"></i></a></td>
                     </tr>
-                
-                    <tr>
-                        <td class="text-center">890524054568</td>
-                        <td class="text-center">Azalea</td>
-                        <td class="text-center">014-7138969</td>
-                        <td class="text-center">020707-04-2222</td>
-                       
-                    </tr>
-                  
                 </tbody>
             </table>
         </div>
