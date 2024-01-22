@@ -837,7 +837,7 @@ public class ReservationController {
             "JOIN reservationservice ON reservation.reservationid = reservationservice.reservationid " +
             "JOIN room ON roomreservation.roomnum = room.roomnum " +
             "JOIN service ON reservationservice.serviceid = service.serviceid " +
-            "JOIN guest ON reservation.guestICNumber = guest.guestICNumber" +
+            "JOIN guest ON reservation.guestICNumber = guest.guestICNumber " +
             "WHERE reservationid = ?";
             final var statement = connection.prepareStatement(sql);
             statement.setInt(1, reservationID);
