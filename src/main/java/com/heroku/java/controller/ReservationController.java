@@ -377,7 +377,7 @@ public String guestMakeRoomService(HttpSession session, Model model) {
     List <service> services = new ArrayList<service>();
     try {
         Connection connection = dataSource.getConnection();
-        String sql = "SELECT serviceid, servicename from service where servicetype = ? and servicestatus = ?";
+        String sql = "SELECT serviceid, servicename, serviceprice from service where servicetype = ? and servicestatus = ?";
         final var statement = connection.prepareStatement(sql);
         statement.setString(1, "Room Service");
         statement.setString(2, "Available");
@@ -385,10 +385,12 @@ public String guestMakeRoomService(HttpSession session, Model model) {
         while (resultSet.next()){
             int serviceID = resultSet.getInt("serviceid");
             String serviceName = resultSet.getString("servicename");
+            double servicePrice = resultSet.getDouble("serviceprice");
 
             service service = new service();
             service.setServiceID(serviceID);
             service.setServiceName(serviceName);
+            service.setServicePrice(servicePrice);
             
             //debug
             System.out.println("add into array for dropdown");
@@ -535,7 +537,7 @@ public String guestMakeEventService(HttpSession session, Model model) {
     List <service> services = new ArrayList<service>();
     try {
         Connection connection = dataSource.getConnection();
-        String sql = "SELECT serviceid, servicename from service where servicetype = ? and servicestatus = ?";
+        String sql = "SELECT serviceid, servicename, serviceprice from service where servicetype = ? and servicestatus = ?";
         final var statement = connection.prepareStatement(sql);
         statement.setString(1, "Event Service");
         statement.setString(2, "Available");
@@ -543,10 +545,12 @@ public String guestMakeEventService(HttpSession session, Model model) {
         while (resultSet.next()){
             int serviceID = resultSet.getInt("serviceid");
             String serviceName = resultSet.getString("servicename");
+            double servicePrice = resultSet.getDouble("serviceprice");
 
             service service = new service();
             service.setServiceID(serviceID);
             service.setServiceName(serviceName);
+            service.setPrice(servicePrice);
             
             //debug
             System.out.println("add into array for dropdown");
