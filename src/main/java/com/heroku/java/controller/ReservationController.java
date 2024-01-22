@@ -853,7 +853,7 @@ public class ReservationController {
                 int totalAdult = resultSet.getInt("totalAdult");
                 int totalKids = resultSet.getInt("totalKids");
                 int totalRoom = resultSet.getInt("totalRoom");
-                double totalPayment = resultSet.getString("totalPayment");
+                double totalPayment = resultSet.getDouble("totalPayment");
                 String reserveStatus = resultSet.getString("reserveStatus");
 
                 reservation reservation = new reservation();
