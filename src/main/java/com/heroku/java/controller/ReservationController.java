@@ -412,7 +412,7 @@ public String guestMakeRoomService(HttpSession session, Model model) {
     List <reservationService> guestReservationService = new ArrayList<reservationService>();
     try (Connection connection = dataSource.getConnection()){
         String sqlGuestService = "SELECT service.servicename, service.servicetype, service.serviceprice, reservationservice.serviceduration, reservationservice.servicequantity "
-        + "from service JOIN roomservice ON service.serviceid = roomservice.serviceid "
+        + "from service "
         + "JOIN reservationservice ON reservationservice.serviceid = service.serviceid "
         + "JOIN reservation ON reservationservice.reservationid = reservation.reservationid "
         + "WHERE reservation.reservationid = ?";
@@ -440,6 +440,7 @@ public String guestMakeRoomService(HttpSession session, Model model) {
             guestReservationService.add(reservationService);
             model.addAttribute("guestService", guestService);
             model.addAttribute("guestReservationService", guestReservationService);
+            System.out.println("service added");
         }
 
         connection.close();
