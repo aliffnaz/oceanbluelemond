@@ -78,10 +78,10 @@ public class ServiceController {
             System.out.println("service id from database: " + serviceID);
                 // Update fields specific to "roomService" or "eventService" based on the service type
                 if (serviceType.equalsIgnoreCase("Room Service")) {
-                    String roomServiceSql = "INSERT INTO roomService(serviceid, balance) VALUES (?, ?)";
+                    String roomServiceSql = "INSERT INTO roomService(serviceid, maxQuantity) VALUES (?, ?)";
                     final var roomServiceStatement = connection.prepareStatement(roomServiceSql);
                     roomServiceStatement.setInt(1, serviceID);
-                    roomServiceStatement.setInt(2, roomService.getBalance());
+                    roomServiceStatement.setInt(2, roomService.getMaxQuantity());
 
                     roomServiceStatement.executeUpdate();
                 } else if (serviceType.equalsIgnoreCase("Event Service")) {
@@ -124,13 +124,13 @@ public class ServiceController {
 
                 service service;
                 if ("roomService".equalsIgnoreCase(serviceType)) {
-                    String roomServiceSql = "SELECT serviceid, balance FROM roomService WHERE serviceid=?";
+                    String roomServiceSql = "SELECT serviceid, maxQuantity FROM roomService WHERE serviceid=?";
                     final var roomServiceStatement = connection.prepareStatement(roomServiceSql);
                     roomServiceStatement.setInt(1, serviceID);
                     final var roomServiceResultSet = roomServiceStatement.executeQuery();
                     if (roomServiceResultSet.next()) {
-                        int balance = roomServiceResultSet.getInt("balance");
-                        service = new roomService(serviceID, serviceName, serviceType, servicePrice, serviceStatus, balance);
+                        int maxQuantity = roomServiceResultSet.getInt("maxQuantity");
+                        service = new roomService(serviceID, serviceName, serviceType, servicePrice, serviceStatus, maxQuantity);
                     } else {
                         service = new service(serviceID, serviceName, serviceType, servicePrice, serviceStatus);
                     }
@@ -168,7 +168,7 @@ public class ServiceController {
         String staffICNumber = (String) session.getAttribute("staffICNumber") ;
         try {
             Connection connection = dataSource.getConnection();
-            String sql = "SELECT service.serviceid, service.servicename, service.servicetype, service.serviceprice, service.servicestatus, roomservice.balance, eventservice.eventcapacity "
+            String sql = "SELECT service.serviceid, service.servicename, service.servicetype, service.serviceprice, service.servicestatus, roomservice.maxQuantity, eventservice.eventcapacity "
             + "FROM service "
             + "LEFT JOIN roomservice ON service.serviceid = roomservice.serviceid "
             + "LEFT JOIN eventservice ON eventservice.serviceid = service.serviceid "
@@ -185,8 +185,8 @@ public class ServiceController {
 
                 service service;
                 if (serviceType.equalsIgnoreCase("Room Service")) {
-                    int balance = resultSet.getInt("balance");
-                    service = new roomService(serviceID, serviceName, serviceType, servicePrice, serviceStatus, balance);
+                    int maxQuantity = resultSet.getInt("maxQuantity");
+                    service = new roomService(serviceID, serviceName, serviceType, servicePrice, serviceStatus, maxQuantity);
                 } else if (serviceType.equalsIgnoreCase("Event Service")) {
                     int eventCapacity = resultSet.getInt("eventCapacity");
                     service = new eventService(serviceID, serviceName, serviceType, servicePrice, serviceStatus, eventCapacity);
@@ -211,7 +211,7 @@ public class ServiceController {
         String staffICNumber = (String) session.getAttribute("staffICNumber") ;
         try {
             Connection connection = dataSource.getConnection();
-            String sql = "SELECT service.serviceid, service.servicename, service.servicetype, service.serviceprice, service.servicestatus, roomservice.balance, eventservice.eventcapacity "
+            String sql = "SELECT service.serviceid, service.servicename, service.servicetype, service.serviceprice, service.servicestatus, roomservice.maxQuantity, eventservice.eventcapacity "
             + "FROM service "
             + "LEFT JOIN roomservice ON service.serviceid = roomservice.serviceid "
             + "LEFT JOIN eventservice ON eventservice.serviceid = service.serviceid "
@@ -228,8 +228,8 @@ public class ServiceController {
 
                 service service;
                 if (serviceType.equalsIgnoreCase("Room Service")) {
-                    int balance = resultSet.getInt("balance");
-                    service = new roomService(serviceID, serviceName, serviceType, servicePrice, serviceStatus, balance);
+                    int maxQuantity = resultSet.getInt("maxQuantity");
+                    service = new roomService(serviceID, serviceName, serviceType, servicePrice, serviceStatus, maxQuantity);
                 } else if (serviceType.equalsIgnoreCase("Event Service")) {
                     int eventCapacity = resultSet.getInt("eventCapacity");
                     service = new eventService(serviceID, serviceName, serviceType, servicePrice, serviceStatus, eventCapacity);
@@ -266,9 +266,9 @@ public class ServiceController {
 
             // Update fields specific to "roomService" or "eventService" based on the service type
             if ("Room Service".equalsIgnoreCase(service.getServiceType())) {
-                String roomServiceSql = "UPDATE roomService SET balance=? WHERE serviceID=?";
+                String roomServiceSql = "UPDATE roomService SET maxQuantity=? WHERE serviceID=?";
                 final var roomServiceStatement = connection.prepareStatement(roomServiceSql);
-                roomServiceStatement.setInt(1, roomService.getBalance());
+                roomServiceStatement.setInt(1, roomService.getMaxQuantity());
                 roomServiceStatement.setInt(2, service.getServiceID());
 
                 roomServiceStatement.executeUpdate();
