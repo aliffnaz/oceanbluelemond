@@ -553,7 +553,7 @@ public String deleteGuestService(HttpSession session, Model model, @RequestParam
         System.out.println("failed to delete service from the guest service list");
         e.printStackTrace();
     }
-    return "guest/guestMakeRoomService";
+    return "redirect:/guestMakeRoomService";
 }
 
 }
