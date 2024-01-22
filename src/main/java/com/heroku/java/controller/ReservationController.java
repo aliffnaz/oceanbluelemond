@@ -870,13 +870,13 @@ public class ReservationController {
                 reservation.setTotalPayment(totalPayment);
                 model.addAttribute("reservation", reservation);
 
-                // room room = new room();
-                // room.setRoomType(resultSet.getString("roomtype"));
-                // model.addAttribute("room", room);
+                room room = new room();
+                room.setRoomType(resultSet.getString("roomtype"));
+                model.addAttribute("room", room);
 
-                // guest guest = new guest();
-                // guest.setGuestName(resultSet.getString("guestName"));
-                // model.addAttribute("guest", guest);
+                guest guest = new guest();
+                guest.setGuestName(resultSet.getString("guestName"));
+                model.addAttribute("guest", guest);
 
                 List <service> services = new ArrayList<service>();
                 while (resultSet.next()){
