@@ -62,12 +62,6 @@ public class GettingStartedApplication {
         return "guest/guestViewRoom";
     }
 
-    @GetMapping("/guestViewRoomReservation")
-    public String guestViewRoomReservation(HttpSession session) {
-        String guestICNumber = (String) session.getAttribute("guestICNumber");
-        return "guest/guestViewRoomReservation";
-    }
-
     @GetMapping("/guestGenerateReceipt")
     public String guestGenerateReceipt(HttpSession session) {
         String guestICNumber = (String) session.getAttribute("guestICNumber");
@@ -85,12 +79,6 @@ public class GettingStartedApplication {
     @GetMapping("/staffLogin")
     public String staffLogin() {
         return "staff/staffLogin";
-    }
-
-    @GetMapping("/staffReservationList")
-    public String staffReservationList(HttpSession session) {
-        String staffICNumber = (String) session.getAttribute("staffICNumber") ;
-        return "staff/staffReservationList";
     }
 
     @GetMapping("/staffAddRoom")
