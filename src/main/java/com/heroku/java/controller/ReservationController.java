@@ -774,7 +774,7 @@ public String deleteGuestEventService(HttpSession session, Model model, @Request
         System.out.println("failed to delete service from the guest service list");
         e.printStackTrace();
     }
-    return "redirect:/guestMakeRoomService";
+    return "redirect:/guestMakeEventService";
 }
 
 }
