@@ -440,7 +440,7 @@ public String guestMakeRoomService(HttpSession session, Model model) {
             guestReservationServices.add(guestReservationService);
             model.addAttribute("guestServices", guestServices);
             model.addAttribute("guestReservationServices", guestReservationServices);
-            System.out.println("service added");
+            System.out.println("service added into list");
         }
 
         connection.close();
@@ -505,7 +505,7 @@ public String guestMakeRoomService(HttpSession session, @ModelAttribute("guestMa
         e.printStackTrace();
         return "redirect:/index";
     }
-    return "guest/guestMakeRoomService";
+    return "redirect:/guestMakeRoomService";
 }
 
 @GetMapping("/guestMakeEventService")
