@@ -192,9 +192,6 @@
                                     alert("Successfully Added");
                                 }
                             </script> -->
-
-                            <a th:href="@{/guestRoomReservation}" class="btn btn-danger btn-lg"
-                                style="border-radius: 3px 3px 3px 3px; height: auto; width:150px">Cancel</a>
                         </div>
                     </div>
   </form>
@@ -218,13 +215,23 @@
                         <td class="text-center" th:text="${guestService.serviceName}"></td>
                         <td class="text-center" th:text="${guestService.serviceType}"></td>
                         <td class="text-center" th:text="${guestService.servicePrice}"></td>
-                        <td class="text-center"><a th:href="@{/deleteGuestEventService?serviceID=}+${guestService.serviceID}"><i class="bi bi-trash3-fill"
-                            style="font-size: 20px;"></i></a></td>
+                        <td class="text-center"><a th:href="@{/deleteGuestEventService?serviceID=}+${guestService.serviceID}">
+                            <i class="bi bi-trash3-fill" style="font-size: 20px;"></i></a></td>
                     </tr>
                 </tbody>
             </table>
         </div>
-   
+        <div class="row m-5">
+            <div class="col text-center">
+                <a th:href="@{/guestRoomReservation}" class="btn btn-dark btn-lg"
+                    style="border-radius: 3px 3px 3px 3px; height: auto">Confirm</a>
+                <!-- <script>
+                    function success() {
+                        alert("Successfully Added");
+                    }
+                </script> -->
+            </div>
+        </div>
     <div class="col"></div>
 </div>
 
