@@ -647,7 +647,7 @@ public String guestMakeEventService(HttpSession session, Model model) {
 }
 
 @PostMapping("/guestMakeEventService")
-public String guestMakeEventService(@ModelAttribute("guestMakeRoomService")service service, @RequestParam("serviceID") String serviceIDString, @RequestParam("people") int people, @RequestParam("serviceDuration") int serviceDuration){
+public String guestMakeEventService(HttpSession session, @ModelAttribute("guestMakeRoomService")service service, @RequestParam("serviceID") String serviceIDString, @RequestParam("people") int people, @RequestParam("serviceDuration") int serviceDuration){
     String guestICNumber = (String) session.getAttribute("guestICNumber");
     int reservationID = (int) session.getAttribute("reservationID");
     int durationOfStay = (int) session.getAttribute("durationOfStay");
