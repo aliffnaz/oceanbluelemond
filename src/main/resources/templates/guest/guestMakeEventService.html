@@ -151,14 +151,18 @@
                         <div class="col-1"></div>
                         <div class="col pt-3">
                             <span>
-                                <h6>Event Capacity</h6>
+                                <h6>Number of People</h6>
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="number" name="EventCapacity" class="form-control"/>
+                            <div class="qty-buttons mb-3 version_2">
+                                <input type="button" value="+" class="qtyplus" name="EventCapacity">
+                                <input type="text" name="EventCapacity" id="EventCapacity" value=""
+                                    class="qty form-control" placeholder="Please insert the number of people for the event">
+                                <input type="button" value="-" class="qtyminus" name="EventCapacity">
+                            </div>
                         </div>
                     </div>
-
 
                     <div class="row m-3">
                         <div class="col-1"></div>
@@ -171,14 +175,11 @@
                             <div class="qty-buttons mb-3 version_2">
                                 <input type="button" value="+" class="qtyplus" name="serviceDuration">
                                 <input type="text" name="serviceDuration" id="serviceDuration" value=""
-                                    class="qty form-control" placeholder="Adults">
+                                    class="qty form-control" placeholder="Please insert the duration for the event">
                                 <input type="button" value="-" class="qtyminus" name="serviceDuration">
                             </div>
                         </div>
                     </div>
-                    
-                    
-                   
                     
                     <div class="row m-5">
                         <div class="col text-center">
