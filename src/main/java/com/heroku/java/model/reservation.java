@@ -3,17 +3,17 @@ import java.util.Date;
 
 public class reservation {
 
-    private String reservationID;
-    private String guestID;
+    private int reservationID;
+    private String guestICNumber;
     private int guestQuantity;
     private int durationOfStay;
-    private String dateStart;
-    private String dateEnd;
+    private Date dateStart;
+    private Date dateEnd;
     private int totalAdult;
     private int totalKids;
     private String reserveStatus;
     private int totalRoom;
-    private String totalPayment;
+    private double totalPayment;
 
     public reservation() {
 
@@ -22,29 +22,29 @@ public class reservation {
     /**
      * @return String return the reservationID
      */
-    public String getReservationID() {
+    public int getReservationID() {
         return reservationID;
     }
 
     /**
      * @param reservationID the reservationID to set
      */
-    public void setReservationID(String reservationID) {
+    public void setReservationID(int reservationID) {
         this.reservationID = reservationID;
     }
 
     /**
-     * @return String return the guestID
+     * @return String return the guestICNumber
      */
-    public String getGuestID() {
-        return guestID;
+    public String getGuestICNumber() {
+        return guestICNumber;
     }
 
     /**
-     * @param guestID the guestID to set
+     * @param guestICNumber the guestICNumber to set
      */
-    public void setGuestID(String guestID) {
-        this.guestID = guestID;
+    public void setGuestICNumber(String guestICNumber) {
+        this.guestICNumber = guestICNumber;
     }
 
     /**
@@ -79,28 +79,28 @@ public class reservation {
     /**
      * @return String return the dateStart
      */
-    public String getDateStart() {
+    public Date getDateStart() {
         return dateStart;
     }
 
     /**
      * @param dateStart the dateStart to set
      */
-    public void setDateStart(String dateStart) {
+    public void setDateStart(Date dateStart) {
         this.dateStart = dateStart;
     }
 
     /**
      * @return String return the dateEnd
      */
-    public String getDateEnd() {
+    public Date getDateEnd() {
         return dateEnd;
     }
 
     /**
      * @param dateEnd the dateEnd to set
      */
-    public void setDateEnd(String dateEnd) {
+    public void setDateEnd(Date dateEnd) {
         this.dateEnd = dateEnd;
     }
 
@@ -163,14 +163,14 @@ public class reservation {
     /**
      * @return String return the totalPayment
      */
-    public String getTotalPayment() {
+    public double getTotalPayment() {
         return totalPayment;
     }
 
     /**
      * @param totalPayment the totalPayment to set
      */
-    public void setTotalPayment(String totalPayment) {
+    public void setTotalPayment(double totalPayment) {
         this.totalPayment = totalPayment;
     }
 
