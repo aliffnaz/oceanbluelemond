@@ -8,6 +8,7 @@ public class service {
     private double servicePrice;
     private String serviceStatus;
     private int serviceDuration;
+    private int serviceQuantity;
 
     public service(){
 	    
@@ -55,7 +56,13 @@ public class service {
 		return serviceDuration;
 	}
 	public void setServiceDuration(int serviceDuration) {
-		this.serviceID = serviceDuration;
+		this.serviceDuration = serviceDuration;
+	}
+	public int getServiceQuantity() {
+		return serviceQuantity;
+	}
+	public void setServiceQuantity(int serviceQuantity) {
+		this.serviceQuantity = serviceQuantity;
 	}
 
 }
