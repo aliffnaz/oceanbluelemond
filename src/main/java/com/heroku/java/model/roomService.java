@@ -2,22 +2,22 @@ package com.heroku.java.model;
 
 public class roomService extends service {
 
-    private int balance;
+    private int maxQuantity;
 
     public roomService(){
 
     }
 
-    public roomService(int serviceID, String serviceName, String serviceType, double servicePrice, String serviceStatus, int balance){
+    public roomService(int serviceID, String serviceName, String serviceType, double servicePrice, String serviceStatus, int maxQuantity){
         super(serviceID, serviceName, serviceType, servicePrice, serviceStatus);
-        this.balance = balance;
+        this.maxQuantity = maxQuantity;
     }
 
-    public int getBalance() {
-		return balance;
+    public int getMaxQuantity() {
+		return maxQuantity;
 	}
-	public void setBalance(int balance) {
-		this.balance = balance;
+	public void setMaxQuantity(int maxQuantity) {
+		this.maxQuantity = maxQuantity;
 	}
 
 }
