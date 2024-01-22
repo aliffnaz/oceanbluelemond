@@ -211,6 +211,35 @@ public class ReservationController {
         return false;
     }
 
+    public static boolean isEventServiceAvailable(int serviceId, Date startDate, Date endDate, Connection connection) throws SQLException {
+        // Query to check if the room service is available for the given date range and maximum quantity constraint
+        String sql = "SELECT COUNT(*) FROM reservationservice rs " +
+                     "JOIN reservation r ON rs.reservationid = r.reservationid " +
+                     "JOIN eventservice ON eventservice.serviceid = rs.serviceid " +
+                     "WHERE rs.serviceid = ? " +
+                     "  AND (r.datestart <= ? AND r.dateend >= ? OR r.datestart <= ? AND r.dateend >= ?) ";
+    
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, serviceId);
+            statement.setDate(2, startDate);
+            statement.setDate(3, endDate);
+            statement.setDate(4, startDate);
+            statement.setDate(5, endDate);
+    
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    int existingReservationsCount = resultSet.getInt(1);
+                    return existingReservationsCount == 0;
+                }
+            }
+        }
+        catch(SQLException e) {
+            System.out.println("fail at method isEventServiceAvailable()");
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 
   @PostMapping("/guestMakeRoomReservation")
   public String guestMakeRoomReservation(HttpSession session, @ModelAttribute("guestMakeRoomReservation") reservation reservation, 
@@ -617,7 +646,63 @@ public String guestMakeEventService(HttpSession session, Model model) {
     return "guest/guestMakeEventService";
 }
 
+@PostMapping("/guestMakeEventService")
+public String guestMakeEventService(@ModelAttribute("guestMakeRoomService")service service, @RequestParam("serviceID") String serviceIDString, @RequestParam("people") int people, @RequestParam("serviceDuration") int serviceDuration){
+    String guestICNumber = (String) session.getAttribute("guestICNumber");
+    int reservationID = (int) session.getAttribute("reservationID");
+    int durationOfStay = (int) session.getAttribute("durationOfStay");
+    Date dateStart = (Date) session.getAttribute("dateStart");
+    Date dateEnd = (Date) session.getAttribute("dateEnd");
+    double totalPayment = (double) session.getAttribute("totalPayment");
+    int totalRoom = (int) session.getAttribute("totalRoom");
+    int serviceID = Integer.parseInt(serviceIDString);
 
+    //for debugging purposes only
+    System.out.println("postmappping guestMakeEventService");
+    System.out.println("guestICNumber: " + guestICNumber);
+    System.out.println("reservationID: " + reservationID);
+    System.out.println("durationOfStay: " + durationOfStay);
+    System.out.println("dateStart: " + dateStart);
+    System.out.println("dateEnd: " + dateEnd);
+    System.out.println("totalPayment: " + totalPayment);
+    System.out.println("serviceID: " + serviceID);
+    System.out.println("total room: " + totalRoom);
+    System.out.println("service id: " + serviceID);
+
+    if (serviceDuration > durationOfStay){
+        System.out.println("Service duration cannot exceed Duration of stay");
+        return "redirect:/guestMakeEventService";
+    }
+
+    try {
+        Connection connection = dataSource.getConnection();
+        boolean available = isEventServiceAvailable(serviceID, dateStart, dateEnd, connection);
+
+        if (available){
+            String sql = "INSERT INTO reservationservice(reservationid, serviceduration, serviceid) VALUES (?,?,?)";
+            final var statement = connection.prepareStatement(sql);
+            
+            statement.setInt(1, reservationID);
+            statement.setInt(2, serviceDuration);
+            statement.setInt(3, serviceID);
+
+            statement.executeUpdate();
+            System.out.println("sukses insert into table reservationservice");
+        }
+        else{
+            System.out.println("gagal insert into table reservationservice sebab tak available");
+        }
+        connection.close();
+    }
+    catch (Exception e) {
+        System.out.println("failed postmapping guestMakeEventService");
+        e.printStackTrace();
+        return "redirect:/index";
+    }
+
+
+    return "redirect:/guestMakeEventService";
+}
 
 @GetMapping("/deleteGuestRoomService")
 public String deleteGuestRoomService(HttpSession session, Model model, @RequestParam("serviceID") int serviceID){
@@ -636,7 +721,6 @@ public String deleteGuestRoomService(HttpSession session, Model model, @RequestP
     System.out.println("dateStart: " + dateStart);
     System.out.println("dateEnd: " + dateEnd);
     System.out.println("totalPayment: " + totalPayment);
-    System.out.println("serviceID: " + serviceID);
     System.out.println("total room: " + totalRoom);
     System.out.println("service id: " + serviceID);
 
