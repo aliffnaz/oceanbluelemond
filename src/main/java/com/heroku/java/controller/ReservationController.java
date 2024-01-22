@@ -550,7 +550,7 @@ public String guestMakeEventService(HttpSession session, Model model) {
             service service = new service();
             service.setServiceID(serviceID);
             service.setServiceName(serviceName);
-            service.setPrice(servicePrice);
+            service.setServicePrice(servicePrice);
             
             //debug
             System.out.println("add into array for dropdown");
