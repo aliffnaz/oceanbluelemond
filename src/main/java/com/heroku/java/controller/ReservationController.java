@@ -446,10 +446,9 @@ public String guestMakeRoomService(HttpSession session, Model model) {
         + "from service "
         + "JOIN reservationservice ON reservationservice.serviceid = service.serviceid "
         + "JOIN reservation ON reservationservice.reservationid = reservation.reservationid "
-        + "WHERE reservation.reservationid = ? AND service.servicetype = ?";
+        + "WHERE reservation.reservationid = ?";
         final var statementGuestService = connection.prepareStatement(sqlGuestService);
         statementGuestService.setInt(1, reservationID);
-        statementGuestService.setString(2, "Room Service");
         final var resultSetGuestService = statementGuestService.executeQuery();
         System.out.println("pass for getting guest services for this reservationid");
 
@@ -604,10 +603,9 @@ public String guestMakeEventService(HttpSession session, Model model) {
         + "from service "
         + "JOIN reservationservice ON reservationservice.serviceid = service.serviceid "
         + "JOIN reservation ON reservationservice.reservationid = reservation.reservationid "
-        + "WHERE reservation.reservationid = ? AND service.servicetype = ?";
+        + "WHERE reservation.reservationid = ?";
         final var statementGuestService = connection.prepareStatement(sqlGuestService);
         statementGuestService.setInt(1, reservationID);
-        statementGuestService.setString(2, "Event Service");
         final var resultSetGuestService = statementGuestService.executeQuery();
         System.out.println("pass for getting guest services for this reservationid");
 
@@ -700,7 +698,6 @@ public String guestMakeEventService(HttpSession session, @ModelAttribute("guestM
         return "redirect:/index";
     }
 
-
     return "redirect:/guestMakeEventService";
 }
 
@@ -782,7 +779,7 @@ public String guestRoomReservation(Model model, HttpSession session){
     String guestICNumber = (String) session.getAttribute("guestICNumber");
     List<reservation> reservations = new ArrayList<reservation>();
     try (Connection connection = dataSource.getConnection()){
-        String sql = "SELECT * from reservation where guesticnumber = ?";
+        String sql = "SELECT * from reservation where guesticnumber = ? order by reservationid desc";
         final var statement = connection.prepareStatement(sql);
         statement.setString(1, guestICNumber);
         final var resultSet = statement.executeQuery();
