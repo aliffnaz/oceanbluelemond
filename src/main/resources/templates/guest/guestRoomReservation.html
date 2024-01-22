@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="Ansonika">
-    <title>D Chalet Ombak Biru</title>
+    <title>Room Reservation
+    </title>
     <!-- Favicons-->
     <link rel="shortcut icon" th:href="@{stylesheets/img/favicon.png}" type="image/x-icon">
     <link rel="apple-touch-icon" type="image/x-icon"
@@ -43,7 +44,7 @@
     <div class="layer"></div>
 
 
-   <header class="reveal_header bg-dark">
+    <header class="reveal_header bg-dark">
         <div class="container-fluid">
             <div class="row align-items-center">
                 <div class="col-6">
@@ -70,9 +71,7 @@
         </div><!-- /container -->
     </header><!-- /Header -->
 
-
-    <!-- -------------------- sidebar panel ------------------------- -->
-<div class="nav_panel">
+    <div class="nav_panel">
         <a th:href="@{#}" class="closebt open_close_nav_panel"><i class="bi bi-x"></i></a>
         <div class="logo_panel"><img th:src="@{stylesheets/img/logo_sticky.png}" width="135" height="45" alt=""></div>
         <div class="sidebar-navigation">
@@ -104,217 +103,64 @@
         </div>
         <!-- /sidebar-navigation -->
     </div>
-    <!-- /nav_panel -->=
+    <!-- /nav_panel -->
+
+
+
     <main>
+
         <div class="container mt-5">
             &nbsp;
         </div>
 
         <div class="container mt-5 mb-5 align-items-center">
+
             <div class="row">
-                <div class="col">
-
-                </div>
-
-                <div class="col-md card card-body py-5">
-                    <div class="row m-5">
-                        <div class="col-2 text-center">
-                            <a th:href="@{/guestRoomReservation}">
-                                <div class="bi bi-arrow-left-circle" style="font-size: 50px;"></div>
-                            </a>
-                        </div>
-                        <div class="col-md-9 text-center pt-3">
-                            <div class="">
-
-                                <h1>Your Reservation</h1>
-                            </div>
-                        </div>
-                        <div class="col-2">
-
-                        </div>
-                    </div>
-
-                    <div class="row m-3">
-                        <div class="col-1"></div>
-                        <div class="col pt-3">
-                            <span>
-                                <h6>Guest IC Number</h6>
-                            </span>
-                        </div>
-                        <div class="col-8">
-                            <input type="text" th:value="${session.guestICNumber}" name="guestICNumber" id="guestICNumber" class="form-control" readonly>
-                        </div>
-                    </div>
-
-                    <div class="row m-3">
-                        <div class="col-1"></div>
-                        <div class="col pt-3">
-                            <span>
-                                <h6>Guest Name</h6>
-                            </span>
-                        </div>
-                        <div class="col-8">
-                            <input type="text" th:value=" " name="guestName" id="guestName" class="form-control" readonly>
-                        </div>
-                    </div>
-
-                    <div class="row m-3">
-                        <div class="col-1"></div>
-                        <div class="col pt-3">
-                            <span>
-                                <h6>Guest Quantity</h6>
-                            </span>
-                        </div>
-                        <div class="col-8">
-                                <input type="text" name="guestQuantity" id="guestQuantity" th:value="${reservation.guestQuantity}" class="qty form-control" readonly>
-                        </div>
-                    </div>
-
-                    <div class="row m-3">
-                        <div class="col-1"></div>
-                        <div class="col pt-3">
-                            <span>
-                                <h6>Duration of Stay</h6>
-                            </span>
-                        </div>
-                        <div class="col-8">
-                                <input type="text" name="durationOfStay" id="durationOfStay" value="${reservation.durationOfStay}" class="qty form-control" placeholder="" readonly>
-                        </div>
-                    </div>
-
-                    <div class="row m-3">
-                        <div class="col-1"></div>
-                        <div class="col pt-3">
-                            <span>
-                                <h6>Check-In Date</h6>
-                            </span>
-                        </div>
-                        <div class="col-8">
-                                <input type="text" name="dateStart" id="dateStart" value="${reservation.dateStart}" class="qty form-control" placeholder="" readonly>
-                        </div>
-                    </div>
-
-                    <div class="row m-3">
-                        <div class="col-1"></div>
-                        <div class="col pt-3">
-                            <span>
-                                <h6>Check-Out Date</h6>
-                            </span>
-                        </div>
-                        <div class="col-8">
-                                <input type="text" name="dateEnd" id="dateEnd" value="${reservation.dateEnd}" class="qty form-control" placeholder="" readonly>
-                        </div>
-                    </div>
-
-                        <div class="row m-3">
-                            <div class="col-1"></div>
-                            <div class="col pt-3">
-                                <span>
-                                    <h6>Room Type</h6>
-                                </span>
-                            </div>
-                            <div class="col-8">
-                                <input type="text" name="roomType" id="dateEnd" value="${room.roomType}" class="qty form-control" placeholder="" readonly>
-                            </div>
-                            </div>
-
-                        <div class="row m-3">
-                            <div class="col-1"></div>
-                            <div class="col pt-3">
-                                <span>
-                                    <h6>Total Adults</h6>
-                                </span>
-                            </div>
-                            <div class="col-8">
-                                <input type="text" name="totalAdult" id="totalAdult" value="${reservation.totalAdult}" class="qty form-control" placeholder="" readonly>
-                            </div>
-                        </div>
-
-                        <div class="row m-3">
-                            <div class="col-1"></div>
-                            <div class="col pt-3">
-                                <span>
-                                    <h6>Total Kids</h6>
-                                </span>
-                            </div>
-                            <div class="col-8">
-                                <input type="text" name="totalKids" id="totalKids" value="${reservation.totalKids}" class="qty form-control" placeholder="" readonly>
-                            </div>
-                        </div>
-
-                        <div class="row m-3">
-                            <div class="col-1"></div>
-                            <div class="col pt-3">
-                                <span>
-                                    <h6>Add-on Room Service</h6>
-                                </span>
-                            </div>
-                            <div class="col-8">
-                                <table>
-                                    <thead>
-                                        <th>Name</th>
-                                        <th>Quantity</th>
-                                        <th>Price</th>
-                                    </thead>
-                                    <tbody>
-                                        <tr th:each="guestService : ${guestServices}">
-                                            <td class="text-center" th:text="${guestService.serviceName}"></td>
-                                            <td class="text-center" th:text="${guestService.serviceQuantity}"></td>
-                                            <td class="text-center" th:text="${guestService.servicePrice}"></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-
-                        <div class="row m-3">
-                            <div class="col-1"></div>
-                            <div class="col pt-3">
-                                <span>
-                                    <h6>Total Room</h6>
-                                </span>
-                            </div>
-                            <div class="col-8">
-                                <input type="text" name="totalRoom" id="totalRoom" value="${reservation.totalRoom}" class="qty form-control" placeholder="" readonly>
-                            </div>
-                        </div>
-
-                        <div class="row m-3">
-                            <div class="col-1"></div>
-                            <div class="col pt-3">
-                                <span>
-                                    <h6>Total Payment</h6>
-                                </span>
-                            </div>
-                            <div class="col-8">
-                                <input type="text" name="totalPayment" id="totalPayment" value="${reservation.totalPayment}" class="qty form-control" placeholder="" readonly>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col"></div>
-                            <div class="col text-center">Generate your receipt <a th:href="@{/guestGenerateReceipt}">here</a></div>
-                            <div class="col"></div>
-                        </div>
-                    </div>
-
-                    <div class="row m-5">
-                        <div class="col text-center">
-                            <a th:href="@{/guestRoomReservation}" class="btn btn-dark btn-lg"
-                                style="border-radius: 3px 3px 3px 3px; height: auto; width:150px">Back</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                </div>
+                <div class="col"></div>
             </div>
-        </div>
 
-            <div class="container mt-5">
-                &nbsp;
+            <div class="col-md card card-body py-5">
+
+                <div class="row my-3 text-center">
+                    <span>
+                        <h2>Your Reservation Records</h2>
+                    </span>
+                </div>
+
+                <div class="row mx-2">
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                            <th class="text-center">Reservation ID</th>
+                            <th class="text-center">Total Room</th>
+                            <th class="text-center">Duration Of Stay</th>
+                            <th class="text-center">Check-in Date</th>
+                            <th class="text-center">Check-out Date</th>
+                            <th class="text-center">Total Amount</th>
+                            <th class="text-center">Status</th>
+                            <th class="text-center">Action</th>
+                        </thead>
+                        <tbody>
+                            <tr th:each="reservation : ${reservations}">
+                                <td th:text="${reservation.reservationID}"></td>
+                                <td th:text="${reservation.totalRoom}"></td>
+                                <td th:text="${reservation.durationOfStay}"></td>
+                                <td th:text="${reservation.dateStart}"></td>
+                                <td th:text="${reservation.dateEnd}"></td>
+                                <td th:text="${reservation.totalPayment}"></td>
+                                <td th:text="${reservation.reserveStatus}"></td>
+                                <td class="text-center"><a th:href="@{/guestViewRoomReservation?reservationID=}+${reservation.reservationID}">
+                                        <div class="bi bi-eye-fill" style="font-size: 20px;"></div>
+                                    </a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col">
+                </div>
             </div>
         </div>
     </main>
-
-<footer class="revealed">
+    <footer class="revealed">
         <div class="footer_bg">
             <div class="gradient_over"></div>
 
@@ -355,8 +201,7 @@
         </svg>
     </div>
     <!-- /back to top -->
-
-<!-- COMMON SCRIPTS -->
+    <!-- COMMON SCRIPTS -->
     <script th:src="@{stylesheets/js/common_scripts.js}"></script>
     <script th:src="@{stylesheets/js/common_functions.js}"></script>
     <script th:src="@{stylesheets/js/datepicker_inline.js}"></script>
