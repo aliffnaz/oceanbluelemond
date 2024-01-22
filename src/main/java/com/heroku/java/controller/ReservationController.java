@@ -784,11 +784,11 @@ public String guestRoomReservation(Model model, HttpSession session){
     try (Connection connection = dataSource.getConnection()){
         String sql = "SELECT * from reservation where guesticnumber = ?";
         final var statement = connection.prepareStatement(sql);
-        statement.setString(guestICNumber);
+        statement.setString(1, guestICNumber);
         final var resultSet = statement.executeQuery();
         System.out.println("pass try guestRoomReservation >>>>>");
 
-        while (resultSet.nect()){
+        while (resultSet.next()){
             int reservationID = resultSet.getInt("reservationid");
             int guestQuantity = resultSet.getInt("guestquantity");
             int durationOfStay = resultSet.getInt("durationofstay");
@@ -796,9 +796,9 @@ public String guestRoomReservation(Model model, HttpSession session){
             Date dateEnd = resultSet.getDate("dateend");
             int totalAdult = resultSet.getInt("totaladult");
             int totalKids= resultSet.getInt("totalkids");
-            String reserveStatus = resultSet.getInt("reservestatus");
+            String reserveStatus = resultSet.getString("reservestatus");
             int totalRoom = resultSet.getInt("totalroom");
-            double totalPayment = resultSet.getInt("totalpayment");
+            double totalPayment = resultSet.getDouble("totalpayment");
 
             reservation reservation = new reservation();
             reservation.setReservationID(reservationID);
