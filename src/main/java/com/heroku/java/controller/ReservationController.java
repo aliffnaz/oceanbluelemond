@@ -1114,7 +1114,7 @@ public class ReservationController {
 
                 room room = new room();
                 room.setRoomType(resultSet.getString("roomtype"));
-                room.setRoomRate(resultSet.getString("roomrate"));
+                room.setRoomRate(resultSet.getDouble("roomrate"));
                 model.addAttribute("room", room);
 
                 guest guest = new guest();
@@ -1194,7 +1194,7 @@ public class ReservationController {
 
                 room room = new room();
                 room.setRoomType(resultSet.getString("roomtype"));
-                room.setRoomRate(resultSet.getString("roomrate"));
+                room.setRoomRate(resultSet.getDouble("roomrate"));
                 model.addAttribute("room", room);
 
                 guest guest = new guest();
