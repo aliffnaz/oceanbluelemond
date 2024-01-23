@@ -344,12 +344,12 @@
     <!-- /back to top -->
     <!-- validation script -->
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+            document.addEventListener('DOMContentLoaded', function () {
             document.querySelector('form').addEventListener('submit', function (e) {
                 // Check IC Number
                 var icNumber = document.getElementById('guestICNumber').value;
-                if (icNumber.trim() === '') {
-                    alert('Please fill in the IC Number.');
+                if (icNumber.trim() === '' || !(/^\d+$/.test(icNumber))) {
+                    alert('Please fill in a valid numeric IC Number.');
                     e.preventDefault(); // Stop form submission
                     return;
                 }
