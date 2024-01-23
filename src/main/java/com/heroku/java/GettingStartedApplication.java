@@ -107,12 +107,6 @@ public String managerAddStaff(HttpSession session) {
     return "manager/managerAddStaff";
 }
 
-@GetMapping("/managerUpdateStatus")
-public String managerUpdateStatus(HttpSession session) {
-    String staffICNumber = (String) session.getAttribute("staffICNumber") ;
-    return "manager/managerUpdateStatus";
-}
-
 @GetMapping("/managerGenerateReport")
 public String managerGenerateReport(HttpSession session) {
     String staffICNumber = (String) session.getAttribute("staffICNumber") ;
