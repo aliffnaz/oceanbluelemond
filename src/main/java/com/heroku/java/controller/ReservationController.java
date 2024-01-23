@@ -940,11 +940,13 @@ public class ReservationController {
                 String serviceName = resultSet.getString("servicename");
                 double servicePrice = resultSet.getDouble("serviceprice");
                 int serviceQuantity = resultSet.getInt("serviceQuantity");
+                int serviceDuration = resultSet.getInt("serviceDuration");
 
                 service service = new service();
                 service.setServiceName(serviceName);
                 service.setServicePrice(servicePrice);
                 service.setServiceQuantity(serviceQuantity);
+                service.setServiceDuration(serviceDuration);
 
                 System.out.println("service added into array for guestViewRoomReservation");
                 services.add(service);
