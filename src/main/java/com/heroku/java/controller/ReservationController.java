@@ -705,12 +705,14 @@ public class ReservationController {
             boolean available = isEventServiceAvailable(serviceID, dateStart, dateEnd, connection);
 
             if (available){
-                String sql = "INSERT INTO reservationservice(reservationid, serviceduration, serviceid) VALUES (?,?,?)";
+                String sql = "INSERT INTO reservationservice(reservationid, serviceduration, servicequantity, serviceid) VALUES (?,?,?)";
                 final var statement = connection.prepareStatement(sql);
                 
+                int serviceQuantity = 1;
                 statement.setInt(1, reservationID);
                 statement.setInt(2, serviceDuration);
-                statement.setInt(3, serviceID);
+                statement.setInt(3, serviceQuantity);
+                statement.setInt(4, serviceID);
 
                 statement.executeUpdate();
                 System.out.println("sukses insert into table reservationservice");
