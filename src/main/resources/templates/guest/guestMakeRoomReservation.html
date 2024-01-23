@@ -347,7 +347,6 @@
     <!-- VALIDATE -->
     <script th:inline="javascript">
         /*<![CDATA[*/
-    
         function validateForm() {
             // Check IC Number
             var icNumber = document.getElementById('guestICNumber').value;
@@ -377,12 +376,17 @@
                 return false;
             }
     
+            // Check if Total Room is more than 0, but Total Kids can be 0
+            if (parseInt(totalRoom) > 0 && parseInt(totalKids) === 0) {
+                alert('You must have at least one adult or one child in the room.');
+                return false;
+            }
+    
             // Other validation checks can be added here
     
             // If all validation passes, submit the form
             return true;
         }
-    
         /*]]>*/
     </script>
     <!-- COMMON SCRIPTS -->
