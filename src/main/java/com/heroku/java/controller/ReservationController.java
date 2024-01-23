@@ -1232,8 +1232,8 @@ public class ReservationController {
         return "staff/staffViewReservation";
     }
 
-    @GetMapping("/guestGenerateReceipt")
-    public String guestGenerateReceipt(HttpSession session, Model model, @RequestParam("reservationID") int reservationID){
+    @GetMapping("/viewReceipt")
+    public String viewReceipt(HttpSession session, Model model, @RequestParam("reservationID") int reservationID){
         String guestICNumber = (String) session.getAttribute("guestICNumber");
         String staffICNumber = (String) session.getAttribute("staffICNumber");
         System.out.println("guestICNumber: " + guestICNumber);
@@ -1320,6 +1320,6 @@ public class ReservationController {
             return "redirect:/index";
         }
 
-        return "guest/guestGenerateReceipt";
+        return "viewReceipt";
     }
 }
