@@ -1350,7 +1350,7 @@ public class ReservationController {
             System.out.println("failed to update status");
         }
         System.out.println("sukses update status");
-        return "redirect:/managerViewReservation";
+        return "redirect:/managerUpdateStatus";
 
     }
 }
