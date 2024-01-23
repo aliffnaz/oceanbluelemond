@@ -200,8 +200,8 @@
                         </div>
                         <div class="col-8">
                             <select name="staffGender" id="staffGender" class="form-control form-select">
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
+                                <option th:value="Male" th:selected="${staff.staffGender eq 'Male'}">Male</option>
+                                <option th:value="Female" th:selected="${staff.staffGender eq 'Female'}">Female</option>
                             </select>
                         </div>
                     </div>
@@ -215,9 +215,10 @@
                         </div>
                         <div class="col-8">
                             <select name="staffRace" id="staffRace" class="form-control form-select">
-                                <option value="Melayu">Melayu</option>
-                                <option value="Cina">Cina</option>
-                                <option value="India">India</option>
+                                <option th:value="Melayu" th:selected="${staff.staffRace eq 'Melayu'}">Melayu</option>
+                                <option th:value="Cina" th:selected="${staff.staffRace eq 'Cina'}">Cina</option>
+                                <option th:value="India" th:selected="${staff.staffRace eq 'India'}">India</option>
+                                <option th:value="Others" th:selected="${staff.staffRace eq 'Others'}">Others</option>
                             </select>
                         </div>
                     </div>
@@ -231,9 +232,10 @@
                         </div>
                         <div class="col-8">
                             <select name="staffReligion" id="staffReligion" class="form-control form-select">
-                                <option value="Islam">Islam</option>
-                                <option value="Budha">Budha</option>
-                                <option value="Christian">Christian</option>
+                                <option th:value="Islam" th:selected="${staff.staffReligion eq 'Islam'}">Islam</option>
+                                <option th:value="Budha" th:selected="${staff.staffReligion eq 'Budha'}">Budha</option>
+                                <option th:value="Christian" th:selected="${staff.staffReligion eq 'Christian'}">Christian</option>
+                                 <option th:value="Others" th:selected="${staff.staffReligion eq 'Others'}">Others</option>
                             </select>
 
                         </div>
@@ -248,10 +250,11 @@
                         </div>
                         <div class="col-8">
                             <select name="staffMaritalStatus" id="staffMaritalStatus" class="form-control form-select">
-                                <option value="Single">Single</option>
-                                <option value="Married">Married</option>
-                                <option value="Divorce">Divorce</option>
-                                <option value="Widowed">Widowed</option>
+                                <option th:value="Single" th:selected="${staff.staffMaritalStatus eq 'Single'}">Single</option>
+                                <option th:value="Married" th:selected="${staff.staffMaritalStatus eq 'Married'}">Married</option>
+                                <option th:value="Divorce" th:selected="${staff.staffMaritalStatus eq 'Divorce'}">Divorce</option>
+                                <option th:value="Widowed" th:selected="${staff.staffMaritalStatus eq 'Widowed'}">Widowed</option>
+                                 <option th:value="Others" th:selected="${staff.staffMaritalStatus eq 'Others'}">Others</option>
                             </select>
 
                         </div>
