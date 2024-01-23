@@ -385,10 +385,6 @@ public class ReservationController {
                 statementUpdateTotalPayment.setInt(2, reservationID);
                 statementUpdateTotalPayment.executeUpdate();
             }
-        else {
-            System.out.println("Room not available");
-            return "redirect:/guestMakeRoomReservation";
-        }
 
         connection.close();
 
