@@ -880,7 +880,7 @@ public class ReservationController {
             }
 
             List <service> services = new ArrayList<service>();
-                while (resultSet.next()){
+            while (resultSet.next()){
                 String serviceName = resultSet.getString("servicename");
                 double servicePrice = resultSet.getDouble("serviceprice");
                 int serviceQuantity = resultSet.getInt("serviceQuantity");
@@ -890,6 +890,7 @@ public class ReservationController {
                 service.setServicePrice(servicePrice);
                 service.setServiceQuantity(serviceQuantity);
 
+                System.out.println("service added into array for guestViewRoomReservation");
                 services.add(service);
                 model.addAttribute("services", services);
             }
