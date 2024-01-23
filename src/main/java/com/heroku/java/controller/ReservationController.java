@@ -1254,6 +1254,7 @@ public class ReservationController {
             List<room> rooms = new ArrayList<room>();
             List <service> services = new ArrayList<service>();
             while(resultSet.next()){
+                guestICNumber = resultSet.getString("guestICNumber");
                 String guestName = resultSet.getString("guestName");
                 int guestQuantity = resultSet.getInt("guestQuantity");
                 int durationOfStay = resultSet.getInt("durationOfStay");
