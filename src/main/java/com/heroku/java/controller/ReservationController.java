@@ -307,12 +307,9 @@ public class ReservationController {
         System.out.println("date start: " + dateStartDate);
         System.out.println("date end: " + dateEndDate);
         int durationOfStay = calculateDurationOfStay(dateStart, dateEnd);
-        
-        boolean available = checkRoomAvailability(roomType, totalRoom, dateStartDate, dateEndDate, connection);
-        System.out.println(available);
 
-             // Get available room numbers
-             List<String> availableRoomNumbers = getAvailableRoomNumbers(roomType, totalRoom, dateStartDate, dateEndDate, connection);
+            // Get available room numbers
+            List<String> availableRoomNumbers = getAvailableRoomNumbers(roomType, totalRoom, dateStartDate, dateEndDate, connection);
             int totalMaxGuests = availableRoomNumbers.stream()
             .mapToInt(roomNumber -> {
                 try{ 
@@ -326,7 +323,6 @@ public class ReservationController {
             // Check if the total guest quantity exceeds the total maximum allowed guests
             boolean exceedsMaxGuests = guestQuantity > totalMaxGuests;
             if (!exceedsMaxGuests){
-
             //insert into table reservation    
             String sqlReservation = "INSERT INTO reservation(guestICNumber, guestQuantity, durationOfStay, datestart, dateend, totaladult, totalkids, reservestatus, totalroom, totalpayment, stafficnumber) VALUES (?,?,?,?,?,?,?,?,?,?,?) RETURNING reservationid";
             final var statementReservation = connection.prepareStatement(sqlReservation);
@@ -357,7 +353,6 @@ public class ReservationController {
             session.setAttribute("dateEnd", dateEndDate);
             session.setAttribute("totalRoom", totalRoom);
 
-
             // Insert room numbers into roomreservation table
             for (String roomNumber : availableRoomNumbers) {
                 String sqlRoomReservation = "INSERT INTO roomreservation(roomnum, reservationid) VALUES (?, ?)";
@@ -373,7 +368,7 @@ public class ReservationController {
                     }
                 }
             } else {
-                System.out.println("Guest quantity exceeds max guest allowed");
+                System.out.println("Failed to make reservation");
                 return "redirect:/guestMakeRoomReservation";
             }
 
