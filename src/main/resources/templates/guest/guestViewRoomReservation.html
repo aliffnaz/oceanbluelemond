@@ -266,12 +266,14 @@
                                     <thead>
                                         <th class="text-center">Name</th>
                                         <th class="text-center">Quantity</th>
+                                        <th class="text-center">Duration</th>
                                         <th class="text-center">Price</th>
                                     </thead>
                                     <tbody>
                                         <tr th:each="service : ${services}">
                                             <td class="text-center" th:text="${service.serviceName}"></td>
                                             <td class="text-center" th:text="${service.serviceQuantity}"></td>
+                                            <td class="text-center" th:text="${service.serviceDuration}"></td>
                                             <td class="text-center" th:text="${service.servicePrice}"></td>
                                         </tr>
                                     </tbody>
