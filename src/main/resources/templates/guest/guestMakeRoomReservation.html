@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="Ansonika">
-    <title>D Chalet Ombak Biru</title>
+    <title>Room Reservation</title>
     <!-- Favicons-->
     <link rel="shortcut icon" th:href="@{stylesheets/img/favicon.png}" type="image/x-icon">
     <link rel="apple-touch-icon" type="image/x-icon"
@@ -39,17 +39,23 @@
     <div id="preloader">
         <div data-loader="circle-side"></div>
     </div><!-- /Page Preload -->
+
     <div class="layer"></div>
-    <header class="reveal_header" style="background-color: #24262d;">
-        <div class="container">
+
+
+    <header class="reveal_header bg-dark">
+        <div class="container-fluid">
             <div class="row align-items-center">
                 <div class="col-6">
-                    <a th:href="@{/index}" class="logo"><img th:src="@{stylesheets/img/logo.png}" width="135" height="45" alt=""></a>
+                    <a th:href="@{/index}" class="logo_normal"><img th:src="@{stylesheets/img/logo.png}" width="135"
+                            height="45" alt=""></a>
+                    <a th:href="@{/index}" class="logo_sticky"><img th:src="@{stylesheets/img/logo_sticky.png}"
+                            width="135" height="45" alt=""></a>
                 </div>
                 <div class="col-6">
                     <nav>
                         <ul>
-                            <li><a class="btn_1 btn_scrollto">Staff</a></li>
+                            <li><a th:href="@{/guestMakeRoomReservation}" class="btn_1 btn_scrollto">Book Now</a></li>
                             <li>
                                 <div class="hamburger_2 open_close_nav_panel">
                                     <div class="hamburger__box">
@@ -64,10 +70,7 @@
         </div><!-- /container -->
     </header><!-- /Header -->
 
-
-
-     <!-- -------------------- sidebar panel ------------------------- -->
-     <div class="nav_panel">
+    <div class="nav_panel">
         <a th:href="@{#}" class="closebt open_close_nav_panel"><i class="bi bi-x"></i></a>
         <div class="logo_panel"><img th:src="@{stylesheets/img/logo_sticky.png}" width="135" height="45" alt=""></div>
         <div class="sidebar-navigation">
@@ -102,30 +105,40 @@
 
 
     <main>
-        &nbsp;<br>&nbsp;<br>&nbsp;<br>
+        <div class="container mt-5">
+            &nbsp;
+        </div>
+
         <div class="container mt-5 mb-5 align-items-center">
-            <form 
-            method="post"
-            th:action="@{/guestMakeRoomService}"
-            modelAttribute="guestMakeRoomService"
-            th:object="(${guestMakeRoomService})"
-            enctype="multipart/form-data">
             <div class="row">
                 <div class="col">
+
                 </div>
+
                 <div class="col-md card card-body py-5">
                     <div class="row m-4">
-                        <!-- <div class="col-2 text-center">
-                            <a th:href="@{/staffRoomList}">
+                        <div class="col-3 text-center">
+                            <a th:href="@{/index}">
                                 <div class="bi bi-arrow-left-circle" style="font-size: 50px;"></div>
                             </a>
-                        </div> -->
-                        <div class="col-md-8 text-center pt-3">
+                        </div>
+                        <div class="col-md-12 text-center">
                             <div class="">
-                                <h1>Add Service</h1>
+                                <h1>Make Room Reservation</h1>
                             </div>
                         </div>
-                        <div class="col-2">
+                    </div>
+
+                    <form method="post" th:action="@{/guestMakeRoomReservation}" modelAttribute="guestMakeRoomReservation" th:object="(${guestMakeRoomReservation})">
+                    <div class="row m-3">
+                        <div class="col-1"></div>
+                        <div class="col pt-3">
+                            <span>
+                                <h6>IC Number</h6>
+                            </span>
+                        </div>
+                        <div class="col-8">
+                            <input type="text" name="guestICNumber" id="" class="form-control" th:value="${session.guestICNumber}" readonly>
                         </div>
                     </div>
 
@@ -133,135 +146,165 @@
                         <div class="col-1"></div>
                         <div class="col pt-3">
                             <span>
-                                <h6>Service Name</h6>
-                                <div class="col-9"><a class="" th:href="@{/guestViewRoomService}" target="blank">View
-                                        Catalogue</a></div>
+                                <h6>Check-in & Check-out Date</h6>
                             </span>
                         </div>
                         <div class="col-8">
-                            <div class="custom_select">
-                                <select class="wide" name="serviceID" id="serviceID">
-                                    <option th:each="service : ${services}" th:value="${service.serviceID}" th:text="${service.serviceName}+'  RM'+${service.servicePrice}"></option>
-                                </select>
+                            <div class="booking_wrapper">
+                                <p id="daterangepicker-result" class="d-none"></p>
+                                <input type="hidden" id="date_booking" name="date">
+                                <div id="daterangepicker-embedded-container"
+                                    class="embedded-daterangepicker clearfix mb-4"></div>
+                                <div class="row"></div>
                             </div>
                         </div>
+
+                        <div class="row m-3">
+                            <div class="col-1"></div>
+                            <div class="col pt-3">
+                                <span>
+                                    <h6>Room Type</h6>
+                                </span>
+                            </div>
+                            <div class="col-8">
+                                <div class="custom_select">
+                                    <select class="wide" name="roomType" id="rooms_booking">
+                                        <option value="Deluxe Room">Deluxe Room</option>
+                                        <option value="Standard Room">Standard Room</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row m-3">
+                            <div class="col-1"></div>
+                            <div class="col pt-3">
+                                <span>
+                                    <h6>Total Adults</h6>
+                                </span>
+                            </div>
+                            <div class="col-8">
+                                <div class="qty-buttons mb-3 version_2">
+                                    <input type="button" value="+" class="qtyplus" name="totalAdult">
+                                    <input type="text" name="totalAdult" id="totalAdult" value=""
+                                        class="qty form-control" placeholder="Adults">
+                                    <input type="button" value="-" class="qtyminus" name="totalAdult">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row m-3">
+                            <div class="col-1"></div>
+                            <div class="col pt-3">
+                                <span>
+                                    <h6>Total Kids</h6>
+                                </span>
+                            </div>
+                            <div class="col-8">
+                                <div class="mb-3 qty-buttons mb-3 version_2">
+                                    <input type="button" value="+" class="qtyplus" name="totalKids">
+                                    <input type="text" name="totalKids" id="totalKids" value="" class="qty form-control"
+                                        placeholder="Childs">
+                                    <input type="button" value="-" class="qtyminus" name="totalKids">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- <div class="row m-3">
+                            <div class="col-1"></div>
+                            <div class="col pt-3">
+                                <span>
+                                    <h6>Add-on Room Service</h6>
+                                    <div class="col-9"><a class="" th:href="@{/guestViewService}" target="blank">View
+                                            Catalogue</a></div>
+                                </span>
+                            </div>
+                            <div class="col-8">
+                                <div class="custom_select">
+                                    <select name="" id="" class="wide">
+                                        <option value="">Select</option>
+                                        <option value="">S01- Barbecue Set</option>
+                                        <option value="">S02 - Dapur & Gas (Set A) </option>
+                                        <option value="">S03 - Dapur & Gas (Set B) </option>
+                                        <option value="">S04- Toto (Set A)</option>
+                                        <option value="">S05 - Toto (Set B)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div> -->
+
+                        <div class="row m-3">
+                            <div class="col-1"></div>
+                            <div class="col pt-3">
+                                <span>
+                                    <h6>Total Room</h6>
+                                </span>
+                            </div>
+                            <div class="col-8">
+                                <div class="qty-buttons mb-3">
+                                    <input type="button" value="+" class="qtyplus" name="totalRoom">
+                                    <input type="text" name="totalRoom" id="totalRoom" value="" class="qty form-control"
+                                        placeholder="Total Room">
+                                    <input type="button" value="-" class="qtyminus" name="totalRoom">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- <div class="row m-3">
+                            <div class="col-1"></div>
+                            <div class="col pt-3">
+                                <span>
+                                    <h6>Total Payment</h6>
+                                </span>
+                            </div>
+                            <div class="col-8">
+                                <div class="qty-buttons mb-3 version_2">
+                                    <input type="text" name="" id="" class="form-control">
+                                </div>
+                            </div>
+                        </div> -->
                     </div>
-                    
+
                     <div class="row m-3">
                         <div class="col-1"></div>
                         <div class="col pt-3">
                             <span>
-                                <h6>Quantity</h6>
+                                <h6>Add Service ?</h6>
                             </span>
                         </div>
                         <div class="col-8">
-                            <div class="qty-buttons mb-3 version_2">
-                                <input type="button" value="+" class="qtyplus" name="serviceQuantity">
-                                <input type="text" name="serviceQuantity" id="serviceQuantity" value=""
-                                    class="qty form-control" placeholder="Quantity of the service that you would like to order">
-                                <input type="button" value="-" class="qtyminus" name="serviceQuantity">
+                            <div class="custom_radio mb-3 version_2">
+                               
+                                <input type="radio" name="addon" class="form-check-input" />
+                                <label class="form-check-label" value="Yes">Yes</label>
+                                
+                                <input type="radio" name="addon" class="form-check-input" />
+                                <label class="form-check-label" value="No">No</label>
                             </div>
                         </div>
                     </div>
-                    <div class="row m-3">
-                        <div class="col-1"></div>
-                        <div class="col pt-3">
-                            <span>
-                                <h6>Duration (days)</h6>
-                            </span>
-                        </div>
-                        <div class="col-8">
-                            <div class="qty-buttons mb-3 version_2">
-                                <input type="button" value="+" class="qtyplus" name="serviceDuration">
-                                <input type="text" name="serviceDuration" id="serviceQuantity" value=""
-                                    class="qty form-control" placeholder="Duration of the service">
-                                <input type="button" value="-" class="qtyminus" name="serviceDuration">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row text-center">
-                        <span>Want to also reserve an event service? <a th:href="@{/guestMakeEventService}" class="btn btn-dark btn-lg" style="border-radius: 3px 3px 3px 3px; height: auto;">Click Here</a></span>
-                    </div>
-                    
+
                     <div class="row m-5">
                         <div class="col text-center">
-                            <button type="submit" class="btn btn-dark btn-lg">Add</button>
-                            <!-- <a th:href="@{/staffRoomList}" class="btn btn-dark btn-lg"
-                                style="border-radius: 3px 3px 3px 3px; height: auto; width:150px" onclick="success()">Add</a>
-                            <script>
-                                function success() {
-                                    alert("Successfully Added");
-                                }
-                            </script> -->
-                        </div>
+                            <button type="submit" class="btn btn-dark btn-lg" style="border-radius: 3px 3px 3px 3px; height: auto; width:150px">Submit</button>
+                            </div>
                     </div>
-  </form>
-  <div class="row mt-5">
-    <div class="col"></div>
-        <div class="row my-3 text-center">
-            <span>
-                <h1>Service List</h1>
-            </span>
-        </div>
-        <div class="row mx-2">
-            <table class="table table-hover table-bordered">
-                <thead style="vertical-align: middle;">
-                    <th class="text-center">Service Name</th>
-                    <th class="text-center">Service Type</th>
-                    <th class="text-center">Service Price</th>
-                    <!-- <th class="text-center">Service Quantity</th>
-                    <th class="text-center">Service Duration</th> -->
-                    <th class="text-center">Action</th>
-                </thead>
-                <tbody>
-                    <tr th:each="guestService: ${guestServices}">
-                        <td class="text-center" th:text="${guestService.serviceName}"></td>
-                        <td class="text-center" th:text="${guestService.serviceType}"></td>
-                        <td class="text-center" th:text="${guestService.servicePrice}"></td>
-                        <!-- <td class="text-center" th:text="${guestReservationService.serviceQuantity}"></td>
-                        <td class="text-center" th:text="${guestReservationService.serviceDuration}"></td> -->
-                        <td class="text-center"><a th:href="@{/deleteGuestRoomService?serviceID=}+${guestService.serviceID}"><i class="bi bi-trash3-fill"
-                            style="font-size: 20px;"></i></a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="row m-5">
-            <div class="col text-center">
-                <a th:href="@{/confirmService}" class="btn btn-dark btn-lg"
-                    style="border-radius: 3px 3px 3px 3px; height: auto">Confirm</a>
-                <!-- <script>
-                    function success() {
-                        alert("Successfully Added");
-                    }
-                </script> -->
-            </div>
-        </div>
-    <div class="col"></div>
-</div>
 
                 </div>
-                <div class="col"></div>
+                <div class="col">
+                </div>
             </div>
-            <!-- <div class="row card card-body align-items-center"> -->
-      
-
-        
+            </form>
+            <div class="container mt-5">
+                &nbsp;
+            </div>
         </div>
-
-        <div class="container mt-5 mb-5 align-items-center">
-          
-        </div>
-        <!-- </div> -->
-        &nbsp;
-
-       
     </main>
 
     <footer class="revealed">
         <div class="footer_bg">
             <div class="gradient_over"></div>
+
         </div>
         <div class="container">
             <div class="row move_content">
@@ -287,7 +330,7 @@
         <!--/container-->
         <div class="copy">
             <div class="container">
-              © Ombak Biru Chalet - by <a th:href="@{#}">Ocean Blue Lemond</a>
+                © Ombak Biru Chalet - by <a th:href="@{#}">Ocean Blue Lemond</a>
             </div>
         </div>
     </footer>
@@ -299,13 +342,15 @@
         </svg>
     </div>
     <!-- /back to top -->
-
     <!-- COMMON SCRIPTS -->
     <script th:src="@{stylesheets/js/common_scripts.js}"></script>
     <script th:src="@{stylesheets/js/common_functions.js}"></script>
     <script th:src="@{stylesheets/js/datepicker_inline.js}"></script>
     <script th:src="@{stylesheets/phpmailer/validate.js}"></script>
 
+    <!-- SPECIFIC SCRIPTS -->
+    <script th:src="@{stylesheets/js/jquery.flexslider.min.js}"></script>
+    <script th:src="@{stylesheets/js/slider_func.js}"></script>
 </body>
 
 </html>
