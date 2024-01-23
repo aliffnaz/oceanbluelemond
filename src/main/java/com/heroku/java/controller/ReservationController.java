@@ -163,7 +163,7 @@ public class ReservationController {
         throw new SQLException("Failed to get max guests for room: " + roomNumber);
     }
 
-    private double calculateTotalPayment(List<String> availableRoomNumbers, Connection connection) throws SQLException {
+    private double calculateTotalPayment(List<String> availableRoomNumbers, int durationOfStay, Connection connection) throws SQLException {
         double totalPayment = 0.0;
     
         // Iterate through each room and fetch its roomrate
@@ -175,7 +175,8 @@ public class ReservationController {
                 try (ResultSet resultSetRoomRate = statementRoomRate.executeQuery()) {
                     if (resultSetRoomRate.next()) {
                         double roomRate = resultSetRoomRate.getDouble("roomrate");
-                        totalPayment += roomRate;
+                        double roomPrice = roomRate * durationOfStay;
+                        totalPayment += roomPrice;
                     }
                 }
             }
@@ -389,7 +390,7 @@ public class ReservationController {
             }
 
             int reservationID = (int) session.getAttribute("reservationID");
-            totalPayment = calculateTotalPayment(availableRoomNumbers, connection);
+            totalPayment = calculateTotalPayment(availableRoomNumbers, durationOfStay, connection);
             String sqlUpdateTotalPayment = "UPDATE reservation SET totalpayment = ? WHERE reservationid = ?";
             try (PreparedStatement statementUpdateTotalPayment = connection.prepareStatement(sqlUpdateTotalPayment)) {
                 statementUpdateTotalPayment.setDouble(1, totalPayment);
@@ -910,6 +911,7 @@ public class ReservationController {
                 Date dateStart = resultSet.getDate("dateStart");
                 Date dateEnd = resultSet.getDate("dateEnd");
                 String roomType = resultSet.getString("roomType");
+                String roomRate = resultSet.getString("roomRate");
                 int totalAdult = resultSet.getInt("totalAdult");
                 int totalKids = resultSet.getInt("totalKids");
                 int totalRoom = resultSet.getInt("totalRoom");
@@ -932,6 +934,7 @@ public class ReservationController {
 
                 room room = new room();
                 room.setRoomType(resultSet.getString("roomtype"));
+                room.setRoomRate(resultSet.getString("roomrate"));
                 model.addAttribute("room", room);
 
                 guest guest = new guest();
