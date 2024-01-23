@@ -939,6 +939,7 @@ public class ReservationController {
 
                 guest guest = new guest();
                 guest.setGuestName(resultSet.getString("guestName"));
+                model.addAttribute("guest", guest);
 
                 String serviceName = resultSet.getString("servicename");
                 double servicePrice = resultSet.getDouble("serviceprice");
