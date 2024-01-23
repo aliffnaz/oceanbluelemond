@@ -1011,7 +1011,7 @@ public class ReservationController {
             System.out.println("error getting staffReservationList");
             return "redirect:/index";
         }
-        return "guest/staffReservationList";
+        return "staff/staffReservationList";
     }
 
    @GetMapping("/managerReservationList")
