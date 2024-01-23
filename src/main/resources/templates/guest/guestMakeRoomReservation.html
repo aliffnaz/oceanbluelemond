@@ -187,7 +187,8 @@
                                 <div class="qty-buttons mb-3 version_2">
                                     <input type="button" value="+" class="qtyplus" name="totalAdult">
                                     <input type="number" name="totalAdult" id="totalAdult" value=""
-                                        class="qty form-control" placeholder="Adults">
+                                           class="qty form-control" placeholder="Adults" th:error="${#fields.hasErrors('totalAdult')}">
+                                    <p th:if="${#fields.hasErrors('totalAdult')}" th:errors="*{totalAdult}" class="error"></p>
                                     <input type="button" value="-" class="qtyminus" name="totalAdult">
                                 </div>
                             </div>
@@ -204,7 +205,8 @@
                                 <div class="mb-3 qty-buttons mb-3 version_2">
                                     <input type="button" value="+" class="qtyplus" name="totalKids">
                                     <input type="number" name="totalKids" id="totalKids" value="" class="qty form-control"
-                                        placeholder="Childs">
+                                           placeholder="Childs" th:error="${#fields.hasErrors('totalKids')}">
+                                    <p th:if="${#fields.hasErrors('totalKids')}" th:errors="*{totalKids}" class="error"></p>
                                     <input type="button" value="-" class="qtyminus" name="totalKids">
                                 </div>
                             </div>
@@ -244,7 +246,8 @@
                                 <div class="qty-buttons mb-3">
                                     <input type="button" value="+" class="qtyplus" name="totalRoom">
                                     <input type="number" name="totalRoom" id="totalRoom" value="" class="qty form-control"
-                                        placeholder="Total Room">
+                                           placeholder="Total Room" th:error="${#fields.hasErrors('totalRoom')}">
+                                    <p th:if="${#fields.hasErrors('totalRoom')}" th:errors="*{totalRoom}" class="error"></p>
                                     <input type="button" value="-" class="qtyminus" name="totalRoom">
                                 </div>
                             </div>
