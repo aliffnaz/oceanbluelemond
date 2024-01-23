@@ -935,6 +935,7 @@ public class ReservationController {
                 room.setRoomRate(roomRate);
                 room.setRoomNum(roomNum);
                 rooms.add(room);
+                model.addAttribute("room", room);
                 model.addAttribute("rooms", rooms);
 
                 guest guest = new guest();
