@@ -1231,10 +1231,92 @@ public class ReservationController {
         return "staff/staffViewReservation";
     }
 
-    @GetMapping("/guestGenerateReceipt")
-    public String guestGenerateReceipt(HttpSession session, Model model){
+    @GetMapping("/generateReceipt")
+    public String generateReceipt(HttpSession session, Model model, @RequestParam("reservationID") int reservationID){
         String guestICNumber = (String) session.getAttribute("guestICNumber");
+        String staffICNumber = (String) session.getAttribute("staffICNumber");
+        System.out.println("guestICNumber: " + guestICNumber);
+        System.out.println("staffICNumber: " + staffICNumber);
+        try {
+            Connection connection = dataSource.getConnection();
+            String sql = "SELECT * from reservation " +
+            "FULL OUTER JOIN roomreservation ON reservation.reservationid = roomreservation.reservationid " +
+            "FULL OUTER JOIN reservationservice ON reservation.reservationid = reservationservice.reservationid " +
+            "FULL OUTER JOIN room ON roomreservation.roomnum = room.roomnum " +
+            "FULL OUTER JOIN service ON reservationservice.serviceid = service.serviceid " +
+            "FULL OUTER JOIN guest ON reservation.guestICNumber = guest.guestICNumber " +
+            "WHERE reservation.reservationid = ?";
+            final var statement = connection.prepareStatement(sql);
+            statement.setInt(1, reservationID);
+            final var resultSet = statement.executeQuery();
 
+            List<room> rooms = new ArrayList<room>();
+            List <service> services = new ArrayList<service>();
+            while(resultSet.next()){
+                String guestName = resultSet.getString("guestName");
+                int guestQuantity = resultSet.getInt("guestQuantity");
+                int durationOfStay = resultSet.getInt("durationOfStay");
+                Date dateStart = resultSet.getDate("dateStart");
+                Date dateEnd = resultSet.getDate("dateEnd");
+                String roomNum = resultSet.getString("roomNum");
+                String roomType = resultSet.getString("roomType");
+                double roomRate = resultSet.getDouble("roomRate");
+                int totalAdult = resultSet.getInt("totalAdult");
+                int totalKids = resultSet.getInt("totalKids");
+                int totalRoom = resultSet.getInt("totalRoom");
+                double totalPayment = resultSet.getDouble("totalPayment");
+                String reserveStatus = resultSet.getString("reserveStatus");
+
+                reservation reservation = new reservation();
+                reservation.setReservationID(reservationID);
+                reservation.setGuestICNumber(guestICNumber);
+                reservation.setGuestQuantity(guestQuantity);
+                reservation.setDurationOfStay(durationOfStay);
+                reservation.setDateStart(dateStart);
+                reservation.setDateEnd(dateEnd);
+                reservation.setTotalAdult(totalAdult);
+                reservation.setTotalKids(totalKids);
+                reservation.setReserveStatus(reserveStatus);
+                reservation.setTotalRoom(totalRoom);
+                reservation.setTotalPayment(totalPayment);
+                model.addAttribute("reservation", reservation);
+
+                room room = new room();
+                room.setRoomType(roomType);
+                room.setRoomRate(roomRate);
+                room.setRoomNum(roomNum);
+                rooms.add(room);
+                model.addAttribute("room", room);
+
+                guest guest = new guest();
+                guest.setGuestName(resultSet.getString("guestName"));
+
+                String serviceName = resultSet.getString("servicename");
+                double servicePrice = resultSet.getDouble("serviceprice");
+                int serviceQuantity = resultSet.getInt("serviceQuantity");
+                int serviceDuration = resultSet.getInt("serviceDuration");
+
+                service service = new service();
+                service.setServiceName(serviceName);
+                service.setServicePrice(servicePrice);
+                service.setServiceQuantity(serviceQuantity);
+                service.setServiceDuration(serviceDuration);
+
+                System.out.println("service added into array for generateReceipt");
+                services.add(service);
+            }
+            model.addAttribute("rooms", rooms);
+            model.addAttribute("services", services);
+
+            connection.close();
+
+        }
+        catch (SQLException e){
+            System.out.println("failed at generateReceipt");
+            e.printStackTrace();
+            return "redirect:/index";
+        }
+
+        return "generateReceipt";
     }
-
 }
