@@ -981,6 +981,7 @@ public class ReservationController {
             System.out.println("pass try staffReservationList >>>>>");
 
             while (resultSet.next()){
+                String guestICNumber = resultSet.getString("guestICNumber");
                 int reservationID = resultSet.getInt("reservationid");
                 int guestQuantity = resultSet.getInt("guestquantity");
                 int durationOfStay = resultSet.getInt("durationofstay");
@@ -994,6 +995,7 @@ public class ReservationController {
 
                 reservation reservation = new reservation();
                 reservation.setReservationID(reservationID);
+                reservation.setGuestICNumber(guestICNumber);
                 reservation.setGuestQuantity(guestQuantity);
                 reservation.setDurationOfStay(durationOfStay);
                 reservation.setDateStart(dateStart);
@@ -1032,6 +1034,7 @@ public class ReservationController {
 
             while (resultSet.next()){
                 int reservationID = resultSet.getInt("reservationid");
+                String guestICNumber = resultSet.getString("guestICNumber");
                 int guestQuantity = resultSet.getInt("guestquantity");
                 int durationOfStay = resultSet.getInt("durationofstay");
                 Date dateStart = resultSet.getDate("datestart");
@@ -1044,6 +1047,7 @@ public class ReservationController {
 
                 reservation reservation = new reservation();
                 reservation.setReservationID(reservationID);
+                reservation.setGuestICNumber(guestICNumber);
                 reservation.setGuestQuantity(guestQuantity);
                 reservation.setDurationOfStay(durationOfStay);
                 reservation.setDateStart(dateStart);
