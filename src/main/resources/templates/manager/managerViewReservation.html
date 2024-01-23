@@ -295,6 +295,7 @@
                             </div>
                         </div>
 
+                        <form method="post" th:action="@{/managerUpdateStatus}" modelAttribute="managerUpdateStatus" th:object="(${managerUpdateStatus})">
                         <div class="row m-3">
                             <div class="col-1"></div>
                             <div class="col pt-3">
@@ -303,9 +304,15 @@
                                 </span>
                             </div>
                             <div class="col-8">
-                                <input type="text" name="reserveStatus" id="reserveStatus" th:value="${reservation.reserveStatus}" class="qty form-control" placeholder="" readonly>
+                                    <div class="custom_select">
+                                    <select class="wide" name="reserveStatus" id="rooms_booking">
+                                        <option th:value="Pending" th:selected="${reservation.reserveStatus eq 'Pending'}">Pending</option>
+                                        <option th:value="Paid" th:selected="${reservation.reserveStatus eq 'Paid'}">Paid</option>
+                                    </select>
+                                    </div>
                             </div>
                         </div>
+                        </form>
 
                         <div class="row" th:if="${reservation.reserveStatus eq 'Paid'}">
                             <div class="col"></div>
