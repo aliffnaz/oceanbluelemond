@@ -98,6 +98,10 @@ public class ReservationController {
                     availableRoomNumbers.add(resultSet.getString("roomnum"));
                 }
             }
+            catch (SQLException e){
+                System.out.println("failure at getAvailableRoomNumbers");
+                e.printStackTrace();
+            }
         }
     
         return availableRoomNumbers;
@@ -183,18 +187,24 @@ public class ReservationController {
     private double calculateTotalServicePrice(int reservationid, Connection connection) throws SQLException {
         double totalServicePrice = 0.0;
     
-            String sqlServicePrice = "SELECT serviceprice FROM service s " +
+            String sqlServicePrice = "SELECT s.serviceprice, rs.serviceduration, rs.servicequantity FROM service s " +
             "JOIN reservationservice rs ON rs.serviceid = s.serviceid " +
             "JOIN reservation r ON r.reservationid = rs.reservationid " +
             "WHERE r.reservationid = ?";
             try (PreparedStatement statementServicePrice = connection.prepareStatement(sqlServicePrice)) {
                 statementServicePrice.setInt(1, reservationid);
     
-                try (ResultSet resultSetRoomRate = statementServicePrice.executeQuery()) {
-                    if (resultSetRoomRate.next()) {
-                        double servicePrice = resultSetRoomRate.getDouble("serviceprice");
-                        totalServicePrice += servicePrice;
+                try (ResultSet resultSet = statementServicePrice.executeQuery()) {
+                    while (resultSet.next()) {
+                        double servicePrice = resultSet.getDouble("serviceprice");
+                        int serviceDuration = resultSet.getInt("serviceduration");
+                        int serviceQuantity = resultSet.getInt("servicequantity");
+                        totalServicePrice += (servicePrice * serviceDuration * serviceQuantity);
                     }
+                }
+                catch(SQLException e){
+                    e.printStackTrace();
+                    System.out.println("failed at calculateTotalServicePrice");
                 }
             }
     
@@ -307,9 +317,13 @@ public class ReservationController {
         System.out.println("date start: " + dateStartDate);
         System.out.println("date end: " + dateEndDate);
         int durationOfStay = calculateDurationOfStay(dateStart, dateEnd);
+        
+        boolean available = checkRoomAvailability(roomType, totalRoom, dateStartDate, dateEndDate, connection);
+        System.out.println(available);
 
-            // Get available room numbers
-            List<String> availableRoomNumbers = getAvailableRoomNumbers(roomType, totalRoom, dateStartDate, dateEndDate, connection);
+        if (available) {
+             // Get available room numbers
+             List<String> availableRoomNumbers = getAvailableRoomNumbers(roomType, totalRoom, dateStartDate, dateEndDate, connection);
             int totalMaxGuests = availableRoomNumbers.stream()
             .mapToInt(roomNumber -> {
                 try{ 
@@ -323,6 +337,7 @@ public class ReservationController {
             // Check if the total guest quantity exceeds the total maximum allowed guests
             boolean exceedsMaxGuests = guestQuantity > totalMaxGuests;
             if (!exceedsMaxGuests){
+
             //insert into table reservation    
             String sqlReservation = "INSERT INTO reservation(guestICNumber, guestQuantity, durationOfStay, datestart, dateend, totaladult, totalkids, reservestatus, totalroom, totalpayment, stafficnumber) VALUES (?,?,?,?,?,?,?,?,?,?,?) RETURNING reservationid";
             final var statementReservation = connection.prepareStatement(sqlReservation);
@@ -353,6 +368,7 @@ public class ReservationController {
             session.setAttribute("dateEnd", dateEndDate);
             session.setAttribute("totalRoom", totalRoom);
 
+
             // Insert room numbers into roomreservation table
             for (String roomNumber : availableRoomNumbers) {
                 String sqlRoomReservation = "INSERT INTO roomreservation(roomnum, reservationid) VALUES (?, ?)";
@@ -368,7 +384,7 @@ public class ReservationController {
                     }
                 }
             } else {
-                System.out.println("Failed to make reservation");
+                System.out.println("Guest quantity exceeds max guest allowed");
                 return "redirect:/guestMakeRoomReservation";
             }
 
@@ -380,6 +396,11 @@ public class ReservationController {
                 statementUpdateTotalPayment.setInt(2, reservationID);
                 statementUpdateTotalPayment.executeUpdate();
             }
+        }
+        else {
+            System.out.println("Room not available");
+            return "redirect:/guestMakeRoomReservation";
+        }
 
         connection.close();
 
@@ -735,7 +756,7 @@ public class ReservationController {
             e.printStackTrace();
             System.out.println("failed to update total payment");
         }
-        return "guest/guestRoomReservation";
+        return "redirect:/guestRoomReservation";
 
     }
 
