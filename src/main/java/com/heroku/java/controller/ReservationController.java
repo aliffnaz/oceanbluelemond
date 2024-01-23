@@ -939,7 +939,6 @@ public class ReservationController {
 
                 guest guest = new guest();
                 guest.setGuestName(resultSet.getString("guestName"));
-                model.addAttribute("guest", guest);
 
                 String serviceName = resultSet.getString("servicename");
                 double servicePrice = resultSet.getDouble("serviceprice");
@@ -1072,8 +1071,8 @@ public class ReservationController {
 
    @GetMapping("/managerViewReservation")
     public String managerViewReservation(HttpSession session, Model model, @RequestParam("reservationID") int reservationID){
-        String guestICNumber = (String) session.getAttribute("guestICNumber");
-        System.out.println("guestICNumber: " + guestICNumber);
+        String staffICNumber = (String) session.getAttribute("staffICNumber");
+        System.out.println("staffICNumber: " + staffICNumber);
         try {
             Connection connection = dataSource.getConnection();
             String sql = "SELECT * from reservation " +
@@ -1087,6 +1086,7 @@ public class ReservationController {
 
             List <service> services = new ArrayList<service>();
             while(resultSet.next()){
+                String guestICNumber = resultSet.getString("guestICNumber");
                 String guestName = resultSet.getString("guestName");
                 int guestQuantity = resultSet.getInt("guestQuantity");
                 int durationOfStay = resultSet.getInt("durationOfStay");
@@ -1152,8 +1152,8 @@ public class ReservationController {
 
     @GetMapping("/staffViewReservation")
     public String staffViewReservation(HttpSession session, Model model, @RequestParam("reservationID") int reservationID){
-        String guestICNumber = (String) session.getAttribute("guestICNumber");
-        System.out.println("guestICNumber: " + guestICNumber);
+        String staffICNumber = (String) session.getAttribute("staffICNumber");
+        System.out.println("staffICNumber: " + staffICNumber);
         try {
             Connection connection = dataSource.getConnection();
             String sql = "SELECT * from reservation " +
@@ -1167,6 +1167,7 @@ public class ReservationController {
 
             List <service> services = new ArrayList<service>();
             while(resultSet.next()){
+                String guestICNumber = resultSet.getString("guestICNumber");
                 String guestName = resultSet.getString("guestName");
                 int guestQuantity = resultSet.getInt("guestQuantity");
                 int durationOfStay = resultSet.getInt("durationOfStay");
@@ -1228,6 +1229,12 @@ public class ReservationController {
         }
 
         return "staff/staffViewReservation";
+    }
+
+    @GetMapping("/guestGenerateReceipt")
+    public String guestGenerateReceipt(HttpSession session, Model model){
+        String guestICNumber = (String) session.getAttribute("guestICNumber");
+
     }
 
 }
