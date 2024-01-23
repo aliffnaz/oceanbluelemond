@@ -132,7 +132,7 @@
                                 <td th:text="${reservation.dateEnd}"></td>
                                 <td th:text="${reservation.totalPayment}"></td>
                                 <td th:text="${reservation.reserveStatus}"></td>
-                                <td class="text-center"><a th:href="@{/guestViewRoomReservation?reservationID=}+${reservation.reservationID}">
+                                <td class="text-center"><a th:href="@{/managerViewReservation?reservationID=}+${reservation.reservationID}">
                                         <div class="bi bi-eye-fill" style="font-size: 20px;"></div>
                                     </a></td>
                             </tr>
