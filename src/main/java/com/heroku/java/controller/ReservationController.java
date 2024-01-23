@@ -470,7 +470,7 @@ public class ReservationController {
                 guestReservationService.setServiceDuration(guestServiceDuration);
                 guestReservationService.setServiceQuantity(guestServiceQuantity);
 
-                totalPayment = totalPayment + (serviceDuration * guestServiceDuration * guestServiceQuantity);
+                totalPayment = totalPayment + (guestServicePrice * guestServiceDuration * guestServiceQuantity);
                 System.out.println("totalPayment thus far: " + totalPayment);
 
                 guestServices.add(guestService);
