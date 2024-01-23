@@ -336,7 +336,7 @@
                             </div>
                         </div>
 
-                        <div class="row">
+                        <div class="row" th:if="${reservation.reserveStatus eq 'Paid'}">
                             <div class="col"></div>
                             <div class="col text-center">Generate your receipt <a th:href="@{/viewReceipt?reservationID=}+${reservation.reservationID}">here</a></div>
                             <div class="col"></div>
