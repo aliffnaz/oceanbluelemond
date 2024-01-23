@@ -1322,4 +1322,27 @@ public class ReservationController {
 
         return "viewReceipt";
     }
+
+    @PostMapping("/managerUpdateStatus")
+    public String managerUpdateStatus(HttpSession session, @RequestParam("reserveStatus") String reserveStatus, @RequestParam("reservationID") String reservationIDString){
+        String staffICNumber = (String) session.getAttribute("staffICNumber");
+        System.out.println("pass manager update status<<<<<<");
+        int reservationID = Integer.parseInt(reservationIDString);
+
+        try (Connection connection = dataSource.getConnection()){
+            String sql = "UPDATE reservation set reservestatus=? where reservationid=?";
+            final var statement = connection.prepareStatement(sql);
+            statement.setString(1, staffICNumber);
+            statement.setInt(2, reservationID);
+            final var resultSet = statement.executeUpdate();
+            connection.close();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            System.out.println("failed to update status");
+        }
+        System.out.println("sukses update status");
+        return "redirect:/managerViewReservation";
+
+    }
 }
