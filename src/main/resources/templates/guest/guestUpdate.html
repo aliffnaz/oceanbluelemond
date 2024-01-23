@@ -188,8 +188,8 @@
                         <div class="col-8">
                             <select name="guestGender" id="guestGender" class="form-control form-select">
                                  <option value="" >Select</option>
-                                <option value="Male" th:selected="${guest.guestGender == 'Male' ? 'selected' : ''}">Male</option>
-                                <option value="Female" th:selected="${guest.guestGender == 'Female' ? 'selected' : ''}">Female</option>
+                                <option value="Male" th:value="${guest.guestGender == 'Male' ? 'selected' : ''}">Male</option>
+                                <option value="Female" th:value="${guest.guestGender == 'Female' ? 'selected' : ''}">Female</option>
                             </select>
                         </div>
                     </div>
