@@ -160,7 +160,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="serviceID" id="" class="form-control" placeholder="1">
+                            <input type="number" name="serviceID" id="" class="form-control" placeholder="1">
                         </div>
                     </div>
                     <div class="row m-3">
@@ -222,11 +222,11 @@
                         <div class="col-1"></div>
                         <div class="col pt-3">
                             <span>
-                                <h6>Service Price</h6>
+                                <h6>Service Price (RM)</h6>
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="number" name="servicePrice" id="" class="form-control" placeholder="RM15.00">
+                            <input type="number" name="servicePrice" id="servicePrice" class="form-control" placeholder="15.00" step="0.01" pattern="\d+(\.\d{2})?">
                         </div>
                     </div>
                     <div class="row m-5">
