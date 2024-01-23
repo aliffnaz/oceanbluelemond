@@ -214,9 +214,21 @@
                                 </span>
                             </div>
                             <div class="col-8">
-                                <input type="text" name="roomType" id="dateEnd" th:value="${room.roomType}" class="qty form-control" placeholder="" readonly>
+                                <input type="text" name="roomType" id="roomType" th:value="${room.roomType}" class="qty form-control" placeholder="" readonly>
                             </div>
                             </div>
+
+                            <div class="row m-3">
+                                <div class="col-1"></div>
+                                <div class="col pt-3">
+                                    <span>
+                                        <h6>Room Rate</h6>
+                                    </span>
+                                </div>
+                                <div class="col-8">
+                                    <input type="text" name="roomRate" id="roomRate" th:value="${room.roomRate}" class="qty form-control" placeholder="" readonly>
+                                </div>
+                                </div>
 
                         <div class="row m-3">
                             <div class="col-1"></div>
