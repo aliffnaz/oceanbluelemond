@@ -531,8 +531,7 @@ public class ReservationController {
 
             statement.executeUpdate();
             System.out.println("sukses insert into table reservationservice");
-
-            totalPayment = 
+            
         }
         else{
             System.out.println("gagal insert into table reservationservice sebab tak available");
