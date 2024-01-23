@@ -188,8 +188,8 @@
                         <div class="col-8">
                             <select name="guestGender" id="guestGender" class="form-control form-select">
                                  <option value="" >Select</option>
-                                <option value="Male" th:value="${guest.guestGender == 'Male' ? 'selected' : ''}">Male</option>
-                                <option value="Female" th:value="${guest.guestGender == 'Female' ? 'selected' : ''}">Female</option>
+                                <option th:value="Male" th:selected="${guest.guestGender eq 'Male'}">Male</option>
+                                <option th:value="Female" th:selected="${guest.guestGender eq 'Female'}">Female</option>
                             </select>
                         </div>
                     </div>
@@ -203,10 +203,10 @@
                         </div>
                         <div class="col-8">
                             <select name="guestRace" id="guestRace" class="form-control form-select">
-                                <option value="Melayu" >Melayu</option>
-                                <option value="Cina">Cina</option>
-                                <option value="India">India</option>
-                                <option value="Others">Others</option>
+                                <option th:value="Melayu" th:selected="${guest.guestRace eq 'Melayu'}">Melayu</option>
+                                <option th:value="Cina" th:selected="${guest.guestRace eq 'Cina'}">Cina</option>
+                                <option th:value="India" th:selected="${guest.guestRace eq 'India'}">India</option>
+                                <option th:value="Others" th:selected="${guest.guestRace eq 'Others'}">Others</option>
                             </select>
                         </div>
                     </div>
@@ -220,10 +220,10 @@
                         </div>
                         <div class="col-8">
                             <select name="guestReligion" id="guestReligion" class="form-control form-select">
-                                <option value="Islam" >Islam</option>
-                                <option value="Buddha">Buddha</option>
-                                <option value="Christian">Christian</option>
-                                <option value="Others">Others</option>
+                                <option th:value="Islam" th:selected="${guest.guestReligion eq 'Islam'}">Islam</option>
+                                <option th:value="Buddha" th:selected="${guest.guestReligion eq 'Budha'}">Buddha</option>
+                                <option th:value="Christian" th:selected="${guest.guestReligion eq 'Christian'}">Christian</option>
+                                <option th:value="Others" th:selected="${guest.guestReligion eq 'Others'}">Others</option>
                             </select>
                         </div>
                     </div>
