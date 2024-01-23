@@ -736,7 +736,7 @@ public class ReservationController {
             System.out.println("totalServicePrice: " + totalServicePrice);
             System.out.println("totalPayment: " + totalPayment);
             String sqlUpdateTotalPayment = "UPDATE reservation SET totalpayment = ? WHERE reservationid = ?";
-            PreparedStatement statementUpdateTotalPayment = connection.prepareStatement(sqlUpdateTotalPayment)) {
+            PreparedStatement statementUpdateTotalPayment = connection.prepareStatement(sqlUpdateTotalPayment); 
             statementUpdateTotalPayment.setDouble(1, totalPayment);
             statementUpdateTotalPayment.setInt(2, reservationID);
             statementUpdateTotalPayment.executeUpdate();
