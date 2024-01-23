@@ -843,7 +843,8 @@ public class ReservationController {
             statement.setInt(1, reservationID);
             final var resultSet = statement.executeQuery();
 
-            if(resultSet.next()){
+            List <service> services = new ArrayList<service>();
+            while(resultSet.next()){
                 String guestName = resultSet.getString("guestName");
                 int guestQuantity = resultSet.getInt("guestQuantity");
                 int durationOfStay = resultSet.getInt("durationOfStay");
@@ -877,10 +878,7 @@ public class ReservationController {
                 guest guest = new guest();
                 guest.setGuestName(resultSet.getString("guestName"));
                 model.addAttribute("guest", guest);
-            }
 
-            List <service> services = new ArrayList<service>();
-            while (resultSet.next()){
                 String serviceName = resultSet.getString("servicename");
                 double servicePrice = resultSet.getDouble("serviceprice");
                 int serviceQuantity = resultSet.getInt("serviceQuantity");
