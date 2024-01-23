@@ -907,9 +907,9 @@ public class ReservationController {
                 int durationOfStay = resultSet.getInt("durationOfStay");
                 Date dateStart = resultSet.getDate("dateStart");
                 Date dateEnd = resultSet.getDate("dateEnd");
-                String roomNum = resultSet.getString("roomType");
+                String roomNum = resultSet.getString("roomNum");
                 String roomType = resultSet.getString("roomType");
-                String roomRate = resultSet.getString("roomRate");
+                double roomRate = resultSet.getDouble("roomRate");
                 int totalAdult = resultSet.getInt("totalAdult");
                 int totalKids = resultSet.getInt("totalKids");
                 int totalRoom = resultSet.getInt("totalRoom");
@@ -931,9 +931,9 @@ public class ReservationController {
                 model.addAttribute("reservation", reservation);
 
                 room room = new room();
-                room.setRoomType(resultSet.getString("roomtype"));
-                room.setRoomRate(resultSet.getDouble("roomrate"));
-                room.setRoomNum(resultSet.getString("roomnum"));
+                room.setRoomType(roomType);
+                room.setRoomRate(roomRate);
+                room.setRoomNum(roomNum);
                 rooms.add(room);
                 model.addAttribute("rooms", rooms);
 
