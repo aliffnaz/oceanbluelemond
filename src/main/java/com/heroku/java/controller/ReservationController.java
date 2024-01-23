@@ -1085,8 +1085,10 @@ public class ReservationController {
             "FULL OUTER JOIN reservationservice ON reservation.reservationid = reservationservice.reservationid " +
             "FULL OUTER JOIN room ON roomreservation.roomnum = room.roomnum " +
             "FULL OUTER JOIN service ON reservationservice.serviceid = service.serviceid " +
-            "FULL OUTER JOIN guest ON reservation.guestICNumber = guest.guestICNumber ";
+            "FULL OUTER JOIN guest ON reservation.guestICNumber = guest.guestICNumber " +
+            "WHERE reservation.reservationid=?";
             final var statement = connection.prepareStatement(sql);
+            statement.setInt(1, reservationID);
             final var resultSet = statement.executeQuery();
 
             List <service> services = new ArrayList<service>();
@@ -1166,8 +1168,10 @@ public class ReservationController {
             "FULL OUTER JOIN reservationservice ON reservation.reservationid = reservationservice.reservationid " +
             "FULL OUTER JOIN room ON roomreservation.roomnum = room.roomnum " +
             "FULL OUTER JOIN service ON reservationservice.serviceid = service.serviceid " +
-            "FULL OUTER JOIN guest ON reservation.guestICNumber = guest.guestICNumber ";
+            "FULL OUTER JOIN guest ON reservation.guestICNumber = guest.guestICNumber " +
+            "WHERE reservation.reservationid=?";
             final var statement = connection.prepareStatement(sql);
+            statement.setInt(1, reservationID);
             final var resultSet = statement.executeQuery();
 
             List <service> services = new ArrayList<service>();
