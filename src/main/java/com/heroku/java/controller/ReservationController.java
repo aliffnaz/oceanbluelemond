@@ -399,6 +399,7 @@ public class ReservationController {
     public String guestMakeRoomService(HttpSession session, Model model) {
         String guestICNumber = (String) session.getAttribute("guestICNumber");
         int reservationID = (int) session.getAttribute("reservationID");
+        double totalPayment = (double) session.getAttribute("totalPayment");
         System.out.println("guestICNumber: " + guestICNumber);
         System.out.println("reservationID: " + reservationID);
 
@@ -469,6 +470,9 @@ public class ReservationController {
                 guestReservationService.setServiceDuration(guestServiceDuration);
                 guestReservationService.setServiceQuantity(guestServiceQuantity);
 
+                totalPayment = totalPayment + (serviceDuration * guestServiceDuration * guestServiceQuantity);
+                System.out.println("totalPayment thus far: " + totalPayment);
+
                 guestServices.add(guestService);
                 guestReservationServices.add(guestReservationService);
                 model.addAttribute("guestServices", guestServices);
@@ -527,6 +531,8 @@ public class ReservationController {
 
             statement.executeUpdate();
             System.out.println("sukses insert into table reservationservice");
+
+            totalPayment = 
         }
         else{
             System.out.println("gagal insert into table reservationservice sebab tak available");
