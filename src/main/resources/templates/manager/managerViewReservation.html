@@ -1,1 +1,385 @@
+<!DOCTYPE html>
+<html lang="zxx">
 
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Ansonika">
+    <title>D Chalet Ombak Biru</title>
+    <!-- Favicons-->
+    <link rel="shortcut icon" th:href="@{stylesheets/img/favicon.png}" type="image/x-icon">
+    <link rel="apple-touch-icon" type="image/x-icon"
+        th:href="@{stylesheets/img/apple-touch-icon-57x57-precomposed.png}">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72"
+        th:href="@{stylesheets/img/apple-touch-icon-72x72-precomposed.png}">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114"
+        th:href="@{stylesheets/img/apple-touch-icon-114x114-precomposed.png}">
+    <link th:rel="apple-touch-icon" type="image/x-icon" sizes="144x144"
+        th:href="@{stylesheets/img/apple-touch-icon-144x144-precomposed.png}">
+
+    <!-- GOOGLE WEB FONT-->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500&family=Montserrat:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- BASE CSS -->
+    <link th:href="@{stylesheets/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{stylesheets/css/style.css}" rel="stylesheet">
+    <link th:href="@{stylesheets/css/vendors.min.css}" rel="stylesheet">
+
+    <!-- SEPCIFIC CSS -->
+    <link th:href="@{stylesheets/css/flex_slider.css}" rel="stylesheet">
+
+    <!-- YOUR CUSTOM CSS -->
+    <link th:href="@{stylesheets/css/custom.css}" rel="stylesheet">
+</head>
+
+<body class="datepicker_mobile_full">
+    <div id="preloader">
+        <div data-loader="circle-side"></div>
+    </div><!-- /Page Preload -->
+    <div class="layer"></div>
+    <header class="reveal_header" style="background-color:#24262d;">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-6">
+                    <a th:href="@{index-6}" class="logo"><img th:src="@{stylesheets/img/logo_sticky.png}" width="135" height="45" alt=""></a>
+                </div>
+                <div class="col-6">
+                    <nav>
+                        <ul>
+                            <li><a class="btn_1 btn_scrollto">Manager</a></li>
+                            <li>
+                                <div class="hamburger_2 open_close_nav_panel">
+                                    <div class="hamburger__box">
+                                        <div class="hamburger__inner"></div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div><!-- /container -->
+    </header><!-- /Header -->
+
+
+
+    <!-- -------------------- sidebar panel ------------------------- -->
+    <div class="nav_panel">
+        <a th:href="@{#}" class="closebt open_close_nav_panel"><i class="bi bi-x"></i></a>
+        <div class="logo_panel"><img th:src="@{stylesheets/img/logo_sticky.png}" width="135" height="45" alt=""></div>
+        <div class="sidebar-navigation">
+            <nav>
+                <ul class="level-1">
+                  <li class=""><a th:href="@{/managerHome}"><i class="bi bi-house" style="font-size: 25px;"></i>&nbsp; Home</a></li>
+                  <li class=""><a th:href="@{/managerUpdateStatus}"><i class="bi bi-clipboard-check" style="font-size: 25px;"></i>&nbsp; Room Reservation</a></li>
+                  <li><a th:href="@{/managerStaffList}"><i class="bi bi-person-badge" style="font-size: 25px;"></i>&nbsp; Manage Staff</a></li>
+                  <li><a th:href="@{/managerRoomList}"><i class="bi bi-pencil-square" style="font-size: 25px;"></i>&nbsp; Manage Room</a></li>
+                  <li><a th:href="@{/managerServiceList}"><i class="bi bi-nut" style="font-size: 25px;"></i>&nbsp; Manage Room Service</a></li>
+                  <li><a th:href="@{/managerGuestList}"><i class="bi bi-people" style="font-size: 25px;"></i>&nbsp; Manage Guest</a></li>
+                  <li><a th:href="@{/managerGenerateReport}"><i class="bi bi-file-earmark-bar-graph" style="font-size: 25px;"></i>&nbsp; Generate Report</a></li>
+                  <li class="mt-5"><a th:href="@{/logout}" class="btn btn-danger pt-3" style="color: white; border-radius: 10px 10px 10px 10px; height: 50px;">Logout</a></li>
+                </ul>
+                <div class="panel_footer">
+                    <div class="copy">
+                        <div class="container py-3">
+                            © Ombak Biru Chalet Malaysia
+                        </div>
+                    </div>
+                </div>
+                <!-- /panel_footer -->
+            </nav>
+        </div>
+        <!-- /sidebar-navigation -->
+    </div>
+    <!-- /nav_panel -->
+
+
+   <main>
+        <div class="container mt-5">
+            &nbsp;
+        </div>
+
+        <div class="container mt-5 mb-5 align-items-center">
+            <div class="row">
+                <div class="col">
+
+                </div>
+
+                <div class="col-md card card-body py-5">
+                    <div class="row m-5">
+                        <div class="col-2 text-center">
+                            <a th:href="@{/guestRoomReservation}">
+                                <div class="bi bi-arrow-left-circle" style="font-size: 50px;"></div>
+                            </a>
+                        </div>
+                        <div class="col-md-9 text-center pt-3">
+                            <div class="">
+
+                                <h1>Your Reservation</h1>
+                            </div>
+                        </div>
+                        <div class="col-2">
+
+                        </div>
+                    </div>
+
+                    <div class="row m-3">
+                        <div class="col-1"></div>
+                        <div class="col pt-3">
+                            <span>
+                                <h6>Guest IC Number</h6>
+                            </span>
+                        </div>
+                        <div class="col-8">
+                            <input type="text" th:value="${session.guestICNumber}" name="guestICNumber" id="guestICNumber" class="form-control" readonly>
+                        </div>
+                    </div>
+
+                    <div class="row m-3">
+                        <div class="col-1"></div>
+                        <div class="col pt-3">
+                            <span>
+                                <h6>Guest Name</h6>
+                            </span>
+                        </div>
+                        <div class="col-8">
+                            <input type="text" th:value="${guest.guestName}" name="guestName" id="guestName" class="form-control" readonly>
+                        </div>
+                    </div>
+
+                    <div class="row m-3">
+                        <div class="col-1"></div>
+                        <div class="col pt-3">
+                            <span>
+                                <h6>Guest Quantity</h6>
+                            </span>
+                        </div>
+                        <div class="col-8">
+                                <input type="text" name="guestQuantity" id="guestQuantity" th:value="${reservation.guestQuantity}" class="qty form-control" readonly>
+                        </div>
+                    </div>
+
+                    <div class="row m-3">
+                        <div class="col-1"></div>
+                        <div class="col pt-3">
+                            <span>
+                                <h6>Duration of Stay</h6>
+                            </span>
+                        </div>
+                        <div class="col-8">
+                                <input type="text" name="durationOfStay" id="durationOfStay" th:value="${reservation.durationOfStay}" class="qty form-control" placeholder="" readonly>
+                        </div>
+                    </div>
+
+                    <div class="row m-3">
+                        <div class="col-1"></div>
+                        <div class="col pt-3">
+                            <span>
+                                <h6>Check-In Date</h6>
+                            </span>
+                        </div>
+                        <div class="col-8">
+                                <input type="text" name="dateStart" id="dateStart" th:value="${reservation.dateStart}" class="qty form-control" placeholder="" readonly>
+                        </div>
+                    </div>
+
+                    <div class="row m-3">
+                        <div class="col-1"></div>
+                        <div class="col pt-3">
+                            <span>
+                                <h6>Check-Out Date</h6>
+                            </span>
+                        </div>
+                        <div class="col-8">
+                                <input type="text" name="dateEnd" id="dateEnd" th:value="${reservation.dateEnd}" class="qty form-control" placeholder="" readonly>
+                        </div>
+                    </div>
+
+                        <div class="row m-3">
+                            <div class="col-1"></div>
+                            <div class="col pt-3">
+                                <span>
+                                    <h6>Room Type</h6>
+                                </span>
+                            </div>
+                            <div class="col-8">
+                                <input type="text" name="roomType" id="roomType" th:value="${room.roomType}" class="qty form-control" placeholder="" readonly>
+                            </div>
+                            </div>
+
+                            <div class="row m-3">
+                                <div class="col-1"></div>
+                                <div class="col pt-3">
+                                    <span>
+                                        <h6>Room Rate</h6>
+                                    </span>
+                                </div>
+                                <div class="col-8">
+                                    <input type="text" name="roomRate" id="roomRate" th:value="${room.roomRate}" class="qty form-control" placeholder="" readonly>
+                                </div>
+                                </div>
+
+                        <div class="row m-3">
+                            <div class="col-1"></div>
+                            <div class="col pt-3">
+                                <span>
+                                    <h6>Total Adults</h6>
+                                </span>
+                            </div>
+                            <div class="col-8">
+                                <input type="text" name="totalAdult" id="totalAdult" th:value="${reservation.totalAdult}" class="qty form-control" placeholder="" readonly>
+                            </div>
+                        </div>
+
+                        <div class="row m-3">
+                            <div class="col-1"></div>
+                            <div class="col pt-3">
+                                <span>
+                                    <h6>Total Kids</h6>
+                                </span>
+                            </div>
+                            <div class="col-8">
+                                <input type="text" name="totalKids" id="totalKids" th:value="${reservation.totalKids}" class="qty form-control" placeholder="" readonly>
+                            </div>
+                        </div>
+
+                        <div class="row m-3">
+                            <div class="col-1"></div>
+                            <div class="col pt-3">
+                                <span>
+                                    <h6>Service Info</h6>
+                                </span>
+                            </div>
+                            <div class="col-8">
+                                <table class="table table-hover table-bordered">
+                                    <thead>
+                                        <th class="text-center">Name</th>
+                                        <th class="text-center">Quantity</th>
+                                        <th class="text-center">Duration</th>
+                                        <th class="text-center">Price/Service</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="service : ${services}">
+                                            <td class="text-center" th:text="${service.serviceName}"></td>
+                                            <td class="text-center" th:text="${service.serviceQuantity}"></td>
+                                            <td class="text-center" th:text="${service.serviceDuration}"></td>
+                                            <td class="text-center" th:text="${service.servicePrice}"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        <div class="row m-3">
+                            <div class="col-1"></div>
+                            <div class="col pt-3">
+                                <span>
+                                    <h6>Total Room</h6>
+                                </span>
+                            </div>
+                            <div class="col-8">
+                                <input type="text" name="totalRoom" id="totalRoom" th:value="${reservation.totalRoom}" class="qty form-control" placeholder="" readonly>
+                            </div>
+                        </div>
+
+                        <div class="row m-3">
+                            <div class="col-1"></div>
+                            <div class="col pt-3">
+                                <span>
+                                    <h6>Total Payment</h6>
+                                </span>
+                            </div>
+                            <div class="col-8">
+                                <input type="text" name="totalPayment" id="totalPayment" th:value="${reservation.totalPayment}" class="qty form-control" placeholder="" readonly>
+                            </div>
+                        </div>
+
+                        <div class="row m-3">
+                            <div class="col-1"></div>
+                            <div class="col pt-3">
+                                <span>
+                                    <h6>Reservation Status</h6>
+                                </span>
+                            </div>
+                            <div class="col-8">
+                                <input type="text" name="reserveStatus" id="reserveStatus" th:value="${reservation.reserveStatus}" class="qty form-control" placeholder="" readonly>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col"></div>
+                            <div class="col text-center">Generate your receipt <a th:href="@{/guestGenerateReceipt}">here</a></div>
+                            <div class="col"></div>
+                        </div>
+                    </div>
+
+                    <div class="row m-5">
+                        <div class="col text-center">
+                            <a th:href="@{/guestRoomReservation}" class="btn btn-dark btn-lg"
+                                style="border-radius: 3px 3px 3px 3px; height: auto; width:150px">Back</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                </div>
+            </div>
+        </div>
+
+            <div class="container mt-5">
+                &nbsp;
+            </div>
+        </div>
+    </main>
+    <footer class="revealed">
+        <div class="footer_bg">
+            <div class="gradient_over"></div>
+
+        </div>
+        <div class="container">
+            <div class="row move_content">
+                <div class="col-lg-4 col-md-12">
+                    <h5>Contacts</h5>
+                    <ul>
+                        <li>Jalan Telok Gong / Pengkalan Balak, Kampung Sungai Tuang<br>78300 Masjid Tanah,
+                            Melaka<br><br></li>
+                        <li><strong><a th:href="@{#0}">dchaletombakbiru@gmail.com</a></strong></li>
+                        <li><strong><a th:href="@{#0}">016-2115359/012-2431337</a></strong></li>
+                    </ul>
+                    <div class="social">
+                        <ul>
+                            <li><a th:href="@{#0}"><i class="bi bi-instagram"></i></a></li>
+                            <li><a th:href="@{#0}"><i class="bi bi-whatsapp"></i></a></li>
+                            <li><a th:href="@{#0}"><i class="bi bi-facebook"></i></a></li>
+                            <li><a th:href="@{#0}"><i class="bi bi-twitter"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/container-->
+        <div class="copy">
+            <div class="container">
+                © Ombak Biru Chalet - by <a th:href="@{#}">Ocean Blue Lemond</a>
+            </div>
+        </div>
+    </footer>
+    <!-- /footer -->
+
+    <div class="progress-wrap">
+        <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+            <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
+        </svg>
+    </div>
+    <!-- /back to top -->
+
+    <!-- COMMON SCRIPTS -->
+    <script th:src="@{stylesheets/js/common_scripts.js}"></script>
+    <script th:src="@{stylesheets/js/common_functions.js}"></script>
+    <script th:src="@{stylesheets/js/datepicker_inline.js}"></script>
+    <script th:src="@{stylesheets/phpmailer/validate.js}"></script>
+
+</body>
+
+</html>
