@@ -311,7 +311,6 @@ public class ReservationController {
         boolean available = checkRoomAvailability(roomType, totalRoom, dateStartDate, dateEndDate, connection);
         System.out.println(available);
 
-        if (available) {
              // Get available room numbers
              List<String> availableRoomNumbers = getAvailableRoomNumbers(roomType, totalRoom, dateStartDate, dateEndDate, connection);
             int totalMaxGuests = availableRoomNumbers.stream()
@@ -386,7 +385,6 @@ public class ReservationController {
                 statementUpdateTotalPayment.setInt(2, reservationID);
                 statementUpdateTotalPayment.executeUpdate();
             }
-        }
         else {
             System.out.println("Room not available");
             return "redirect:/guestMakeRoomReservation";
