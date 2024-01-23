@@ -111,13 +111,12 @@
                 <div class="col-md card card-body py-5">
                     <div class="row m-5">
                         <div class="col-2 text-center">
-                            <a th:href="@{/guestRoomReservation}">
+                            <a th:href="@{/managerReservationList}">
                                 <div class="bi bi-arrow-left-circle" style="font-size: 50px;"></div>
                             </a>
                         </div>
                         <div class="col-md-9 text-center pt-3">
                             <div class="">
-
                                 <h1>Your Reservation</h1>
                             </div>
                         </div>
@@ -134,7 +133,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" th:value="${session.guestICNumber}" name="guestICNumber" id="guestICNumber" class="form-control" readonly>
+                            <input type="text" th:value="${reservation.guestICNumber}" name="guestICNumber" id="guestICNumber" class="form-control" readonly>
                         </div>
                     </div>
 
@@ -310,14 +309,14 @@
 
                         <div class="row">
                             <div class="col"></div>
-                            <div class="col text-center">Generate your receipt <a th:href="@{/guestGenerateReceipt}">here</a></div>
+                            <div class="col text-center">Generate your receipt <a th:href="@{/viewReceipt?reservationID=}+${reservation.reservationID}">here</a></div>
                             <div class="col"></div>
                         </div>
                     </div>
 
                     <div class="row m-5">
                         <div class="col text-center">
-                            <a th:href="@{/guestRoomReservation}" class="btn btn-dark btn-lg"
+                            <a th:href="@{/managerReservationList}" class="btn btn-dark btn-lg"
                                 style="border-radius: 3px 3px 3px 3px; height: auto; width:150px">Back</a>
                         </div>
                     </div>
