@@ -1074,8 +1074,8 @@ public class ReservationController {
         return "manager/managerReservationList";
     }
 
-   @GetMapping("/managerViewReservation")
-    public String managerViewReservation(HttpSession session, Model model, @RequestParam("reservationID") int reservationID){
+   @GetMapping("/managerUpdateStatus")
+    public String managerUpdateStatus(HttpSession session, Model model, @RequestParam("reservationID") int reservationID){
         String staffICNumber = (String) session.getAttribute("staffICNumber");
         System.out.println("staffICNumber: " + staffICNumber);
         try {
@@ -1154,7 +1154,7 @@ public class ReservationController {
             return "redirect:/index";
         }
 
-        return "manager/managerViewReservation";
+        return "manager/managerUpdateStatus";
     }
 
     @GetMapping("/staffViewReservation")
@@ -1331,8 +1331,8 @@ public class ReservationController {
         return "viewReceipt";
     }
 
-    @PostMapping("/managerUpdateReservationStatus")
-    public String managerUpdateReservationStatus(HttpSession session, @RequestParam("reserveStatus") String reserveStatus, @RequestParam("reservationID") String reservationIDString){
+    @PostMapping("/managerUpdateStatus")
+    public String managerUpdateStatus(HttpSession session, @RequestParam("reserveStatus") String reserveStatus, @RequestParam("reservationID") String reservationIDString){
         String staffICNumber = (String) session.getAttribute("staffICNumber");
         System.out.println("pass manager update status<<<<<<");
         int reservationID = Integer.parseInt(reservationIDString);
