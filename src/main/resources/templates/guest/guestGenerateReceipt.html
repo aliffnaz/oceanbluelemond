@@ -53,24 +53,24 @@
 <body>
   <div class="receipt">
     <div class="logo">
-      <img th:src="@{Stylesheets\img\favicon.png}" width="80" height="70" alt="Logo">
+      <img th:src="@{stylesheets\img\favicon.png}" width="80" height="70" alt="Logo">
     </div>
     <h2>PAYMENT RECEIPT</h2>
     <div class="receipt-info">
       <span>Guest IC Number:</span>
-      770901012341
+      <span th:text="${guest.guestICNumber}"></span>
     </div>
     <div class="receipt-info">
       <span>Date:</span>
-      July 1, 2023
+      <span th:text="${#dates.format(#dates.createNow(), 'MMMM d, yyyy')}"></span>
     </div>
     <div class="receipt-info">
       <span>Reservation ID:</span>
-      RS002
+      <span th:text="${reservation.reservationID}"></span>
     </div>
     <div class="receipt-info">
         <span>Name:</span>
-        Haiqal Izzee
+        <span th:text="${guest.guestName}"></span>
       </div>
     <h3>Reservation Detail</h3>
     <table class="receipt-details">
@@ -79,16 +79,12 @@
         <th>Check-in Date</th>
         <th>Check-out Date</th>
         <th>Duration of Stay</th>
-        <th>Quantity</th>
-        <th>Total</th>
       </tr>
       <tr>
-        <td>Deluxe</td>
-        <td>June 29, 2023</td>
-        <td>June 30, 2023</td>
-        <td>1</td>
-        <td>1</td>
-        <td>RM 150.00</td>
+        <td th:text="${room.roomType}"></td>
+        <td th:text="${reservation.dateStart}"></td>
+        <td th:text="${reservation.dateEnd}"></td>
+        <td th:text="${reservation.durationOfStay}"></td>
       </tr>
     </table>
     <h3>Add-Ons Detail</h3>
@@ -98,20 +94,16 @@
         <th>Quantity</th>
         <th>Total</th>
       </tr>
-      <tr>
-        <td>Barbecue Set</td>
-        <td>1</td>
-        <td>RM 50.00</td>
+      <tr th:each="service : ${services}">
+        <td th:text="${service.serviceName}"></td>
+        <td th:text="${service.serviceQuantity}"></td>
+        <td th:text="${service.servicePrice}"></td>
       </tr>
     </table>
     <br>
     <div class="receipt-info">
-        <span>Caj Warisan:</span>
-        RM 10.00
-      </div>
-    <div class="receipt-info">
       <span>Total Amount:</span>
-      RM 210.00
+      <span th:text="${reservation.totalPayment}">
     </div>
   </div>
   <div class="center">
