@@ -1022,8 +1022,8 @@ public class ReservationController {
         return "staff/staffReservationList";
     }
 
-   @GetMapping("/managerReservationList")
-    public String managerReservationList(Model model, HttpSession session){
+   @GetMapping("/managerUpdateStatus")
+    public String managerUpdateStatus(Model model, HttpSession session){
         String staffICNumber = (String) session.getAttribute("staffICNumber");
         List<reservation> reservations = new ArrayList<reservation>();
         try (Connection connection = dataSource.getConnection()){
@@ -1071,11 +1071,11 @@ public class ReservationController {
             System.out.println("error getting managerReservationList");
             return "redirect:/index";
         }
-        return "manager/managerReservationList";
+        return "manager/managerUpdateStatus";
     }
 
-   @GetMapping("/managerUpdateStatus")
-    public String managerUpdateStatus(HttpSession session, Model model, @RequestParam("reservationID") int reservationID){
+   @GetMapping("/managerViewReservation")
+    public String managerViewReservation(HttpSession session, Model model, @RequestParam("reservationID") int reservationID){
         String staffICNumber = (String) session.getAttribute("staffICNumber");
         System.out.println("staffICNumber: " + staffICNumber);
         try {
@@ -1154,7 +1154,7 @@ public class ReservationController {
             return "redirect:/index";
         }
 
-        return "manager/managerUpdateStatus";
+        return "manager/managerViewReservation";
     }
 
     @GetMapping("/staffViewReservation")
