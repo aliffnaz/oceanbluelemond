@@ -129,7 +129,7 @@
                         </div>
                     </div>
 
-                    <form id="reservationForm" method="post" th:action="@{/guestMakeRoomReservation}" modelAttribute="guestMakeRoomReservation" th:object="(${guestMakeRoomReservation})">
+                    <form method="post" th:action="@{/guestMakeRoomReservation}" modelAttribute="guestMakeRoomReservation" th:object="(${guestMakeRoomReservation})" onsubmit="return validateForm()">
                     <div class="row m-3">
                         <div class="col-1"></div>
                         <div class="col pt-3">
@@ -284,9 +284,11 @@
                         </div>
                     </div>
 
+                    
+
                     <div class="row m-5">
                         <div class="col text-center">
-                            <button type="submit" id="submitButton" class="btn btn-dark btn-lg" style="border-radius: 3px 3px 3px 3px; height: auto; width:150px">Submit</button>
+                            <button type="submit" class="btn btn-dark btn-lg" style="border-radius: 3px 3px 3px 3px; height: auto; width:150px">Submit</button>
                             </div>
                     </div>
 
@@ -342,6 +344,51 @@
         </svg>
     </div>
     <!-- /back to top -->
+    <!-- VALIDATE -->
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        function validateForm() {
+            // Check IC Number
+            var icNumber = document.getElementById('guestICNumber').value;
+            if (!icNumber.trim()) {
+                alert('Please fill in the IC Number.');
+                return false;
+            }
+    
+            // Check Total Adults
+            var totalAdult = document.getElementById('totalAdult').value;
+            if (!totalAdult.trim() || parseInt(totalAdult) <= 0) {
+                alert('Please enter a valid number greater than 0 for Total Adults.');
+                return false;
+            }
+    
+            // Check Total Kids
+            var totalKids = document.getElementById('totalKids').value;
+            if (!totalKids.trim() || parseInt(totalKids) < 0) {
+                alert('Please enter a valid number greater than or equal to 0 for Total Kids.');
+                return false;
+            }
+    
+            // Check Total Room
+            var totalRoom = document.getElementById('totalRoom').value;
+            if (!totalRoom.trim() || parseInt(totalRoom) <= 0) {
+                alert('Please enter a valid number greater than 0 for Total Room.');
+                return false;
+            }
+    
+            // Check if Total Room is more than 0, but Total Kids can be 0
+            if (parseInt(totalRoom) > 0 && parseInt(totalKids) === 0) {
+                alert('You must have at least one adult or one child in the room.');
+                return false;
+            }
+    
+            // Other validation checks can be added here
+    
+            // If all validation passes, submit the form
+            return true;
+        }
+        /*]]>*/
+    </script>
     <!-- COMMON SCRIPTS -->
     <script th:src="@{stylesheets/js/common_scripts.js}"></script>
     <script th:src="@{stylesheets/js/common_functions.js}"></script>
@@ -351,30 +398,6 @@
     <!-- SPECIFIC SCRIPTS -->
     <script th:src="@{stylesheets/js/jquery.flexslider.min.js}"></script>
     <script th:src="@{stylesheets/js/slider_func.js}"></script>
-
-    <!-- VALIDATE -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Get references to the form and submit button
-            var reservationForm = document.getElementById('reservationForm');
-            var submitButton = document.getElementById('submitButton');
-    
-            // Add an event listener to the form
-            reservationForm.addEventListener('input', function () {
-                // Get values from input fields
-                var totalAdults = parseInt(document.getElementById('totalAdult').value) || 0;
-                var totalRooms = parseInt(document.getElementById('totalRoom').value) || 0;
-    
-                // Check conditions for enabling/disabling the submit button
-                if (totalAdults > 0 && totalRooms > 0) {
-                    submitButton.removeAttribute('disabled');
-                } else {
-                    submitButton.setAttribute('disabled', 'disabled');
-                }
-            });
-        });
-    </script>
-
 </body>
 
 </html>
