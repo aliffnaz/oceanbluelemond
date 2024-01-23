@@ -57,8 +57,8 @@ String staffICNumber = (String) session.getAttribute("staffICNumber") ;
             while (resultSet.next()) {
                 String roomNum = resultSet.getString("roomNum");
                 String roomType = resultSet.getString("roomType");
-                String maxGuest = resultSet.getString("maxGuest");
-                String roomRate = resultSet.getString("roomRate");
+                int maxGuest = resultSet.getInt("maxGuest");
+                double roomRate = resultSet.getDouble("roomRate");
                 String roomSize = resultSet.getString("roomSize");
                 String roomStatus = resultSet.getString("roomStatus");
                 //System.out.println("room number" + roomNum);
@@ -99,15 +99,15 @@ String staffICNumber = (String) session.getAttribute("staffICNumber") ;
 
             String roomNum = room.getRoomNum();
             String roomType = room.getRoomType();
-            String maxGuest = room.getMaxGuest();
-            String roomRate = room.getRoomRate();
+            int maxGuest = room.getMaxGuest();
+            double roomRate = room.getRoomRate();
             String roomSize = room.getRoomSize();
             String roomstatus = room.getRoomStatus();
             
             statement.setString(1, roomNum);
             statement.setString(2, roomType);
-            statement.setString(3, maxGuest );
-            statement.setString(4, roomRate);
+            statement.setInt(3, maxGuest );
+            statement.setDouble(4, roomRate);
             statement.setString(5, roomSize);
             statement.setString(6, roomstatus);
             statement.executeUpdate();
@@ -140,8 +140,8 @@ String staffICNumber = (String) session.getAttribute("staffICNumber") ;
          
              if (resultSet.next()) {
                 String roomType = resultSet.getString("roomType");
-                String maxGuest = resultSet.getString("maxGuest");
-                String roomRate = resultSet.getString("roomRate");
+                int maxGuest = resultSet.getInt("maxGuest");
+                double roomRate = resultSet.getDouble("roomRate");
                 String roomSize = resultSet.getString("roomSize");
                 String roomStatus = resultSet.getString("roomStatus");
          
@@ -178,8 +178,8 @@ String staffICNumber = (String) session.getAttribute("staffICNumber") ;
          
              if (resultSet.next()) {
                 String roomType = resultSet.getString("roomType");
-                String maxGuest = resultSet.getString("maxGuest");
-                String roomRate = resultSet.getString("roomRate");
+                int maxGuest = resultSet.getInt("maxGuest");
+                double roomRate = resultSet.getDouble("roomRate");
                 String roomSize = resultSet.getString("roomSize");
                 String roomStatus = resultSet.getString("roomStatus");
          
@@ -212,8 +212,8 @@ String staffICNumber = (String) session.getAttribute("staffICNumber") ;
             final var statement = connection.prepareStatement(sql);
             String roomNum = room.getRoomNum();
             String roomType = room.getRoomType();
-            String maxGuest = room.getMaxGuest();
-            String roomRate = room.getRoomRate();
+            int maxGuest = room.getMaxGuest();
+            double roomRate = room.getRoomRate();
             String roomSize = room.getRoomSize();
             String roomstatus = room.getRoomStatus();
 
@@ -222,8 +222,8 @@ String staffICNumber = (String) session.getAttribute("staffICNumber") ;
             // System.out.println("pro id update : "+proid);
 
             statement.setString(1, roomType);
-            statement.setString(2, maxGuest );
-            statement.setString(3, roomRate);
+            statement.setInt(2, maxGuest );
+            statement.setDouble(3, roomRate);
             statement.setString(4, roomSize);
             statement.setString(5, roomstatus);
             statement.setString(6, roomNum);
@@ -257,8 +257,8 @@ String staffICNumber = (String) session.getAttribute("staffICNumber") ;
             while (resultSet.next()) {
                 String roomNum = resultSet.getString("roomNum");
                 String roomType = resultSet.getString("roomType");
-                String maxGuest = resultSet.getString("maxGuest");
-                String roomRate = resultSet.getString("roomRate");
+                int maxGuest = resultSet.getInt("maxGuest");
+                double roomRate = resultSet.getDouble("roomRate");
                 String roomSize = resultSet.getString("roomSize");
                 String roomStatus = resultSet.getString("roomStatus");
                 //System.out.println("room number" + roomNum);
@@ -299,15 +299,15 @@ String staffICNumber = (String) session.getAttribute("staffICNumber") ;
 
             String roomNum = room.getRoomNum();
             String roomType = room.getRoomType();
-            String maxGuest = room.getMaxGuest();
-            String roomRate = room.getRoomRate();
+            int maxGuest = room.getMaxGuest();
+            double roomRate = room.getRoomRate();
             String roomSize = room.getRoomSize();
             String roomstatus = room.getRoomStatus();
             
             statement.setString(1, roomNum);
             statement.setString(2, roomType);
-            statement.setString(3, maxGuest );
-            statement.setString(4, roomRate);
+            statement.setInt(3, maxGuest );
+            statement.setDouble(4, roomRate);
             statement.setString(5, roomSize);
             statement.setString(6, roomstatus);
             statement.executeUpdate();
@@ -335,8 +335,8 @@ String staffICNumber = (String) session.getAttribute("staffICNumber") ;
          
              if (resultSet.next()) {
                 String roomType = resultSet.getString("roomType");
-                String maxGuest = resultSet.getString("maxGuest");
-                String roomRate = resultSet.getString("roomRate");
+                int maxGuest = resultSet.getInt("maxGuest");
+                double roomRate = resultSet.getDouble("roomRate");
                 String roomSize = resultSet.getString("roomSize");
                 String roomStatus = resultSet.getString("roomStatus");
          
@@ -372,8 +372,8 @@ String staffICNumber = (String) session.getAttribute("staffICNumber") ;
          
              if (resultSet.next()) {
                 String roomType = resultSet.getString("roomType");
-                String maxGuest = resultSet.getString("maxGuest");
-                String roomRate = resultSet.getString("roomRate");
+                int maxGuest = resultSet.getInt("maxGuest");
+                double roomRate = resultSet.getDouble("roomRate");
                 String roomSize = resultSet.getString("roomSize");
                 String roomStatus = resultSet.getString("roomStatus");
          
@@ -406,8 +406,8 @@ String staffICNumber = (String) session.getAttribute("staffICNumber") ;
             final var statement = connection.prepareStatement(sql);
             String roomNum = room.getRoomNum();
             String roomType = room.getRoomType();
-            String maxGuest = room.getMaxGuest();
-            String roomRate = room.getRoomRate();
+            int maxGuest = room.getMaxGuest();
+            double roomRate = room.getRoomRate();
             String roomSize = room.getRoomSize();
             String roomstatus = room.getRoomStatus();
 
@@ -416,8 +416,8 @@ String staffICNumber = (String) session.getAttribute("staffICNumber") ;
             // System.out.println("pro id update : "+proid);
 
             statement.setString(1, roomType);
-            statement.setString(2, maxGuest );
-            statement.setString(3, roomRate);
+            statement.setInt(2, maxGuest );
+            statement.setDouble(3, roomRate);
             statement.setString(4, roomSize);
             statement.setString(5, roomstatus);
             statement.setString(6, roomNum);
