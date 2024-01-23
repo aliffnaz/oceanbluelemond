@@ -1340,7 +1340,7 @@ public class ReservationController {
         try (Connection connection = dataSource.getConnection()){
             String sql = "UPDATE reservation set reservestatus=? where reservationid=?";
             final var statement = connection.prepareStatement(sql);
-            statement.setString(1, staffICNumber);
+            statement.setString(1, reserveStatus);
             statement.setInt(2, reservationID);
             final var resultSet = statement.executeUpdate();
             connection.close();
