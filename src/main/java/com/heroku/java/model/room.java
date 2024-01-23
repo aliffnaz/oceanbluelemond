@@ -4,8 +4,8 @@ public class room {
    
     private String roomNum;
     private String roomType;
-    private String maxGuest;
-    private String roomRate;
+    private int maxGuest;
+    private double roomRate;
     private String roomSize;
     private String roomStatus;
 
@@ -29,19 +29,19 @@ public class room {
         this.roomType = roomType;
     }
 
-    public String getMaxGuest() {
+    public int getMaxGuest() {
         return this.maxGuest;
     }
 
-    public void setMaxGuest(String maxGuest) {
+    public void setMaxGuest(int maxGuest) {
         this.maxGuest = maxGuest;
     }
 
-    public String getRoomRate() {
+    public double getRoomRate() {
         return this.roomRate;
     }
 
-    public void setRoomRate(String roomRate) {
+    public void setRoomRate(double roomRate) {
         this.roomRate = roomRate;
     }
 
