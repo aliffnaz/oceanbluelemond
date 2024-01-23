@@ -731,7 +731,7 @@ public class ReservationController {
         double totalPayment = (double) session.getAttribute("totalPayment");
         try{
             Connection connection = dataSource.getConnection();
-            totalServicePrice = calculateTotalServicePrice(reservationID, connection);
+            Double totalServicePrice = calculateTotalServicePrice(reservationID, connection);
             totalPayment = totalPayment + totalServicePrice;
             System.out.println("totalServicePrice: " + totalServicePrice);
             System.out.println("totalPayment: " + totalPayment);
