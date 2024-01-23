@@ -267,7 +267,7 @@
                                         <th class="text-center">Name</th>
                                         <th class="text-center">Quantity</th>
                                         <th class="text-center">Duration</th>
-                                        <th class="text-center">Price</th>
+                                        <th class="text-center">Price/Service</th>
                                     </thead>
                                     <tbody>
                                         <tr th:each="service : ${services}">
@@ -303,6 +303,19 @@
                                 <input type="text" name="totalPayment" id="totalPayment" th:value="${reservation.totalPayment}" class="qty form-control" placeholder="" readonly>
                             </div>
                         </div>
+
+                        <div class="row m-3">
+                            <div class="col-1"></div>
+                            <div class="col pt-3">
+                                <span>
+                                    <h6>Reservation Status</h6>
+                                </span>
+                            </div>
+                            <div class="col-8">
+                                <input type="text" name="reserveStatus" id="reserveStatus" th:value="${reservation.reserveStatus}" class="qty form-control" placeholder="" readonly>
+                            </div>
+                        </div>
+
                         <div class="row">
                             <div class="col"></div>
                             <div class="col text-center">Generate your receipt <a th:href="@{/guestGenerateReceipt}">here</a></div>
