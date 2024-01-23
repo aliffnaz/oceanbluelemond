@@ -1331,8 +1331,8 @@ public class ReservationController {
         return "viewReceipt";
     }
 
-    @PostMapping("/managerUpdateStatus")
-    public String managerUpdateStatus(HttpSession session, @RequestParam("reserveStatus") String reserveStatus, @RequestParam("reservationID") String reservationIDString){
+    @PostMapping("/managerUpdateReservationStatus")
+    public String managerUpdateReservationStatus(HttpSession session, @RequestParam("reserveStatus") String reserveStatus, @RequestParam("reservationID") String reservationIDString){
         String staffICNumber = (String) session.getAttribute("staffICNumber");
         System.out.println("pass manager update status<<<<<<");
         int reservationID = Integer.parseInt(reservationIDString);
