@@ -180,6 +180,27 @@ public class ReservationController {
         return totalPayment;
     }
 
+    private double calculateTotalServicePrice(int reservationid, Connection connection) throws SQLException {
+        double totalServicePrice = 0.0;
+    
+            String sqlServicePrice = "SELECT serviceprice FROM service s " +
+            "JOIN reservationservice rs ON rs.serviceid = s.serviceid " +
+            "JOIN reservation r ON r.reservationid = rs.reservationid " +
+            "WHERE r.reservationid = ?";
+            try (PreparedStatement statementServicePrice = connection.prepareStatement(sqlServicePrice)) {
+                statementServicePrice.setInt(1, reservationid);
+    
+                try (ResultSet resultSetRoomRate = statementServicePrice.executeQuery()) {
+                    if (resultSetRoomRate.next()) {
+                        double servicePrice = resultSetRoomRate.getDouble("serviceprice");
+                        totalServicePrice += servicePrice;
+                    }
+                }
+            }
+    
+        return totalServicePrice;
+    }
+
     public static boolean isRoomServiceAvailable(int serviceId, Date startDate, Date endDate, int totalRooms, Connection connection) throws SQLException {
         // Query to check if the room service is available for the given date range and maximum quantity constraint
         String sql = "SELECT COUNT(*) FROM reservationservice rs " +
@@ -470,9 +491,6 @@ public class ReservationController {
                 guestReservationService.setServiceDuration(guestServiceDuration);
                 guestReservationService.setServiceQuantity(guestServiceQuantity);
 
-                totalPayment = totalPayment + (guestServicePrice * guestServiceDuration * guestServiceQuantity);
-                System.out.println("totalPayment thus far: " + totalPayment);
-
                 guestServices.add(guestService);
                 guestReservationServices.add(guestReservationService);
                 model.addAttribute("guestServices", guestServices);
@@ -704,6 +722,32 @@ public class ReservationController {
         }
 
         return "redirect:/guestMakeEventService";
+    }
+
+    @GetMapping("/confirmService")
+    public String confirmService(HttpSession session){
+        String guestICNumber = (String) session.getAttribute("guestICNumber");
+        int reservationID = (int) session.getAttribute("reservationID");
+        double totalPayment = (double) session.getAttribute("totalPayment");
+        try{
+            Connection connection = dataSource.getConnection();
+            totalServicePrice = calculateTotalServicePrice(reservationID, connection);
+            totalPayment = totalPayment + totalServicePrice;
+            System.out.println("totalServicePrice: " + totalServicePrice);
+            System.out.println("totalPayment: " + totalPayment);
+            String sqlUpdateTotalPayment = "UPDATE reservation SET totalpayment = ? WHERE reservationid = ?";
+            PreparedStatement statementUpdateTotalPayment = connection.prepareStatement(sqlUpdateTotalPayment)) {
+            statementUpdateTotalPayment.setDouble(1, totalPayment);
+            statementUpdateTotalPayment.setInt(2, reservationID);
+            statementUpdateTotalPayment.executeUpdate();
+
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+            System.out.println("failed to update total payment");
+        }
+        return "guest/guestRoomReservation";
+
     }
 
     @GetMapping("/deleteGuestRoomService")
