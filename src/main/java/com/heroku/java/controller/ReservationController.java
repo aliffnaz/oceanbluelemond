@@ -936,7 +936,6 @@ public class ReservationController {
                 room.setRoomNum(roomNum);
                 rooms.add(room);
                 model.addAttribute("room", room);
-                model.addAttribute("rooms", rooms);
 
                 guest guest = new guest();
                 guest.setGuestName(resultSet.getString("guestName"));
@@ -955,8 +954,10 @@ public class ReservationController {
 
                 System.out.println("service added into array for guestViewRoomReservation");
                 services.add(service);
-                model.addAttribute("services", services);
             }
+            model.addAttribute("rooms", rooms);
+            model.addAttribute("services", services);
+
             connection.close();
 
         }
