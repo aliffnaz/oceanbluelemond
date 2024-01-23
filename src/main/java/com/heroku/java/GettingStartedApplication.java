@@ -62,12 +62,6 @@ public class GettingStartedApplication {
         return "guest/guestViewRoom";
     }
 
-    @GetMapping("/guestGenerateReceipt")
-    public String guestGenerateReceipt(HttpSession session) {
-        String guestICNumber = (String) session.getAttribute("guestICNumber");
-        return "guest/guestGenerateReceipt";
-    }
-
     // for staff
 
     @GetMapping("/staffHome")
