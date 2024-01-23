@@ -342,6 +342,69 @@
         </svg>
     </div>
     <!-- /back to top -->
+    <!-- validation script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelector('form').addEventListener('submit', function (e) {
+                // Check IC Number
+                var icNumber = document.getElementById('guestICNumber').value;
+                if (icNumber.trim() === '') {
+                    alert('Please fill in the IC Number.');
+                    e.preventDefault(); // Stop form submission
+                    return;
+                }
+    
+                // Check Check-in & Check-out Date
+                var dateBooking = document.getElementById('date_booking').value;
+                if (dateBooking.trim() === '') {
+                    alert('Please select the Check-in & Check-out Date.');
+                    e.preventDefault(); // Stop form submission
+                    return;
+                }
+    
+                // Check Room Type
+                var roomType = document.getElementById('rooms_booking').value;
+                if (roomType.trim() === '') {
+                    alert('Please select the Room Type.');
+                    e.preventDefault(); // Stop form submission
+                    return;
+                }
+    
+                // Check Total Adults
+                var totalAdult = document.getElementById('totalAdult').value;
+                if (totalAdult.trim() === '' || isNaN(totalAdult) || parseInt(totalAdult) <= 0) {
+                    alert('Please enter a valid number greater than 0 for Total Adults.');
+                    e.preventDefault(); // Stop form submission
+                    return;
+                }
+    
+                // Check Total Kids
+                var totalKids = document.getElementById('totalKids').value;
+                if (totalKids.trim() === '' || isNaN(totalKids) || parseInt(totalKids) < 0) {
+                    alert('Please enter a valid number greater than or equal to 0 for Total Kids.');
+                    e.preventDefault(); // Stop form submission
+                    return;
+                }
+    
+                // Check Total Room
+                var totalRoom = document.getElementById('totalRoom').value;
+                if (totalRoom.trim() === '' || isNaN(totalRoom) || parseInt(totalRoom) <= 0) {
+                    alert('Please enter a valid number greater than 0 for Total Room.');
+                    e.preventDefault(); // Stop form submission
+                    return;
+                }
+    
+                // Check Add Service
+                var addon = document.querySelector('input[name="addon"]:checked');
+                if (!addon) {
+                    alert('Please select whether to add the service.');
+                    e.preventDefault(); // Stop form submission
+                    return;
+                }
+            });
+        });
+    </script>
+
     <!-- COMMON SCRIPTS -->
     <script th:src="@{stylesheets/js/common_scripts.js}"></script>
     <script th:src="@{stylesheets/js/common_functions.js}"></script>
