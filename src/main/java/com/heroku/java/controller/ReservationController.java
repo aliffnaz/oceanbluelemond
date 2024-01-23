@@ -899,6 +899,7 @@ public class ReservationController {
             statement.setInt(1, reservationID);
             final var resultSet = statement.executeQuery();
 
+            List<room> rooms = new ArrayList<room>();
             List <service> services = new ArrayList<service>();
             while(resultSet.next()){
                 String guestName = resultSet.getString("guestName");
@@ -906,6 +907,7 @@ public class ReservationController {
                 int durationOfStay = resultSet.getInt("durationOfStay");
                 Date dateStart = resultSet.getDate("dateStart");
                 Date dateEnd = resultSet.getDate("dateEnd");
+                String roomNum = resultSet.getString("roomType");
                 String roomType = resultSet.getString("roomType");
                 String roomRate = resultSet.getString("roomRate");
                 int totalAdult = resultSet.getInt("totalAdult");
@@ -930,8 +932,10 @@ public class ReservationController {
 
                 room room = new room();
                 room.setRoomType(resultSet.getString("roomtype"));
-                room.setRoomRate(resultSet.getString("roomrate"));
-                model.addAttribute("room", room);
+                room.setRoomRate(resultSet.getDouble("roomrate"));
+                room.setRoomNum(resultSet.getString("roomnum"));
+                rooms.add(room);
+                model.addAttribute("rooms", rooms);
 
                 guest guest = new guest();
                 guest.setGuestName(resultSet.getString("guestName"));
