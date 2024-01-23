@@ -123,7 +123,7 @@
                             <thead style="vertical-align: middle;">
                                 <th class="text-center">Guest IC Number</th>
                                 <th class="text-center">Guest Name</th>
-                                <th class="text-center" width="130">Guest Phone Number</th>
+                                <th class="text-center">Guest Phone Number</th>
                                 <th class="text-center">Guest Gender</th>
                                 <th class="text-center">Guest Race</th>
                                 <th class="text-center">Guest Religion</th>
@@ -132,63 +132,14 @@
                             </thead>
                             <tbody>
                                 <tr th:each="guest : ${guests}">
-                                    <td class="text-center" th:value="${guest.guestICNumber}"></td>
-                                    <td class="text-center" th:value="${guest.guestName}"></td>
-                                    <td class="text-center" th:value="${guest.guestPhoneNumber}"></td>
-                                    <td class="text-center" th:value="${guest.guestGender}"></td>
-                                    <td class="text-center" th:value="${guest.guestRace}"></td>
-                                    <td class="text-center" th:value="${guest.guestReligion}"></td>
-                                    <td class="text-center" th:value="${guest.guestAddress}"></td>
-                                    <td class="text-center" ><a th:href="@{/staffViewGuest?=}+${guest.guestICNumber}" th:value="${guest.guestICNumber}"><i class="bi bi-eye-fill" style="font-size: 20px;"></i></a></td>
-                                  
-                                </tr>
-                                <tr>
-                                    <td class="text-center">G02</td>
-                                    <td class="text-center">Azalea</td>
-                                    <td class="text-center">014-7138969</td>
-                                    <td class="text-center">020707-04-2222</td>
-                                    <td class="text-center">Female</td>
-                                    <td class="text-center">Malay</td>
-                                    <td class="text-center">Muslim</td>
-                                    <td class="text-center">No 42, Jalan PRI 22, Taman Paya Rumput Indah, 76450 Paya Rumput, Melaka</td>
-                                    <td class="text-center"><a th:href="@{/staffViewGuest}"><i class="bi bi-eye-fill" style="font-size: 20px;"></i></a></td>
-                                    <td class="text-center"><a href=" "><i class="bi bi-trash3-fill" style="font-size: 20px;"></i></a></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">G03</td>
-                                    <td class="text-center">Balqis</td>
-                                    <td class="text-center">014-6070102</td>
-                                    <td class="text-center">020625-04-4444</td>
-                                    <td class="text-center">Female</td>
-                                    <td class="text-center">Malay</td>
-                                    <td class="text-center">Muslim</td>
-                                    <td class="text-center">No 12 Jln Angkasa Nuri 47, Taman Angkasa Nuri, 76100 Durian Tunggal, Melaka</td>
-                                    <td class="text-center"><a th:href="@{/staffViewGuest}"><i class="bi bi-eye-fill" style="font-size: 20px;"></i></a></td>
-                                    <td class="text-center"><a href=" "><i class="bi bi-trash3-fill" style="font-size: 20px;"></i></a></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">G04</td>
-                                    <td class="text-center">Aliff</td>
-                                    <td class="text-center">018-9839423</td>
-                                    <td class="text-center">021230-04-3333</td>
-                                    <td class="text-center">Male</td>
-                                    <td class="text-center">Malay</td>
-                                    <td class="text-center">Muslim</td>
-                                    <td class="text-center">No 24, Jalan Sri Raya 5, Taman Muzafar Syah, 75450 Ayer Keroh, Melaka</td>
-                                    <td class="text-center"><a th:href="@{/staffViewGuest}"><i class="bi bi-eye-fill" style="font-size: 20px;"></i></a></td>
-                                    <td class="text-center"><a href=" "><i class="bi bi-trash3-fill" style="font-size: 20px;"></i></a></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">G05</td>
-                                    <td class="text-center">Aminudin</td>
-                                    <td class="text-center">019-2141021</td>
-                                    <td class="text-center">021207-05-7777</td>
-                                    <td class="text-center">Non-Binary</td>
-                                    <td class="text-center">Portuguese</td>
-                                    <td class="text-center">Muslim</td>
-                                    <td class="text-center">1130 Jalan Sentosa 3, Taman Sentosa, 73400 Gemas, Negeri Sembilan</td>
-                                    <td class="text-center"><a th:href="@{/staffViewGuest}"><i class="bi bi-eye-fill" style="font-size: 20px;"></i></a></td>
-                                    <td class="text-center"><a href=" "><i class="bi bi-trash3-fill" style="font-size: 20px;"></i></a></td>
+                                    <td class="text-center" th:text="${guest.guestICNumber}"></td>
+                                    <td class="text-center" th:text="${guest.guestName}"></td>
+                                    <td class="text-center" th:text="${guest.guestPhoneNumber}"></td>
+                                    <td class="text-center" th:text="${guest.guestGender}"></td>
+                                    <td class="text-center" th:text="${guest.guestRace}"></td>
+                                    <td class="text-center" th:text="${guest.guestReligion}"></td>
+                                    <td class="text-center" th:text="${guest.guestAddress}"></td>
+                                    <td class="text-center" ><a th:href="@{/staffViewGuest?guestICNumber=}+${guest.guestICNumber}" th:value="${guest.guestICNumber}"><i class="bi bi-eye-fill" style="font-size: 20px;"></i></a></td>
                                 </tr>
                             </tbody>
                         </table>
