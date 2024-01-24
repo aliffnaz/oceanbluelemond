@@ -1559,6 +1559,7 @@ public class ReservationController {
             final var resultSet = statement.executeUpdate();
 
             List<Map<String, Object>> reports = new ArrayList<>();
+            double totalPaymentReport = 0;
             while(resultSet.next()){
                 int reservationID = resultSet.getInt("reservationid");
                 int durationOfStay = resultSet.getInt("durationOfStay");
@@ -1579,14 +1580,16 @@ public class ReservationController {
 
                 reports.add(report);
 
+                totalPaymentReport = totalPaymentReport + totalPayment;
             }
+            model.setAttribute("reports", reports);
+            session.setAttribute("totalPaymentReport", totalPaymentReport);
             connection.close();
         }
         catch(Exception e){
             e.printStackTrace();
             System.out.println("failed to generate report");
         }
-        model.setAttribute("reports", reports);
         return "reservationReport";
 
     }
