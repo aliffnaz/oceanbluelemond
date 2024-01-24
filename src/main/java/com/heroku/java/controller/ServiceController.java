@@ -37,7 +37,7 @@ public class ServiceController {
     }
 
     @GetMapping("/managerAddService")
-    public String managerAddService(@RequestParam("success") boolean success) {
+    public String managerAddService(@RequestParam("success") boolean success, HttpSession session) {
   if (session.getAttribute("messege") != null) {
           session.removeAttribute("messege");
         }
