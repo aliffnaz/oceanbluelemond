@@ -2,24 +2,24 @@ package com.heroku.java.model;
 
 public class roomReservation {
 
-    private String roomReservationID;
+    private int roomReservationID;
     private String roomNum;
-    private String reservationID;
+    private int reservationID;
 
     public roomReservation() {
 
     }
 
-    public roomReservation(String roomReservationID, String roomNum, String reservationID){
+    public roomReservation(int roomReservationID, String roomNum, int reservationID){
       this.roomReservationID = roomReservationID;
       this.roomNum = roomNum;
       this.reservationID = reservationID;
     }
 
-    public String getRoomReservationID() {
+    public int getRoomReservationID() {
 		return roomReservationID;
 	}
-	public void setRoomReservationID(String roomReservationID) {
+	public void setRoomReservationID(int roomReservationID) {
 		this.roomReservationID = roomReservationID;
 	}
 	public String getRoomNum() {
@@ -28,10 +28,10 @@ public class roomReservation {
 	public void setRoomNum(String roomNum) {
 		this.roomNum = roomNum;
 	}
-	public String getReservationID() {
+	public int getReservationID() {
 		return reservationID;
 	}
-	public void setReservationID(String reservationID) {
+	public void setReservationID(int reservationID) {
 		this.reservationID = reservationID;
 	}
 
