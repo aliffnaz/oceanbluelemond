@@ -31,14 +31,6 @@ public class StaffController {
         this.dataSource = dataSource;
     }
 
-    //original syahir punyer, guna session
-    // @GetMapping("/managerAddRoom")
-    // public String managerAddRoom(HttpSession session) {
-    //     // int roomNumber = (int) session.getAttribute("roomNumber");
-    //     // System.out.println("roomNumber id :" + roomNumber);
-    //     return "manager/managerAddRoom";
-    // }
-
 
     @GetMapping("/managerStaffList")
     public String managerStaffList(Model model, HttpSession session) {
@@ -449,6 +441,10 @@ public class StaffController {
             final var statement = connection.prepareStatement(sql);
             statement.setString(1, "Terminated");
             statement.setString(2, staffICNumber);
+            statement.executeUpdate();
+            
+            connection.close();
+
           }
           catch(SQLException e){
             System.out.println("failed to terminate this staff");
