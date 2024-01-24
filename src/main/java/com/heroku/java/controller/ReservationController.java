@@ -899,17 +899,11 @@ public class ReservationController {
             statement.setInt(1, reservationID);
             final var resultSet = statement.executeQuery();
 
-            List<room> rooms = new ArrayList<room>();
-            List <service> services = new ArrayList<service>();
             while(resultSet.next()){
-                String guestName = resultSet.getString("guestName");
                 int guestQuantity = resultSet.getInt("guestQuantity");
                 int durationOfStay = resultSet.getInt("durationOfStay");
                 Date dateStart = resultSet.getDate("dateStart");
                 Date dateEnd = resultSet.getDate("dateEnd");
-                String roomNum = resultSet.getString("roomNum");
-                String roomType = resultSet.getString("roomType");
-                double roomRate = resultSet.getDouble("roomRate");
                 int totalAdult = resultSet.getInt("totalAdult");
                 int totalKids = resultSet.getInt("totalKids");
                 int totalRoom = resultSet.getInt("totalRoom");
@@ -930,17 +924,77 @@ public class ReservationController {
                 reservation.setTotalPayment(totalPayment);
                 model.addAttribute("reservation", reservation);
 
+                connection.close();
+            }
+        }
+        catch (SQLException e){
+            System.out.println("failed at retrieving reservation details");
+            e.printStackTrace();
+            return "redirect:/index";
+        }
+
+        try {
+            Connection connection = dataSource.getConnection();
+            String sql = "SELECT * from room " +
+            "JOIN roomreservation ON room.roomnum = roomreservation.roomnum " +
+            "JOIN reservation ON reservation.reservationid = reservation.reservationid " +
+            "WHERE reservation.reservationid = ?";
+            final var statement = connection.prepareStatement(sql);
+            statement.setInt(1, reservationID);
+            final var resultSet = statement.executeQuery();
+
+            List<room> rooms = new ArrayList<room>();
+            String roomNum = resultSet.getString("roomNum");
+            String roomType = resultSet.getString("roomType");
+            double roomRate = resultSet.getDouble("roomRate");
+
+            while (resultSet.next()){
                 room room = new room();
                 room.setRoomType(roomType);
                 room.setRoomRate(roomRate);
                 room.setRoomNum(roomNum);
                 rooms.add(room);
                 model.addAttribute("room", room);
+            }
+            connection.close();
+            }
+        catch (SQLException e){
+                System.out.println("failed at retrieving room details for this reservation");
+                e.printStackTrace();
+                return "redirect:/index";
+            }
+
+            try {
+                Connection connection = dataSource.getConnection();
+                String sql = "SELECT * from guest " +
+                "JOIN reservation ON guest.guestICNumber = reservation.guestICNumber " +
+                "WHERE reservation.reservationid = ?";
+                final var statement = connection.prepareStatement(sql);
+                statement.setInt(1, reservationID);
+                final var resultSet = statement.executeQuery();
 
                 guest guest = new guest();
                 guest.setGuestName(resultSet.getString("guestName"));
                 model.addAttribute("guest", guest);
+                connection.close();
+            }
+            catch (SQLException e){
+                System.out.println("failed at retrieving guest details for this reservation");
+                e.printStackTrace();
+                return "redirect:/index";
+            }
 
+            try {
+                Connection connection = dataSource.getConnection();
+                String sql = "SELECT * from service " +
+                "JOIN reservationservice ON service.serviceid = reservationservice.serviceid " +
+                "JOIN reservation ON reservation.reservationid = reservationservice.reservationid " +
+                "WHERE reservation.reservationid = ?";
+                final var statement = connection.prepareStatement(sql);
+                statement.setInt(1, reservationID);
+                final var resultSet = statement.executeQuery();
+                
+                List <service> services = new ArrayList<service>();
                 String serviceName = resultSet.getString("servicename");
                 double servicePrice = resultSet.getDouble("serviceprice");
                 int serviceQuantity = resultSet.getInt("serviceQuantity");
@@ -954,18 +1008,15 @@ public class ReservationController {
 
                 System.out.println("service added into array for guestViewRoomReservation");
                 services.add(service);
+                connection.close();
+            }
+            catch (SQLException e){
+                System.out.println("failed at retrieving service details for this reservation");
+                e.printStackTrace();
+                return "redirect:/index";
             }
             model.addAttribute("rooms", rooms);
             model.addAttribute("services", services);
-
-            connection.close();
-
-        }
-        catch (SQLException e){
-            System.out.println("failed at guestViewRoomReservation");
-            e.printStackTrace();
-            return "redirect:/index";
-        }
 
         return "guest/guestViewRoomReservation";
     }
