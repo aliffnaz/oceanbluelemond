@@ -215,6 +215,11 @@
     <script th:src="@{stylesheets/js/jquery.flexslider.min.js}"></script>
     <script th:src="@{stylesheets/js/slider_func.js}"></script>
 
+    <script th:if="${session.errorMessage}" th:inline="javascript">
+    /* Display error message in an alert */
+    alert([[${session.errorMessage}]]);
+    </script>
+
 </body>
 
 </html>
