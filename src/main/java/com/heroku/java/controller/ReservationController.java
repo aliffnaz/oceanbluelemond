@@ -924,8 +924,8 @@ public class ReservationController {
                 reservation.setTotalPayment(totalPayment);
                 model.addAttribute("reservation", reservation);
 
-                connection.close();
             }
+            connection.close();
         }
         catch (SQLException e){
             System.out.println("failed at retrieving reservation details");
