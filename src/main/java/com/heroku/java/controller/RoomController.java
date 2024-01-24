@@ -256,8 +256,9 @@ public class RoomController {
             
  String messege = "Successfully Updated";
                   session.setAttribute("messege", messege);
-            return "redirect:/managerRoomList";
               model.addAttribute("alert", "success");
+            return "redirect:/managerRoomList";
+            
         }
     
 
