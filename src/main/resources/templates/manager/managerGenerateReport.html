@@ -122,16 +122,11 @@ label {
             <div class="title">
               <h1>GENERATE REPORT</h1>
               <br>
-              <form id="reservationForm" action="reservationReport.html" method="get">
+              <form method="post" th:action="@{/generateReport}" modelAttribute="generateReport" th:object="(${generateReport})">
                 <div class="form-row">
                   <div class="form-group">
                     <label for="reportType">Report Type:</label>
-                    <div class="custom_select">
-                      <select id="reportType" name="reportType">
-                        <option value="sales">Sales Report</option>
-                        <option value="reservation">Reservation Report</option>
-                      </select>
-                    </div>
+                        <input type="text" name="reportType" id="reportType" class="form-control" th:value="reservationReport" readonly>
                   </div>
                 </div>
               
