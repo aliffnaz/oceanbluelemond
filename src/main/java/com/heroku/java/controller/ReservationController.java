@@ -30,6 +30,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Base64;
+import java.util.HashMap;
 
 // import org.jscience.physics.amount.Amount;
 // import org.jscience.physics.model.RelativisticModel;
@@ -1556,7 +1557,7 @@ public class ReservationController {
 
             final var statement = connection.prepareStatement(sql);
             statement.setInt(1, month);
-            final var resultSet = statement.executeUpdate();
+            final var resultSet = statement.executeQuery();
 
             List<Map<String, Object>> reports = new ArrayList<>();
             double totalPaymentReport = 0;
