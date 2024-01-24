@@ -6,7 +6,7 @@
   <style>
     .receipt {
       margin: 50px auto;
-      width: 600px;
+      width: 1000px;
       border: 2px solid #000;
       padding: 20px;
     }
@@ -107,13 +107,13 @@
         <th>Total</th>
       </tr>
       <tr th:each = "report : ${reports}">
-        <td th:text="report.reservationID"></td>
-        <td th:text="report.totalRoom"></td>
-        <td th:text="report.roomType"></td>
-        <td th:text="report.dateStart"></td>
-        <td th:text="report.dateEnd"></td>
-        <td th:text="report.durationOfStay"></td>
-        <td th:text="report.totalPayment"></td>
+        <td th:text="${report.reservationID}"></td>
+        <td th:text="${report.totalRoom}"></td>
+        <td th:text="${report.roomType}"></td>
+        <td th:text="${report.dateStart}"></td>
+        <td th:text="${report.dateEnd}"></td>
+        <td th:text="${report.durationOfStay}"></td>
+        <td th:text="${report.totalPayment}"></td>
       </tr>
     </table>
     <br>
