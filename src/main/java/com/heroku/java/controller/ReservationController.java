@@ -1548,7 +1548,7 @@ public class ReservationController {
         int month = Integer.parseInt(monthString);
 
         try (Connection connection = dataSource.getConnection()){
-            String sql = "SELECT r.reservationid, r.datestart, r.dateend, COUNT(rr.roomid) AS totalroom, room.roomtype, r.durationofstay, r.totalpayment " +
+            String sql = "SELECT r.reservationid, r.datestart, r.dateend, COUNT(rr.roomnum) AS totalroom, room.roomtype, r.durationofstay, r.totalpayment " +
             "FROM reservation r " +
             "JOIN roomreservation rr ON r.reservationid = rr.reservationid " +
             "JOIN room ON room.roomnum = rr.roomnum " +
