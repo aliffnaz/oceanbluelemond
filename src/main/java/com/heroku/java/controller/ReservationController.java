@@ -1222,7 +1222,7 @@ public class ReservationController {
 
                 if (resultSet.next()){
                 guest guest = new guest();
-                reservation.setGuestICNumber(resultSet.getString("guestICNumber"));
+                guest.setGuestICNumber(resultSet.getString("guestICNumber"));
                 guest.setGuestName(resultSet.getString("guestName"));
                 model.addAttribute("guest", guest);
             }
@@ -1365,7 +1365,7 @@ public class ReservationController {
 
                 if (resultSet.next()){
                 guest guest = new guest();
-                reservation.setGuestICNumber(resultSet.getString("guestICNumber"));
+                guest.setGuestICNumber(resultSet.getString("guestICNumber"));
                 guest.setGuestName(resultSet.getString("guestName"));
                 model.addAttribute("guest", guest);
             }
