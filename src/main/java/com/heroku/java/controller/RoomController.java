@@ -123,7 +123,7 @@ String staffICNumber = (String) session.getAttribute("staffICNumber") ;
                 } catch (SQLException e) {
                   e.printStackTrace();
                   String errorMessage = e.getMessage();
-                  redirectAttributes.addFlashAttribute("errorMessage", errorMessage);
+                  session.setAttribute("errorMessage", errorMessage);
                   return "redirect:/managerAddRoom";
                 }
             return "redirect:/managerRoomList";
