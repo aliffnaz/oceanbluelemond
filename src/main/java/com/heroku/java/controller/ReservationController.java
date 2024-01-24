@@ -1543,7 +1543,7 @@ public class ReservationController {
     public String generateReport(HttpSession session, Model model, @RequestParam("month") String monthString){
         String guestICNumber = (String) session.getAttribute("guestICNumber");
         String staffICNumber = (String) session.getAttribute("staffICNumber");
-        System.out.println("month", monthString);
+        session.setAttribute("month", monthString);
         System.out.println("guestICNumber: " + guestICNumber);
         System.out.println("staffICNumber: " + staffICNumber);
         int month = Integer.parseInt(monthString);
