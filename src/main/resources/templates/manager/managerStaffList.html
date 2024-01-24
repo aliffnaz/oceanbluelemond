@@ -123,6 +123,7 @@
                                 <th class="text-center">Staff Name</th>
                                 <th class="text-center">Staff IC Number</th>
                                 <th class="text-center">Staff Role</th>
+                                <th class="text-center">Staff Role</th>
                                 <th class="text-center">Action</th>
                             </thead>
                             <tbody>
@@ -130,6 +131,7 @@
                                     <td th:text="${staff.staffName}"></td>
                                     <td th:text="${staff.staffICNumber}"></td>
                                     <td th:text="${staff.staffRole}"></td>
+                                    <td th:text="${staff.staffStatus}"></td>
                                     <td class="text-center"><a th:href="@{/managerViewStaff?staffICNumber=}+${staff.staffICNumber}"><i class="bi bi-eye-fill"></i></a></td>
                                 </tr>
                             </tbody>
@@ -140,8 +142,6 @@
                         <div class="col"></div>
                         <div class="col"></div>
                         <div class="col-2 text-center"><a class="btn btn-dark" th:href="@{/managerAddStaff}">Add</a></div>
-
-
                     </div>
                 </div>
                 <div class="col"></div>
