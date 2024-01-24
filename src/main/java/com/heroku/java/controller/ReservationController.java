@@ -319,8 +319,15 @@ public class ReservationController {
         System.out.println("date end: " + dateEndDate);
         int durationOfStay = calculateDurationOfStay(dateStart, dateEnd);
         
-        boolean available = checkRoomAvailability(roomType, totalRoom, dateStartDate, dateEndDate, connection);
-        System.out.println(available);
+        // boolean available = checkRoomAvailability(roomType, totalRoom, dateStartDate, dateEndDate, connection);
+        // System.out.println(available);
+
+        java.sql.Date thisDate = new java.sql.Date(utilDate.getTime());
+
+        if (dateStartDate.before(thisDate)){
+            session.setAttribute("messege", "Date start cannot be earlier than today's date!");
+            return "redirect:/guestMakeRoomReservation";
+        }
 
              // Get available room numbers
              List<String> availableRoomNumbers = getAvailableRoomNumbers(roomType, totalRoom, dateStartDate, dateEndDate, connection);
@@ -384,6 +391,7 @@ public class ReservationController {
                     }
                 }
             } else {
+                session.setAttribute("messege", "Guest quantity exceeds max guest allowed!");
                 System.out.println("Guest quantity exceeds max guest allowed");
                 return "redirect:/guestMakeRoomReservation";
             }
@@ -407,8 +415,9 @@ public class ReservationController {
         }
         catch (Exception e) {
             e.printStackTrace();
-            System.out.println("reservation date: " + date);
-            return "redirect:/index";
+            session.setAttribute("messege", "Room not available");
+            System.out.println("Failed to make room reservation");
+            return "redirect:/guestMakeRoomReservation";
         }
 
         if (addon.equalsIgnoreCase("Yes")){
