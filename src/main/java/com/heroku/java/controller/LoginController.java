@@ -119,7 +119,7 @@ public class LoginController {
 
                 if (guestEmail.equals(email)
                         && guestPassword.equals(password)
-                        && staffStatus.equalsIgnoreCase("Employed") {
+                        && staffStatus.equalsIgnoreCase("Employed") ){
 
                     session.setAttribute("staffName", staffname);
                     session.setAttribute("staffICNumber", stafficnumber);
