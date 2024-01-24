@@ -272,7 +272,7 @@
 
      <script th:if="${alert eq 'success'}" th:inline="javascript">
     /* Display error message in an alert */
-    alert([[${alert}]]);
+    alert([[${session.messege}]]);
     </script>
 </body>
 </html>
