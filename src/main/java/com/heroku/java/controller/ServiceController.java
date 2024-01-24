@@ -43,7 +43,10 @@ public class ServiceController {
 
     @PostMapping("/managerAddService")
     public String managerAddService(Model model, @ModelAttribute("managerAddService") service service, roomService roomService, eventService eventService, HttpSession session) {
-    String staffICNumber = (String) session.getAttribute("staffICNumber") ;
+     if (session.getAttribute("messege") != null) {
+          session.removeAttribute("messege");
+        }
+        String staffICNumber = (String) session.getAttribute("staffICNumber") ;
         try {
             Connection connection = dataSource.getConnection();
             String sql = "INSERT INTO service(serviceName, serviceType, servicePrice, serviceStatus) VALUES(?, ?, ?, ?)";
@@ -98,9 +101,12 @@ public class ServiceController {
 
         } catch (SQLException e) {
             e.printStackTrace();
+             String messege = "Service Add Fail";
+                  session.setAttribute("messege", messege);
             return "redirect:/managerAddService?success=false";
         }
-
+ String messege = "Service Added Successfully ";
+                  session.setAttribute("messege", messege);
         return "redirect:/managerServiceList?success=true";
     }
 
@@ -251,6 +257,9 @@ public class ServiceController {
 
     @PostMapping("/managerUpdateService")
     public String managerUpdateService(@ModelAttribute("managerUpdateService") service service, roomService roomService, eventService eventService, HttpSession session) {
+         if (session.getAttribute("messege") != null) {
+          session.removeAttribute("messege");
+        }
         String staffICNumber = (String) session.getAttribute("staffICNumber") ;
         try {
             Connection connection = dataSource.getConnection();
@@ -285,8 +294,13 @@ public class ServiceController {
 
         } catch (SQLException e) {
             e.printStackTrace();
+             String messege = "Update Service Failed";
+                  session.setAttribute("messege", messege);
             return "redirect:/managerUpdateService?success=false";
         }
+        
+ String messege = "Successfully Updated";
+                  session.setAttribute("messege", messege);
         return "redirect:/managerServiceList?success=true";
     }
  }
