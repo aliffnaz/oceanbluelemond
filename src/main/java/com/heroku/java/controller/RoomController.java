@@ -246,6 +246,8 @@ public class RoomController {
             
             connection.close();
 
+            
+
           }catch(Exception e){
             e.printStackTrace();
              String messege = "Update Fail";
@@ -255,6 +257,7 @@ public class RoomController {
  String messege = "Successfully Updated";
                   session.setAttribute("messege", messege);
             return "redirect:/managerRoomList";
+              model.addAttribute("alert", "success");
         }
     
 
