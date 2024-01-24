@@ -94,6 +94,7 @@
         <th>Check-out Date</th>
         <th>Duration of Stay</th>
         <th>Total</th>
+        <th>Status</th>
       </tr>
       <tr th:each = "report : ${reports}">
         <td th:text="${report.reservationID}"></td>
@@ -103,6 +104,7 @@
         <td th:text="${report.dateEnd}"></td>
         <td th:text="${report.durationOfStay}"></td>
         <td th:text="${report.totalPayment}"></td>
+        <td th:text="${report.reserveStatus}"></td>
       </tr>
     </table>
     <br>
