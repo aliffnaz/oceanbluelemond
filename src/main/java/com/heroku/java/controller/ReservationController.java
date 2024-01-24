@@ -346,7 +346,7 @@ public class ReservationController {
         }
 
              // Get available room numbers
-             List<String> availableRoomNumbers = getAvailableRoomNumbers(roomType, totalRoom, dateStartDate, dateEndDate, connection);
+             List<String> availableRoomNumbers = getAvailableRoomNumbers(roomType, totalRoom, dateStartDate, dateEndDate, connection, session);
             int totalMaxGuests = availableRoomNumbers.stream()
             .mapToInt(roomNumber -> {
                 try{ 
