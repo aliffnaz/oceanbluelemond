@@ -937,7 +937,7 @@ public class ReservationController {
             Connection connection = dataSource.getConnection();
             String sql = "SELECT * from room " +
             "JOIN roomreservation ON room.roomnum = roomreservation.roomnum " +
-            "JOIN reservation ON reservation.reservationid = reservation.reservationid " +
+            "JOIN reservation ON reservation.reservationid = roomreservation.reservationid " +
             "WHERE reservation.reservationid = ?";
             final var statement = connection.prepareStatement(sql);
             statement.setInt(1, reservationID);
