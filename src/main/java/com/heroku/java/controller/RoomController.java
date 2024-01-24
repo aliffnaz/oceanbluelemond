@@ -89,7 +89,7 @@ String staffICNumber = (String) session.getAttribute("staffICNumber") ;
     }
 
     @PostMapping("/managerAddRoom")
-    public String managerAddRoom(@ModelAttribute("managerAddRoom")room room, HttpSession session, Model model){
+    public String managerAddRoom(@ModelAttribute("managerAddRoom")room room, HttpSession session, Model model, RedirectAttributes redirectAttributes){
         String staffICNumber = (String) session.getAttribute("staffICNumber") ;
 
         try {
@@ -120,15 +120,10 @@ String staffICNumber = (String) session.getAttribute("staffICNumber") ;
             connection.close();
                 
                 } catch (SQLException e) {
-                    if (e.getSQLState().equals("23505")) {
-                    e.printStackTrace();
-                    // SQLState 23505 corresponds to unique constraint violation
-                    model.addAttribute("errorMessage", "Room with this number already exists.");
-                    }
-                    else{
-                    e.printStackTrace();
-                    return "redirect:/managerAddRoom";
-                    }
+                  e.printStackTrace();
+                  String errorMessage = e.getMessage();
+                  redirectAttributes.addFlashAttribute("errorMessage", errorMessage);
+                  return "redirect/:managerAddRoom";
                 }
             return "redirect:/managerRoomList";
          }
