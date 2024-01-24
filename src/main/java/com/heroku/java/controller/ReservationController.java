@@ -322,8 +322,7 @@ public class ReservationController {
         // boolean available = checkRoomAvailability(roomType, totalRoom, dateStartDate, dateEndDate, connection);
         // System.out.println(available);
 
-        java.util.Date utilDate;
-        java.sql.Date thisDate = new java.sql.Date(utilDate.getTime());
+        //java.sql.Date thisDate = new java.sql.Date(utilDate.getTime());
 
         if (dateStartDate.before(thisDate)){
             session.setAttribute("messege", "Date start cannot be earlier than today's date!");
