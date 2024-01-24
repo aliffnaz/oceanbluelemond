@@ -276,13 +276,13 @@
 
     <script th:inline="javascript">
     /* Retrieve the flash attribute */
-    var errorMessage = /*[[${flash.errorMessage}]]*/ '';
+    var errorMessage = /*[[${#request.flashAttributes.errorMessage}]]*/ '';
 
     /* Check if there's an error message and display it in an alert */
     if (errorMessage) {
         alert(errorMessage);
     }
-    </script>
+</script>
 
 </body>
 
