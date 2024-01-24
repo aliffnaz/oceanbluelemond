@@ -1597,37 +1597,37 @@ public class ReservationController {
         if (month==01){ 
             monthString = "January";
         }
-        else if(month==02){ 
+        if(month==02){ 
             monthString = "February";
         } 
-        else if(month==03){ 
+        if(month==03){ 
             monthString = "March";
         } 
-        else if(month==04){ 
+        if(month==04){ 
             monthString = "April";
         } 
-        else if(month==05){ 
+        if(month==05){ 
             monthString = "May";
         } 
-        else if(month==06){ 
+        if(month==06){ 
             monthString = "June";
         } 
-        else if(month==07){ 
+        if(month==07){ 
             monthString = "July";
         } 
-        else if(month==08){ 
+        if(month==8){ 
             monthString = "August";
         } 
-        else if(month==09){ 
+        if(month==9){ 
             monthString = "September";
         } 
-        else if(month==10){ 
+        if(month==10){ 
             monthString = "October";
         } 
-        else if(month==11){ 
+        if(month==11){ 
             monthString = "November";
         } 
-        else{ 
+        if(month==12){ 
             monthString = "December";
         } 
 
