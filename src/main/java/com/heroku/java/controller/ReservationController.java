@@ -1553,7 +1553,7 @@ public class ReservationController {
             "JOIN roomreservation rr ON r.reservationid = rr.reservationid " +
             "JOIN room ON room.roomnum = rr.rromnum " +
             "WHERE EXTRACT(MONTH FROM r.datestart) = ? " +
-            "GROUP BY r.reservationid, r.datestart, r.dateend, r.durationofstay, room.roomtype r.totalpayment";
+            "GROUP BY r.reservationid, r.datestart, r.dateend, r.durationofstay, room.roomtype, r.totalpayment";
 
             final var statement = connection.prepareStatement(sql);
             statement.setInt(1, month);
