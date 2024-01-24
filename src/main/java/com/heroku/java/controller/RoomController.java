@@ -44,10 +44,6 @@ public class RoomController {
     @GetMapping("/managerRoomList")
     public String managerRoomList(Model model, HttpSession session) {
     String staffICNumber = (String) session.getAttribute("staffICNumber") ;
-    // Check if the errorMessage attribute is not null and remove it
-    if (session.getAttribute("errorMessage") != null) {
-      session.removeAttribute("errorMessage");
-    }
         List<room> rooms = new ArrayList<room>();
         // Retrieve the logged-in room's role from the session (syahir punya nih)
         //String staffsrole = (String) session.getAttribute("staffsrole");
@@ -143,10 +139,6 @@ public class RoomController {
          public String managerViewRoom(@RequestParam("roomNum") String roomNum, Model model,HttpSession session) {
              String staffICNumber = (String) session.getAttribute("staffICNumber") ;
            System.out.println("Room Number : " + roomNum);
-           // Check if the errorMessage attribute is not null and remove it
-            if (session.getAttribute("errorMessage") != null) {
-              session.removeAttribute("errorMessage");
-          }
            try {
              Connection connection = dataSource.getConnection();
              String sql = "SELECT roomnum, roomtype, maxguest, roomrate, roomsize, roomstatus FROM public.room WHERE roomnum = ?";
@@ -187,9 +179,6 @@ public class RoomController {
          public String managerUpdateRoom(@RequestParam("roomNum") String roomNum, Model model, HttpSession session) {
              String staffICNumber = (String) session.getAttribute("staffICNumber") ;
            System.out.println("Room Number : " + roomNum);
-           if (session.getAttribute("errorMessage") != null) {
-            session.removeAttribute("errorMessage");
-        }
            try {
              Connection connection = dataSource.getConnection();
              String sql = "SELECT roomnum, roomtype, maxguest, roomrate, roomsize, roomstatus FROM public.room WHERE roomnum = ?";
@@ -270,9 +259,6 @@ public class RoomController {
         @GetMapping("/staffRoomList")
     public String staffRoomList(Model model, HttpSession session) {
         String staffICNumber = (String) session.getAttribute("staffICNumber") ;
-        if (session.getAttribute("errorMessage") != null) {
-          session.removeAttribute("errorMessage");
-      }
 
         List<room> rooms = new ArrayList<room>();
         // Retrieve the logged-in room's role from the session (syahir punya nih)
@@ -364,9 +350,6 @@ public class RoomController {
          public String staffViewRoom(@RequestParam("roomNum") String roomNum, Model model, HttpSession session) {
              String staffICNumber = (String) session.getAttribute("staffICNumber") ;
            System.out.println("Room Number : " + roomNum);
-           if (session.getAttribute("errorMessage") != null) {
-            session.removeAttribute("errorMessage");
-        }
            try {
              Connection connection = dataSource.getConnection();
              String sql = "SELECT roomnum, roomtype, maxguest, roomrate, roomsize, roomstatus FROM public.room WHERE roomnum = ?";
@@ -406,9 +389,6 @@ public class RoomController {
          public String staffUpdateRoom(@RequestParam("roomNum") String roomNum, Model model, HttpSession session) {
              String staffICNumber = (String) session.getAttribute("staffICNumber") ;
            System.out.println("Room Number : " + roomNum);
-           if (session.getAttribute("errorMessage") != null) {
-            session.removeAttribute("errorMessage");
-        }
            try {
              Connection connection = dataSource.getConnection();
              String sql = "SELECT roomnum, roomtype, maxguest, roomrate, roomsize, roomstatus FROM public.room WHERE roomnum = ?";
