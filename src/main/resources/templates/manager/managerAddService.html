@@ -267,32 +267,5 @@
     <script th:src="@{stylesheets/js/jquery.flexslider.min.js}"></script>
     <script th:src="@{stylesheets/js/slider_func.js}"></script>
 
-    <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var serviceTypeField = document.getElementById('serviceType');
-        var roomServiceField = document.getElementById('roomServiceField');
-        var eventServiceField = document.getElementById('eventServiceField');
-
-        // Add event listener for changes in service type
-        serviceTypeField.addEventListener('input', toggleFieldsVisibility);
-
-        function toggleFieldsVisibility() {
-            // Hide both fields initially
-            roomServiceField.style.display = 'none';
-            eventServiceField.style.display = 'none';
-
-            // Show the appropriate field based on the selected service type
-            if (serviceTypeField.value === 'roomService') {
-                roomServiceField.style.display = 'block';
-            } else if (serviceTypeField.value === 'eventService') {
-                eventServiceField.style.display = 'block';
-            }
-        }
-
-        // Initial check on page load
-        toggleFieldsVisibility();
-    });
-</script>
-
-</body>
+    </body>
 </html>
