@@ -89,7 +89,7 @@ String staffICNumber = (String) session.getAttribute("staffICNumber") ;
     }
 
     @PostMapping("/managerAddRoom")
-    public String managerAddRoom(@ModelAttribute("managerAddRoom")room room, HttpSession session){
+    public String managerAddRoom(@ModelAttribute("managerAddRoom")room room, HttpSession session, Model model){
         String staffICNumber = (String) session.getAttribute("staffICNumber") ;
 
         try {
@@ -119,7 +119,7 @@ String staffICNumber = (String) session.getAttribute("staffICNumber") ;
             
             connection.close();
                 
-                } catch (Exception e) {
+                } catch (SQLException e) {
                     if (e.getSQLState().equals("23505")) {
                     // SQLState 23505 corresponds to unique constraint violation
                     model.addAttribute("errorMessage", "Room with this number already exists.");
