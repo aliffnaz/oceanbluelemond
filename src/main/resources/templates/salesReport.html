@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sales Report</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    .receipt {
+      margin: 50px auto;
+      width: 1000px;
+      border: 2px solid #000;
+      padding: 20px;
+    }
+    h2 {
+      text-align: center;
+    }
+    .receipt-info {
+      margin-bottom: 20px;
+      text-align: right;
+    }
+    .receipt-info span {
+      display: inline-block;
+      width: 150px;
+    }
+    .receipt-details {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    .receipt-details th,
+    .receipt-details td {
+      border: 1px solid #000;
+      padding: 4px;
+      text-align: left;
+    }
+
+
+    .header {
+      background-color: #f5f5f5;
+      padding: 20px;
+    }
+
+    .logo {
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .chalet-info {
+      display: inline-block;
+      margin-left: 20px;
+      vertical-align: middle;
+    }
+
+    .chalet-name {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .chalet-address {
+      font-size: 16px;
+    }
+
+    .contact-info {
+      font-size: 16px;
+    }
+
+    @media print {
+      .print-button {
+        display: none;
+      }
+
+    }
+    .center {
+    text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="receipt">
+    <div class="logo">
+        <img th:src="@{stylesheets/img/logo_report.png}" alt="Chalet Logo">
+      </div>
+      <div class="chalet-info">
+        <p class="chalet-name">D Chalet Ombak Biru</p>
+        <p class="chalet-address">Tepi pantai , seberang jalan</p>
+        <p class="contact-info">Phone: +601 3728 38019 | Email: dchaletombakbiru@gmail.com</p>
+      </div>
+    <h2>Sales Report for <span id="month"></span></h2>
+
+    <script>
+        // Retrieve the month value from the URL query parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const month = urlParams.get('month');
+    
+        // Display the retrieved month in the report
+        document.getElementById('month').textContent = month;
+    </script>
+
+    <canvas id="salesChart"></canvas>
+
+    <script>
+      // Daily sales data for a month
+      var dailySalesData = [
+        500, 800, 1200, 900, 1500, 1800, 2000, 1900, 2200, 2500, 2800, 3000,
+        2700, 3200, 3500, 3100, 3400, 3800, 4100, 3900, 4200, 4500, 4800, 5000,
+        4700, 5200, 5500, 5100, 5400, 5800
+      ];
+  
+      // Generate array of days for the month
+      var days = Array.from({ length: 30 }, (_, i) => i + 1);
+  
+      // Create chart using Chart.js
+      var ctx = document.getElementById('salesChart').getContext('2d');
+      var salesChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: days,
+          datasets: [{
+            label: 'Daily Sales',
+            data: dailySalesData,
+            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: 'Day'
+              }
+            },
+            y: {
+              title: {
+                display: true,
+                text: 'Sales (RM)'
+              }
+            }
+          }
+        }
+      });
+    </script>
+    
+  </div>
+  <div class="center">
+    <button class="print-button" onclick="goBack()">Back</button>
+    <button class="print-button" onclick="printPage()">Print</button>
+  </div>
+
+  <script>
+    function goBack() {
+      window.history.back();
+    }
+
+    function printPage() {
+      window.print();
+    }
+  </script>
+</body>
+</html>
