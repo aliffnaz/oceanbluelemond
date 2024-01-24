@@ -1594,18 +1594,42 @@ public class ReservationController {
             System.out.println("failed to generate report");
         }
 
-        if (month==01){ monthString = "January";}
-        else if(month==02){ monthString = "February";} 
-        else if(month==03){ monthString = "March";} 
-        else if(month==04){ monthString = "April";} 
-        else if(month==05){ monthString = "May";} 
-        else if(month==06){ monthString = "June";} 
-        else if(month==07){ monthString = "July";} 
-        else if(month==08){ monthString = "August";} 
-        else if(month==09){ monthString = "September";} 
-        else if(month==10){ monthString = "October";} 
-        else if(month==11){ monthString = "November";} 
-        else if(month==12){ monthString = "December";} 
+        if (month==01){ 
+            monthString = "January";
+        }
+        else if(month==02){ 
+            monthString = "February";
+        } 
+        else if(month==03){ 
+            monthString = "March";
+        } 
+        else if(month==04){ 
+            monthString = "April";
+        } 
+        else if(month==05){ 
+            monthString = "May";
+        } 
+        else if(month==06){ 
+            monthString = "June";
+        } 
+        else if(month==07){ 
+            monthString = "July";
+        } 
+        else if(month==08){ 
+            monthString = "August";
+        } 
+        else if(month==09){ 
+            monthString = "September";
+        } 
+        else if(month==10){ 
+            monthString = "October";
+        } 
+        else if(month==11){ 
+            monthString = "November";
+        } 
+        else{ 
+            monthString = "December";
+        } 
 
         session.setAttribute("month", monthString);
         return "reservationReport";
