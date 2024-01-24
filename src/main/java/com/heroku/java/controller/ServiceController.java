@@ -37,7 +37,14 @@ public class ServiceController {
     }
 
     @GetMapping("/managerAddService")
-    public String managerAddService() {
+    public String managerAddService(@RequestParam("success") boolean success) {
+  if (session.getAttribute("messege") != null) {
+          session.removeAttribute("messege");
+        }
+        if(success){
+             String messege = "Service Added Successfully ";
+                  session.setAttribute("messege", messege);
+        }
         return "manager/managerAddService";
     }
 
