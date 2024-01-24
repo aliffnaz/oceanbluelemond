@@ -954,7 +954,7 @@ public class ReservationController {
                 room.setRoomRate(roomRate);
                 room.setRoomNum(roomNum);
                 rooms.add(room);
-                model.addAttribute("room", room);
+                model.addAttribute("room", rooms);
             }
             connection.close();
             }
@@ -973,9 +973,11 @@ public class ReservationController {
                 statement.setInt(1, reservationID);
                 final var resultSet = statement.executeQuery();
 
+                if (resultSet.next()){
                 guest guest = new guest();
                 guest.setGuestName(resultSet.getString("guestName"));
                 model.addAttribute("guest", guest);
+            }
                 connection.close();
             }
             catch (SQLException e){
@@ -995,6 +997,7 @@ public class ReservationController {
                 final var resultSet = statement.executeQuery();
                 
                 List <service> services = new ArrayList<service>();
+                while (resultSet.next()){
                 String serviceName = resultSet.getString("servicename");
                 double servicePrice = resultSet.getDouble("serviceprice");
                 int serviceQuantity = resultSet.getInt("serviceQuantity");
@@ -1008,6 +1011,8 @@ public class ReservationController {
 
                 System.out.println("service added into array for guestViewRoomReservation");
                 services.add(service);
+                model.addAttribute("services", services);
+                }
                 connection.close();
             }
             catch (SQLException e){
@@ -1015,8 +1020,6 @@ public class ReservationController {
                 e.printStackTrace();
                 return "redirect:/index";
             }
-            model.addAttribute("rooms", rooms);
-            model.addAttribute("services", services);
 
         return "guest/guestViewRoomReservation";
     }
