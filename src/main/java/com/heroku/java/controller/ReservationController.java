@@ -322,6 +322,7 @@ public class ReservationController {
         // boolean available = checkRoomAvailability(roomType, totalRoom, dateStartDate, dateEndDate, connection);
         // System.out.println(available);
 
+        java.util.Date utilDate;
         java.sql.Date thisDate = new java.sql.Date(utilDate.getTime());
 
         if (dateStartDate.before(thisDate)){
