@@ -944,11 +944,12 @@ public class ReservationController {
             final var resultSet = statement.executeQuery();
 
             List<room> rooms = new ArrayList<room>();
-            String roomNum = resultSet.getString("roomNum");
-            String roomType = resultSet.getString("roomType");
-            double roomRate = resultSet.getDouble("roomRate");
 
-            while (resultSet.next()){
+            while (resultSet.next()){ 
+                String roomNum = resultSet.getString("roomNum");
+                String roomType = resultSet.getString("roomType");
+                double roomRate = resultSet.getDouble("roomRate");
+
                 room room = new room();
                 room.setRoomType(roomType);
                 room.setRoomRate(roomRate);
