@@ -3,7 +3,7 @@ package com.heroku.java.model;
 public class reservationService {
 
     private int reservationServiceID;
-    private String serviceID;
+    private int serviceID;
     private int reservationID;
     private int serviceDuration;
     private int serviceQuantity;
@@ -12,7 +12,7 @@ public class reservationService {
 
     }
 
-    public reservationService(int reservationServiceID, String serviceID, int reservationID, int serviceDuration, int serviceQuantity){
+    public reservationService(int reservationServiceID, int serviceID, int reservationID, int serviceDuration, int serviceQuantity){
       this.reservationServiceID = reservationServiceID;
       this.serviceID = serviceID;
       this.reservationID = reservationID;
@@ -26,10 +26,10 @@ public class reservationService {
 	public void setReservationServiceID(int reservationServiceID) {
 		this.reservationServiceID = reservationServiceID;
 	}
-	public String getServiceID() {
+	public int getServiceID() {
 		return serviceID;
 	}
-	public void setServiceID(String serviceID) {
+	public void setServiceID(int serviceID) {
 		this.serviceID = serviceID;
 	}
 	public int getReservationID() {
