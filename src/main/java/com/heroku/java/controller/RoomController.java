@@ -124,7 +124,7 @@ String staffICNumber = (String) session.getAttribute("staffICNumber") ;
                   e.printStackTrace();
                   String errorMessage = e.getMessage();
                   redirectAttributes.addFlashAttribute("errorMessage", errorMessage);
-                  return "redirect/:managerAddRoom";
+                  return "redirect:/managerAddRoom";
                 }
             return "redirect:/managerRoomList";
          }
