@@ -270,9 +270,9 @@
     <script th:src="@{stylesheets/js/jquery.flexslider.min.js}"></script>
     <script th:src="@{stylesheets/js/slider_func.js}"></script>
 
-    <script th:if="${session.errorMessage}" th:inline="javascript">
+     <script th:if="${session.messege}" th:inline="javascript">
     /* Display error message in an alert */
-    alert([[${session.errorMessage}]]);
+    alert([[${session.messege}]]);
     </script>
 </body>
 </html>
