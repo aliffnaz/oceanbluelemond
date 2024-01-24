@@ -264,7 +264,7 @@
                             <a th:href="@{/managerStaffUpdate?staffICNumber=}+${staff.staffICNumber}" class="btn btn-dark btn-md"
                                 style="border-radius: 3px 3px 3px 3px; height: auto; width:150px">Edit</a>
 
-                            <a th:href="@{/managerTerminatStaff}" class="btn btn-danger btn-md"
+                            <a th:href="@{/managerTerminatStaff?staffICNumber=}+${staff.staffICNumber}" class="btn btn-danger btn-md"
                                 style="border-radius: 3px 3px 3px 3px; height: auto; width:150px"
                                 onclick="success()">Terminate</a>
                         </div>
