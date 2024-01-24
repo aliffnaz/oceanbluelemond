@@ -83,8 +83,6 @@ public class RoomController {
         return "manager/managerRoomList";
         } catch (SQLException e) {
             e.printStackTrace();
-            String errorMessage = e.getMessage();
-            session.setAttribute("errorMessage", errorMessage);
             return "error";
         }
         
@@ -94,9 +92,10 @@ public class RoomController {
     public String managerAddRoom(@ModelAttribute("managerAddRoom")room room, HttpSession session, Model model, RedirectAttributes redirectAttributes){
         String staffICNumber = (String) session.getAttribute("staffICNumber") ;
         // Check if the errorMessage attribute is not null and remove it
-        if (session.getAttribute("errorMessage") != null) {
-          session.removeAttribute("errorMessage");
+         if (session.getAttribute("messege") != null) {
+          session.removeAttribute("messege");
         }
+
 
         try {
             Connection connection = dataSource.getConnection();
@@ -127,10 +126,13 @@ public class RoomController {
                 
                 } catch (SQLException e) {
                   e.printStackTrace();
-                  String errorMessage = e.getMessage();
-                  session.setAttribute("errorMessage", errorMessage);
+                  
+ String messege = "Update Fail "
+                  session.setAttribute("messege", messege);
                   return "redirect:/managerAddRoom";
                 }
+         String messege = "Successfully Added"
+                  session.setAttribute("messege", messege);
             return "redirect:/managerRoomList";
          }
 
@@ -166,8 +168,6 @@ public class RoomController {
              }
            } catch (Exception e) {
              e.printStackTrace();
-             String errorMessage = e.getMessage();
-             session.setAttribute("errorMessage", errorMessage);
            }
          
            return "manager/managerViewRoom";
@@ -206,8 +206,6 @@ public class RoomController {
              }
            } catch (Exception e) {
              e.printStackTrace();
-             String errorMessage = e.getMessage();
-             session.setAttribute("errorMessage", errorMessage);
            }
          
            return "manager/managerUpdateRoom";
@@ -218,9 +216,10 @@ public class RoomController {
         public String managerUpdateRoom(@ModelAttribute("managerUpdateRoom") room room, HttpSession session){
             String staffICNumber = (String) session.getAttribute("staffICNumber") ;
           System.out.println("pass here <<<<<<<");
-          if (session.getAttribute("errorMessage") != null) {
-            session.removeAttribute("errorMessage");
+         if (session.getAttribute("messege") != null) {
+          session.removeAttribute("messege");
         }
+
           try{
             Connection connection = dataSource.getConnection();
             String sql = "UPDATE room SET roomType=? ,maxGuest=?, roomRate=?, roomSize=?, roomStatus=? WHERE roomNum=?";
@@ -249,9 +248,12 @@ public class RoomController {
 
           }catch(Exception e){
             e.printStackTrace();
-            String errorMessage = e.getMessage();
-            session.setAttribute("errorMessage", errorMessage);
+             String messege = "Update Fail"
+                  session.setAttribute("messege", messege);
           }
+            
+ String messege = "Successfully Updated"
+                  session.setAttribute("messege", messege);
             return "redirect:/managerRoomList";
         }
     
@@ -299,8 +301,6 @@ public class RoomController {
         return "staff/staffRoomList";
         } catch (SQLException e) {
             e.printStackTrace();
-            String errorMessage = e.getMessage();
-            session.setAttribute("errorMessage", errorMessage);
             // Handle the exception as desired (e.g., show an error message)
             return "error";
         }
@@ -310,9 +310,9 @@ public class RoomController {
     @PostMapping("/staffAddRoom")
     public String staffAddRoom(@ModelAttribute("staffAddRoom")room room, HttpSession session){
         String staffICNumber = (String) session.getAttribute("staffICNumber") ;
-        if (session.getAttribute("errorMessage") != null) {
-          session.removeAttribute("errorMessage");
-      }
+        if (session.getAttribute("messege") != null) {
+          session.removeAttribute("messege");
+        }
 
         try {
             Connection connection = dataSource.getConnection();
@@ -338,10 +338,12 @@ public class RoomController {
                 
                 } catch (Exception e) {
                     e.printStackTrace();
-                    String errorMessage = e.getMessage();
-                    session.setAttribute("errorMessage", errorMessage);
+                     String messege = "Add Fail"
+                  session.setAttribute("messege", messege);
                     return "redirect:/staffAddRoom";
                 }
+         String messege = "Successfully Added"
+                  session.setAttribute("messege", messege);
             return "redirect:/staffRoomList";
          }
 
@@ -377,8 +379,6 @@ public class RoomController {
              }
            } catch (Exception e) {
              e.printStackTrace();
-             String errorMessage = e.getMessage();
-             session.setAttribute("errorMessage", errorMessage);
            }
          
            return "staff/staffViewRoom";
@@ -416,8 +416,6 @@ public class RoomController {
              }
            } catch (Exception e) {
              e.printStackTrace();
-             String errorMessage = e.getMessage();
-             session.setAttribute("errorMessage", errorMessage);
            }
          
            return "staff/staffUpdateRoom";
@@ -428,8 +426,8 @@ public class RoomController {
         public String staffUpdateRoom(@ModelAttribute("staffUpdateRoom") room room, HttpSession session){
             String staffICNumber = (String) session.getAttribute("staffICNumber") ;
           System.out.println("pass here <<<<<<<");
-          if (session.getAttribute("errorMessage") != null) {
-            session.removeAttribute("errorMessage");
+           if (session.getAttribute("messege") != null) {
+          session.removeAttribute("messege");
         }
           try{
             Connection connection = dataSource.getConnection();
@@ -459,9 +457,12 @@ public class RoomController {
 
           }catch(Exception e){
             e.printStackTrace();
-            String errorMessage = e.getMessage();
-            session.setAttribute("errorMessage", errorMessage);
+             String messege = "Update Fail"
+                  session.setAttribute("messege", messege);
           }
+            
+ String messege = "Successfully Updated"
+                  session.setAttribute("messege", messege);
             return "redirect:/staffRoomList";
         }
     }
