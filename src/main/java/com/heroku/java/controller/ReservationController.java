@@ -22,6 +22,7 @@ import com.heroku.java.model.*;
 
 import jakarta.servlet.http.HttpSession;
 
+import javax.net.ssl.HttpsURLConnection;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -77,8 +78,7 @@ public class ReservationController {
         return false;
     }
 
-    public static List<String> getAvailableRoomNumbers(String roomType, int totalRooms, Date startDate, Date endDate, Connection connection) throws SQLException {
-        HttpSession session;
+    public static List<String> getAvailableRoomNumbers(String roomType, int totalRooms, Date startDate, Date endDate, Connection connection, HttpSession session) throws SQLException {
         // Query to get available room numbers
         String sql = "SELECT roomnum FROM room WHERE roomtype = ? AND roomstatus = 'Available' " +
                 "AND roomnum NOT IN (SELECT roomnum FROM roomreservation rr " +
