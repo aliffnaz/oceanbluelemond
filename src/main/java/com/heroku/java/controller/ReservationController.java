@@ -1549,12 +1549,12 @@ public class ReservationController {
         int month = Integer.parseInt(monthString);
 
         try (Connection connection = dataSource.getConnection()){
-            String sql = "SELECT r.reservationid, r.datestart, r.dateend, COUNT(rr.roomnum) AS totalroom, room.roomtype, r.durationofstay, r.totalpayment " +
+            String sql = "SELECT r.reservationid, r.datestart, r.dateend, COUNT(rr.roomnum) AS totalroom, room.roomtype, r.durationofstay, r.totalpayment, r.reservestatus " +
             "FROM reservation r " +
             "JOIN roomreservation rr ON r.reservationid = rr.reservationid " +
             "JOIN room ON room.roomnum = rr.roomnum " +
             "WHERE EXTRACT(MONTH FROM r.datestart) = ? " +
-            "GROUP BY r.reservationid, r.datestart, r.dateend, r.durationofstay, room.roomtype, r.totalpayment";
+            "GROUP BY r.reservationid, r.datestart, r.dateend, r.durationofstay, room.roomtype, r.totalpayment, r.reservestatus";
 
             final var statement = connection.prepareStatement(sql);
             statement.setInt(1, month);
@@ -1570,6 +1570,7 @@ public class ReservationController {
                 String roomType = resultSet.getString("roomType");
                 int totalRoom = resultSet.getInt("totalRoom");
                 double totalPayment = resultSet.getDouble("totalPayment");
+                String reserveStatus = resultSet.getString("reserveStatus");
 
                 Map<String, Object> report = new HashMap<>();
                 report.put("reservationID", reservationID);
@@ -1579,6 +1580,7 @@ public class ReservationController {
                 report.put("roomType", roomType);
                 report.put("totalRoom", totalRoom);
                 report.put("totalPayment", totalPayment);
+                report.put("reserveStatus", reserveStatus);
 
                 reports.add(report);
 
