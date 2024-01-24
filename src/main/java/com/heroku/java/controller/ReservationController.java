@@ -322,12 +322,12 @@ public class ReservationController {
         // boolean available = checkRoomAvailability(roomType, totalRoom, dateStartDate, dateEndDate, connection);
         // System.out.println(available);
 
-        //java.sql.Date thisDate = new java.sql.Date(utilDate.getTime());
+        java.sql.Date thisDate = new java.sql.Date(utilDate.getTime());
 
-        // if (dateStartDate.before(thisDate)){
-        //     session.setAttribute("messege", "Date start cannot be earlier than today's date!");
-        //     return "redirect:/guestMakeRoomReservation";
-        // }
+        if (dateStartDate.before(thisDate)){
+            session.setAttribute("messege", "Date start cannot be earlier than today's date!");
+            return "redirect:/guestMakeRoomReservation";
+        }
 
              // Get available room numbers
              List<String> availableRoomNumbers = getAvailableRoomNumbers(roomType, totalRoom, dateStartDate, dateEndDate, connection);
@@ -1535,6 +1535,59 @@ public class ReservationController {
         }
         System.out.println("sukses update status");
         return "redirect:/managerUpdateStatus";
+
+    }
+
+    @PostMapping("/generateReport")
+    public String generateReport(HttpSession session, Model model, @RequestParam("month") String monthString){
+        String guestICNumber = (String) session.getAttribute("guestICNumber");
+        String staffICNumber = (String) session.getAttribute("staffICNumber");
+        System.out.println("guestICNumber: " + guestICNumber);
+        System.out.println("staffICNumber: " + staffICNumber);
+        int month = Integer.parseInt(monthString);
+
+        try (Connection connection = dataSource.getConnection()){
+            String sql = "SELECT r.reservationid, r.datestart, r.dateend, COUNT(rr.roomid) AS totalroom, room.roomtype, r.durationofstay, r.totalpayment " +
+            "FROM reservation r " +
+            "JOIN roomreservation rr ON r.reservationid = rr.reservationid " +
+            "JOIN room ON room.roomnum = rr.rromnum " +
+            "WHERE EXTRACT(MONTH FROM r.datestart) = ? " +
+            "GROUP BY r.reservationid, r.datestart, r.dateend, r.durationofstay, room.roomtype r.totalpayment";
+
+            final var statement = connection.prepareStatement(sql);
+            statement.setInt(1, month);
+            final var resultSet = statement.executeUpdate();
+
+            List<Map<String, Object>> reports = new ArrayList<>();
+            while(resultSet.next()){
+                int reservationID = resultSet.getInt("reservationid");
+                int durationOfStay = resultSet.getInt("durationOfStay");
+                Date dateStart = resultSet.getDate("dateStart");
+                Date dateEnd = resultSet.getDate("dateEnd");
+                String roomType = resultSet.getString("roomType");
+                int totalRoom = resultSet.getInt("totalRoom");
+                double totalPayment = resultSet.getDouble("totalPayment");
+
+                Map<String, Object> report = new HashMap<>();
+                report.put("reservationID", reservationID);
+                report.put("durationOfStay", durationOfStay);
+                report.put("dateStart", dateStart);
+                report.put("dateEnd", dateEnd);
+                report.put("roomType", roomType);
+                report.put("totalRoom", totalRoom);
+                report.put("totalPayment", totalPayment);
+
+                reports.add(report);
+
+            }
+            connection.close();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            System.out.println("failed to generate report");
+        }
+        model.setAttribute("reports", reports);
+        return "reservationReport";
 
     }
 }
