@@ -16,6 +16,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.sql.Date;
 import java.time.Duration;
+import java.time.LocalDate;
 
 import com.heroku.java.model.*;
 
@@ -323,12 +324,18 @@ public class ReservationController {
         // boolean available = checkRoomAvailability(roomType, totalRoom, dateStartDate, dateEndDate, connection);
         // System.out.println(available);
 
-        // java.sql.Date thisDate = new java.sql.Date(utilDate.getTime());
+        // Convert java.sql.Date to LocalDate
+        LocalDate userDate = dateStartDate.toLocalDate();
 
-        // if (dateStartDate.before(thisDate)){
-        //     session.setAttribute("messege", "Date start cannot be earlier than today's date!");
-        //     return "redirect:/guestMakeRoomReservation";
-        // }
+        // Get today's date
+        LocalDate currentDate = LocalDate.now();
+
+        // Check if the user's date is not earlier than today
+        if (dateStartDate.isBefore(currentDate)) {
+            session.setAttribute("messege", "Selected date cannot be earlier than today");
+            // You might want to return to the same page or redirect with an error message
+            return "redirect:/guestMakeRoomReservation";
+        }
 
              // Get available room numbers
              List<String> availableRoomNumbers = getAvailableRoomNumbers(roomType, totalRoom, dateStartDate, dateEndDate, connection);
