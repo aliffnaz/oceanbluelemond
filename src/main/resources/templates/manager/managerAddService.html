@@ -33,35 +33,7 @@
 
     <!-- YOUR CUSTOM CSS -->
     <link th:href="@{stylesheets/css/custom.css}" rel="stylesheet">
-
-<!--     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var serviceTypeField = document.getElementById('serviceType');
-            var roomServiceField = document.getElementById('roomServiceField');
-            var eventServiceField = document.getElementById('eventServiceField');
     
-            // Initial check on page load
-            toggleFieldsVisibility();
-    
-            // Add event listener for changes in service type
-            serviceTypeField.addEventListener('change', function () {
-                toggleFieldsVisibility();
-            });
-    
-            function toggleFieldsVisibility() {
-                // Hide both fields initially
-                roomServiceField.style.display = 'none';
-                eventServiceField.style.display = 'none';
-    
-                // Show the appropriate field based on the selected service type
-                if (serviceTypeField.value === 'roomService') {
-                    roomServiceField.style.display = 'block';
-                } else if (serviceTypeField.value === 'eventService') {
-                    eventServiceField.style.display = 'block';
-                }
-            }
-        });
-    </script> -->
 </head>
     
 <body class="datepicker_mobile_full">
@@ -152,7 +124,6 @@
                     </div>
 
                     <form method="post" th:action="@{/managerAddService}" modelAttribute="managerAddService" th:object="(${managerAddService})">
-                   
                     <div class="row m-3">
                         <div class="col-1"></div>
                         <div class="col pt-3">
@@ -174,7 +145,6 @@
                         <div class="col-8">
                             <div class="custom_select">
                             <select name="serviceType" id="serviceType" class="wide">
-                                <option value="" selected>Choose</option>
                                 <option value="roomService">Room Service</option>
                                 <option value="eventService">Event Service</option>
                             </select>
@@ -186,11 +156,11 @@
                         <div class="col-1"></div>
                         <div class="col pt-3">
                             <span>
-                                <h6>Balance</h6>
+                                <h6>Max Quantity</h6>
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="number" name="balance" id="" class="form-control" placeholder="0">
+                            <input type="number" name="maxQuantity" id="" class="form-control" placeholder="0">
                         </div>
                         </div>
                     </div>
