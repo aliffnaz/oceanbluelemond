@@ -105,6 +105,9 @@ public class ReservationController {
                 e.printStackTrace();
             }
         }
+        if (availableRoomNumbers.size() < 1){
+            session.setAttribute("messege", "No available room for that combination of Room Type and Date");
+        }
     
         return availableRoomNumbers;
     }
@@ -280,6 +283,10 @@ public class ReservationController {
   room room, roomReservation roomReservation, staff staff, Model model, @RequestParam("addon") String addon,
   @RequestParam("roomType") String roomType, @RequestParam("date") String date){
 
+    // Check if the errorMessage attribute is not null and remove it
+    if (session.getAttribute("messege") != null) {
+        session.removeAttribute("messege");
+      }
     try{
         Connection connection = dataSource.getConnection();
 
@@ -399,7 +406,7 @@ public class ReservationController {
                     }
                 }
             } else {
-                session.setAttribute("messege", "Guest quantity exceeds max guest allowed!");
+                session.setAttribute("messege", "Something went wrong :(  Please ensure that you entered valid data");
                 System.out.println("Guest quantity exceeds max guest allowed");
                 return "redirect:/guestMakeRoomReservation";
             }
