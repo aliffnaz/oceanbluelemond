@@ -110,6 +110,7 @@ public class LoginController {
                 String guestEmail = resultSet.getString("staffEmail");
                 String guestPassword = resultSet.getString("staffPassword");
                 String staffrole = resultSet.getString("staffrole");
+                String staffStatus = resultSet.getString("staffStatus");
 
                 System.out.println(staffname);
                 // if they're admin
@@ -117,7 +118,8 @@ public class LoginController {
                 System.out.println("Password status : " + guestPassword.equals(password));
 
                 if (guestEmail.equals(email)
-                        && guestPassword.equals(password)) {
+                        && guestPassword.equals(password)
+                        && staffStatus.equalsIgnoreCase("Employed") {
 
                     session.setAttribute("staffName", staffname);
                     session.setAttribute("staffICNumber", stafficnumber);
