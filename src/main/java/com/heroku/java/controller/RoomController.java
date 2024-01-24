@@ -121,6 +121,7 @@ String staffICNumber = (String) session.getAttribute("staffICNumber") ;
                 
                 } catch (SQLException e) {
                     if (e.getSQLState().equals("23505")) {
+                    e.printStackTrace();
                     // SQLState 23505 corresponds to unique constraint violation
                     model.addAttribute("errorMessage", "Room with this number already exists.");
                     }
@@ -440,45 +441,3 @@ String staffICNumber = (String) session.getAttribute("staffICNumber") ;
     }
 
 
-    /* delete controller
-    @GetMapping("/deletestaff")
-    public String deleteProfileCust(HttpSession session, Model model, HttpSession session) {
-    String staffICNumber = (String) session.getAttribute("staffICNumber") ;
-        String fullname = (String) session.getAttribute("roomType");
-        int userid = (int) session.getAttribute("roomNum");
-
-        if (fullname != null) {
-            try (Connection connection = dataSource.getConnection()) {
-
-                // Delete user record
-                final var deleteStaffStatement = connection.prepareStatement("DELETE FROM staffs WHERE roomNum=?");
-                deleteStaffStatement.setInt(1, userid);
-                int userRowsAffected = deleteStaffStatement.executeUpdate();
-
-                if (userRowsAffected > 0) {
-                    // Deletion successful
-                    // You can redirect to a success page or perform any other desired actions
-                    
-                    session.invalidate();
-                    connection.close();
-                    return "redirect:/";
-                } else {
-                    // Deletion failed
-                    connection.close();
-                     System.out.println("Delete Failed");
-                    return "admin/deletestaff";
-                   
-                }
-            } catch (SQLException e) {
-                // Handle any potential exceptions (e.g., log the error, display an error page)
-                e.printStackTrace();
-
-                // Deletion failed
-                // You can redirect to an error page or perform any other desired actions
-                System.out.println("Error");
-            }
-        }
-        // Username is null or deletion failed, handle accordingly (e.g., redirect to an
-        // error page)
-        return "staff/stafforder";
-    }*/
