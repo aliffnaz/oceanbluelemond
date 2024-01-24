@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -84,17 +83,7 @@
         <p class="chalet-address">Tepi pantai, Seberang jalan</p>
         <p class="contact-info">Phone: +601 3728 38019 | Email: dchaletombakbiru@gmail.com</p>
       </div>
-    <h2>Reservation Report for <span id="month" th:text="${session.month}"></span></h2>
-
-    <script>
-        // Retrieve the month value from the URL query parameter
-        const urlParams = new URLSearchParams(window.location.search);
-        const month = urlParams.get('month');
-    
-        // Display the retrieved month in the report
-        document.getElementById('month').textContent = month;
-        
-      </script>
+    <h2>Reservation Report for <span th:text="${session.month}"></span></h2>
 
     <table class="receipt-details">
       <tr>
