@@ -127,11 +127,11 @@ public class RoomController {
                 } catch (SQLException e) {
                   e.printStackTrace();
                   
- String messege = "Update Fail "
+                 String messege = "Update Fail ";
                   session.setAttribute("messege", messege);
                   return "redirect:/managerAddRoom";
                 }
-         String messege = "Successfully Added"
+                 String messege = "Successfully Added";
                   session.setAttribute("messege", messege);
             return "redirect:/managerRoomList";
          }
@@ -248,11 +248,11 @@ public class RoomController {
 
           }catch(Exception e){
             e.printStackTrace();
-             String messege = "Update Fail"
+             String messege = "Update Fail";
                   session.setAttribute("messege", messege);
           }
             
- String messege = "Successfully Updated"
+ String messege = "Successfully Updated";
                   session.setAttribute("messege", messege);
             return "redirect:/managerRoomList";
         }
@@ -338,11 +338,11 @@ public class RoomController {
                 
                 } catch (Exception e) {
                     e.printStackTrace();
-                     String messege = "Add Fail"
+                     String messege = "Add Fail";
                   session.setAttribute("messege", messege);
                     return "redirect:/staffAddRoom";
                 }
-         String messege = "Successfully Added"
+         String messege = "Successfully Added";
                   session.setAttribute("messege", messege);
             return "redirect:/staffRoomList";
          }
@@ -457,11 +457,11 @@ public class RoomController {
 
           }catch(Exception e){
             e.printStackTrace();
-             String messege = "Update Fail"
+             String messege = "Update Fail";
                   session.setAttribute("messege", messege);
           }
             
- String messege = "Successfully Updated"
+ String messege = "Successfully Updated";
                   session.setAttribute("messege", messege);
             return "redirect:/staffRoomList";
         }
