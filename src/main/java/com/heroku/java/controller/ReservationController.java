@@ -331,7 +331,7 @@ public class ReservationController {
         LocalDate currentDate = LocalDate.now();
 
         // Check if the user's date is not earlier than today
-        if (dateStartDate.isBefore(currentDate)) {
+        if (userDate.isBefore(currentDate)) {
             session.setAttribute("messege", "Selected date cannot be earlier than today");
             // You might want to return to the same page or redirect with an error message
             return "redirect:/guestMakeRoomReservation";
