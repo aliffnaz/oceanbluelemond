@@ -54,7 +54,7 @@
                 <div class="col-6">
                     <nav>
                         <ul>
-                            <li><a th:href="@{/guestMakeRoomReservation}" class="btn_1 btn_scrollto">Book Now</a></li>
+                            <li><a th:href="@{/guestLogin}" class="btn_1 btn_scrollto">Book Now</a></li>
                             <li>
                                 <div class="hamburger_2 open_close_nav_panel">
                                     <div class="hamburger__box">
@@ -74,32 +74,23 @@
         <a th:href="@{#}" class="closebt open_close_nav_panel"><i class="bi bi-x"></i></a>
         <div class="logo_panel"><img th:src="@{stylesheets/img/logo_sticky.png}" width="135" height="45" alt=""></div>
         <div class="sidebar-navigation">
-            <nav>
-
-                <ul class="level-1">
-                    <li><a th:href="@{/index}"><i class="bi bi-house" style="font-size: 25px;"></i> &nbsp;Home</a></li>
-                    <li><a th:href="@{/guestProfile}"><i class="bi bi-person-square" style="font-size: 25px;"></i>
-                            &nbsp;Profile</a></li>
-                    <li><a th:href="@{/guestViewRoom}"><i class="bi bi-door-open" style="font-size: 25px;"></i>
-                            &nbsp;Our
-                            Rooms</a></li>
-                    <li><a th:href="@{/guestMakeRoomReservation}"><i class="bi bi-plus" style="font-size: 25px;"></i>
-                            &nbsp;Make Reservation</a></li>
-                    <li><a th:href="@{/guestRoomReservation}"><i class="bi bi-receipt-cutoff"
-                                style="font-size: 25px;"></i> &nbsp;Records</a></li>
-                    <li class="mt-5"><a th:href="@{/logout}" class="btn btn-danger pt-3" type="button"
-                            style="color: white; border-radius: 10px 10px 10px 10px; height: 50px;">Logout</a></li>
-                </ul>
-                <div class="panel_footer">
-                    <div class="copy">
-                        <div class="container py-3">
-                            © Ombak Biru Chalet Malaysia
-                        </div>
-                    </div>
-                </div>
-                <!-- /panel_footer -->
-            </nav>
-        </div>
+                                <nav>
+                                    <ul class="level-1">
+                                        <li><a th:href="@{/index_logout}"><i class="bi bi-house" style="font-size: 25px;"></i> &nbsp;Home</a></li>
+                                        <li><a th:href="@{/logoutViewRoom}"><i class="bi bi-door-open" style="font-size: 25px;"></i> &nbsp;Our Rooms</a></li>
+                                        <li><a th:href="@{/guestLogin}"><i class="bi bi-plus" style="font-size: 25px;"></i> &nbsp;Make Reservation</a></li>
+                                        <li class="mt-5"><a th:href="@{/guestLogin}" class="btn btn-success pt-3" style="color: white; border-radius: 10px 10px 10px 10px; height: 50px;">Login</a></li>
+                                    </ul>
+                                    <div class="panel_footer">
+                                        <div class="copy">
+                                            <div class="container py-3">
+                                                © Ombak Biru Chalet Malaysia
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /panel_footer -->
+                                </nav>
+                            </div>
         <!-- /sidebar-navigation -->
     </div>
     <!-- /nav_panel -->
@@ -122,7 +113,7 @@
                         <small>D'Chalet Ombak Biru</small>
                         <h2>Our Rooms</h2>
                         <p class="lead">Feel free to choose from our two types of rooms: <strong>Standard</strong> and <strong>Deluxe</strong>.</p>
-                        <p><a th:href="@{/guestMakeRoomReservation}" class="btn_1 outline">Book Now</a></p>
+                        <p><a th:href="@{/guestLogin}" class="btn_1 outline">Book Now</a></p>
                     </div>
                 </div>
                 <div class="col-xl-7">
