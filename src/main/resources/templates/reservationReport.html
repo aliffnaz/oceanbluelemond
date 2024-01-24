@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -99,57 +98,28 @@
     <table class="receipt-details">
       <tr>
         <th>ID</th>
-        <th>Guest</th>
-        <th>Standard</th>
-        <th>Deluxe</th>
+        <th>Total Room</th>
+        <th>Room Type</th>
         <th>Check-in Date</th>
         <th>Check-out Date</th>
-        <th>Total Nights</th>
-        <th width="20%">Room Service</th>
+        <th>Duration of Stay</th>
         <th>Total</th>
       </tr>
-      <tr>
-        <td>DCOB001</td>
-        <td>Ahmad Bin Ali</td>
-        <td>1</td>
-        <td>-</td>
-        <td>June 29, 2023</td>
-        <td>June 30, 2023</td>
-        <td>1</td>
-        <td>-</td>
-        <td>RM 150.00</td>
+      <tr th:each = "report : ${reports}">
+        <td th:text="report.reservationID"></td>
+        <td th:text="report.totalRoom"></td>
+        <td th:text="report.roomType"></td>
+        <td th:text="report.dateStart"></td>
+        <td th:text="report.dateEnd"></td>
+        <td th:text="report.durationOfStay"></td>
+        <td th:text="report.totalPayment"></td>
       </tr>
-      <tr>
-        <td>DCOB001</td>
-        <td>Ahmad Bin Ali</td>
-        <td>1</td>
-        <td>-</td>
-        <td>June 29, 2023</td>
-        <td>June 30, 2023</td>
-        <td>1</td>
-        <td>BBQ Set<br>Toto Set A</td>
-        <td>RM 150.00</td>
-      </tr>
-      <tr>
-        <td>DCOB001</td>
-        <td>Ahmad Bin Ali</td>
-        <td>1</td>
-        <td>-</td>
-        <td>June 29, 2023</td>
-        <td>June 30, 2023</td>
-        <td>1</td>
-        <td>-</td>
-        <td>RM 150.00</td>
-      </tr>
-      
     </table>
     <br>
     <div class="receipt-info">
-        <span>Total Caj Warisan:</span>
-        RM 6.00
         <br>
         <span>Total Amount:</span>
-        RM 810.00
+        <span th:text="session.totalPaymentReport"></span>
     </div>
   </div>
 
