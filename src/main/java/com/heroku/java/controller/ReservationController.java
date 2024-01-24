@@ -78,6 +78,7 @@ public class ReservationController {
     }
 
     public static List<String> getAvailableRoomNumbers(String roomType, int totalRooms, Date startDate, Date endDate, Connection connection) throws SQLException {
+        HttpSession session;
         // Query to get available room numbers
         String sql = "SELECT roomnum FROM room WHERE roomtype = ? AND roomstatus = 'Available' " +
                 "AND roomnum NOT IN (SELECT roomnum FROM roomreservation rr " +
