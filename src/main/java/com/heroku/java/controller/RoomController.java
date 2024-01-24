@@ -213,7 +213,7 @@ public class RoomController {
         
          
          @PostMapping("/managerUpdateRoom")
-        public String managerUpdateRoom(@ModelAttribute("managerUpdateRoom") room room, HttpSession session){
+        public String managerUpdateRoom(@ModelAttribute("managerUpdateRoom") room room, HttpSession session, Model model){
             String staffICNumber = (String) session.getAttribute("staffICNumber") ;
           System.out.println("pass here <<<<<<<");
          if (session.getAttribute("messege") != null) {
