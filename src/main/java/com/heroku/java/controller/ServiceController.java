@@ -91,8 +91,9 @@ public class ServiceController {
                 } else if (serviceType.equalsIgnoreCase("Event Service")) {
                     String eventServiceSql = "INSERT INTO eventService(serviceid, eventcapacity) VALUES (?, ?)";
                     final var eventServiceStatement = connection.prepareStatement(eventServiceSql);
+                    int eventCapacity = eventService.getEventCapacity();
                     eventServiceStatement.setInt(1, serviceID);
-                    eventServiceStatement.setInt(2, eventService.getEventCapacity());
+                    eventServiceStatement.setInt(2, eventCapacity);
 
                     eventServiceStatement.executeUpdate();
                 }
