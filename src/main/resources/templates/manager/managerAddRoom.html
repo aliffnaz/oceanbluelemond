@@ -274,9 +274,14 @@
     <script th:src="@{stylesheets/js/jquery.flexslider.min.js}"></script>
     <script th:src="@{stylesheets/js/slider_func.js}"></script>
 
-    <script th:if="${errorMessage}">
-        /* Display an alert with the error message */
-        alert([[${errorMessage}]]);
+    <script th:inline="javascript">
+    /* Retrieve the flash attribute */
+    var errorMessage = /*[[${flash.errorMessage}]]*/ '';
+
+    /* Check if there's an error message and display it in an alert */
+    if (errorMessage) {
+        alert(errorMessage);
+    }
     </script>
 
 </body>
