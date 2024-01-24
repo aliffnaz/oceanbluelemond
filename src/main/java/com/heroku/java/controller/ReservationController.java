@@ -1551,7 +1551,7 @@ public class ReservationController {
             String sql = "SELECT r.reservationid, r.datestart, r.dateend, COUNT(rr.roomid) AS totalroom, room.roomtype, r.durationofstay, r.totalpayment " +
             "FROM reservation r " +
             "JOIN roomreservation rr ON r.reservationid = rr.reservationid " +
-            "JOIN room ON room.roomnum = rr.rromnum " +
+            "JOIN room ON room.roomnum = rr.roomnum " +
             "WHERE EXTRACT(MONTH FROM r.datestart) = ? " +
             "GROUP BY r.reservationid, r.datestart, r.dateend, r.durationofstay, room.roomtype, r.totalpayment";
 
