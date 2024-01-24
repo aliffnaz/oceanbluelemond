@@ -14,6 +14,7 @@ public class reservation {
     private String reserveStatus;
     private int totalRoom;
     private double totalPayment;
+    private String staffICNumber;
 
     public reservation() {
 
@@ -172,6 +173,20 @@ public class reservation {
      */
     public void setTotalPayment(double totalPayment) {
         this.totalPayment = totalPayment;
+    }
+
+        /**
+     * @return String return the guestICNumber
+     */
+    public String getStaffICNumber() {
+        return getStaffICNumber;
+    }
+
+    /**
+     * @param guestICNumber the guestICNumber to set
+     */
+    public void setStaffICNumber(String staffICNumber) {
+        this.staffICNumber = staffICNumber;
     }
 
 }
