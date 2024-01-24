@@ -120,8 +120,14 @@ String staffICNumber = (String) session.getAttribute("staffICNumber") ;
             connection.close();
                 
                 } catch (Exception e) {
+                    if (e.getSQLState().equals("23505")) {
+                    // SQLState 23505 corresponds to unique constraint violation
+                    model.addAttribute("errorMessage", "Room with this number already exists.");
+                    }
+                    else{
                     e.printStackTrace();
-                    return "redirect:/index";
+                    return "redirect:/managerAddRoom";
+                    }
                 }
             return "redirect:/managerRoomList";
          }
