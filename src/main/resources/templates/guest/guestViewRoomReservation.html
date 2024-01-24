@@ -210,45 +210,25 @@
                         <div class="col-1"></div>
                         <div class="col pt-3">
                             <span>
-                                <h6>Room Number</h6>
+                                <h6>Room</h6>
                             </span>
                         </div>
                         <div class="col-8">
                             <table class="table table-hover table-bordered">
                                 <thead>
                                     <th class="text-center">Room Number</th>
+                                    <th class="text-center">Room Type</th>
+                                    <th class="text-center">Room Rate</th>
                                 </thead>
                                 <tbody>
                                     <tr th:each="room : ${rooms}">
                                         <td class="text-center" th:text="${room.roomNum}"></td>
+                                        <td class="text-center" th:text="${room.roomType}"></td>
+                                        <td class="text-center" th:text="${room.roomRate}"></td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
-
-                        <div class="row m-3">
-                            <div class="col-1"></div>
-                            <div class="col pt-3">
-                                <span>
-                                    <h6>Room Type</h6>
-                                </span>
-                            </div>
-                            <div class="col-8">
-                                <input type="text" name="roomType" id="roomType" th:value="${room.roomType}" class="qty form-control" placeholder="" readonly>
-                            </div>
-                            </div>
-
-                            <div class="row m-3">
-                                <div class="col-1"></div>
-                                <div class="col pt-3">
-                                    <span>
-                                        <h6>Room Rate</h6>
-                                    </span>
-                                </div>
-                                <div class="col-8">
-                                    <input type="text" name="roomRate" id="roomRate" th:value="${room.roomRate}" class="qty form-control" placeholder="" readonly>
-                                </div>
-                                </div>
 
                         <div class="row m-3">
                             <div class="col-1"></div>
