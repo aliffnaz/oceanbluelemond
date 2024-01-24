@@ -201,7 +201,7 @@ public class StaffController {
     @GetMapping("/managerStaffUpdate")
          public String managerStaffUpdate(@RequestParam("staffICNumber") String staffICNumber, Model model, HttpSession session) {
            String userStaffICNumber = (String) session.getAttribute("staffICNumber") ;
-           System.out.println("Staff IC Number : " + staffICNumber);
+           System.out.println("Staff IC Number : " + userStaffICNumber);
            try {
             Connection connection = dataSource.getConnection();
             String sql = "SELECT stafficnumber, staffname, staffgender, staffphonenumber, staffrace, staffreligion, staffmaritalstatus, staffaddress, staffrole, staffstatus, managerICNumber, staffemail FROM public.staff where stafficnumber = ?";
@@ -249,7 +249,7 @@ public class StaffController {
          
          @PostMapping("/managerStaffUpdate")
         public String managerStaffUpdate(@ModelAttribute("managerStaffUpdate") staff staff, HttpSession session){
-	  String userStaffICNumber = (String) session.getAttribute("staffICNumber") ;
+	        String userStaffICNumber = (String) session.getAttribute("staffICNumber") ;
           System.out.println("pass here <<<<<<<");
           try{
             Connection connection = dataSource.getConnection();
@@ -266,7 +266,7 @@ public class StaffController {
             String staffRole = staff.getStaffRole();
             String staffStatus = staff.getStaffStatus();
             String managerICNumber = staff.getManagerICNumber();
-	        String staffEmail = staff.getStaffEmail();
+	          String staffEmail = staff.getStaffEmail();
 
             statement.setString(1, staffName);
             statement.setString(2, staffGender);
@@ -293,7 +293,7 @@ public class StaffController {
 
         @GetMapping("/staffProfile")
          public String staffProfile(HttpSession session, Model model) {
-	  String staffICNumber = (String) session.getAttribute("staffICNumber") ;
+	        String staffICNumber = (String) session.getAttribute("staffICNumber") ;
           System.out.println("Staff IC Number : " + staffICNumber);
            try {
              Connection connection = dataSource.getConnection();
@@ -341,7 +341,7 @@ public class StaffController {
 
          @GetMapping("/staffUpdate")
          public String staffUpdate(HttpSession session, Model model) {
-	  String staffICNumber = (String) session.getAttribute("staffICNumber") ;
+	        String staffICNumber = (String) session.getAttribute("staffICNumber") ;
           System.out.println("Staff IC Number : " + staffICNumber);
            try {
             Connection connection = dataSource.getConnection();
@@ -391,7 +391,7 @@ public class StaffController {
          
          @PostMapping("/staffUpdate")
          public String staffUpdate1(HttpSession session, @ModelAttribute("staffUpdate1") staff staff, Model model) {
-	  String staffICNumber = (String) session.getAttribute("staffICNumber") ;
+	        String staffICNumber = (String) session.getAttribute("staffICNumber") ;
           System.out.println("Staff IC Number : " + staffICNumber);
            try {
 
@@ -411,7 +411,6 @@ public class StaffController {
             String managerICNumber = staff.getManagerICNumber();
             String staffEmail = staff.getStaffEmail();
             String staffPassword = staff.getStaffPassword();
-            
             
             statement.setString(1, staffName);
             statement.setString(2, staffGender);
@@ -440,45 +439,21 @@ public class StaffController {
             return "redirect:/staffProfile";
         }
 
-    // /* delete controller
-    // @GetMapping("/deletestaff")
-    // public String deleteProfileCust(HttpSession session, Model model) {
-    //     String fullname = (String) session.getAttribute("roomType");
-    //     int userid = (int) session.getAttribute("roomNum");
+        @GetMapping("/managerTerminateStaff")
+        public String managerTerminateStaff(HttpSession session, @RequestParam("staffICNumber") String staffICNumber){
+          String userStaffICNumber = (String) session.getAttribute("staffICNumber");
 
-    //     if (fullname != null) {
-    //         try (Connection connection = dataSource.getConnection()) {
-
-    //             // Delete user record
-    //             final var deleteStaffStatement = connection.prepareStatement("DELETE FROM staffs WHERE roomNum=?");
-    //             deleteStaffStatement.setInt(1, userid);
-    //             int userRowsAffected = deleteStaffStatement.executeUpdate();
-
-    //             if (userRowsAffected > 0) {
-    //                 // Deletion successful
-    //                 // You can redirect to a success page or perform any other desired actions
-                    
-    //                 session.invalidate();
-    //                 connection.close();
-    //                 return "redirect:/";
-    //             } else {
-    //                 // Deletion failed
-    //                 connection.close();
-    //                  System.out.println("Delete Failed");
-    //                 return "admin/deletestaff";
-                   
-    //             }
-    //         } catch (SQLException e) {
-    //             // Handle any potential exceptions (e.g., log the error, display an error page)
-    //             e.printStackTrace();
-
-    //             // Deletion failed
-    //             // You can redirect to an error page or perform any other desired actions
-    //             System.out.println("Error");
-    //         }
-    //     }
-    //     // Username is null or deletion failed, handle accordingly (e.g., redirect to an
-    //     // error page)
-    //     return "staff/stafforder";
-    // }*/
-    }
+          try{
+            Connection connection = dataSource.getConnection();
+            String sql = "UPDATE staff SET staffstatus=? WHERE stafficnumber=?";
+            final var statement = connection.prepareStatement(sql);
+            statement.setString(1, "Terminated");
+            statement.setString(2, staffICNumber);
+          }
+          catch(SQLException e){
+            System.out.println("failed to terminate this staff");
+            e.printStackTrace();
+          }
+          return "redirect:/managerStaffList";
+        }
+}
