@@ -83,7 +83,8 @@ String staffICNumber = (String) session.getAttribute("staffICNumber") ;
         return "manager/managerRoomList";
         } catch (SQLException e) {
             e.printStackTrace();
-            // Handle the exception as desired (e.g., show an error message)
+            String errorMessage = e.getMessage();
+            session.setAttribute("errorMessage", errorMessage);
             return "error";
         }
         
@@ -161,6 +162,8 @@ String staffICNumber = (String) session.getAttribute("staffICNumber") ;
              }
            } catch (Exception e) {
              e.printStackTrace();
+             String errorMessage = e.getMessage();
+             session.setAttribute("errorMessage", errorMessage);
            }
          
            return "manager/managerViewRoom";
@@ -199,6 +202,8 @@ String staffICNumber = (String) session.getAttribute("staffICNumber") ;
              }
            } catch (Exception e) {
              e.printStackTrace();
+             String errorMessage = e.getMessage();
+             session.setAttribute("errorMessage", errorMessage);
            }
          
            return "manager/managerUpdateRoom";
@@ -237,6 +242,8 @@ String staffICNumber = (String) session.getAttribute("staffICNumber") ;
 
           }catch(Exception e){
             e.printStackTrace();
+            String errorMessage = e.getMessage();
+            session.setAttribute("errorMessage", errorMessage);
           }
             return "redirect:/managerRoomList";
         }
@@ -285,6 +292,8 @@ String staffICNumber = (String) session.getAttribute("staffICNumber") ;
         return "staff/staffRoomList";
         } catch (SQLException e) {
             e.printStackTrace();
+            String errorMessage = e.getMessage();
+            session.setAttribute("errorMessage", errorMessage);
             // Handle the exception as desired (e.g., show an error message)
             return "error";
         }
@@ -319,7 +328,9 @@ String staffICNumber = (String) session.getAttribute("staffICNumber") ;
                 
                 } catch (Exception e) {
                     e.printStackTrace();
-                    return "redirect:/index";
+                    String errorMessage = e.getMessage();
+                    session.setAttribute("errorMessage", errorMessage);
+                    return "redirect:/staffAddRoom";
                 }
             return "redirect:/staffRoomList";
          }
@@ -356,6 +367,8 @@ String staffICNumber = (String) session.getAttribute("staffICNumber") ;
              }
            } catch (Exception e) {
              e.printStackTrace();
+             String errorMessage = e.getMessage();
+             session.setAttribute("errorMessage", errorMessage);
            }
          
            return "staff/staffViewRoom";
@@ -393,6 +406,8 @@ String staffICNumber = (String) session.getAttribute("staffICNumber") ;
              }
            } catch (Exception e) {
              e.printStackTrace();
+             String errorMessage = e.getMessage();
+             session.setAttribute("errorMessage", errorMessage);
            }
          
            return "staff/staffUpdateRoom";
@@ -431,6 +446,8 @@ String staffICNumber = (String) session.getAttribute("staffICNumber") ;
 
           }catch(Exception e){
             e.printStackTrace();
+            String errorMessage = e.getMessage();
+            session.setAttribute("errorMessage", errorMessage);
           }
             return "redirect:/staffRoomList";
         }
