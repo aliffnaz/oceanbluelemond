@@ -179,7 +179,7 @@ public class reservation {
      * @return String return the guestICNumber
      */
     public String getStaffICNumber() {
-        return getStaffICNumber;
+        return staffICNumber;
     }
 
     /**
