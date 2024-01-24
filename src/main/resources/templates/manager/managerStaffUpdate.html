@@ -169,8 +169,8 @@
                         </div>
                         <div class="col-8">
                             <select name="staffGender" id="staffGender" class="form-control form-select">
-                                <option th:value="Male" Selected>Male</option>
-                                <option th:value="Female">Female</option>
+                                <option th:value="Male" th:selected="${staff.staffGender eq 'Male'}">Male</option>
+                                <option th:value="Female" th:selected="${staff.staffGender eq 'Female'}">Female</option>
                             </select>
                         </div>
                     </div>
@@ -184,9 +184,9 @@
                         </div>
                         <div class="col-8">
                             <select name="staffRace" id="staffRace" class="form-control form-select">
-                                <option th:value="Melayu" Selected>Melayu</option>
-                                <option th:value="Cina">Cina</option>
-                                <option th:value="India">India</option>
+                                <option th:value="Melayu" th:selected="${staff.staffRace eq 'Melayu'}">Melayu</option>
+                                <option th:value="Cina" th:selected="${staff.staffRace eq 'Cina'}">Cina</option>
+                                <option th:value="India" th:selected="${staff.staffRace eq 'India'}">India</option>
                             </select>
                         </div>
                     </div>
@@ -200,9 +200,10 @@
                         </div>
                         <div class="col-8">
                             <select name="staffReligion" id="staffReligion" class="form-control form-select">
-                                <option th:value="Islam" Selected>Islam</option>
-                                <option th:value="Budha">Budha</option>
-                                <option th:value="Christian">Christian</option>
+                                <option th:value="Islam" th:selected="${staff.staffReligion eq 'Islam'}">Islam</option>
+                                <option th:value="Budha" th:selected="${staff.staffReligion eq 'Budha'}">Budha</option>
+                                <option th:value="Christian" th:selected="${staff.staffReligion eq 'Christian'}">Christian</option>
+                                 <option th:value="Others" th:selected="${staff.staffReligion eq 'Others'}">Others</option>
                             </select>
                         </div>
                     </div>
@@ -216,10 +217,10 @@
                         </div>
                         <div class="col-8">
                             <select name="staffMaritalStatus" id="staffMaritalStatus" class="form-control form-select">
-                                <option th:value="Single" Selected>Single</option>
-                                <option th:value="Married">Married</option>
-                                <option th:value="Divorce">Divorce</option>
-                                <option th:value="Widowed">Widowed</option>
+                                <option th:value="Single" th:selected="${staff.staffMaritalStatus eq 'Single'}">Single</option>
+                                <option th:value="Married" th:selected="${staff.staffMaritalStatus eq 'Married'}">Married</option>
+                                <option th:value="Divorce" th:selected="${staff.staffMaritalStatus eq 'Divorce'}">Divorce</option>
+                                <option th:value="Widowed" th:selected="${staff.staffMaritalStatus eq 'Widowed'}">Widowed</option>
                             </select>
 
                         </div>
@@ -234,9 +235,9 @@
                         </div>
                         <div class="col-8">
                             <select name="staffRole" id="staffRole" class="form-control form-select">
-                                <option th:value="Manager" Selected>Manager</option>
-                                <option th:value="Office">Office</option>
-                                <option th:value="Finanace">Finanace</option>
+                                <option th:value="Manager" th:selected="${staff.staffRole eq 'Manager'}">Manager</option>
+                                <option th:value="Office" th:selected="${staff.staffRole eq 'Office'}">Office</option>
+                                <option th:value="Finanace" th:selected="${staff.staffRole eq 'Finanace'}">Finanace</option>
                             </select>
 
                         </div>
@@ -251,8 +252,8 @@
                         </div>
                         <div class="col-8">
                             <select name="staffStatus" id="staffStatus" class="form-control form-select">
-                                <option th:value="Employed" Selected>Employed</option>
-                                <option th:value="Terminated">Terminated</option>
+                                <option th:value="Employed" th:selected="${staff.staffStatus eq 'Employed'}">Employed</option>
+                                <option th:value="Terminated" th:selected="${staff.staffStatus eq 'Terminated'}">Terminated</option>
                             </select>
 
                         </div>
