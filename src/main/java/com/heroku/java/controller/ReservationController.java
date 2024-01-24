@@ -1583,7 +1583,7 @@ public class ReservationController {
 
                 totalPaymentReport = totalPaymentReport + totalPayment;
             }
-            model.setAttribute("reports", reports);
+            model.addAttribute("reports", reports);
             session.setAttribute("totalPaymentReport", totalPaymentReport);
             connection.close();
         }
