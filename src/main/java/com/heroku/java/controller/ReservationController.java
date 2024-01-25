@@ -1654,10 +1654,52 @@ public class ReservationController {
   @GetMapping("/managerHome")
     public String managerHome(@RequestParam(name = "success", required = false) Boolean success, HttpSession session) {
     String staffICNumber = (String) session.getAttribute("staffICNumber") ;
-      // try {
-      //   Connection connection = dataSource.getConnection();
-      // }
+    Connection connection = dataSource.getConnection();
+    double totalStandard = 0;
+    double totalDeluxe = 0;
+      try{
+        String sqlStandard = "select totalpayment from reservation r "
+        + "JOIN roomreservation rr ON r.reservationid = rr.reservationid "
+        + "JOIN room ON rr.roomnum = room.roomnum "
+        + "WHERE room.roomtype = ?";
+        final var statement = connection.prepareStatement(sqlStandard);
+        statement.setString(1, "Standard Room");
+        final var resultSet = statement.executeQuery();
+        while (resultSet.next()){
+            double totalPayment = resultSet.getDouble("totalpayment");
+            totalStandard = totalStandard + totalPayment;
+        }
+        session.setAttribute("totalStandard", totalStandard);
+        connection.close();
+        
+      }
+      catch (Exception e){
+        e.printStackTrace();
+        session.setAttribute("messege", e);
+      }
+
+      try{
+        String sqlDeluxe = "select totalpayment from reservation r "
+        + "JOIN roomreservation rr ON r.reservationid = rr.reservationid "
+        + "JOIN room ON rr.roomnum = room.roomnum "
+        + "WHERE room.roomtype = ?";
+        final var statement = connection.prepareStatement(sqlDeluxe);
+        statement.setString(1, "Deluxe Room");
+        final var resultSet = statement.executeQuery();
+        while (resultSet.next()){
+            double totalPayment = resultSet.getDouble("totalpayment");
+            totalDeluxe = totalDeluxe + totalPayment;
+        }
+        session.setAttribute("totalDeluxe", totalDeluxe);
+        connection.close();
+        
+      }
+      catch (Exception e){
+        e.printStackTrace();
+        session.setAttribute("messege", e);
+      }
       
+    double totalOverall = totalStandard + totalDeluxe;
     return "manager/managerHome";
 }
 }
