@@ -1654,9 +1654,9 @@ public class ReservationController {
   @GetMapping("/managerHome")
     public String managerHome(@RequestParam(name = "success", required = false) Boolean success, HttpSession session) {
     String staffICNumber = (String) session.getAttribute("staffICNumber") ;
-      try {
-        Connection connection = dataSource.getConnection();
-      }
+      // try {
+      //   Connection connection = dataSource.getConnection();
+      // }
       
     return "manager/managerHome";
 }
