@@ -107,7 +107,7 @@ public class StaffController {
             String staffAddress = staff.getStaffAddress();
             String staffRole = staff.getStaffRole();
             String staffStatus = "Employed";
-            String managerICNumber = staff.getManagerICNumber();
+            String managerICNumber = userStaffICNumber;
             String staffEmail = staff.getStaffEmail();
             String staffPassword = staff.getStaffPassword();
             
@@ -258,7 +258,7 @@ public class StaffController {
             String staffRole = staff.getStaffRole();
             String staffStatus = staff.getStaffStatus();
             String managerICNumber = staff.getManagerICNumber();
-	          String staffEmail = staff.getStaffEmail();
+	    String staffEmail = staff.getStaffEmail();
 
             statement.setString(1, staffName);
             statement.setString(2, staffGender);
