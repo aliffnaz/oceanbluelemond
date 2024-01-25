@@ -1654,16 +1654,16 @@ public class ReservationController {
   @GetMapping("/managerHome")
     public String managerHome(@RequestParam(name = "success", required = false) Boolean success, HttpSession session) {
     String staffICNumber = (String) session.getAttribute("staffICNumber") ;
-    Connection connection = dataSource.getConnection();
     double totalStandard = 0;
     double totalDeluxe = 0;
-      try{
+      try (Connection connection = dataSource.getConnection()){
         String sqlStandard = "select totalpayment from reservation r "
         + "JOIN roomreservation rr ON r.reservationid = rr.reservationid "
         + "JOIN room ON rr.roomnum = room.roomnum "
-        + "WHERE room.roomtype = ?";
+        + "WHERE room.roomtype = ? AND r.reservestatus = ?";
         final var statement = connection.prepareStatement(sqlStandard);
         statement.setString(1, "Standard Room");
+        statement.setString(2, "Available");
         final var resultSet = statement.executeQuery();
         while (resultSet.next()){
             double totalPayment = resultSet.getDouble("totalpayment");
@@ -1678,13 +1678,14 @@ public class ReservationController {
         session.setAttribute("messege", e);
       }
 
-      try{
+      try(Connection connection = dataSource.getConnection()){
         String sqlDeluxe = "select totalpayment from reservation r "
         + "JOIN roomreservation rr ON r.reservationid = rr.reservationid "
         + "JOIN room ON rr.roomnum = room.roomnum "
-        + "WHERE room.roomtype = ?";
+        + "WHERE room.roomtype = ? AND r.reservestatus=?";
         final var statement = connection.prepareStatement(sqlDeluxe);
         statement.setString(1, "Deluxe Room");
+        statement.setString(2, "Available");
         final var resultSet = statement.executeQuery();
         while (resultSet.next()){
             double totalPayment = resultSet.getDouble("totalpayment");
