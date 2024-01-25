@@ -373,6 +373,9 @@ public class GuestController {
 
     @PostMapping("/guestUpdate")
     public String guestUpdate1(HttpSession session, @ModelAttribute("guestUpdate1") guest guest, Model model) {
+        if (session.getAttribute("messege") != null) {
+          session.removeAttribute("messege");
+        }
         String guestICNumber = (String) session.getAttribute("guestICNumber");
         System.out.println("pass here <<<<<<<");
         try {
