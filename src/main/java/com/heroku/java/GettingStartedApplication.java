@@ -89,11 +89,11 @@ public String staffGenerateReport(HttpSession session) {
 
 // for manager
 
-@GetMapping("/managerHome")
-public String managerHome(@RequestParam(name = "success", required = false) Boolean success, HttpSession session) {
-    String staffICNumber = (String) session.getAttribute("staffICNumber") ;
-    return "manager/managerHome";
-}
+// @GetMapping("/managerHome")
+// public String managerHome(@RequestParam(name = "success", required = false) Boolean success, HttpSession session) {
+//     String staffICNumber = (String) session.getAttribute("staffICNumber") ;
+//     return "manager/managerHome";
+// }
 
 @GetMapping("/managerAddRoom")
 public String managerAddRoom(HttpSession session) {
