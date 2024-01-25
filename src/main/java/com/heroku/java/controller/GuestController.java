@@ -405,8 +405,10 @@ public class GuestController {
 
         } catch (Exception e) {
             e.printStackTrace();
+            session.setAttribute("messege", "Update Failed");
         }
         return "redirect:/guestProfile";
+         session.setAttribute("messege", "Successfully Update");
     }
 }
 
