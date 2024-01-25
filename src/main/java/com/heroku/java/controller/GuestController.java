@@ -404,11 +404,13 @@ public class GuestController {
             connection.close();
 
         } catch (Exception e) {
+             session.setAttribute("messege", "Update Failed");
             e.printStackTrace();
-            session.setAttribute("messege", "Update Failed");
+           
         }
+          session.setAttribute("messege", "Successfully Update");
         return "redirect:/guestProfile";
-         session.setAttribute("messege", "Successfully Update");
+       
     }
 }
 
