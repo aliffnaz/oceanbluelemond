@@ -1663,7 +1663,7 @@ public class ReservationController {
         + "WHERE room.roomtype = ? AND r.reservestatus = ?";
         final var statement = connection.prepareStatement(sqlStandard);
         statement.setString(1, "Standard Room");
-        statement.setString(2, "Available");
+        statement.setString(2, "Paid");
         final var resultSet = statement.executeQuery();
         while (resultSet.next()){
             double totalPayment = resultSet.getDouble("totalpayment");
@@ -1685,7 +1685,7 @@ public class ReservationController {
         + "WHERE room.roomtype = ? AND r.reservestatus=?";
         final var statement = connection.prepareStatement(sqlDeluxe);
         statement.setString(1, "Deluxe Room");
-        statement.setString(2, "Available");
+        statement.setString(2, "Paid");
         final var resultSet = statement.executeQuery();
         while (resultSet.next()){
             double totalPayment = resultSet.getDouble("totalpayment");
