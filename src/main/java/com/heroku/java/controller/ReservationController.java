@@ -1673,7 +1673,7 @@ public class ReservationController {
         connection.close();
         
       }
-      catch (Exception e){
+      catch (SQLException e){
         e.printStackTrace();
         session.setAttribute("messege", e);
       }
@@ -1694,7 +1694,7 @@ public class ReservationController {
         connection.close();
         
       }
-      catch (Exception e){
+      catch (SQLException e){
         e.printStackTrace();
         session.setAttribute("messege", e);
       }
