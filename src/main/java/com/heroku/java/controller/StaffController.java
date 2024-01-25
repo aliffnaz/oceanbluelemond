@@ -383,6 +383,9 @@ public class StaffController {
          
          @PostMapping("/staffUpdate")
          public String staffUpdate1(HttpSession session, @ModelAttribute("staffUpdate1") staff staff, Model model) {
+		 if (session.getAttribute("messege") != null) {
+          session.removeAttribute("messege");
+        }
 	        String staffICNumber = (String) session.getAttribute("staffICNumber") ;
           System.out.println("Staff IC Number : " + staffICNumber);
            try {
@@ -426,8 +429,10 @@ public class StaffController {
                 
                 } catch (Exception e) {
                     e.printStackTrace();
+		   session.setAttribute("messege", "Update Fail");
                     return "redirect:/index";
                 }
+		 
             return "redirect:/staffProfile";
         }
 
