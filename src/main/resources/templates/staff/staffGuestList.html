@@ -49,6 +49,12 @@
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
 
+        <script>
+   $(document).ready(function () {
+      $('#guestTable').DataTable();
+   });
+</script>
+
 </head>
 
 <body class="datepicker_mobile_full">
@@ -216,11 +222,7 @@
     <script th:src="@{stylesheets/js/jquery.flexslider.min.js}"></script>
     <script th:src="@{stylesheets/js/slider_func.js}"></script>
 
-    <script>
-   $(document).ready(function () {
-      $('#guestTable').DataTable();
-   });
-</script>
+
 
 </body>
 
