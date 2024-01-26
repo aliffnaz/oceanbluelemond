@@ -35,6 +35,20 @@
 
     <!-- YOUR CUSTOM CSS -->
     <link th:href="@{stylesheets/css/custom.css}" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+<!-- DataTables CSS -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+<!-- DataTables JavaScript -->
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+
 </head>
 
 <body class="datepicker_mobile_full">
@@ -119,7 +133,7 @@
                         </span>
                     </div>
                     <div class="row mx-2">
-                        <table class="table table-hover table-bordered">
+                        <table class="table table-hover table-bordered" id="guestTable">
                             <thead style="vertical-align: middle;">
                                 <th class="text-center">Guest IC Number</th>
                                 <th class="text-center">Guest Name</th>
@@ -201,6 +215,12 @@
     <!-- SPECIFIC SCRIPTS -->
     <script th:src="@{stylesheets/js/jquery.flexslider.min.js}"></script>
     <script th:src="@{stylesheets/js/slider_func.js}"></script>
+
+    <script>
+   $(document).ready(function () {
+      $('#guestTable').DataTable();
+   });
+</script>
 
 </body>
 
