@@ -1701,6 +1701,7 @@ public class ReservationController {
       }
       
     double totalOverall = totalStandard + totalDeluxe;
+    session.setAttribute("totalOverall", totalOverall);
     return "manager/managerHome";
 }
 }
