@@ -98,13 +98,10 @@
         </div>
 
         <div class="container mt-5 mb-5 align-items-center">
-
             <div class="row">
                 <div class="col"></div>
             </div>
-
             <div class="col-md card card-body py-5">
-                
                 <div class="row my-3 text-center">
                     <span>
                         <h2>Search Reservations</h2>
@@ -112,20 +109,20 @@
                 </div>
                 <!-- Add a search input field -->
                 <input type="text" id="searchInput" placeholder="Enter Reservation ID/Check-In Date/Check-Out Date/Status">
-
+        
                 <div class="row my-3 text-center">
                     <span>
                         <h2>Reservation Records</h2>
                     </span>
                 </div>
-
+        
                 <div class="row mx-2">
                     <div class="pagination">
                         <button id="prevPage">Previous</button>
                         <span id="currentPage"></span>
                         <button id="nextPage">Next</button>
                     </div>
-                    <table class="table table-hover table-bordered">
+                    <table id="reservationTable" class="table table-hover table-bordered">
                         <thead>
                             <th class="text-center">Reservation ID</th>
                             <th class="text-center">Total Room</th>
@@ -137,6 +134,7 @@
                             <th class="text-center">Action</th>
                         </thead>
                         <tbody>
+                            <!-- This part will be dynamically populated with reservation data -->
                             <tr th:each="reservation : ${reservations}">
                                 <td th:text="${reservation.reservationID}"></td>
                                 <td th:text="${reservation.totalRoom}"></td>
@@ -145,17 +143,20 @@
                                 <td th:text="${reservation.dateEnd}"></td>
                                 <td th:text="${reservation.totalPayment}"></td>
                                 <td th:text="${reservation.reserveStatus}"></td>
-                                <td class="text-center"><a th:href="@{/managerViewReservation?reservationID=}+${reservation.reservationID}">
+                                <td class="text-center">
+                                    <a th:href="@{/managerViewReservation(reservationID=${reservation.reservationID})}">
                                         <div class="bi bi-eye-fill" style="font-size: 20px;"></div>
-                                    </a></td>
+                                    </a>
+                                </td>
                             </tr>
+                            <!-- End of dynamic data -->
                         </tbody>
                     </table>
                 </div>
-                <div class="col">
-                </div>
+                <div class="col"></div>
             </div>
         </div>
+        
     </main>
 
 <footer class="revealed">
@@ -209,6 +210,69 @@
     <script th:src="@{stylesheets/js/jquery.flexslider.min.js}"></script>
     <script th:src="@{stylesheets/js/slider_func.js}"></script> 
 
+    <script>
+        // Function to handle search input
+        document.getElementById("searchInput").addEventListener("input", function() {
+            var filter = this.value.toLowerCase();
+            var rows = document.querySelectorAll("#reservationTable tbody tr");
+            
+            rows.forEach(function(row) {
+                var cells = row.querySelectorAll("td");
+                var shouldDisplay = false;
+                
+                cells.forEach(function(cell) {
+                    if (cell.textContent.toLowerCase().includes(filter)) {
+                        shouldDisplay = true;
+                    }
+                });
+                
+                if (shouldDisplay) {
+                    row.style.display = ""; // Show row
+                } else {
+                    row.style.display = "none"; // Hide row
+                }
+            });
+        });
+    
+        // Function to handle pagination
+        var currentPage = 0;
+        var rowsPerPage = 10;
+        var rows = document.querySelectorAll("#reservationTable tbody tr");
+    
+        function showPage(page) {
+            rows.forEach(function(row, index) {
+                if (index >= page * rowsPerPage && index < (page + 1) * rowsPerPage) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
+            });
+            document.getElementById("currentPage").textContent = "Page " + (page + 1);
+        }
+    
+        function prevPage() {
+            if (currentPage > 0) {
+                currentPage--;
+                showPage(currentPage);
+            }
+        }
+    
+        function nextPage() {
+            if ((currentPage + 1) * rowsPerPage < rows.length) {
+                currentPage++;
+                showPage(currentPage);
+            }
+        }
+    
+        // Initialize
+        showPage(currentPage);
+    
+        // Pagination buttons
+        document.getElementById("prevPage").addEventListener("click", prevPage);
+        document.getElementById("nextPage").addEventListener("click", nextPage);
+    </script>
+    
+
 </body>
  <script th:if="${session.messege}" th:inline="javascript">
     /* Display error message in an alert */
@@ -249,53 +313,4 @@
         });
     });
 </script>
-
-<script>
-    // Number of rows to display per page
-    var rowsPerPage = 10;
-    var currentPage = 1;
-
-    // Function to display rows for the current page
-    function displayRowsForPage() {
-        var rows = document.querySelectorAll("#reservationTable tbody tr");
-        var startIdx = (currentPage - 1) * rowsPerPage;
-        var endIdx = startIdx + rowsPerPage;
-
-        // Loop through all rows and show/hide based on current page
-        rows.forEach(function(row, idx) {
-            if (idx >= startIdx && idx < endIdx) {
-                row.style.display = ""; // Show row
-            } else {
-                row.style.display = "none"; // Hide row
-            }
-        });
-
-        // Update current page display
-        document.getElementById("currentPage").textContent = "Page " + currentPage;
-    }
-
-    // Function to handle next page button click
-    document.getElementById("nextPage").addEventListener("click", function() {
-        var totalRows = document.querySelectorAll("#reservationTable tbody tr").length;
-        var totalPages = Math.ceil(totalRows / rowsPerPage);
-        
-        if (currentPage < totalPages) {
-            currentPage++;
-            displayRowsForPage();
-        }
-    });
-
-    // Function to handle previous page button click
-    document.getElementById("prevPage").addEventListener("click", function() {
-        if (currentPage > 1) {
-            currentPage--;
-            displayRowsForPage();
-        }
-    });
-
-    // Initially display rows for the first page
-    displayRowsForPage();
-</script>
-
-
 </html>
