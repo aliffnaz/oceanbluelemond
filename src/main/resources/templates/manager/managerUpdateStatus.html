@@ -120,6 +120,11 @@
                 </div>
 
                 <div class="row mx-2">
+                    <div class="pagination">
+                        <button id="prevPage">Previous</button>
+                        <span id="currentPage"></span>
+                        <button id="nextPage">Next</button>
+                    </div>
                     <table class="table table-hover table-bordered">
                         <thead>
                             <th class="text-center">Reservation ID</th>
@@ -244,5 +249,53 @@
         });
     });
 </script>
+
+<script>
+    // Number of rows to display per page
+    var rowsPerPage = 10;
+    var currentPage = 1;
+
+    // Function to display rows for the current page
+    function displayRowsForPage() {
+        var rows = document.querySelectorAll("#reservationTable tbody tr");
+        var startIdx = (currentPage - 1) * rowsPerPage;
+        var endIdx = startIdx + rowsPerPage;
+
+        // Loop through all rows and show/hide based on current page
+        rows.forEach(function(row, idx) {
+            if (idx >= startIdx && idx < endIdx) {
+                row.style.display = ""; // Show row
+            } else {
+                row.style.display = "none"; // Hide row
+            }
+        });
+
+        // Update current page display
+        document.getElementById("currentPage").textContent = "Page " + currentPage;
+    }
+
+    // Function to handle next page button click
+    document.getElementById("nextPage").addEventListener("click", function() {
+        var totalRows = document.querySelectorAll("#reservationTable tbody tr").length;
+        var totalPages = Math.ceil(totalRows / rowsPerPage);
+        
+        if (currentPage < totalPages) {
+            currentPage++;
+            displayRowsForPage();
+        }
+    });
+
+    // Function to handle previous page button click
+    document.getElementById("prevPage").addEventListener("click", function() {
+        if (currentPage > 1) {
+            currentPage--;
+            displayRowsForPage();
+        }
+    });
+
+    // Initially display rows for the first page
+    displayRowsForPage();
+</script>
+
 
 </html>
