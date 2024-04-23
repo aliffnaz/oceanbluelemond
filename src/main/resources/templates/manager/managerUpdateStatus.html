@@ -104,6 +104,9 @@
             </div>
 
             <div class="col-md card card-body py-5">
+                
+                <!-- Add a search input field -->
+                <input type="text" id="searchInput" placeholder="Search reservations">
 
                 <div class="row my-3 text-center">
                     <span>
@@ -200,5 +203,37 @@
  <script th:if="${session.messege}" th:inline="javascript">
     /* Display error message in an alert */
     alert([[${session.messege}]]);
-    </script>
+</script>
+
+<script>
+    // Get the input field
+    var input = document.getElementById("searchInput");
+
+    // Add an event listener to listen for changes in the input value
+    input.addEventListener("input", function() {
+        var filter = input.value.toLowerCase(); // Convert input value to lowercase for case-insensitive matching
+        var rows = document.querySelectorAll("tbody tr"); // Get all table rows
+
+        // Loop through each row
+        rows.forEach(function(row) {
+            var cells = row.querySelectorAll("td"); // Get all cells in the current row
+            var shouldDisplay = false;
+
+            // Loop through each cell in the row and check if it contains the search query
+            cells.forEach(function(cell) {
+                if (cell.textContent.toLowerCase().indexOf(filter) > -1) {
+                    shouldDisplay = true;
+                }
+            });
+
+            // Show/hide the row based on whether it matches the search query
+            if (shouldDisplay) {
+                row.style.display = ""; // Show the row
+            } else {
+                row.style.display = "none"; // Hide the row
+            }
+        });
+    });
+</script>
+
 </html>
