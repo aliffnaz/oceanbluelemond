@@ -219,8 +219,12 @@
             var cells = row.querySelectorAll("td"); // Get all cells in the current row
             var shouldDisplay = false;
 
-            // Loop through each cell in the row and check if it contains the search query
-            cells.forEach(function(cell) {
+            // Check specific columns for the search query
+            var columnsToSearch = [0, 3, 4, 6]; // Array of column indices to search (e.g., Reservation ID, Check-in Date, Check-out Date, Status)
+            columnsToSearch.forEach(function(columnIndex) {
+                var cell = cells[columnIndex]; // Get the cell in the specified column
+
+                // Check if the cell contains the search query
                 if (cell.textContent.toLowerCase().indexOf(filter) > -1) {
                     shouldDisplay = true;
                 }
