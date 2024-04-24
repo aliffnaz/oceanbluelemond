@@ -218,49 +218,42 @@
     
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            // Your JavaScript code for search and pagination
-            // Initialize your data here or retrieve it asynchronously
-            
-            // Sample data (replace this with actual data from your backend)
-            var reservations = [
-                { reservationID: 1, totalRoom: 2, durationOfStay: 3, dateStart: '2024-04-24', dateEnd: '2024-04-27', totalPayment: 500, reserveStatus: 'Confirmed' },
-                { reservationID: 2, totalRoom: 1, durationOfStay: 2, dateStart: '2024-04-25', dateEnd: '2024-04-27', totalPayment: 300, reserveStatus: 'Pending' },
-                { reservationID: 3, totalRoom: 3, durationOfStay: 4, dateStart: '2024-04-26', dateEnd: '2024-04-30', totalPayment: 800, reserveStatus: 'Cancelled' }
-            ];
-
             var currentPage = 0;
             var rowsPerPage = 5; // Number of rows per page
             var rows = document.querySelectorAll("#reservationTable tbody tr");
-
+    
             function updateTable() {
-                var filter = document.getElementById("searchInput").value.toLowerCase();
+                var filter = document.getElementById("searchInput").value.trim().toLowerCase();
                 var visibleRows = [];
-
+    
                 // Filter rows based on search input
                 rows.forEach(function (row) {
                     var cells = row.querySelectorAll("td");
                     var shouldDisplay = false;
-
-                    cells.forEach(function (cell) {
-                        if (cell.textContent.toLowerCase().includes(filter)) {
-                            shouldDisplay = true;
+    
+                    cells.forEach(function (cell, index) {
+                        // Check only specified columns for filtering
+                        if (index === 0 || index === 3 || index === 4 || index === 6) {
+                            if (cell.textContent.trim().toLowerCase().includes(filter)) {
+                                shouldDisplay = true;
+                            }
                         }
                     });
-
+    
                     if (shouldDisplay) {
                         visibleRows.push(row);
                     }
                 });
-
+    
                 // Calculate number of pages based on filtered rows
                 var numPages = Math.ceil(visibleRows.length / rowsPerPage);
-
+    
                 // Update pagination
                 if (currentPage >= numPages) {
                     currentPage = Math.max(0, numPages - 1);
                 }
                 document.getElementById("currentPage").textContent = "Page " + (currentPage + 1);
-
+    
                 // Display rows for current page
                 visibleRows.forEach(function (row, index) {
                     if (index >= currentPage * rowsPerPage && index < (currentPage + 1) * rowsPerPage) {
@@ -270,13 +263,13 @@
                     }
                 });
             }
-
+    
             // Update table when search input changes
             document.getElementById("searchInput").addEventListener("input", function () {
                 currentPage = 0; // Reset current page when search query changes
                 updateTable();
             });
-
+    
             // Pagination buttons
             document.getElementById("prevPage").addEventListener("click", function () {
                 if (currentPage > 0) {
@@ -284,7 +277,7 @@
                     updateTable();
                 }
             });
-
+    
             document.getElementById("nextPage").addEventListener("click", function () {
                 var numPages = Math.ceil(rows.length / rowsPerPage);
                 if (currentPage < numPages - 1) {
@@ -292,11 +285,12 @@
                     updateTable();
                 }
             });
-
+    
             // Initial table update
             updateTable();
         });
     </script>
+    
 
 </body>
  <script th:if="${session.messege}" th:inline="javascript">
