@@ -222,6 +222,7 @@
         var currentPage = 0;
         var rowsPerPage = 10;
         var rows = document.querySelectorAll("#reservationTable tbody tr");
+        var columnsToSearch = [0, 3, 4, 6]; // Columns to search: Reservation ID, Check-in Date, Check-out Date, Status
     
         function updateTable() {
             var filter = input.value.toLowerCase();
@@ -232,7 +233,8 @@
                 var cells = row.querySelectorAll("td");
                 var shouldDisplay = false;
                 
-                cells.forEach(function(cell) {
+                columnsToSearch.forEach(function(columnIndex) {
+                    var cell = cells[columnIndex];
                     if (cell.textContent.toLowerCase().includes(filter)) {
                         shouldDisplay = true;
                     }
@@ -242,6 +244,8 @@
                     visibleRows.push(row);
                 }
             });
+    
+            console.log("Filtered Rows:", visibleRows); // Debug statement
     
             // Calculate number of pages based on filtered rows
             var numPages = Math.ceil(visibleRows.length / rowsPerPage);
@@ -287,6 +291,8 @@
         // Initialize table
         updateTable();
     </script>
+    
+    
     
 
 </body>
