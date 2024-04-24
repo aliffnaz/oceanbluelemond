@@ -108,7 +108,7 @@
                     </span>
                 </div>
                 <!-- Add a search input field -->
-                <input type="text" id="searchInput" placeholder="Enter Reservation ID/Check-In Date/Check-Out Date/Status">
+                <input type="text" id="searchInput"  class="form-control" placeholder="Enter Reservation ID/Check-In Date/Check-Out Date/Status">
         
                 <div class="row my-3 text-center">
                     <span>
@@ -217,11 +217,17 @@
     <script th:src="@{stylesheets/js/slider_func.js}"></script> 
 
     <script>
-        // Function to handle search input
-        document.getElementById("searchInput").addEventListener("input", function() {
-            var filter = this.value.toLowerCase();
-            var rows = document.querySelectorAll("#reservationTable tbody tr");
+        // Function to handle search input and pagination
+        var input = document.getElementById("searchInput");
+        var currentPage = 0;
+        var rowsPerPage = 10;
+        var rows = document.querySelectorAll("#reservationTable tbody tr");
+    
+        function updateTable() {
+            var filter = input.value.toLowerCase();
+            var visibleRows = [];
             
+            // Filter rows based on search input
             rows.forEach(function(row) {
                 var cells = row.querySelectorAll("td");
                 var shouldDisplay = false;
@@ -233,49 +239,53 @@
                 });
                 
                 if (shouldDisplay) {
-                    row.style.display = ""; // Show row
-                } else {
-                    row.style.display = "none"; // Hide row
+                    visibleRows.push(row);
                 }
             });
-        });
     
-        // Function to handle pagination
-        var currentPage = 0;
-        var rowsPerPage = 10;
-        var rows = document.querySelectorAll("#reservationTable tbody tr");
+            // Calculate number of pages based on filtered rows
+            var numPages = Math.ceil(visibleRows.length / rowsPerPage);
     
-        function showPage(page) {
-            rows.forEach(function(row, index) {
-                if (index >= page * rowsPerPage && index < (page + 1) * rowsPerPage) {
+            // Update pagination
+            if (currentPage >= numPages) {
+                currentPage = Math.max(0, numPages - 1);
+            }
+            document.getElementById("currentPage").textContent = "Page " + (currentPage + 1);
+    
+            // Display rows for current page
+            visibleRows.forEach(function(row, index) {
+                if (index >= currentPage * rowsPerPage && index < (currentPage + 1) * rowsPerPage) {
                     row.style.display = "";
                 } else {
                     row.style.display = "none";
                 }
             });
-            document.getElementById("currentPage").textContent = "Page " + (page + 1);
         }
     
-        function prevPage() {
-            if (currentPage > 0) {
-                currentPage--;
-                showPage(currentPage);
-            }
-        }
-    
-        function nextPage() {
-            if ((currentPage + 1) * rowsPerPage < rows.length) {
-                currentPage++;
-                showPage(currentPage);
-            }
-        }
-    
-        // Initialize
-        showPage(currentPage);
+        // Update table when search input changes
+        input.addEventListener("input", function() {
+            currentPage = 0; // Reset current page when search query changes
+            updateTable();
+        });
     
         // Pagination buttons
-        document.getElementById("prevPage").addEventListener("click", prevPage);
-        document.getElementById("nextPage").addEventListener("click", nextPage);
+        document.getElementById("prevPage").addEventListener("click", function() {
+            if (currentPage > 0) {
+                currentPage--;
+                updateTable();
+            }
+        });
+    
+        document.getElementById("nextPage").addEventListener("click", function() {
+            var numPages = Math.ceil(rows.length / rowsPerPage);
+            if (currentPage < numPages - 1) {
+                currentPage++;
+                updateTable();
+            }
+        });
+    
+        // Initialize table
+        updateTable();
     </script>
     
 
@@ -285,7 +295,7 @@
     alert([[${session.messege}]]);
 </script>
 
-<script>
+<!-- <script>
     // Get the input field
     var input = document.getElementById("searchInput");
 
@@ -318,5 +328,5 @@
             }
         });
     });
-</script>
+</script> -->
 </html>
