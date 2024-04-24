@@ -219,7 +219,7 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             var currentPage = 0;
-            var rowsPerPage = 5; // Number of rows per page
+            var rowsPerPage = 10; // Number of rows per page
             var rows = document.querySelectorAll("#reservationTable tbody tr");
     
             function updateTable() {
@@ -231,14 +231,15 @@
                     var cells = row.querySelectorAll("td");
                     var shouldDisplay = false;
     
-                    cells.forEach(function (cell, index) {
-                        // Check only specified columns for filtering
-                        if (index === 0 || index === 3 || index === 4 || index === 6) {
-                            if (cell.textContent.trim().toLowerCase().includes(filter)) {
-                                shouldDisplay = true;
-                            }
-                        }
-                    });
+                    // Check specific columns for filtering
+                    var reservationID = cells[0].textContent.trim().toLowerCase();
+                    var checkInDate = cells[3].textContent.trim().toLowerCase();
+                    var checkOutDate = cells[4].textContent.trim().toLowerCase();
+                    var status = cells[6].textContent.trim().toLowerCase();
+    
+                    if (reservationID.includes(filter) || checkInDate.includes(filter) || checkOutDate.includes(filter) || status.includes(filter)) {
+                        shouldDisplay = true;
+                    }
     
                     if (shouldDisplay) {
                         visibleRows.push(row);
@@ -290,6 +291,7 @@
             updateTable();
         });
     </script>
+    
     
 
 </body>
