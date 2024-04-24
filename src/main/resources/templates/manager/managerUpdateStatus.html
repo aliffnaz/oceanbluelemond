@@ -223,7 +223,7 @@
     var rows = document.querySelectorAll("#reservationTable tbody tr");
 
     function updateTable() {
-        var filter = document.getElementById("searchInput").value.toLowerCase();
+        var filter = document.getElementById("searchInput").value.trim().toLowerCase();
         var visibleRows = [];
 
         // Filter rows based on search input
@@ -245,10 +245,12 @@
 
             if (reservationID.includes(filter) || checkInDate.includes(filter) || checkOutDate.includes(filter) || status.includes(filter)) {
                 shouldDisplay = true;
+                console.log("shouldDisplay:", shouldDisplay);
             }
 
             if (shouldDisplay) {
                 visibleRows.push(row);
+                console.log("pushed row into array visibleRows");
             }
         });
 
