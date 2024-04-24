@@ -295,38 +295,4 @@
     alert([[${session.messege}]]);
 </script>
 
-<script>
-    // Get the input field
-    var input = document.getElementById("searchInput");
-
-    // Add an event listener to listen for changes in the input value
-    input.addEventListener("input", function() {
-        var filter = input.value.toLowerCase(); // Convert input value to lowercase for case-insensitive matching
-        var rows = document.querySelectorAll("tbody tr"); // Get all table rows
-
-        // Loop through each row
-        rows.forEach(function(row) {
-            var cells = row.querySelectorAll("td"); // Get all cells in the current row
-            var shouldDisplay = false;
-
-            // Check specific columns for the search query
-            var columnsToSearch = [0, 3, 4, 6]; // Array of column indices to search (e.g., Reservation ID, Check-in Date, Check-out Date, Status)
-            columnsToSearch.forEach(function(columnIndex) {
-                var cell = cells[columnIndex]; // Get the cell in the specified column
-
-                // Check if the cell contains the search query
-                if (cell.textContent.toLowerCase().indexOf(filter) > -1) {
-                    shouldDisplay = true;
-                }
-            });
-
-            // Show/hide the row based on whether it matches the search query
-            if (shouldDisplay) {
-                row.style.display = ""; // Show the row
-            } else {
-                row.style.display = "none"; // Hide the row
-            }
-        });
-    });
-</script>
 </html>
