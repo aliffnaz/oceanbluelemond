@@ -237,6 +237,12 @@
             var checkOutDate = cells[4].textContent.trim().toLowerCase();
             var status = cells[6].textContent.trim().toLowerCase();
 
+            console.log("Search Filter:", filter);
+            console.log("Reservation ID:", reservationID);
+            console.log("Check-in Date:", checkInDate);
+            console.log("Check-out Date:", checkOutDate);
+            console.log("Status:", status);
+
             if (reservationID.includes(filter) || checkInDate.includes(filter) || checkOutDate.includes(filter) || status.includes(filter)) {
                 shouldDisplay = true;
             }
