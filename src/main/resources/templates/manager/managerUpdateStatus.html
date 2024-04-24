@@ -216,81 +216,81 @@
     <script th:src="@{stylesheets/js/jquery.flexslider.min.js}"></script>
     <script th:src="@{stylesheets/js/slider_func.js}"></script> 
 
-    <script>
+<script>
         document.addEventListener("DOMContentLoaded", function () {
-            var currentPage = 0;
-            var rowsPerPage = 10; // Number of rows per page
-            var rows = document.querySelectorAll("#reservationTable tbody tr");
-    
-            function updateTable() {
-                var filter = document.getElementById("searchInput").value.trim().toLowerCase();
-                var visibleRows = [];
-    
-                // Filter rows based on search input
-                rows.forEach(function (row) {
-                    var cells = row.querySelectorAll("td");
-                    var shouldDisplay = false;
-    
-                    // Check specific columns for filtering
-                    var reservationID = cells[0].textContent.trim().toLowerCase();
-                    var checkInDate = cells[3].textContent.trim().toLowerCase();
-                    var checkOutDate = cells[4].textContent.trim().toLowerCase();
-                    var status = cells[6].textContent.trim().toLowerCase();
-    
-                    if (reservationID.includes(filter) || checkInDate.includes(filter) || checkOutDate.includes(filter) || status.includes(filter)) {
-                        shouldDisplay = true;
-                    }
-    
-                    if (shouldDisplay) {
-                        visibleRows.push(row);
-                    }
-                });
-    
-                // Calculate number of pages based on filtered rows
-                var numPages = Math.ceil(visibleRows.length / rowsPerPage);
-    
-                // Update pagination
-                if (currentPage >= numPages) {
-                    currentPage = Math.max(0, numPages - 1);
-                }
-                document.getElementById("currentPage").textContent = "Page " + (currentPage + 1);
-    
-                // Display rows for current page
-                visibleRows.forEach(function (row, index) {
-                    if (index >= currentPage * rowsPerPage && index < (currentPage + 1) * rowsPerPage) {
-                        row.style.display = "";
-                    } else {
-                        row.style.display = "none";
-                    }
-                });
+    var currentPage = 0;
+    var rowsPerPage = 10; // Number of rows per page
+    var rows = document.querySelectorAll("#reservationTable tbody tr");
+
+    function updateTable() {
+        var filter = document.getElementById("searchInput").value.trim().toLowerCase();
+        var visibleRows = [];
+
+        // Filter rows based on search input
+        rows.forEach(function (row) {
+            var cells = row.querySelectorAll("td");
+            var shouldDisplay = false;
+
+            // Check specific columns for filtering
+            var reservationID = cells[0].textContent.trim().toLowerCase();
+            var checkInDate = cells[3].textContent.trim().toLowerCase();
+            var checkOutDate = cells[4].textContent.trim().toLowerCase();
+            var status = cells[6].textContent.trim().toLowerCase();
+
+            if (reservationID.includes(filter) || checkInDate.includes(filter) || checkOutDate.includes(filter) || status.includes(filter)) {
+                shouldDisplay = true;
             }
-    
-            // Update table when search input changes
-            document.getElementById("searchInput").addEventListener("input", function () {
-                currentPage = 0; // Reset current page when search query changes
-                updateTable();
-            });
-    
-            // Pagination buttons
-            document.getElementById("prevPage").addEventListener("click", function () {
-                if (currentPage > 0) {
-                    currentPage--;
-                    updateTable();
-                }
-            });
-    
-            document.getElementById("nextPage").addEventListener("click", function () {
-                var numPages = Math.ceil(rows.length / rowsPerPage);
-                if (currentPage < numPages - 1) {
-                    currentPage++;
-                    updateTable();
-                }
-            });
-    
-            // Initial table update
-            updateTable();
+
+            if (shouldDisplay) {
+                visibleRows.push(row);
+            }
         });
-    </script>
+
+        // Calculate number of pages based on filtered rows
+        var numPages = Math.ceil(visibleRows.length / rowsPerPage);
+
+        // Update pagination
+        if (currentPage >= numPages) {
+            currentPage = Math.max(0, numPages - 1);
+        }
+        document.getElementById("currentPage").textContent = "Page " + (currentPage + 1);
+
+        // Display rows for current page
+        visibleRows.forEach(function (row, index) {
+            if (index >= currentPage * rowsPerPage && index < (currentPage + 1) * rowsPerPage) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        });
+    }
+
+    // Update table when search input changes
+    document.getElementById("searchInput").addEventListener("input", function () {
+        currentPage = 0; // Reset current page when search query changes
+        updateTable();
+    });
+
+    // Pagination buttons
+    document.getElementById("prevPage").addEventListener("click", function () {
+        if (currentPage > 0) {
+            currentPage--;
+            updateTable();
+        }
+    });
+
+    document.getElementById("nextPage").addEventListener("click", function () {
+        var numPages = Math.ceil(rows.length / rowsPerPage);
+        if (currentPage < numPages - 1) {
+            currentPage++;
+            updateTable();
+        }
+    });
+
+    // Initial table update
+    updateTable();
+});
+</script>
     
 </body>
  <script th:if="${session.messege}" th:inline="javascript">
