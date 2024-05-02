@@ -147,6 +147,9 @@
                             <!-- End of dynamic data -->
                         </tbody>
                     </table>
+                    <div th:if="${not #strings.isEmpty(message)}" class="alert alert-info" role="alert">
+                        <p th:text="${message}"></p>
+                    </div>
                 </div>
 
                 <div class="row m-5">
@@ -216,38 +219,28 @@
     <script th:src="@{stylesheets/js/jquery.flexslider.min.js}"></script>
     <script th:src="@{stylesheets/js/slider_func.js}"></script> 
     
-    <script>
-        // Add event listeners for search input and pagination buttons
-        document.getElementById("searchInput").addEventListener("input", function () {
-        currentPage = 0; // Reset current page when search query changes
-        updateTable();
-        });
+<script>
+// JavaScript function to handle pagination
+function setPage(page) {
+    // Make AJAX request to fetch data for the specified page
+    // Update the table with the fetched data
+}
 
-        document.getElementById("prevPage").addEventListener("click", function () {
-            if (currentPage > 0) {
-                currentPage--;
-                updateTable();
-            }
-        });
+// JavaScript function to handle search
+function search() {
+    var searchInput = document.getElementById("searchInput").value;
+    setPage(0); // Reset page to 0 when performing a new search
+}
 
-        document.getElementById("nextPage").addEventListener("click", function () {
-            var numPages = Math.ceil(filteredRows.length / rowsPerPage);
-            if (currentPage < numPages - 1) {
-                currentPage++;
-                updateTable();
-            }
-        });
+// JavaScript function to initialize the page
+document.addEventListener("DOMContentLoaded", function() {
+    // Initialize page with default data (page 0)
+    setPage(0);
+    // Add event listener for search input
+    document.getElementById("searchInput").addEventListener("input", search);
+});
+</script>
 
-        // Function to update the table dynamically based on search and pagination
-        function updateTable() {
-            // Filter rows based on search input
-            // Display rows for current page
-        }
-
-        // Initial table update
-        updateTable();
-
-    </script>
 </body>
  <script th:if="${session.messege}" th:inline="javascript">
     /* Display error message in an alert */
