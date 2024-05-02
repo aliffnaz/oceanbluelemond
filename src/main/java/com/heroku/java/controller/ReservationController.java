@@ -1108,7 +1108,9 @@ public class ReservationController {
                                       Model model,
                                       HttpSession session) {
         String staffICNumber = (String) session.getAttribute("staffICNumber");
-        List<Reservation> reservations = new ArrayList<>();
+        List<reservation> reservations = new ArrayList<>();
+        int pageSize = 10; // Number of items per page
+        int offset = page * pageSize; // Offset for pagination
         String message = ""; // Message to display when no reservations are found
     
         try (Connection connection = dataSource.getConnection()) {
