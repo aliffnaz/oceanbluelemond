@@ -1109,7 +1109,7 @@ public class ReservationController {
                                       HttpSession session) {
         String staffICNumber = (String) session.getAttribute("staffICNumber");
         List<reservation> reservations = new ArrayList<>();
-        private static final int PAGE_SIZE = 10;
+        int PAGE_SIZE = 10;
         String message = ""; // Message to display when no reservations are found
     
         try (Connection connection = dataSource.getConnection()) {
