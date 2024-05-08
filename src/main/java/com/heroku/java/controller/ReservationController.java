@@ -1157,13 +1157,14 @@ public class ReservationController {
     @PostMapping("/managerUpdateStatus")
     public String managerUpdateStatus(Model model, HttpSession session, @RequestParam("searchInput") String searchInput){
         String staffICNumber = (String) session.getAttribute("staffICNumber");
+        searchInput = searchInput.trim();
         List<reservation> reservations = new ArrayList<reservation>();
         try (Connection connection = dataSource.getConnection()){
             String sql = "SELECT * FROM reservation WHERE "
             + "reservationid = ? "
-            + "OR reservestatus = ? "
-            + "OR datestart::text LIKE ? "
-            + "OR dateend::text LIKE ? "
+            + "OR lower(reservestatus) = lower(?) "
+            + "OR datestart::text ILIKE ? "
+            + "OR dateend::text ILIKE ? "
             + "ORDER BY reservationid DESC";
             final var statement = connection.prepareStatement(sql);
 
