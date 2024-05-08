@@ -1159,13 +1159,13 @@ public class ReservationController {
         String staffICNumber = (String) session.getAttribute("staffICNumber");
         List<reservation> reservations = new ArrayList<reservation>();
         try (Connection connection = dataSource.getConnection()){
-            String sql = "SELECT * from reservation WHERE reservationid = ? "
-            + "OR reservestatus = ? "
+            String sql = "SELECT * from reservation WHERE reservestatus = ? "
+            //+ "OR reservestatus = ? "
             + "order by reservationid desc";
             final var statement = connection.prepareStatement(sql);
             int searchInputInt = Integer.parseInt(searchInput);
-            statement.setInt(1, searchInputInt);
-            statement.setString(2, searchInput);
+            //statement.setInt(1, searchInputInt);
+            statement.setString(1, searchInput);
             final var resultSet = statement.executeQuery();
             System.out.println("pass try managerReservationList for search >>>>>");
 
