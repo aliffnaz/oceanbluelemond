@@ -1165,7 +1165,7 @@ public class ReservationController {
             final var statement = connection.prepareStatement(sql);
             int searchInputInt = Integer.parseInt(searchInput);
             String searchInputWithWildcards = "%" + searchInput + "%";
-            statement.setInt(1, searchInputWithWildcards);
+            statement.setInt(1, searchInputInt);
             statement.setString(2, searchInputWithWildcards);
             final var resultSet = statement.executeQuery();
             System.out.println("pass try managerReservationList for search >>>>>");
