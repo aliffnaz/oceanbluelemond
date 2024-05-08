@@ -1160,13 +1160,12 @@ public class ReservationController {
         List<reservation> reservations = new ArrayList<reservation>();
         try (Connection connection = dataSource.getConnection()){
             String sql = "SELECT * from reservation WHERE reservationid = ? "
-            + "OR reservestatus LIKE ? "
+            + "OR reservestatus = ? "
             + "order by reservationid desc";
             final var statement = connection.prepareStatement(sql);
             int searchInputInt = Integer.parseInt(searchInput);
-            String searchInputWithWildcards = "%" + searchInput + "%";
             statement.setInt(1, searchInputInt);
-            statement.setString(2, searchInputWithWildcards);
+            statement.setString(2, searchInput);
             final var resultSet = statement.executeQuery();
             System.out.println("pass try managerReservationList for search >>>>>");
 
