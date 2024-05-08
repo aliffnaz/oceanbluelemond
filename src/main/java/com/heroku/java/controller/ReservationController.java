@@ -1152,7 +1152,66 @@ public class ReservationController {
             return "redirect:/index";
         }
         return "manager/managerUpdateStatus";
-    }    
+    }   
+    
+    @PostMapping("/managerUpdateStatus")
+    public String managerUpdateStatus(Model model, HttpSession session @RequestParam("searchInput") String searchInput){
+        String staffICNumber = (String) session.getAttribute("staffICNumber");
+        List<reservation> reservations = new ArrayList<reservation>();
+        try (Connection connection = dataSource.getConnection()){
+            String sql = "SELECT * from reservation WHERE reservationid LIKE ? "
+            + "OR datestart LIKE ? OR dateend LIKE ? OR reservestatus LIKE ? "
+            + "order by reservationid desc";
+            final var statement = connection.prepareStatement(sql);
+            String searchInputWithWildcards = "%" + searchInput + "%";
+            statement.setString(1, searchInputWithWildcards);
+            statement.setString(2, searchInputWithWildcards);
+            statement.setString(3, searchInputWithWildcards);
+            statement.setString(4, searchInputWithWildcards);
+            final var resultSet = statement.executeQuery();
+            System.out.println("pass try managerReservationList for search >>>>>");
+
+            while (resultSet.next()){
+                int reservationID = resultSet.getInt("reservationid");
+                String guestICNumber = resultSet.getString("guestICNumber");
+                int guestQuantity = resultSet.getInt("guestquantity");
+                int durationOfStay = resultSet.getInt("durationofstay");
+                Date dateStart = resultSet.getDate("datestart");
+                Date dateEnd = resultSet.getDate("dateend");
+                int totalAdult = resultSet.getInt("totaladult");
+                int totalKids= resultSet.getInt("totalkids");
+                String reserveStatus = resultSet.getString("reservestatus");
+                int totalRoom = resultSet.getInt("totalroom");
+                double totalPayment = resultSet.getDouble("totalpayment");
+
+                reservation reservation = new reservation();
+                reservation.setReservationID(reservationID);
+                reservation.setGuestICNumber(guestICNumber);
+                reservation.setGuestQuantity(guestQuantity);
+                reservation.setDurationOfStay(durationOfStay);
+                reservation.setDateStart(dateStart);
+                reservation.setDateEnd(dateEnd);
+                reservation.setTotalAdult(totalAdult);
+                reservation.setTotalKids(totalKids);
+                reservation.setReserveStatus(reserveStatus);
+                reservation.setTotalRoom(totalRoom);
+                reservation.setTotalPayment(totalPayment);
+
+                reservations.add(reservation);
+                model.addAttribute("reservations", reservations);
+
+            }
+            connection.close();
+
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            // Handle the exception as desired (e.g., show an error message)
+            System.out.println("error getting managerReservationList for search");
+            return "redirect:/index";
+        }
+        return "manager/managerUpdateStatus";
+    }
 
    @GetMapping("/managerViewReservation")
     public String managerViewReservation(HttpSession session, Model model, @RequestParam("reservationID") int reservationID){
