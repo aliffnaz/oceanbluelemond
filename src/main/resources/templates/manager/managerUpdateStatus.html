@@ -107,9 +107,12 @@
                         <h2>Search Reservations</h2>
                     </span>
                 </div>
+                <form method="post" th:action="@{/managerUpdateStatus}" modelAttribute="managerUpdateStatus" th:object="(${managerUpdateStatus})">
                 <!-- Add a search input field -->
-                <input type="text" id="searchInput"  class="form-control" placeholder="Enter Reservation ID/Check-In Date/Check-Out Date/Status">
-        
+                <input type="text" id="searchInput"  class="form-control" placeholder="Search Reservation ID/Check-In Date/Check-Out Date/Status">
+                <button type="submit" class="btn btn-dark btn-lg" style="border-radius: 3px 3px 3px 3px; height: auto; width:150px"><i class="fa fa-search"></i></button>
+                </form>
+
                 <div class="row my-3 text-center">
                     <span>
                         <h2>Reservation Records</h2>
@@ -218,33 +221,5 @@
     <!-- SPECIFIC SCRIPTS -->
     <script th:src="@{stylesheets/js/jquery.flexslider.min.js}"></script>
     <script th:src="@{stylesheets/js/slider_func.js}"></script> 
-    
-<script>
-// JavaScript function to handle pagination
-function setPage(page) {
-    // Make AJAX request to fetch data for the specified page
-    // Update the table with the fetched data
-}
-
-// JavaScript function to handle search
-function search() {
-    var searchInput = document.getElementById("searchInput").value;
-    setPage(0); // Reset page to 0 when performing a new search
-}
-
-// JavaScript function to initialize the page
-document.addEventListener("DOMContentLoaded", function() {
-    // Initialize page with default data (page 0)
-    setPage(0);
-    // Add event listener for search input
-    document.getElementById("searchInput").addEventListener("input", search);
-});
-</script>
-
-</body>
- <script th:if="${session.messege}" th:inline="javascript">
-    /* Display error message in an alert */
-    alert([[${session.messege}]]);
-</script>
 
 </html>
