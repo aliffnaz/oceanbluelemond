@@ -107,11 +107,15 @@
                         <h2>Search Reservations</h2>
                     </span>
                 </div>
-                <form method="post" th:action="@{/managerUpdateStatus}" modelAttribute="managerUpdateStatus" th:object="(${managerUpdateStatus})">
-                <!-- Add a search input field -->
-                <input type="text" id="searchInput"  class="form-control" placeholder="Search Reservation ID/Check-In Date/Check-Out Date/Status">
-                <button type="submit" class="btn btn-dark btn-lg" style="border-radius: 3px 3px 3px 3px; height: auto; width:150px"><i class="fa fa-search"></i></button>
-                </form>
+                <div class="row m-5">
+                    <div class="col text-center">
+                        <form method="post" th:action="@{/managerUpdateStatus}" modelAttribute="managerUpdateStatus" th:object="(${managerUpdateStatus})">
+                        <!-- Add a search input field -->
+                        <input type="text" id="searchInput"  class="form-control" placeholder="Search Reservation ID/Check-In Date/Check-Out Date/Status">
+                        <button type="submit" class="btn btn-dark btn-lg" style="border-radius: 3px 3px 3px 3px; height:auto; width:auto">Search</button>
+                        </form>
+                    </div>
+                </div>
 
                 <div class="row my-3 text-center">
                     <span>
