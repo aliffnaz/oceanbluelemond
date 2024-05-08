@@ -1159,13 +1159,28 @@ public class ReservationController {
         String staffICNumber = (String) session.getAttribute("staffICNumber");
         List<reservation> reservations = new ArrayList<reservation>();
         try (Connection connection = dataSource.getConnection()){
-            String sql = "SELECT * from reservation WHERE reservestatus = ? "
-            //+ "OR reservestatus = ? "
-            + "order by reservationid desc";
+            String sql = "SELECT * FROM reservation WHERE "
+            + "reservationid = ? "
+            + "OR reservestatus = ? "
+            + "OR datestart::text LIKE ? "
+            + "OR dateend::text LIKE ? "
+            + "ORDER BY reservationid DESC";
             final var statement = connection.prepareStatement(sql);
-            //int searchInputInt = Integer.parseInt(searchInput);
-            //statement.setInt(1, searchInputInt);
-            statement.setString(1, searchInput);
+
+            // Setting parameters for reservation ID and reservation status
+            int searchInputInt = 0;
+            try {
+                searchInputInt = Integer.parseInt(searchInput);
+                statement.setInt(1, searchInputInt);
+            } catch (NumberFormatException e) {
+                // If searchInput is not a number, set reservation ID parameter as 0
+                statement.setInt(1, 0);
+            }
+            statement.setString(2, searchInput);
+            // Setting parameters for date start and date end
+            statement.setString(3, "%" + searchInput + "%");
+            statement.setString(4, "%" + searchInput + "%");
+
             final var resultSet = statement.executeQuery();
             System.out.println("pass try managerReservationList for search >>>>>");
 
