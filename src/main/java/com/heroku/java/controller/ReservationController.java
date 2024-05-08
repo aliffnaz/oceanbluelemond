@@ -1155,7 +1155,7 @@ public class ReservationController {
     }   
     
     @PostMapping("/managerUpdateStatus")
-    public String managerUpdateStatus(Model model, HttpSession session @RequestParam("searchInput") String searchInput){
+    public String managerUpdateStatus(Model model, HttpSession session, @RequestParam("searchInput") String searchInput){
         String staffICNumber = (String) session.getAttribute("staffICNumber");
         List<reservation> reservations = new ArrayList<reservation>();
         try (Connection connection = dataSource.getConnection()){
