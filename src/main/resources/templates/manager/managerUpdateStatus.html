@@ -225,5 +225,48 @@
     <!-- SPECIFIC SCRIPTS -->
     <script th:src="@{stylesheets/js/jquery.flexslider.min.js}"></script>
     <script th:src="@{stylesheets/js/slider_func.js}"></script> 
-
+    
+</body>
+    <script>
+        // Function to handle pagination
+        var currentPage = 0;
+        var rowsPerPage = 10;
+        var rows = document.querySelectorAll("#reservationTable tbody tr");
+    
+        function showPage(page) {
+            rows.forEach(function(row, index) {
+                if (index >= page * rowsPerPage && index < (page + 1) * rowsPerPage) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
+            });
+            document.getElementById("currentPage").textContent = "Page " + (page + 1);
+        }
+    
+        function prevPage() {
+            if (currentPage > 0) {
+                currentPage--;
+                showPage(currentPage);
+            }
+        }
+    
+        function nextPage() {
+            if ((currentPage + 1) * rowsPerPage < rows.length) {
+                currentPage++;
+                showPage(currentPage);
+            }
+        }
+    
+        // Initialize
+        showPage(currentPage);
+    
+        // Pagination buttons
+        document.getElementById("prevPage").addEventListener("click", prevPage);
+        document.getElementById("nextPage").addEventListener("click", nextPage);
+    </script>
+    <script th:if="${session.messege}" th:inline="javascript">
+        /* Display error message in an alert */
+        alert([[${session.messege}]]);
+    </script>
 </html>
