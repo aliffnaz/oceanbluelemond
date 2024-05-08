@@ -1163,7 +1163,7 @@ public class ReservationController {
             //+ "OR reservestatus = ? "
             + "order by reservationid desc";
             final var statement = connection.prepareStatement(sql);
-            int searchInputInt = Integer.parseInt(searchInput);
+            //int searchInputInt = Integer.parseInt(searchInput);
             //statement.setInt(1, searchInputInt);
             statement.setString(1, searchInput);
             final var resultSet = statement.executeQuery();
