@@ -47,9 +47,9 @@
         <div class="container-fluid">
             <div class="row align-items-center">
                 <div class="col-6">
-                    <a th:href="@{/index}" class="logo_normal"><img th:src="@{stylesheets/img/logo.png}" width="135"
+                    <a th:href="@{/index_logout}" class="logo_normal"><img th:src="@{stylesheets/img/logo.png}" width="135"
                             height="45" alt=""></a>
-                    <a th:href="@{/index}" class="logo_sticky"><img th:src="@{stylesheets/img/logo_sticky.png}"
+                    <a th:href="@{/index_logout}" class="logo_sticky"><img th:src="@{stylesheets/img/logo_sticky.png}"
                             width="135" height="45" alt=""></a>
                 </div>
                 <div class="col-6">
@@ -76,8 +76,8 @@
                             <div class="sidebar-navigation">
                                 <nav>
                                     <ul class="level-1">
-                                        <li><a th:href="@{/index}"><i class="bi bi-house" style="font-size: 25px;"></i> &nbsp;Home</a></li>
-                                        <li><a th:href="@{/guestViewRoom}"><i class="bi bi-door-open" style="font-size: 25px;"></i> &nbsp;Our Rooms</a></li>
+                                        <li><a th:href="@{/index_logout}"><i class="bi bi-house" style="font-size: 25px;"></i> &nbsp;Home</a></li>
+                                        <li><a th:href="@{/logoutViewRoom}"><i class="bi bi-door-open" style="font-size: 25px;"></i> &nbsp;Our Rooms</a></li>
                                         <li><a th:href="@{/guestLogin}"><i class="bi bi-plus" style="font-size: 25px;"></i> &nbsp;Make Reservation</a></li>
                                         <li class="mt-5"><a th:href="@{/guestLogin}" class="btn btn-success pt-3" style="color: white; border-radius: 10px 10px 10px 10px; height: 50px;">Login</a></li>
                                     </ul>
@@ -132,7 +132,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="guestName" id="" class="form-control" pattern="[A-Za-z\s]+">
+                            <input type="text" name="guestName" id="" class="form-control" pattern="[A-Za-z\s]+" required>
                         </div>
                     </div>
 
@@ -144,7 +144,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="number" name="guestICNumber" id="" class="form-control">
+                            <input type="number" name="guestICNumber" id="" class="form-control" inputmode="numeric" pattern="\d*" required>
                         </div>
                     </div>
 
@@ -156,7 +156,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="guestAddress" id="" class="form-control">
+                            <input type="text" name="guestAddress" id="" class="form-control" required>
                         </div>
                     </div>
 
@@ -168,7 +168,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <select name="guestGender" id="" class="form-control form-select">
+                            <select name="guestGender" id="" class="form-control form-select" required>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
                             </select>
@@ -183,7 +183,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <select name="guestRace" id="" class="form-control form-select">
+                            <select name="guestRace" id="" class="form-control form-select" required>
                                 <option value="Melayu">Melayu</option>
                                 <option value="Cina">Cina</option>
                                 <option value="India">India</option>
@@ -200,7 +200,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <select name="guestReligion" id="" class="form-control form-select">
+                            <select name="guestReligion" id="" class="form-control form-select" required>
                                 <option value="Islam">Islam</option>
                                 <option value="Budha">Budha</option>
                                 <option value="Christian">Christian</option>
@@ -218,7 +218,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="number" name="guestPhoneNumber" id="" class="form-control">
+                            <input type="number" name="guestPhoneNumber" id="" class="form-control" inputmode="numeric" pattern="\d*" required>
                         </div>
                     </div>
 
@@ -230,7 +230,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="email" name="guestEmail" id="" class="form-control">
+                            <input type="email" name="guestEmail" id="" class="form-control" required>
                         </div>
                     </div>
 
@@ -242,7 +242,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="password" name="guestPassword" id="" class="form-control">
+                            <input type="password" name="guestPassword" id="" class="form-control" required>
                         </div>
                     </div>
                 </form>
