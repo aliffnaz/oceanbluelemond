@@ -280,9 +280,16 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="number" name="staffPhoneNumber" id="staffPhoneNumber" class="form-control" th:value="${staff.staffPhoneNumber}">
+                            <input type="number" name="staffPhoneNumber" id="staffPhoneNumber" class="form-control" minlength="10" maxlength="11" th:value="${staff.staffPhoneNumber}">
                         </div>
                     </div>
+
+                    <script>
+                        document.getElementById("staffPhoneNumber").addEventListener("input", function() {
+                            // Remove any non-numeric characters
+                            this.value = this.value.replace(/\D/g, '');
+                        });
+                    </script>
 
                     <div class="row m-3">
                         <div class="col-1"></div>
