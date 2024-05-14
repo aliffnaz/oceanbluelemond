@@ -152,6 +152,9 @@
                                 </td>
                             </tr>
                             <!-- End of dynamic data -->
+                            <tr th:if="${#lists.isEmpty(reservations)}">
+                                <td colspan="8" class="text-center" th:text="${message}"></td>
+                            </tr>
                         </tbody>
                     </table>
                     <div th:if="${not #strings.isEmpty(message)}" class="alert alert-info" role="alert">
