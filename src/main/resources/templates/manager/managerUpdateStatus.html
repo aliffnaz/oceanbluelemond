@@ -153,8 +153,8 @@
                             </tr>
                             <!-- End of dynamic data -->
                             <tr th:if="${#lists.isEmpty(reservations)}">
-                                <td colspan="8" class="text-center" th:text="${messageNoResult}"></td>
-                                <td colspan="8" class="text-center" text="No result"></td>
+                                <!-- <td colspan="8" class="text-center" th:text="${messageNoResult}"></td> -->
+                                <td colspan="8" class="text-center">Sorry, There are no results for the search input.</td>
                             </tr>
                         </tbody>
                     </table>
