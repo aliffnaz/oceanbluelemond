@@ -154,6 +154,10 @@
                                         <div class="bi bi-eye-fill" style="font-size: 20px;"></div>
                                     </a></td>
                             </tr>
+                            <tr th:if="${#lists.isEmpty(reservations)}">
+                                <!-- <td colspan="8" class="text-center" th:text="${messageNoResult}"></td> -->
+                                <td colspan="8" class="text-center">Sorry, there are no results for the search input.</td>
+                            </tr>
                         </tbody>
                         </table>
                     </div>
