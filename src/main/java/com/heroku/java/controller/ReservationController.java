@@ -1140,9 +1140,6 @@ public class ReservationController {
 
                 reservations.add(reservation);
                 model.addAttribute("reservations", reservations);
-                if (reservations.isEmpty()) {
-                    model.addAttribute("messageNoResult", "No results found");
-                }
 
             }
             connection.close();
@@ -1216,9 +1213,6 @@ public class ReservationController {
 
                 reservations.add(reservation);
                 model.addAttribute("reservations", reservations);
-                if (reservations.isEmpty()) {
-                    model.addAttribute("messageNoResult", "No results found for \"" + searchInput + "\"");
-                }
             }
             connection.close();
 
