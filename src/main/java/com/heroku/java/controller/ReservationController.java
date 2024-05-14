@@ -1140,6 +1140,9 @@ public class ReservationController {
 
                 reservations.add(reservation);
                 model.addAttribute("reservations", reservations);
+                if (reservations.isEmpty()) {
+                    model.addAttribute("message", "No results found");
+                }
 
             }
             connection.close();
