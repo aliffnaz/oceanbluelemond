@@ -1,3 +1,4 @@
+
 package com.heroku.java.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -1089,6 +1090,81 @@ public class ReservationController {
                 reservations.add(reservation);
                 model.addAttribute("reservations", reservations);
 
+            }
+            connection.close();
+
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            // Handle the exception as desired (e.g., show an error message)
+            System.out.println("error getting staffReservationList");
+            return "redirect:/index";
+        }
+        return "staff/staffReservationList";
+    }
+
+    @PostMapping("/staffReservationList")
+    public String staffReservationList(Model model, HttpSession session, @RequestParam("searchInput") String searchInput){
+        String staffICNumber = (String) session.getAttribute("staffICNumber");
+        searchInput = searchInput.trim();
+        List<reservation> reservations = new ArrayList<reservation>();
+        try (Connection connection = dataSource.getConnection()){
+            String sql = "SELECT * FROM reservation WHERE "
+            + "reservationid = ? "
+            + "OR lower(reservestatus) = lower(?) "
+            + "OR datestart::text ILIKE ? "
+            + "OR dateend::text ILIKE ? "
+            + "ORDER BY reservationid DESC";
+            final var statement = connection.prepareStatement(sql);
+
+            // Setting parameters for reservation ID and reservation status
+            int searchInputInt = 0;
+            try {
+                searchInputInt = Integer.parseInt(searchInput);
+                statement.setInt(1, searchInputInt);
+            } catch (NumberFormatException e) {
+                // If searchInput is not a number, set reservation ID parameter as 0
+                statement.setInt(1, 0);
+            }
+            statement.setString(2, searchInput);
+            // Setting parameters for date start and date end
+            statement.setString(3, "%" + searchInput + "%");
+            statement.setString(4, "%" + searchInput + "%");
+
+            final var resultSet = statement.executeQuery();
+            System.out.println("pass try managerReservationList for search >>>>>");
+
+            while (resultSet.next()){
+                int reservationID = resultSet.getInt("reservationid");
+                String guestICNumber = resultSet.getString("guestICNumber");
+                int guestQuantity = resultSet.getInt("guestquantity");
+                int durationOfStay = resultSet.getInt("durationofstay");
+                Date dateStart = resultSet.getDate("datestart");
+                Date dateEnd = resultSet.getDate("dateend");
+                int totalAdult = resultSet.getInt("totaladult");
+                int totalKids= resultSet.getInt("totalkids");
+                String reserveStatus = resultSet.getString("reservestatus");
+                int totalRoom = resultSet.getInt("totalroom");
+                double totalPayment = resultSet.getDouble("totalpayment");
+
+                reservation reservation = new reservation();
+                reservation.setReservationID(reservationID);
+                reservation.setGuestICNumber(guestICNumber);
+                reservation.setGuestQuantity(guestQuantity);
+                reservation.setDurationOfStay(durationOfStay);
+                reservation.setDateStart(dateStart);
+                reservation.setDateEnd(dateEnd);
+                reservation.setTotalAdult(totalAdult);
+                reservation.setTotalKids(totalKids);
+                reservation.setReserveStatus(reserveStatus);
+                reservation.setTotalRoom(totalRoom);
+                reservation.setTotalPayment(totalPayment);
+
+                reservations.add(reservation);
+                model.addAttribute("reservations", reservations);
+                if (reservations.isEmpty()) {
+                    model.addAttribute("messageNoResult", "No results found for \"" + searchInput + "\"");
+                }
             }
             connection.close();
 
