@@ -1141,7 +1141,7 @@ public class ReservationController {
                 reservations.add(reservation);
                 model.addAttribute("reservations", reservations);
                 if (reservations.isEmpty()) {
-                    model.addAttribute("message", "No results found");
+                    model.addAttribute("messageNoResult", "No results found");
                 }
 
             }
@@ -1217,7 +1217,7 @@ public class ReservationController {
                 reservations.add(reservation);
                 model.addAttribute("reservations", reservations);
                 if (reservations.isEmpty()) {
-                    model.addAttribute("message", "No results found for \"" + searchInput + "\"");
+                    model.addAttribute("messageNoResult", "No results found for \"" + searchInput + "\"");
                 }
             }
             connection.close();
