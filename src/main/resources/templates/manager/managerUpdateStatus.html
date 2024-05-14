@@ -136,6 +136,9 @@
                             <th class="text-center">Action</th>
                         </thead>
                         <tbody>
+                            <tr th:if="${messageNoResult != null}">
+                                <td colspan="8" class="text-center" th:text="${messageNoResult}"></td>
+                            </tr>
                             <!-- This part will be dynamically populated with reservation data -->
                             <tr th:each="reservation : ${reservations}">
                                 <td th:text="${reservation.reservationID}"></td>
@@ -152,9 +155,6 @@
                                 </td>
                             </tr>
                             <!-- End of dynamic data -->
-                            <tr>
-                                <td colspan="8" class="text-center" th:text="${messageNoResult}"></td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
