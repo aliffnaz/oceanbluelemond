@@ -218,9 +218,16 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="number" name="guestPhoneNumber" id="" class="form-control" required>
+                            <input type="text" name="guestPhoneNumber" id="guestPhoneNumber" class="form-control" required>
                         </div>
                     </div>
+                    
+                    <script>
+                        document.getElementById("guestPhoneNumber").addEventListener("input", function() {
+                            // Remove any non-numeric characters
+                            this.value = this.value.replace(/\D/g, '');
+                        });
+                    </script>
 
                     <div class="row m-3">
                         <div class="col-1"></div>
