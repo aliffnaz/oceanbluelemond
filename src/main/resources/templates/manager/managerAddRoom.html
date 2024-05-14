@@ -133,7 +133,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="roomNum" id="roomNum" class="form-control" placeholder="01">
+                            <input type="text" name="roomNum" id="roomNum" class="form-control" placeholder="01" required>
                         </div>
                     </div>
                     <div class="row m-3">
@@ -144,7 +144,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="number" name="maxGuest" id="maxGuest" class="form-control" placeholder="0">
+                            <input type="number" name="maxGuest" id="maxGuest" class="form-control" placeholder="0" required>
                         </div>
                     </div>
                     <div class="row m-3">
@@ -155,7 +155,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="number" name="roomRate" id="roomRate" class="form-control" placeholder="80">
+                            <input type="number" name="roomRate" id="roomRate" class="form-control" placeholder="80" required>
                         </div>
                     </div>
                     <div class="row m-3">
@@ -182,7 +182,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="roomSize" id="roomSize" class="form-control" placeholder="22 x 28 ft">
+                            <input type="text" name="roomSize" id="roomSize" class="form-control" placeholder="22 x 28 ft" required>
                         </div>
                     </div>
                     <div class="row m-3">
@@ -193,7 +193,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="roomStatus" id="roomStatus" class="form-control" placeholder="Available">
+                            <input type="text" name="roomStatus" id="roomStatus" class="form-control" placeholder="Available" required>
                         </div>
                     </div>
                     <div class="row m-5">
@@ -274,10 +274,10 @@
     <script th:src="@{stylesheets/js/jquery.flexslider.min.js}"></script>
     <script th:src="@{stylesheets/js/slider_func.js}"></script>
 
-    <script th:if="${session.messege}" th:inline="javascript">
+<!--     <script th:if="${session.messege}" th:inline="javascript">
     /* Display error message in an alert */
     alert([[${session.messege}]]);
-    </script>
+    </script> -->
 
 </body>
 
