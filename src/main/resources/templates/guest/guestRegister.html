@@ -148,6 +148,13 @@
                         </div>
                     </div>
 
+                    <script>
+                        document.getElementById("guestICNumber").addEventListener("input", function() {
+                            // Remove any non-numeric characters
+                            this.value = this.value.replace(/\D/g, '');
+                        });
+                    </script>
+
                     <div class="row m-3">
                         <div class="col-1"></div>
                         <div class="col pt-3">
