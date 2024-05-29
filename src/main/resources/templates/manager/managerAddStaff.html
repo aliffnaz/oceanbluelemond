@@ -158,9 +158,16 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="number" name="staffICNumber" id="" class="form-control" value="" minlength="12" maxlength="12" placeholder="012345678912"  pattern="^-?\d{12}$" required>
+                            <input type="number" name="staffICNumber" id="" class="form-control" value="" minlength="12" maxlength="12" placeholder="012345678912" required>
                         </div>
                     </div>
+
+                    <script>
+                        document.getElementById("staffICNumber").addEventListener("input", function() {
+                            // Remove any non-numeric characters
+                            this.value = this.value.replace(/\D/g, '');
+                        });
+                    </script>
 
                     <div class="row m-3">
                         <div class="col-1"></div>
