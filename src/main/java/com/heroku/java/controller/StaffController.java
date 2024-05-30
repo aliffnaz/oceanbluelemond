@@ -213,6 +213,7 @@ public class StaffController {
                 String staffStatus = resultSet.getString("staffstatus");
                 String managerICNumber = resultSet.getString("managerICNumber");
                 String staffEmail = resultSet.getString("staffemail");
+                String staffPassword = resultSet.getString("staffpassword");
          
                 staff staff = new staff();
                 staff.setStaffICNumber(staffICNumber);
@@ -227,6 +228,7 @@ public class StaffController {
                 staff.setStaffStatus(staffStatus);
                 staff.setManagerICNumber(managerICNumber);
                 staff.setStaffEmail(staffEmail);
+                staff.setStaffPassword(staffPassword);
                 model.addAttribute("staff", staff);  
    
                connection.close();
@@ -245,7 +247,7 @@ public class StaffController {
           System.out.println("pass here <<<<<<<");
           try{
             Connection connection = dataSource.getConnection();
-            String sql = "UPDATE staff SET staffname=? ,staffgender=?, staffphonenumber=?, staffrace=?, staffreligion=?, staffmaritalstatus=?, staffaddress=?, staffrole=?, staffstatus=?, managerICNumber=?, staffemail=? WHERE stafficnumber=?";
+            String sql = "UPDATE staff SET staffname=? ,staffgender=?, staffphonenumber=?, staffrace=?, staffreligion=?, staffmaritalstatus=?, staffaddress=?, staffrole=?, staffstatus=?, managerICNumber=?, staffemail=?, staffpassword = ? WHERE stafficnumber=?";
             final var statement = connection.prepareStatement(sql);
             String staffICNumber = staff.getStaffICNumber();
             String staffName = staff.getStaffName();
@@ -259,6 +261,7 @@ public class StaffController {
             String staffStatus = staff.getStaffStatus();
             String managerICNumber = staff.getManagerICNumber();
 	    String staffEmail = staff.getStaffEmail();
+	    String staffPassword = staff.getStaffPassword();
 
             statement.setString(1, staffName);
             statement.setString(2, staffGender);
@@ -271,7 +274,8 @@ public class StaffController {
             statement.setString(9, staffStatus);
             statement.setString(10, managerICNumber);
             statement.setString(11, staffEmail);
-            statement.setString(12, staffICNumber);
+            statement.setString(12, staffPassword);
+            statement.setString(13, staffICNumber);
 
             statement.executeUpdate();
             
