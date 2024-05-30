@@ -198,7 +198,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="number" name="servicePrice" id="servicePrice" class="form-control" th:value ="${service.servicePrice}">
+                            <input type="number" name="servicePrice" id="servicePrice" class="form-control" step="0.01" pattern="\d+(\.\d{2})?" th:value ="${service.servicePrice}">
                         </div>
                     </div>
 
