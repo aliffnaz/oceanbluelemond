@@ -263,7 +263,7 @@ public class ServiceController {
           session.removeAttribute("messege");
         }
         String staffICNumber = (String) session.getAttribute("staffICNumber");
-        string serviceType = service.getServiceType();
+        String serviceType = service.getServiceType();
         if (serviceType.equalsIgnoreCase("roomService")){
             serviceType = "Room Service";}
             else {
