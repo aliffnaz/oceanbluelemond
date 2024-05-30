@@ -136,7 +136,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="serviceID" id="serviceID" class="form-control" th:value ="${service.serviceID}">
+                            <input type="text" name="serviceID" id="serviceID" class="form-control" th:value ="${service.serviceID}" readonly>
                         </div>
                     </div>
 
@@ -208,7 +208,10 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="serviceStatus" id="serviceStatus" class="form-control" th:value ="${service.serviceStatus}">
+                            <select name="serviceStatus" id="serviceStatus" class="form-control form-select">
+                                <option th:value="Available" th:selected="${service.serviceStatus eq 'Available'}">Available</option>
+                                <option th:value="Unavailable" th:selected="${service.serviceStatus eq 'Unavailable'}">Unavailable</option>
+                            </select>
                         </div>
                     </div>
 
