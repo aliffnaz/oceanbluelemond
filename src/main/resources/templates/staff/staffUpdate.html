@@ -163,7 +163,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="staffName" id="staffName" class="form-control" th:value="${staff.staffName}" pattern="[A-Za-z\s]+">
+                            <input type="text" name="staffName" id="staffName" class="form-control" th:value="${staff.staffName}" pattern="[A-Za-z\s]+" required>
                         </div>
                     </div>
 
@@ -187,7 +187,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="staffAddress" id="staffAddress" class="form-control" th:value="${staff.staffAddress}">
+                            <input type="text" name="staffAddress" id="staffAddress" class="form-control" th:value="${staff.staffAddress}" required>
                         </div>
                     </div>
 
@@ -280,7 +280,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="staffPhoneNumber" id="staffPhoneNumber" class="form-control" minlength="10" maxlength="11" th:value="${staff.staffPhoneNumber}">
+                            <input type="text" name="staffPhoneNumber" id="staffPhoneNumber" class="form-control" minlength="10" maxlength="11" th:value="${staff.staffPhoneNumber}" required>
                         </div>
                     </div>
 
@@ -299,7 +299,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="email" name="staffEmail" id="staffEmail" class="form-control" th:value="${staff.staffEmail}">
+                            <input type="email" name="staffEmail" id="staffEmail" class="form-control" th:value="${staff.staffEmail}" required>
                         </div>
                     </div>
 
@@ -312,7 +312,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="password" name="staffPassword" id="staffPassword" class="form-control" th:value="${staff.staffPassword}">
+                            <input type="password" name="staffPassword" id="staffPassword" class="form-control" th:value="${staff.staffPassword}" required>
                         </div>
                     </div>
                     <div class="row m-5">
