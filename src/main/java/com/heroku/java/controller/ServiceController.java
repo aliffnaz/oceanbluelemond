@@ -262,13 +262,19 @@ public class ServiceController {
          if (session.getAttribute("messege") != null) {
           session.removeAttribute("messege");
         }
-        String staffICNumber = (String) session.getAttribute("staffICNumber") ;
+        String staffICNumber = (String) session.getAttribute("staffICNumber");
+        string serviceType = service.getServiceType();
+        if (serviceType.equalsIgnoreCase("roomService")){
+            serviceType = "Room Service";}
+            else {
+            serviceType = "Event Service";}
+        
         try {
             Connection connection = dataSource.getConnection();
             String sql = "UPDATE service SET serviceName=?, serviceType=?, servicePrice=?, servicestatus=? WHERE serviceID=?";
             final var statement = connection.prepareStatement(sql);
             statement.setString(1, service.getServiceName());
-            statement.setString(2, service.getServiceType());
+            statement.setString(2, serviceType);
             statement.setDouble(3, service.getServicePrice());
             statement.setString(4, service.getServiceStatus());
             statement.setInt(5, service.getServiceID());
@@ -276,14 +282,14 @@ public class ServiceController {
             statement.executeUpdate();
 
             // Update fields specific to "roomService" or "eventService" based on the service type
-            if ("Room Service".equalsIgnoreCase(service.getServiceType())) {
+            if ("Room Service".equalsIgnoreCase(serviceType)) {
                 String roomServiceSql = "UPDATE roomService SET maxQuantity=? WHERE serviceID=?";
                 final var roomServiceStatement = connection.prepareStatement(roomServiceSql);
                 roomServiceStatement.setInt(1, roomService.getMaxQuantity());
                 roomServiceStatement.setInt(2, service.getServiceID());
 
                 roomServiceStatement.executeUpdate();
-            } else if ("Event Service".equalsIgnoreCase(service.getServiceType())) {
+            } else if ("Event Service".equalsIgnoreCase(serviceType)) {
                 String eventServiceSql = "UPDATE eventService SET eventCapacity=? WHERE serviceID=?";
                 final var eventServiceStatement = connection.prepareStatement(eventServiceSql);
                 eventServiceStatement.setInt(1, eventService.getEventCapacity());
