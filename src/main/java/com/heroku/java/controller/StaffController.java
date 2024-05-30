@@ -196,7 +196,7 @@ public class StaffController {
            System.out.println("Staff IC Number : " + userStaffICNumber);
            try {
             Connection connection = dataSource.getConnection();
-            String sql = "SELECT stafficnumber, staffname, staffgender, staffphonenumber, staffrace, staffreligion, staffmaritalstatus, staffaddress, staffrole, staffstatus, managerICNumber, staffemail FROM public.staff where stafficnumber = ?";
+            String sql = "SELECT stafficnumber, staffname, staffgender, staffphonenumber, staffrace, staffreligion, staffmaritalstatus, staffaddress, staffrole, staffstatus, managerICNumber,staffemail, staffpassword FROM public.staff where stafficnumber = ?";
             final var statement = connection.prepareStatement(sql);
             statement.setString(1, staffICNumber);
             final var resultSet = statement.executeQuery();
