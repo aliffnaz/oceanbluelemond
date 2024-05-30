@@ -119,7 +119,7 @@ public class ServiceController {
 
         try {
             Connection connection = dataSource.getConnection();
-            String sql = "SELECT serviceid, servicename, servicetype, serviceprice, servicestatus FROM service ORDER BY serviceName";
+            String sql = "SELECT serviceid, servicename, servicetype, serviceprice, servicestatus FROM service ORDER BY serviceid";
             final var statement = connection.createStatement();
             final var resultSet = statement.executeQuery(sql);
 
