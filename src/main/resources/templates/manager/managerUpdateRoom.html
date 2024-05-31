@@ -190,8 +190,13 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="roomStatus" id="roomStatus" class="form-control" th:value="${room.roomStatus}">
+                            <div class="custom_select">
+                            <select name="roomStatus" id="roomStatus" class="form-control" th:value="${room.roomStatus}">
+                                <option value="Available" style="font-size: 16px;">Available</option>
+                                <option value="Unavailable" style="font-size: 16px;">Unavailable</option>
+                            </select>
                         </div>
+                    </div>
                     </div>
                     <div class="row m-5">
                         <div class="col text-center">
