@@ -168,7 +168,12 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="roomType" id="roomType" class="form-control" th:value="${room.roomType}">
+                            <div class="custom_select">
+                            <select name="roomType" id="roomType" class="wide" th:value="${room.roomType}">
+                                 <option value="Standard Room" style="font-size: 16px;">Standard</option>
+                                 <option value="Deluxe Room" style="font-size: 16px;">Deluxe</option>
+                            </select>
+                            </div>
                         </div>
                     </div>
                     <div class="row m-3">
@@ -191,7 +196,7 @@
                         </div>
                         <div class="col-8">
                             <div class="custom_select">
-                            <select name="roomStatus" id="roomStatus" class="form-control" th:value="${room.roomStatus}">
+                            <select name="roomStatus" id="roomStatus" class="wide" th:value="${room.roomStatus}">
                                 <option value="Available" style="font-size: 16px;">Available</option>
                                 <option value="Unavailable" style="font-size: 16px;">Unavailable</option>
                             </select>
