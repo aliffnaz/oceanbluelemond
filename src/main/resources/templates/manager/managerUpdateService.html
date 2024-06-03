@@ -147,7 +147,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="serviceName" id="serviceName" class="form-control" th:value ="${service.serviceName}">
+                            <input type="text" name="serviceName" id="serviceName" class="form-control" th:value ="${service.serviceName}" required>
                         </div>
                     </div>
 
@@ -171,7 +171,7 @@
                                 </span>
                             </div>
                             <div class="col-8">
-                                <input type="number" name="maxQuantity" id="maxQuantity" class="form-control" th:value ="${service.maxQuantity}">
+                                <input type="number" name="maxQuantity" id="maxQuantity" class="form-control" th:value ="${service.maxQuantity}" required>
                             </div>
                     </div>
 
@@ -183,7 +183,7 @@
                                 </span>
                             </div>
                             <div class="col-8">
-                                <input type="number" name="eventCapacity" id="eventCapacity" class="form-control" th:value ="${service.eventCapacity}">
+                                <input type="number" name="eventCapacity" id="eventCapacity" class="form-control" th:value ="${service.eventCapacity}" required>
                             </div>
                         </div>
 
@@ -195,7 +195,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="number" name="servicePrice" id="servicePrice" class="form-control" step="0.01" pattern="\d+(\.\d{2})?" th:value ="${service.servicePrice}">
+                            <input type="number" name="servicePrice" id="servicePrice" class="form-control" step="0.01" pattern="\d+(\.\d{2})?" th:value ="${service.servicePrice}" required>
                         </div>
                     </div>
 
