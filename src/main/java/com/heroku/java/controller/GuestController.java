@@ -100,8 +100,8 @@ public class GuestController {
     try (Connection connection = dataSource.getConnection()) {
         String sql = "SELECT guesticnumber, guestname, guestphonenumber, guestgender, guestreligion, guestrace, guestaddress, guestemail, guestpassword " 
             + "FROM public.guest "
-            + "guesticnumber ILIKE ? "
-            + "OR guestname ILIKE ? "
+            + "guesticnumber::text ILIKE ? "
+            + "OR guestname::text ILIKE ? "
             + "order by guestname desc"; 
         final var statement = connection.prepareStatement(sql);
         statement.setString(1, searchInput);
