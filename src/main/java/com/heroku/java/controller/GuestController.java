@@ -104,8 +104,8 @@ public class GuestController {
             + "OR guestname ILIKE ? "
             + "order by guestname desc"; 
         final var statement = connection.prepareStatement(sql);
-        statement.setString(1, searchInput);
-        statement.setString(2, searchInput);
+        statement.setString(1, "%" + searchInput + "%");
+        statement.setString(2, "%" + searchInput + "%");
         final var resultSet = statement.executeQuery();
         System.out.println("pass try managerGuestList >>>>>");
 
