@@ -135,8 +135,7 @@ public class GuestController {
 
             guests.add(guest);
             model.addAttribute("guests", guests);
-            model.addAttribute("reservations", reservations);
-            if (reservations.isEmpty()) {
+            if (guests.isEmpty()) {
                 model.addAttribute("messageNoResult", "No results found for \"" + searchInput + "\"");
             }
         }
