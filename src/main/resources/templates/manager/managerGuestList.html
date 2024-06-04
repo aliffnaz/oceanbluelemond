@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -97,7 +98,7 @@
         </div>
         <div class="container mt-5 mb-5 align-items-center">
             <div class="row">
-                <div class="col">
+                <div class="col"></div>
             </div>
                 <div class="col-md card card-body py-5">
                 <div class="row my-3 text-center">
@@ -115,7 +116,6 @@
                     </div>
                 </div>
                     
-                <div class="col-md card card-body py-5">
                     <div class="row my-3 text-center">
                         <span>
                             <h1>Guest List</h1>
@@ -146,7 +146,7 @@
                                     <td class="text-center" th:text="${guest.guestAddress}"></td>
                                     <td class="text-center"><a th:href="@{/managerViewGuest?guestICNumber=}+${guest.guestICNumber}"><i class="bi bi-eye-fill" style="font-size: 20px;"></i></a></td>
                                 </tr>
-                                <tr th:if="${#lists.isEmpty(reservations)}">
+                                <tr th:if="${#lists.isEmpty(guests)}">
                                     <!-- <td colspan="8" class="text-center" th:text="${messageNoResult}"></td> -->
                                     <td colspan="8" class="text-center">Sorry, there are no results for the search input.</td>
                                 </tr>
