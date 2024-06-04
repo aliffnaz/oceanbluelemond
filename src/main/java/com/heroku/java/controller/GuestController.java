@@ -89,9 +89,64 @@ public class GuestController {
             // Handle the exception as desired (e.g., show an error message)
             return "error";
         }
+    }
 
+    @PostMapping("/managerGuestList")
+    public String managerGuestList(Model model, HttpSession session, @RequestParam("searchInput") String searchInput) {
+    String staffICNumber = (String) session.getAttribute("staffICNumber");
+    @RequestParam("searchInput") String searchInput
+    List<guest> guests = new ArrayList<guest>();
         
+    try (Connection connection = dataSource.getConnection()) {
+        String sql = "SELECT guesticnumber, guestname, guestphonenumber, guestgender, guestreligion, guestrace, guestaddress, guestemail, guestpassword " 
+            + "FROM public.guest "
+            + "guesticnumber ILIKE ? "
+            + "OR lower(guestname) ILIKE lower(?) "
+            + "order by guestname desc"; 
+        final var statement = connection.prepareStatement(sql);
+        statement.setString(1, searchInput);
+        statement.setString(2, searchInput);
+        final var resultSet = statement.executeQuery();
+        System.out.println("pass try managerGuestList >>>>>");
 
+        while (resultSet.next()) {
+            String guestName = resultSet.getString("guestName");
+            String guestPhoneNumber = resultSet.getString("guestPhoneNumber");
+            String guestICNumber = resultSet.getString("guestICNumber");
+            String guestGender = resultSet.getString("guestGender");
+            String guestReligion = resultSet.getString("guestReligion");
+            String guestRace = resultSet.getString("guestRace");
+            String guestAddress = resultSet.getString("guestAddress");
+            String guestEmail = resultSet.getString("guestEmail");
+            String guestPassword = resultSet.getString("guestPassword");
+
+            // System.out.println("room number" + roomNum);
+
+            guest guest = new guest();
+            guest.setGuestName(guestName);
+            guest.setGuestPhoneNumber(guestPhoneNumber);
+            guest.setGuestICNumber(guestICNumber);
+            guest.setGuestGender(guestGender);
+            guest.setGuestRace(guestRace);
+            guest.setGuestReligion(guestReligion);
+            guest.setGuestAddress(guestAddress);
+            guest.setGuestEmail(guestEmail);
+            guest.setGuestPassword(guestPassword);
+
+            guests.add(guest);
+            model.addAttribute("guests", guests);
+            model.addAttribute("reservations", reservations);
+            if (reservations.isEmpty()) {
+                model.addAttribute("messageNoResult", "No results found for \"" + searchInput + "\"");
+            }
+        }
+        connection.close();
+        return "manager/managerGuestList";
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle the exception as desired (e.g., show an error message)
+            return "error";
+        }
     }
 
     @GetMapping("/staffGuestList")
