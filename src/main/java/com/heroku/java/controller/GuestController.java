@@ -94,7 +94,7 @@ public class GuestController {
     @PostMapping("/managerGuestList")
     public String managerGuestList(Model model, HttpSession session, @RequestParam("searchInput") String searchInput) {
     String staffICNumber = (String) session.getAttribute("staffICNumber");
-    @RequestParam("searchInput") String searchInput
+    searchInput = searchInput.trim();
     List<guest> guests = new ArrayList<guest>();
         
     try (Connection connection = dataSource.getConnection()) {
