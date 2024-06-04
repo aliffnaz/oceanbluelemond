@@ -101,7 +101,7 @@ public class GuestController {
         String sql = "SELECT guesticnumber, guestname, guestphonenumber, guestgender, guestreligion, guestrace, guestaddress, guestemail, guestpassword " 
             + "FROM public.guest "
             + "guesticnumber ILIKE ? "
-            + "OR lower(guestname) ILIKE lower(?) "
+            + "OR guestname ILIKE ? "
             + "order by guestname desc"; 
         final var statement = connection.prepareStatement(sql);
         statement.setString(1, searchInput);
