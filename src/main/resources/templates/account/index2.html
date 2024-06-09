@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iman's Rabbit Farm</title>
+    <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+    <header>
+        <h2 class="logo">Iman's Rabbit Farm</h2>
+        <nav class="navigation">
+            <a href="#">Home</a>
+            <a href="Account.html">Account</a>
+            <a href="#">Booking</a>
+            <a href="#">Ticket</a>
+            <a href="AboutUS.html">About Us</a>
+            <button class="btnlogin-popup">Login</button>
+        </nav>
+    </header>
+<div class="form-box register">
+            <h2>Registration</h2>
+            <form th:action="@{/customerRegister}" modelAttribute="customerRegister" method ="post" th:object="${customerRegister}">
+                <div class="input-box">
+                    <span class="icon"></span>
+                    <input type="text" name="custname" id="custname" required>
+                    <label>Name</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon"></span>
+                    <input type="email" name="custemail" required>
+                    <label>Email</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon"></span>
+                    <input type="password" name="custpassword" required>
+                    <label>Password</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon"></span>
+                    <input type="text" name="custphonenum" required>
+                    <label>Phone Number</label>
+                </div>
+
+                <div class="input-box">
+                    <span class="icon"></span>
+                    <input type="text" name="custaddress" required>
+                    <label>Address</label>
+                </div>
+                <div class="remember-forgot">
+                    <label><input type="checkbox">
+                    I agree to the terms & conditions</label>
+                </div>
+                <button type="submit" class="btn">Register
+                </button>
+                <div class="login-register"></div>
+                <p>Alreaady have an account?<a 
+                href="#" class="login-link">Login</a></p>
+            </form>
+        </div>
+        
+    <div class="wrapper">
+        <div class="form-box login">
+            <h2>Login</h2>
+            <form action="#">
+                <div class="input-box">
+                    <span class="icon"></span>
+                    <input type="email" required>
+                    <label>Email</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon"></span>
+                    <input type="password" required>
+                    <label>Password</label>
+                </div>
+                <div class="remember-forgot">
+                    <label><input type="checkbox">
+                    Remember me</label>
+                    <a href="#">Forgot password?</a>
+                </div>
+                <button type="submit" class="btn">Login
+                </button>
+                <div class="login-register"></div>
+                <p>Don't have an account?<a 
+                href="#" class="register-link">Register</a></p>
+            </form>
+        </div>
+    
+        
+    </div>
+<script src="test.js"></script>
+</body>
+</html>
