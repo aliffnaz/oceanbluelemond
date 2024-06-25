@@ -171,7 +171,7 @@
                         <div class="col-8">
                             <div class="qty-buttons mb-3 version_2">
                                 <input type="button" value="+" class="qtyplus" name="serviceDuration">
-                                <input type="text" name="serviceDuration" id="serviceQuantity" value="" min="1"
+                                <input type="text" name="serviceDuration" id="serviceDuration" value="" min="1"
                                     class="qty form-control" placeholder="Duration of the service">
                                 <input type="button" value="-" class="qtyminus" name="serviceDuration">
                             </div>
@@ -297,6 +297,20 @@
         </svg>
     </div>
     <!-- /back to top -->
+
+            // Check Service Quantity
+            var serviceQuantity = document.getElementById('serviceQuantity').value;
+            if (!serviceQuantity.trim() || parseInt(serviceQuantity) < 0) {
+                alert('Please enter a valid number greater than or equal to 0 for Service Quantity.');
+                return false;
+            }
+
+            // Check Service Duration
+            var serviceDuration = document.getElementById('serviceDuration').value;
+            if (!serviceDuration.trim() || parseInt(serviceDuration) < 0) {
+                alert('Please enter a valid number greater than or equal to 0 for Service Duration.');
+                return false;
+            }
 
     <!-- COMMON SCRIPTS -->
     <script th:src="@{stylesheets/js/common_scripts.js}"></script>
