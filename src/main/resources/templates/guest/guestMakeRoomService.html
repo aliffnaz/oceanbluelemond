@@ -109,7 +109,8 @@
             th:action="@{/guestMakeRoomService}"
             modelAttribute="guestMakeRoomService"
             th:object="(${guestMakeRoomService})"
-            enctype="multipart/form-data">
+            enctype="multipart/form-data"
+            onsubmit="return validateForm()">
             <div class="row">
                 <div class="col">
                 </div>
@@ -298,6 +299,9 @@
     </div>
     <!-- /back to top -->
 
+            <script th:inline="javascript">
+            /*<![CDATA[*/
+            function validateForm() {
             // Check Service Quantity
             var serviceQuantity = document.getElementById('serviceQuantity').value;
             if (!serviceQuantity.trim() || parseInt(serviceQuantity) < 0) {
@@ -311,6 +315,11 @@
                 alert('Please enter a valid number greater than or equal to 0 for Service Duration.');
                 return false;
             }
+            // If all validation passes, submit the form
+            return true;
+                }
+                /*]]>*/
+            </script>
 
     <!-- COMMON SCRIPTS -->
     <script th:src="@{stylesheets/js/common_scripts.js}"></script>
