@@ -301,13 +301,13 @@
             function validateForm() {
             // Check Service Duration
             var serviceDuration = document.getElementById('serviceDuration').value;
-            if (!serviceDuration.trim() || parseInt(serviceDuration) < 0) {
+            if (!serviceDuration.trim() || parseInt(serviceDuration) <= 0) {
                 alert('Please enter a valid number greater than or equal to 0 for Service Duration.');
                 return false;
             }
             // Check Number of People
             var people = document.getElementById('people').value;
-            if (!people.trim() || parseInt(people) < 0) {
+            if (!people.trim() || parseInt(people) <= 0) {
                 alert('Please enter a valid number greater than or equal to 0 for Number of People.');
                 return false;
             }
