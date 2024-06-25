@@ -304,14 +304,14 @@
             function validateForm() {
             // Check Service Quantity
             var serviceQuantity = document.getElementById('serviceQuantity').value;
-            if (!serviceQuantity.trim() || parseInt(serviceQuantity) < 0) {
+            if (!serviceQuantity.trim() || parseInt(serviceQuantity) <= 0) {
                 alert('Please enter a valid number greater than or equal to 0 for Service Quantity.');
                 return false;
             }
 
             // Check Service Duration
             var serviceDuration = document.getElementById('serviceDuration').value;
-            if (!serviceDuration.trim() || parseInt(serviceDuration) < 0) {
+            if (!serviceDuration.trim() || parseInt(serviceDuration) <= 0) {
                 alert('Please enter a valid number greater than or equal to 0 for Service Duration.');
                 return false;
             }
