@@ -150,7 +150,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="guestName" id="guestName" class="form-control" th:value="${guest.guestName}" pattern="[A-Za-z\s]+">
+                            <input type="text" name="guestName" id="guestName" class="form-control" th:value="${guest.guestName}" pattern="[A-Za-z\s]+" required>
                         </div>
                     </div>
 
@@ -174,7 +174,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="guestAddress" id="guestAddress" class="form-control" th:value="${guest.guestAddress}">
+                            <input type="text" name="guestAddress" id="guestAddress" class="form-control" th:value="${guest.guestAddress}" required>
                         </div>
                     </div>
 
@@ -236,7 +236,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="text" name="guestPhoneNumber" id="guestPhoneNumber" th:value="${guest.guestPhoneNumber}" class="form-control" minlength="10" maxlength="11">
+                            <input type="text" name="guestPhoneNumber" id="guestPhoneNumber" th:value="${guest.guestPhoneNumber}" class="form-control" minlength="10" maxlength="11" required>
                         </div>
                     </div>
 
@@ -255,7 +255,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="email" name="guestEmail" id="guestEmail" class="form-control" th:value="${guest.guestEmail}">
+                            <input type="email" name="guestEmail" id="guestEmail" class="form-control" th:value="${guest.guestEmail}" required>
                         </div>
                     </div>
 
@@ -268,7 +268,7 @@
                             </span>
                         </div>
                         <div class="col-8">
-                            <input type="password" name="guestPassword" id="guestPassword" class="form-control" th:value="${guest.guestPassword}">
+                            <input type="password" name="guestPassword" id="guestPassword" class="form-control" th:value="${guest.guestPassword}" required>
                         </div>
                     </div>
 
